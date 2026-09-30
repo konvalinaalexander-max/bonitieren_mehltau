@@ -31,6 +31,10 @@ eigentlich schwierige Teil ist nicht der Code, sondern:
 | Note, die mit Experten übereinstimmt | mittel–schwer | steht und fällt mit Kalibrierdaten |
 | KI-Modell (falls Farbschwellen nicht reichen) | schwer | erst später und nur wenn nötig |
 
+**Selbst bauen oder fertige App?** Eine fertige App, die das kann, gibt es nicht
+(Recherche Stand 09/2026) → selbst bauen, in Etappen, mit vorhandenen
+Gratis-Bausteinen. Details und Quellen: [RECHERCHE.md](RECHERCHE.md).
+
 ---
 
 ## 2. Was die App messen kann – und was nicht
@@ -46,7 +50,8 @@ Braunfärbung. Das passt gut zu eurem Ziel.
 
 **Messbar:**
 
-- Pflanzenfläche von oben (cm²) → Maß für Größe/Wachstum
+- Pflanzenfläche von oben (Pixel bei fester Kamerahöhe; cm² nur ungefähr,
+  weil die Blätter auf unterschiedlicher Höhe liegen) → Maß für Größe/Wachstum
 - Anteil gesund-grün / gelblich / braun an der Pflanzenfläche (%)
 - mittlerer „Grünwert" der Pflanze (stufenlose Kennzahl für Vergilbung)
 - daraus abgeleitet: Befallsnote nach eurer Skala
@@ -54,13 +59,17 @@ Braunfärbung. Das passt gut zu eurem Ziel.
 **Nicht (direkt) messbar:**
 
 - **Frühe Infektion** ohne sichtbare Vergilbung (Sporen nur auf der Unterseite)
-- **Untere Blätter**, die von oberen verdeckt sind – Befall beginnt häufig unten
-  → die App wird frühen/unteren Befall unterschätzen. Für Vergleiche
-  (Behandlung A vs. B, Verlauf über die Zeit) ist das unkritisch, solange immer
-  gleich fotografiert wird.
+- **Untere Blätter**, die von oberen verdeckt sind – laut Beratungsliteratur
+  (z. B. University of Minnesota Extension) beginnt der Befall unten und wandert
+  nach oben → die App wird frühen/unteren Befall unterschätzen und hinterherhinken.
+  Für Vergleiche (Behandlung A vs. B, Verlauf über die Zeit) ist das weniger
+  kritisch, solange immer gleich fotografiert wird. **Der Pilot muss prüfen, wie
+  groß dieser Effekt ist.**
 - **Ursache der Vergilbung**: Gelb kann auch von Nährstoffmangel (N, Fe, Mg),
   Staunässe, Lichtmangel oder alten Blättern kommen. Die App misst
   „Vergilbung", nicht den Pilz. Ein Mensch muss die Ursache kennen/prüfen.
+  Das Ergebnis heißt deshalb **„sichtbare Symptome (von oben)"**, nicht
+  „Mehltau-Diagnose". Eine regelmäßige Kontrolle der Blattunterseite bleibt nötig.
 - **Pflanzenhöhe**: mit einem Foto von oben nicht direkt messbar (nur Fläche).
   Falls Höhe wichtig ist: Maßskala an der Innenwand + zweites Foto von der Seite,
   oder später Tiefensensor (LiDAR bei manchen iPhones).
@@ -78,8 +87,8 @@ Foto ──► Farbkorrektur ──► Box-Bereich ausschneiden ──► Pflanz
 
 1. **Foto** in der Box: gleicher Abstand, gleiches Licht, Topf immer an
    derselben Stelle.
-2. **Farbkorrektur**: Im Bild liegt immer eine **Referenzkarte** (mindestens
-   Weiß + Grau). Die App rechnet die Farben so um, dass die Karte immer gleich
+2. **Farbkorrektur**: Im Bild liegt immer eine **Farbkarte** (24 Farbfelder,
+   siehe Kapitel 4). Die App rechnet die Farben so um, dass die Karte immer gleich
    aussieht. Damit gleichen wir aus, dass die Handykamera Belichtung und
    Weißabgleich selbst verstellt.
 3. **Ausschneiden**: Da die Box fix ist, ist der relevante Bildbereich immer
@@ -88,14 +97,15 @@ Foto ──► Farbkorrektur ──► Box-Bereich ausschneiden ──► Pflanz
 4. **Pflanze vs. Hintergrund**: Jeder Pixel hat einen **Farbton** (0–360°),
    eine **Sättigung** und eine **Helligkeit**. Pflanzenpixel sind gelb bis grün
    und ausreichend gesättigt. Erde (dunkel, braun, wenig gesättigt), Topf und
-   Boden werden verworfen.
+   Boden werden verworfen. Weil Erde und braune Blätter sich farblich ähneln,
+   wird die Erde zusätzlich abgedeckt (Abdeckscheibe, siehe Kapitel 4).
 5. **Einteilung der Pflanzenpixel**, grob zur Veranschaulichung (die echten
    Grenzwerte werden mit euren Fotos eingestellt):
    - Farbton ca. > 80° → **gesund grün** (typisches Basilikumgrün ≈ 90–110°)
    - Farbton ca. 45–80° → **gelblich / chlorotisch**
    - Farbton ca. < 45° und eher dunkel → **braun / nekrotisch**
    - sehr hell, kaum Farbe → **Glanzlicht**, wird ignoriert
-6. **Kennzahlen**: Pixel zählen → Pflanzenfläche in cm² (über den Maßstab),
+6. **Kennzahlen**: Pixel zählen → Pflanzenfläche (Pixel bzw. ungefähre cm²),
    % gelb, % braun, mittlerer Grünwert → Note.
 7. **Kontrollbild**: Die App zeigt das Foto mit eingefärbten Bereichen (grün /
    gelb / rot). So sehen Mitarbeiter sofort, ob die App sinnvoll erkannt hat –
@@ -140,13 +150,22 @@ gedruckt wird.
   Blätter abstrahlt.
 - **Topf-Zentrierung**: Ring oder Mulde am Boden, damit der Topf immer mittig
   unter der Kamera steht.
+- **Abdeckscheibe für Erde und Topfrand**: eine matte, dunkle (schwarze oder
+  dunkelblaue) Scheibe mit Schlitz, die man um die Stängel auf den Topf legt.
+  Sonst zählt sichtbare braune Erde als „braunes Blatt". Lässt sich gut drucken.
+- **Topf-Etikett im Bild**: Wenn das Etikett mit QR- oder EAN-Code mit im Foto
+  ist, liest die App die Topf-ID direkt aus dem Bild. Kein extra Scannen, und
+  Foto und ID können nicht vertauscht werden.
 - **Deckel**: Oben nicht ganz offen lassen, sondern eine Deckelplatte mit Loch
   für die Kamera (= gleichzeitig Handyhalter). Sonst verändert Raumlicht
   (Sonne, Hallenbeleuchtung) die Fotos.
 - **Referenzkarte** fest montiert im Bildfeld, an einer Stelle, die nie von
   Blättern verdeckt wird (im Karton-Test ausprobieren – Bodenecken können bei
-  großen Pflanzen verdeckt sein). Möglichkeiten: günstige Graukarte (~10–20 €) oder eine Farbkarte
-  (z. B. X-Rite ColorChecker, ~80–120 €; PlantCV unterstützt diese direkt).
+  großen Pflanzen verdeckt sein). **Empfehlung: Farbkarte mit 24 Feldern**, z. B.
+  Calibrite ColorChecker Classic Mini (Kreditkartengröße, ca. 60–80 €). Eine
+  einfache Graukarte korrigiert nur den Weißabgleich, nicht die Farben selbst –
+  gerade die Grenze zwischen Grün, Gelb und Braun hängt aber an der Farbtreue.
+  PlantCV erkennt diese 24-Feld-Karten automatisch.
   Sauber halten, nicht in der Sonne lagern (verblasst).
 
 ### Licht
@@ -166,13 +185,19 @@ gedruckt wird.
   Verschiedene Handymodelle liefern unterschiedliche Farben – ein Gerät für alle
   Fotos macht die Daten deutlich vergleichbarer. Ein günstiges Android-Handy
   reicht völlig.
+- **Android statt iPhone für die Box**: Auf dem iPhone lässt sich aus dem Browser
+  heraus Belichtung und Weißabgleich nach aktuellem Stand nicht zuverlässig
+  festhalten. Auf Android geht das eventuell direkt aus der Web-App, sonst mit
+  der kostenlosen Kamera-App **Open Camera** (Belichtung, ISO und Weißabgleich
+  sperrbar). Klärt der Pilot.
 - Der Halter wird genau für dieses Modell gedruckt, Kameralinse mittig über dem
   Topf, Handy waagerecht.
 
 ### Grobe Kosten (ohne Handy)
 
 LED-Streifen ~15–30 €, Platten ~20–40 €, Profile/Leisten ~20–40 €, Filament
-~10 €, Graukarte ~10–20 € → **ca. 80–150 €**.
+~10 €, Farbkarte ~60–80 € → **ca. 130–200 €**. Mit gebrauchtem Android-Handy
+ca. 150–250 € (falls kein vorhandenes Gerät genutzt wird, eher mehr).
 
 ---
 
@@ -200,18 +225,29 @@ nicht präzise genug erweist.
 
 ### Ablauf für Mitarbeiter
 
-1. Topf in die Box stellen
-2. Topf identifizieren: QR-Code auf dem Etikett/Tisch scannen oder Satz/Sorte
-   aus einer Liste wählen
+1. Topf in die Box stellen, Abdeckscheibe drauf
+2. Topf identifizieren: Etikett mit QR/EAN im Bild (wird aus dem Foto gelesen)
+   oder Satz/Sorte aus einer Liste wählen
 3. Foto auslösen
 4. App zeigt Kontrollbild + Ergebnis (Fläche, % gelb, % braun, Note)
 5. Bestätigen → gespeichert → nächster Topf
 
+Geschätztes Tempo: ca. 10–20 Sekunden pro Topf. Eine reine Sicht-Bonitur ist mit
+3–5 Sekunden schneller. Der Gewinn der App ist also nicht Tempo, sondern
+**gleichbleibende Bewertung, Wachstumsmessung und ein Foto-Archiv**. Falls mehr
+Tempo nötig ist: später mehrere Töpfe pro Foto (z. B. eine Palette mit festen
+Plätzen).
+
 ### Daten
 
 - **Anfang:** Speicherung auf dem Handy + Export als CSV/Excel
+- **Wichtig:** Web-App „zum Startbildschirm hinzufügen" und am Ende jeder
+  Sitzung exportieren (Excel + Fotos). Browser-Speicher allein ist kein sicheres
+  Archiv.
 - **Später:** zentrale Ablage (z. B. Online-Datenbank), damit alle Fotos und
   Ergebnisse an einem Ort landen
+- In jeder exportierten Zeile steht die **Version der Auswertung**, damit
+  Ergebnisse nach einer Änderung vergleichbar bleiben
 - **Auswertung:** Befallsverlauf pro Satz/Sorte/Behandlung über die Zeit,
   z. B. als Kurve oder als AUDPC (Fläche unter der Befallsverlaufskurve – das
   übliche Maß in Pflanzenschutzversuchen)
@@ -223,12 +259,19 @@ nicht präzise genug erweist.
 - Die App liefert zuerst einen **stufenlosen Wert** (% befallene Blattfläche)
   und rechnet ihn in **eure bestehende Skala** um (z. B. 0–5, 1–9 oder
   Prozentklassen). Welche Skala ihr heute nutzt, bestimmt die Umrechnung.
+  Falls ihr noch keine feste Skala habt: Die Skala von Ben Naim et al. (2025,
+  *Planta*) für Basilikum-Mehltau definiert die Stufen über den Anteil
+  befallener Blattfläche und passt daher gut zu einem Bild-Prozentwert.
 - **Kalibrierung:**
   1. ca. 100–200 Töpfe über die ganze Bandbreite fotografieren (gesund bis
      stark befallen)
   2. jeden Topf zusätzlich von 1–3 erfahrenen Personen wie bisher bonitieren
   3. Grenzwerte der App so einstellen, dass App-Note und Menschen-Note möglichst
-     gut übereinstimmen
+     gut übereinstimmen (Übereinstimmung messen, z. B. mit gewichtetem Kappa)
+  4. neu prüfen bei neuer Sorte, neuer Saison, neuem Handy oder neuen LEDs
+- Ein fester Satz von ca. 50 Referenzbildern mit bekannten Ergebnissen wird nach
+  jeder Code-Änderung automatisch durchgerechnet. So fällt sofort auf, wenn eine
+  Änderung die Ergebnisse verschiebt.
 - Nebeneffekt: Menschen bonitieren untereinander oft unterschiedlich (bekanntes
   Problem, gerade bei geringem Befall). Die App ist dagegen immer gleich – das
   ist ein echter Vorteil.
@@ -239,35 +282,42 @@ nicht präzise genug erweist.
 
 | Risiko | Gegenmaßnahme |
 |---|---|
-| Sichtbare Erde sieht aus wie braune Blätter | dunkle Erde unterscheidet sich meist in Helligkeit; notfalls KI-Segmentierung |
+| Sichtbare Erde sieht aus wie braune Blätter | Abdeckscheibe über Erde und Topfrand; notfalls KI-Segmentierung |
+| Junge Triebspitzen sind hellgrün und könnten als „gelblich" zählen | Grenzwerte im Pilot an echten Töpfen einstellen |
+| Schatten zwischen Blättern wirken braun | diffuses Licht von allen Seiten; sehr dunkle Pixel ignorieren |
 | Rote/violette Basilikumsorten | Farbschwellen funktionieren nicht → separat behandeln oder ausschließen |
 | Glanzlichter auf (nassen) Blättern | diffuses Licht, nicht direkt nach dem Gießen fotografieren, Glanzpixel ignorieren |
 | Unterschiedliche Pflanzenhöhe verändert die Fläche im Bild | für Vergleiche okay; bei Bedarf Höhe separat erfassen |
 | Vergilbung durch andere Ursachen | App misst Vergilbung; Ursache muss bekannt sein |
-| Früher/unterer Befall unsichtbar | akzeptieren; App ist für sichtbaren Befall und Verlauf gedacht |
-| Farbabweichungen zwischen Handys | ein festes Box-Handy |
+| Früher/unterer Befall unsichtbar | im Pilot messen; falls zu groß: zweites, schräges Foto oder bei Sicht-Bonitur mit Foto-Archiv bleiben |
+| Farbabweichungen zwischen Handys | ein festes Box-Handy mit gesperrten Kameraeinstellungen |
 
 ---
 
 ## 8. Fahrplan
 
-**Phase 0 – Machbarkeitstest (ohne App, ca. 1–2 Wochen)**
-- Karton-Box + gute Lampe + Graukarte
-- 30–50 Töpfe mit der normalen Kamera-App fotografieren, gesund bis stark
-  befallen, jeweils eure Note notieren
-- Auswertungs-Prototyp (Skript oder einfache Testseite) → App-Werte mit
-  menschlichen Noten vergleichen
-- **Ergebnis:** Klarheit, ob Farbanalyse bei euch funktioniert, bevor Zeit in
-  Box und App fließt
+**Phase 0 – Pilot (ohne eigene App, ca. 2 Wochen)**
+- Karton-Box oder erste Box, gutes Licht, 24-Feld-Farbkarte, festes
+  Android-Handy mit gesperrten Kameraeinstellungen, Topf-Etikett im Bild
+- 100–200 Töpfe fotografieren, gesund bis stark befallen
+- zwei Personen bonitieren jeden Topf wie bisher, inkl. Blick auf die
+  Blattunterseite
+- Auswertung mit einem Skript (PlantCV), zum Vergleich auch mit LeafScan
+- **Ergebnis:** Klarheit, ob die Farbanalyse von oben bei euch gut genug mit der
+  Sicht-Bonitur übereinstimmt, bevor Zeit in die App fließt. Falls nicht:
+  digitale Sicht-Bonitur mit Referenzfotos und Foto-Archiv (siehe
+  [RECHERCHE.md](RECHERCHE.md), Option 3)
 
-**Phase 1 – Box + erste App**
-- Box final bauen (3D-Druck, LED, Referenzkarte, Handyhalter)
-- Web-App: Foto → Kontrollbild + Kennzahlen + Note → speichern → CSV-Export
+**Phase 1 – Box + App-Grundgerüst (ohne Analyse)**
+- Box final bauen (3D-Druck, LED, Farbkarte, Handyhalter, Abdeckscheibe)
+- Web-App: Topf-ID, Sorte/Satz/Behandlung, manuelle Note mit Referenzfotos,
+  Foto-Archiv, Excel-Export. Ist schon allein nützlich.
 
-**Phase 2 – Kalibrierung und Alltagstauglichkeit**
-- 100–200 bewertete Töpfe → Grenzwerte und Notenskala einstellen
-- Topf-Identifikation (QR-Code / Auswahlliste), zentrale Datenablage
-- Verlaufsauswertung pro Satz/Sorte/Behandlung
+**Phase 2 – automatische Analyse**
+- Farbkorrektur, Pflanzenerkennung, Farbklassen, Fläche in die App einbauen
+  (Vorlage: LeafScan-Code, MIT-Lizenz)
+- Umrechnung in eure Note mit den Pilot-Daten einstellen
+- Verlaufsauswertung pro Satz/Sorte/Behandlung, zentrale Datenablage
 
 **Phase 3 – optional**
 - KI-Modell, falls Farbschwellen an Grenzen stoßen (Erde vs. Nekrose,
