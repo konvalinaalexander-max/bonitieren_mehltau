@@ -2,6 +2,11 @@
 
 Stand: Ideen- und Planungsphase. Noch kein Code.
 
+> Die ausgearbeitete Schritt-für-Schritt-Anleitung steht im Leitfaden
+> [docs/Leitfaden_Mehltau-Bonitur.pdf](docs/Leitfaden_Mehltau-Bonitur.pdf),
+> die verbindlichen Zahlen in [docs/SPEZIFIKATION.md](docs/SPEZIFIKATION.md).
+> Bei Abweichungen gelten diese beiden Dateien.
+
 ## 1. Kurzfazit
 
 **Machbar – ja.** Das Grundprinzip (Foto unter kontrolliertem Licht → Pixel nach
@@ -130,11 +135,12 @@ für die normale Hauptkamera (1×, **nicht** Weitwinkel wegen Verzerrung):
 
 Beispiel: 12-cm-Topf, Pflanze bis ~25 cm Durchmesser und ~25 cm hoch:
 
-- Bildbreite ~30 cm (mit etwas Rand) → Kamera ~30 cm über der Pflanzenoberkante
-- Topf ~11 cm + Pflanze ~25 cm + 30 cm → **Kamera ca. 65 cm über dem Boden**
-- Grundfläche ca. 40 × 40 cm
+- Box-Innenhöhe 70 cm → Kamera ca. 70 cm über dem Boden, ca. 34 cm über der
+  Pflanzenoberkante (Topf ~11 cm + Pflanze ~25 cm) → Bildbreite dort ca. 34 cm
+- Grundfläche 50 × 50 cm, damit Farbkarte und Etikett in den Bodenecken
+  möglichst nicht von Blättern verdeckt werden
 
-→ Eher ein hoher Quader (z. B. 40 × 40 × 70 cm) als ein Würfel.
+→ Eher ein hoher Quader (50 × 50 × 70 cm, Innenmaß) als ein Würfel.
 **Tipp:** Erst mit einem Karton und einer Lampe testen, welche Höhe passt, bevor
 gedruckt wird.
 
@@ -195,9 +201,10 @@ gedruckt wird.
 
 ### Grobe Kosten (ohne Handy)
 
-LED-Streifen ~15–30 €, Platten ~20–40 €, Profile/Leisten ~20–40 €, Filament
-~10 €, Farbkarte ~60–80 € → **ca. 130–200 €**. Mit gebrauchtem Android-Handy
-ca. 150–250 € (falls kein vorhandenes Gerät genutzt wird, eher mehr).
+Farbkarte ~60–80 €, LED-Streifen ~15–30 €, Platten ~20–40 €, Leisten/Profile
+~20–40 €, Filament ~20 €, Diffusor ~5–10 €, USB-Netzteil ~10–20 €,
+Magnete/Scharniere ~5 € → **ca. 150–250 €**. Gebrauchtes Android-Handy
+zusätzlich ca. 80–150 €.
 
 ---
 

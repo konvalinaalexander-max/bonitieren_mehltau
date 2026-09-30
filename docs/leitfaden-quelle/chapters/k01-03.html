@@ -1,0 +1,579 @@
+<section class="chapter" id="kap-1">
+<p class="kicker">Einstieg</p>
+<h1>1 So benutzt du diesen Leitfaden</h1>
+<p class="lead">Dieser Leitfaden führt dich in acht Etappen zu deiner eigenen Handy-App für die Mehltau-Bonitur. Du entscheidest, baust und prüfst – Claude schreibt die Programme.</p>
+
+<h2>1.1 Worum es geht</h2>
+<p>Du baust eine eigene Lösung für die Bonitur von Falschem Mehltau (<em>Peronospora belbahrii</em>) an Topfbasilikum. <strong>Bonitur</strong> heißt: den Zustand von Pflanzen nach einer festen Skala bewerten. Ein Handy fotografiert den Topf in einer Fotobox von oben. Die App misst Pflanzenfläche und Anteil grüner, gelber und brauner Blattfläche und gibt eine Befallsnote. Eine fertige App dafür gibt es nicht (Recherche Stand 09/2026).</p>
+
+<h2>1.2 Aufbau und Zeichen</h2>
+<p>Kapitel 2 zeigt das Gesamtbild. Die Kapitel 3 bis 11 führen durch die Etappen 0 bis 7 – eine <strong>Etappe</strong> ist ein Arbeitsabschnitt mit klarem Ergebnis. Dazwischen erklärt Kapitel 7 ohne eigene Etappe, wie das Programm rechnet. Anhang A erklärt Fachbegriffe, Anhang B nennt Quellen. In jedem Etappen-Kapitel findest du:</p>
+<ul>
+<li>einen <strong>Steckbrief</strong>: Tabelle am Anfang mit Ziel, Dauer, Aufgaben, Material und Ergebnis,</li>
+<li><strong>Schritte</strong> (grüne Nummern) und <strong>Checklisten</strong> zum Abhaken – am Ende immer eine Abschluss-Checkliste, meist „Etappe … ist fertig, wenn …“,</li>
+<li><strong>Kopier-Prompts</strong> für Claude (blauer Kasten) und <strong>Kopiervorlagen</strong> zum Ausdrucken (gestrichelter Rahmen).</li>
+</ul>
+<div class="box tip"><p class="box-title">Tipp</p><p>Erfahrungswerte und Abkürzungen, die dir Zeit sparen.</p></div>
+<div class="box warn"><p class="box-title">Achtung</p><p>Hier kann etwas schiefgehen, das später viel Arbeit kostet.</p></div>
+<div class="box info"><p class="box-title">Hintergrund</p><p>Erklärt, warum etwas so ist – beim ersten Lesen kannst du es überspringen.</p></div>
+<div class="box decision"><p class="box-title">Entscheidung</p><p>Hier legst du etwas fest: ankreuzen und mit Datum im Projekttagebuch notieren.</p></div>
+
+<h2>1.3 Du musst nicht programmieren können</h2>
+<p><strong>Claude</strong> ist ein KI-Assistent der Firma Anthropic. In <strong>Claude Code</strong>, einer Arbeitsumgebung im Browser oder in der Claude-App, liest Claude die Projektdateien, schreibt Code, testet ihn und legt die Änderungen als Vorschlag ab, den du freigibst. Die Rollen-Zeichen im Leitfaden zeigen, wer was macht:</p>
+<ul>
+<li><span class="who du">Du</span> entscheidest, kaufst ein, baust die Box, fotografierst und bonitierst im Pilot, testest auf dem Handy und gibst Änderungen frei.</li>
+<li><span class="who claude">Claude</span> schreibt allen Code und die Druckdateien für den 3D-Drucker, erstellt Auswertungen und Anleitungen, testet automatisch und erklärt alles, so oft du willst.</li>
+<li><span class="who team">Team</span> – deine Mitarbeiter fotografieren und bonitieren später nach einer Kurzanleitung.</li>
+</ul>
+<p>Du brauchst nur Grundkenntnisse: Webseiten öffnen, Text kopieren, Dateien hoch- und herunterladen, Excel ausfüllen. Beschreib genau, was du siehst, am besten mit einem Bildschirmfoto (Screenshot). Ist etwas unklar, schreib: „Erkläre mir das ohne Fachbegriffe.“</p>
+<div class="box warn"><p class="box-title">Achtung</p><p>Claude kann sich irren. Prüfe jedes Ergebnis selbst – auf dem Handy, an der Box, mit echten Pflanzen.</p></div>
+
+<h2>1.4 So benutzt du die Kopier-Prompts</h2>
+<p>Ein <strong>Prompt</strong> ist ein Arbeitsauftrag an Claude in Textform.</p>
+<ol class="steps">
+<li><strong>Sitzung starten.</strong> <a href="https://claude.ai/code">claude.ai/code</a> öffnen, unter dem Eingabefeld dein Repository <code>bonitieren_mehltau</code> auswählen – deinen Projektordner, siehe 1.5 (beim ersten Mal: Abschnitt 3.9).</li>
+<li><strong>Prompt einfügen.</strong> Text aus dem blauen Kasten kopieren; Stellen in eckigen Klammern wie [Sortenname] ersetzen. Zeilenumbrüche aus dem PDF stören Claude nicht.</li>
+<li><strong>Absenden, Rückfragen beantworten.</strong> Eine Aufgabe pro Sitzung – kleine Schritte sind leichter zu prüfen.</li>
+<li><strong>Prüfen, dann übernehmen.</strong> Claudes Änderungsvorschlag übernimmst du erst, wenn er funktioniert (erstes Mal: Abschnitt 3.9, ausführlich: Kapitel 9.1).</li>
+</ol>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – Beispiel: etwas erklären lassen</p><pre>Lies docs/SPEZIFIKATION.md. Erkläre mir in einfachen Worten und ohne Fachbegriffe,
+wie die App aus einem Foto die Befallsnote berechnet. Ändere keine Dateien.</pre></div>
+
+<h2>1.5 Wo die Projektdateien liegen</h2>
+<p>Alles, was Claude erstellt, liegt in deinem <strong>GitHub-Repository</strong> <a href="https://github.com/konvalinaalexander-max/bonitieren_mehltau">github.com/konvalinaalexander-max/bonitieren_mehltau</a>: einem Projektordner im Internet, der sich jede Änderung merkt. Wichtig darin:</p>
+<ul>
+<li><code>docs/SPEZIFIKATION.md</code>: verbindliche Zahlen und Entscheidungen. Claude liest sie vor jeder Arbeit.</li>
+<li><code>CLAUDE.md</code>: Projektregeln für Claude (legt Claude im ersten Programmier-Baustein an).</li>
+<li><code>referenzbilder/</code>: 20–30 Pilotfotos und die Wiederholungsfotos mit Bonitur als Prüfmaterial. Alle anderen Betriebsdaten bleiben in deiner Datenablage (Abschnitt 3.7).</li>
+</ul>
+
+<h2>1.6 Tipp: Führe ein Projekttagebuch</h2>
+<p>Ein Heft oder eine Excel-Datei reicht: nach jedem Arbeitsschritt eine Zeile mit <strong>Datum, Erledigtem und offenen Fragen</strong>, etwa „07.10.2026 – Töpfe gemessen, Handy bestellt – Passt die Box-Höhe für die größte Sorte?“. Offene Fragen nimmst du in die nächste Claude-Sitzung mit. Entscheidungen immer mit Datum notieren – nach drei Monaten weißt du sonst nicht mehr, warum etwas so ist.</p>
+</section>
+
+<section class="chapter" id="kap-2">
+<p class="kicker">Überblick</p>
+<h1>2 Das Gesamtbild</h1>
+<p class="lead">Was am Ende dasteht, wie eine Bonitur später abläuft und in welcher Reihenfolge du dorthin kommst – mit Kosten und Zeitbedarf.</p>
+
+<h2>2.1 Was am Ende da ist</h2>
+<p class="table-caption">Tabelle 2.1: Die fünf Teile der fertigen Lösung</p>
+<table class="t">
+<thead><tr><th>Teil</th><th>Was es ist</th><th>Wer</th><th>Kapitel</th></tr></thead>
+<tbody>
+<tr><td><strong>Fotobox</strong></td><td>Kasten, innen 50 × 50 cm und 70 cm hoch: weiße Wände, LED-Licht, Farbkarte, Handyhalter. Sorgt für immer gleiche Fotos.</td><td><span class="who du">Du</span> <span class="who claude">Claude</span></td><td>4</td></tr>
+<tr><td><strong>Box-Handy</strong></td><td>gebrauchtes Android-Handy, bleibt immer in der Box, Kamera fest eingestellt</td><td><span class="who du">Du</span></td><td>3, 5</td></tr>
+<tr><td><strong>Analyse-Werkstatt</strong></td><td>Webseite im PC-Browser (Chrome, Edge): wertet viele Fotos auf einmal aus und vergleicht sie mit eurer Bonitur. Fotos bleiben auf dem PC.</td><td><span class="who claude">Claude</span></td><td>8–10</td></tr>
+<tr><td><strong>Handy-App</strong></td><td>Web-App: eine Webseite, die du „zum Startbildschirm hinzufügst“. Läuft nach dem ersten Öffnen auch ohne Internet, kein App Store nötig.</td><td><span class="who claude">Claude</span> <span class="who du">Du</span></td><td>9</td></tr>
+<tr><td><strong>Excel-Daten</strong></td><td>je Sitzung eine Excel-Datei (eine Zeile je Topf) und ein ZIP-Archiv mit den Fotos</td><td><span class="who du">Du</span></td><td>11</td></tr>
+</tbody>
+</table>
+<p>Werkstatt und Handy-App rechnen mit demselben Programmteil, dem <strong>Analyse-Kern</strong>. Er macht aus einem Foto die Zahlen: Fläche, Anteil grün, gelb und braun, Note. Was du im Pilot mit der Werkstatt einstellst, gilt deshalb genauso in der App.</p>
+
+<h2>2.2 So läuft eine Bonitur später ab</h2>
+<p>Im Alltag bonitieren deine Mitarbeiter <span class="who team">Team</span> nach einer einseitigen Kurzanleitung (Kapitel 11). Abbildung 2.1 zeigt den Weg vom Topf zur Excel-Zeile.</p>
+<figure>
+<svg viewBox="0 0 800 244" role="img" aria-label="Ablauf: Fotobox, Foto, Analyse, Ergebnis mit Kontrollbild, Excel" font-family="Source Sans 3, sans-serif">
+<defs>
+<marker id="k2-arrow-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2F6B3A"/></marker>
+</defs>
+<!-- boxes -->
+<rect x="1" y="8" width="138" height="178" rx="6" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="1.5"/>
+<rect x="166" y="8" width="138" height="178" rx="6" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="1.5"/>
+<rect x="331" y="8" width="138" height="178" rx="6" fill="#F3F6F1" stroke="#2B5D8C" stroke-width="2"/>
+<rect x="496" y="8" width="138" height="178" rx="6" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="1.5"/>
+<rect x="661" y="8" width="138" height="178" rx="6" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="1.5"/>
+<!-- arrows -->
+<g stroke="#2F6B3A" stroke-width="2" marker-end="url(#k2-arrow-a)">
+<line x1="142" y1="97" x2="162" y2="97"/>
+<line x1="307" y1="97" x2="327" y2="97"/>
+<line x1="472" y1="97" x2="492" y2="97"/>
+<line x1="637" y1="97" x2="657" y2="97"/>
+</g>
+<!-- icon 1: Fotobox -->
+<rect x="38" y="34" width="64" height="62" fill="#FFFFFF" stroke="#1F2A24" stroke-width="2"/>
+<rect x="56" y="25" width="28" height="9" rx="2" fill="#1F2A24"/>
+<line x1="41" y1="39" x2="99" y2="39" stroke="#D9B32E" stroke-width="3"/>
+<rect x="39" y="88" width="62" height="7" fill="#1F2A24"/>
+<path d="M62 74 H78 L76 88 H64 Z" fill="#6B7570"/>
+<circle cx="70" cy="64" r="12" fill="#5B9A3C"/>
+<rect x="86" y="80" width="4" height="8" fill="#C0392B"/><rect x="90" y="80" width="4" height="8" fill="#D9B32E"/><rect x="94" y="80" width="4" height="8" fill="#2B5D8C"/>
+<rect x="43" y="80" width="11" height="8" fill="#FFFFFF" stroke="#6B7570"/>
+<!-- icon 2: Foto -->
+<rect x="213" y="22" width="44" height="78" rx="7" fill="#1F2A24"/>
+<rect x="218" y="32" width="34" height="60" fill="#FFFFFF"/>
+<circle cx="235" cy="62" r="13" fill="#5B9A3C"/>
+<circle cx="240" cy="57" r="4" fill="#D9B32E"/>
+<!-- icon 3: Analyse (Pixelraster) -->
+<g>
+<rect x="368" y="28" width="11" height="11" fill="#1F2A24"/><rect x="381" y="28" width="11" height="11" fill="#5B9A3C"/><rect x="394" y="28" width="11" height="11" fill="#5B9A3C"/><rect x="407" y="28" width="11" height="11" fill="#5B9A3C"/><rect x="420" y="28" width="11" height="11" fill="#1F2A24"/>
+<rect x="368" y="41" width="11" height="11" fill="#5B9A3C"/><rect x="381" y="41" width="11" height="11" fill="#5B9A3C"/><rect x="394" y="41" width="11" height="11" fill="#D9B32E"/><rect x="407" y="41" width="11" height="11" fill="#5B9A3C"/><rect x="420" y="41" width="11" height="11" fill="#5B9A3C"/>
+<rect x="368" y="54" width="11" height="11" fill="#5B9A3C"/><rect x="381" y="54" width="11" height="11" fill="#D9B32E"/><rect x="394" y="54" width="11" height="11" fill="#8A5A2B"/><rect x="407" y="54" width="11" height="11" fill="#5B9A3C"/><rect x="420" y="54" width="11" height="11" fill="#5B9A3C"/>
+<rect x="368" y="67" width="11" height="11" fill="#5B9A3C"/><rect x="381" y="67" width="11" height="11" fill="#5B9A3C"/><rect x="394" y="67" width="11" height="11" fill="#5B9A3C"/><rect x="407" y="67" width="11" height="11" fill="#5B9A3C"/><rect x="420" y="67" width="11" height="11" fill="#D9B32E"/>
+<rect x="368" y="80" width="11" height="11" fill="#1F2A24"/><rect x="381" y="80" width="11" height="11" fill="#5B9A3C"/><rect x="394" y="80" width="11" height="11" fill="#5B9A3C"/><rect x="407" y="80" width="11" height="11" fill="#5B9A3C"/><rect x="420" y="80" width="11" height="11" fill="#1F2A24"/>
+</g>
+<!-- icon 4: Ergebnis / Kontrollbild -->
+<circle cx="562" cy="60" r="31" fill="#5B9A3C"/>
+<circle cx="549" cy="49" r="8" fill="#D9B32E"/>
+<circle cx="576" cy="72" r="6" fill="#D9B32E"/>
+<circle cx="571" cy="45" r="6" fill="#C0392B"/>
+<circle cx="591" cy="88" r="13" fill="#2F6B3A"/>
+<text x="591" y="93.5" text-anchor="middle" font-size="15" font-weight="700" fill="#FFFFFF">2</text>
+<!-- icon 5: Excel -->
+<rect x="700" y="30" width="60" height="62" fill="#FFFFFF" stroke="#6B7570" stroke-width="1.5"/>
+<rect x="700" y="30" width="60" height="13" fill="#2F6B3A"/>
+<g stroke="#C9D2C6" stroke-width="1.2">
+<line x1="700" y1="55" x2="760" y2="55"/><line x1="700" y1="67" x2="760" y2="67"/><line x1="700" y1="79" x2="760" y2="79"/>
+<line x1="720" y1="43" x2="720" y2="92"/><line x1="740" y1="43" x2="740" y2="92"/>
+</g>
+<!-- titles -->
+<g font-size="17" font-weight="700" fill="#1F2A24" text-anchor="middle">
+<text x="70" y="128">Fotobox</text>
+<text x="235" y="128">Foto</text>
+<text x="400" y="128">Analyse</text>
+<text x="565" y="128">Ergebnis</text>
+<text x="730" y="128">Excel</text>
+</g>
+<g font-size="13.5" fill="#1F2A24" text-anchor="middle">
+<text x="70" y="151">gleiches Licht,</text><text x="70" y="169">Farbkarte im Bild</text>
+<text x="235" y="151">Box-Handy oben,</text><text x="235" y="169">feste Einstellungen</text>
+<text x="400" y="151">Farben korrigieren,</text><text x="400" y="169">Pixel einteilen</text>
+<text x="565" y="151">Kontrollbild,</text><text x="565" y="169">Befall %, Note</text>
+<text x="730" y="151">1 Zeile je Topf,</text><text x="730" y="169">Fotos als ZIP</text>
+</g>
+<!-- bracket -->
+<path d="M170 198 V206 H630 V198" fill="none" stroke="#6B7570" stroke-width="1.5"/>
+<line x1="400" y1="206" x2="400" y2="214" stroke="#6B7570" stroke-width="1.5"/>
+<text x="400" y="232" text-anchor="middle" font-size="14" fill="#6B7570">in der Handy-App auf dem Box-Handy – funktioniert auch ohne Internet</text>
+</svg>
+<figcaption>Abb. 2.1: Vom Topf zur Excel-Zeile. Foto, Analyse und Ergebnis laufen in der Handy-App. Derselbe Analyse-Kern (blauer Rahmen) steckt auch in der Analyse-Werkstatt am PC.</figcaption>
+</figure>
+<ol class="steps">
+<li><strong>Vorbereiten.</strong> LED-Licht an, App öffnen, Sitzung starten: Datum, Mitarbeiter-Kürzel, Satz.</li>
+<li><strong>Topf einsetzen.</strong> Pflanze trocken, Abdeckscheibe auf den Topf, Etikett-Karte in den Halter, Topf in den Zentrierring, Klappe zu.</li>
+<li><strong>Fotografieren.</strong> In der App auslösen; das Box-Handy liegt fest oben auf dem Deckel. Kann die App die Kamera nicht fest einstellen, fotografierst du mit Open Camera und holst das Foto in die App (Kapitel 9).</li>
+<li><strong>Prüfen.</strong> Die App zeigt ein <strong>Kontrollbild</strong> (Foto mit eingefärbten grünen, gelben und braunen Bereichen), Befall %, Note, Topfnummer und Warnungen. Plausibel: Speichern, sonst Wiederholen.</li>
+<li><strong>Sichern.</strong> Nach der Sitzung Excel und Foto-ZIP exportieren und auf Firmen-PC, NAS (Netzwerkspeicher) oder Cloud ablegen.</li>
+</ol>
+<p>Geschätzt dauert das 10–20 Sekunden pro Topf; eine reine Sicht-Bonitur ist schneller. Der Gewinn: Die App bewertet immer gleich, misst nebenbei die Pflanzengröße und legt ein Foto-Archiv an.</p>
+
+<h2>2.3 Der Weg dorthin: acht Etappen</h2>
+<p>Abbildung 2.2 zeigt die Etappen in ihrer Reihenfolge; jede hat ein eigenes Kapitel.</p>
+<figure>
+<svg viewBox="0 0 800 424" role="img" aria-label="Zeitplan der Etappen 0 bis 7 mit Go/No-Go-Entscheidung nach Etappe 4" font-family="Source Sans 3, sans-serif">
+<defs>
+<marker id="k2-arrow-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2A24"/></marker>
+<marker id="k2-arrow-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2F6B3A"/></marker>
+<marker id="k2-arrow-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C0392B"/></marker>
+<marker id="k2-arrow-y" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8A5A2B"/></marker>
+</defs>
+<!-- legend -->
+<rect x="1" y="4" width="14" height="14" rx="2" fill="#6B7570"/>
+<text x="21" y="16" font-size="13" fill="#1F2A24">Vorbereitung</text>
+<rect x="120" y="4" width="14" height="14" rx="2" fill="#D9B32E"/>
+<text x="140" y="16" font-size="13" fill="#1F2A24">Risiko zuerst prüfen – noch ohne Handy-App</text>
+<rect x="450" y="4" width="14" height="14" rx="2" fill="#2F6B3A"/>
+<text x="470" y="16" font-size="13" fill="#1F2A24">App bauen und im Alltag nutzen</text>
+
+<!-- Row 1: E0..E3 -->
+<g>
+<rect x="1" y="36" width="174" height="100" rx="5" fill="#FFFFFF" stroke="#6B7570" stroke-width="1.5"/>
+<rect x="1" y="36" width="174" height="26" rx="5" fill="#6B7570"/><rect x="1" y="49" width="174" height="13" fill="#6B7570"/>
+<text x="11" y="54" font-size="13" font-weight="700" fill="#FFFFFF">ETAPPE 0</text><text x="165" y="54" font-size="13" text-anchor="end" fill="#FFFFFF">Kap. 3</text>
+<text x="88" y="86" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">Vorbereitung und</text>
+<text x="88" y="105" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">Entscheidungen</text>
+<text x="88" y="126" font-size="13.5" text-anchor="middle" fill="#6B7570">ca. 1 Woche</text>
+</g>
+<g>
+<rect x="209" y="36" width="174" height="100" rx="5" fill="#FFFFFF" stroke="#D9B32E" stroke-width="1.5"/>
+<rect x="209" y="36" width="174" height="26" rx="5" fill="#D9B32E"/><rect x="209" y="49" width="174" height="13" fill="#D9B32E"/>
+<text x="219" y="54" font-size="13" font-weight="700" fill="#1F2A24">ETAPPE 1</text><text x="373" y="54" font-size="13" text-anchor="end" fill="#1F2A24">Kap. 4</text>
+<text x="296" y="86" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">Fotobox bauen</text>
+<text x="296" y="105" font-size="14" text-anchor="middle" fill="#1F2A24">(erst Karton, dann fest)</text>
+<text x="296" y="126" font-size="13.5" text-anchor="middle" fill="#6B7570">1–3 Wochen</text>
+</g>
+<g>
+<rect x="417" y="36" width="174" height="100" rx="5" fill="#FFFFFF" stroke="#D9B32E" stroke-width="1.5"/>
+<rect x="417" y="36" width="174" height="26" rx="5" fill="#D9B32E"/><rect x="417" y="49" width="174" height="13" fill="#D9B32E"/>
+<text x="427" y="54" font-size="13" font-weight="700" fill="#1F2A24">ETAPPE 2</text><text x="581" y="54" font-size="13" text-anchor="end" fill="#1F2A24">Kap. 5</text>
+<text x="504" y="86" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">Box-Handy</text>
+<text x="504" y="105" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">einrichten</text>
+<text x="504" y="126" font-size="13.5" text-anchor="middle" fill="#6B7570">1 Tag</text>
+</g>
+<g>
+<rect x="625" y="36" width="174" height="100" rx="5" fill="#FFFFFF" stroke="#D9B32E" stroke-width="1.5"/>
+<rect x="625" y="36" width="174" height="26" rx="5" fill="#D9B32E"/><rect x="625" y="49" width="174" height="13" fill="#D9B32E"/>
+<text x="635" y="54" font-size="13" font-weight="700" fill="#1F2A24">ETAPPE 3</text><text x="789" y="54" font-size="13" text-anchor="end" fill="#1F2A24">Kap. 6</text>
+<text x="712" y="86" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">Pilot: Fotos und</text>
+<text x="712" y="105" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">Sicht-Bonitur</text>
+<text x="712" y="126" font-size="13.5" text-anchor="middle" fill="#6B7570">1–2 Wochen</text>
+</g>
+<g stroke="#1F2A24" stroke-width="2" marker-end="url(#k2-arrow-b)">
+<line x1="178" y1="86" x2="205" y2="86"/>
+<line x1="386" y1="86" x2="413" y2="86"/>
+<line x1="594" y1="86" x2="621" y2="86"/>
+</g>
+<!-- connector row1 -> row2 -->
+<path d="M712 137 V164 H81 V194" fill="none" stroke="#1F2A24" stroke-width="2" marker-end="url(#k2-arrow-b)"/>
+
+<!-- Row 2: E4 -->
+<g>
+<rect x="1" y="198" width="160" height="100" rx="5" fill="#FFFFFF" stroke="#D9B32E" stroke-width="1.5"/>
+<rect x="1" y="198" width="160" height="26" rx="5" fill="#D9B32E"/><rect x="1" y="211" width="160" height="13" fill="#D9B32E"/>
+<text x="11" y="216" font-size="13" font-weight="700" fill="#1F2A24">ETAPPE 4</text><text x="151" y="216" font-size="13" text-anchor="end" fill="#1F2A24">Kap. 8</text>
+<text x="81" y="248" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">Pilot auswerten</text>
+<text x="81" y="267" font-size="14" text-anchor="middle" fill="#1F2A24">(Analyse-Werkstatt)</text>
+<text x="81" y="288" font-size="13.5" text-anchor="middle" fill="#6B7570">ca. 1 Woche</text>
+</g>
+<line x1="163" y1="248" x2="181" y2="248" stroke="#1F2A24" stroke-width="2" marker-end="url(#k2-arrow-b)"/>
+<!-- decision diamond -->
+<polygon points="184,248 240,202 296,248 240,294" fill="#FFFFFF" stroke="#1F2A24" stroke-width="2"/>
+<text x="240" y="244" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2A24">Go oder</text>
+<text x="240" y="262" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2A24">No-Go?</text>
+<!-- Go -->
+<line x1="298" y1="248" x2="340" y2="248" stroke="#2F6B3A" stroke-width="2" marker-end="url(#k2-arrow-g)"/>
+<text x="318" y="240" font-size="14" font-weight="700" text-anchor="middle" fill="#2F6B3A">Go</text>
+<!-- E5..E7 -->
+<g>
+<rect x="344" y="198" width="134" height="100" rx="5" fill="#FFFFFF" stroke="#2F6B3A" stroke-width="1.5"/>
+<rect x="344" y="198" width="134" height="26" rx="5" fill="#2F6B3A"/><rect x="344" y="211" width="134" height="13" fill="#2F6B3A"/>
+<text x="353" y="216" font-size="13" font-weight="700" fill="#FFFFFF">ETAPPE 5</text><text x="469" y="216" font-size="13" text-anchor="end" fill="#FFFFFF">Kap. 9</text>
+<text x="411" y="248" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">Handy-App</text>
+<text x="411" y="267" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">bauen</text>
+<text x="411" y="288" font-size="13.5" text-anchor="middle" fill="#6B7570">3–6 Wochen</text>
+</g>
+<g>
+<rect x="504" y="198" width="134" height="100" rx="5" fill="#FFFFFF" stroke="#2F6B3A" stroke-width="1.5"/>
+<rect x="504" y="198" width="134" height="26" rx="5" fill="#2F6B3A"/><rect x="504" y="211" width="134" height="13" fill="#2F6B3A"/>
+<text x="513" y="216" font-size="13" font-weight="700" fill="#FFFFFF">ETAPPE 6</text><text x="629" y="216" font-size="13" text-anchor="end" fill="#FFFFFF">Kap. 10</text>
+<text x="571" y="248" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">Kalibrieren</text>
+<text x="571" y="267" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">und prüfen</text>
+<text x="571" y="288" font-size="13.5" text-anchor="middle" fill="#6B7570">2–4 Wochen</text>
+</g>
+<g>
+<rect x="664" y="198" width="134" height="100" rx="5" fill="#FFFFFF" stroke="#2F6B3A" stroke-width="1.5"/>
+<rect x="664" y="198" width="134" height="26" rx="5" fill="#2F6B3A"/><rect x="664" y="211" width="134" height="13" fill="#2F6B3A"/>
+<text x="673" y="216" font-size="13" font-weight="700" fill="#FFFFFF">ETAPPE 7</text><text x="789" y="216" font-size="13" text-anchor="end" fill="#FFFFFF">Kap. 11</text>
+<text x="731" y="248" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">Im Betrieb</text>
+<text x="731" y="267" font-size="15.5" font-weight="700" text-anchor="middle" fill="#1F2A24">und Wartung</text>
+<text x="731" y="288" font-size="13.5" text-anchor="middle" fill="#6B7570">laufend</text>
+</g>
+<g stroke="#2F6B3A" stroke-width="2" marker-end="url(#k2-arrow-g)">
+<line x1="481" y1="248" x2="500" y2="248"/>
+<line x1="641" y1="248" x2="660" y2="248"/>
+</g>
+<!-- Nachbessern loop -->
+<path d="M212 271 C212 334, 81 334, 81 302" fill="none" stroke="#8A5A2B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#k2-arrow-y)"/>
+<text x="128" y="346" font-size="14" font-weight="700" text-anchor="middle" fill="#8A5A2B">Nachbessern,</text>
+<text x="128" y="364" font-size="13.5" text-anchor="middle" fill="#1F2A24">dann Teil-Pilot</text>
+<text x="128" y="381" font-size="13.5" text-anchor="middle" fill="#1F2A24">mit 30–50 Töpfen</text>
+<!-- No-Go branch -->
+<path d="M240 296 V377 H296" fill="none" stroke="#C0392B" stroke-width="2" marker-end="url(#k2-arrow-r)"/>
+<text x="250" y="330" font-size="14" font-weight="700" fill="#C0392B">No-Go</text>
+<rect x="300" y="334" width="360" height="86" rx="5" fill="#FFFFFF" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="6 4"/>
+<text x="480" y="354" font-size="14.5" font-weight="700" text-anchor="middle" fill="#1F2A24">Handy-App ohne automatische Analyse</text>
+<text x="480" y="373" font-size="13.5" text-anchor="middle" fill="#1F2A24">digitale Sicht-Bonitur mit Referenzfotos</text>
+<text x="480" y="391" font-size="13.5" text-anchor="middle" fill="#1F2A24">je Notenstufe, Foto-Archiv, Excel-Export</text>
+<text x="480" y="410" font-size="13" text-anchor="middle" fill="#6B7570">gebaut in Etappe 5; Kalibrieren entfällt größtenteils</text>
+<path d="M660 377 H731 V302" fill="none" stroke="#C0392B" stroke-width="2" marker-end="url(#k2-arrow-r)"/>
+</svg>
+<figcaption>Abb. 2.2: Die Etappen 0 bis 7 mit grober Dauer und Kapitelnummer. Nach Etappe 4 entscheidest du anhand der Pilot-Ergebnisse: Go, Nachbessern oder No-Go. Gesamtdauer grob 2–4 Monate nebenbei (Schätzung).</figcaption>
+</figure>
+
+<h2>2.4 Erst das Risiko prüfen, dann die App bauen</h2>
+<p>Das größte Risiko ist nicht die Programmierung, sondern eine Frage: <strong>Stimmt die Farbauswertung von oben gut genug mit dem Urteil eurer erfahrenen Leute überein?</strong> Das prüfst du zuerst: Box, Box-Handy und 100–200 Pilot-Töpfe, die zwei Personen bonitieren (Etappen 1–3). Für Etappe 4 baut Claude als Erstes Analyse-Kern und Analyse-Werkstatt. Erst danach entsteht die Handy-App – mit demselben Kern, ohne doppelte Arbeit. Nach Etappe 4 entscheidest du (Vorschlag, Grenzwerte in Kapitel 8):</p>
+<ul>
+<li><strong>Go:</strong> Die App stimmt mit den Menschen ungefähr so gut überein wie die Menschen untereinander; wiederholte Fotos liefern fast dieselben Werte; die Farbkarte wird fast immer erkannt. → Handy-App mit automatischer Analyse.</li>
+<li><strong>Nachbessern:</strong> Übereinstimmung nur mittel oder Werte schwanken. → Licht, Abdeckscheibe oder Schwellwerte verbessern, dann Teil-Pilot mit 30–50 Töpfen.</li>
+<li><strong>No-Go:</strong> Auch danach schwach, oder die Kamera übersieht zu viel Befall an unteren Blättern. → Handy-App ohne automatische Analyse: digitale Sicht-Bonitur mit Referenzfotos je Notenstufe, Foto-Archiv, Excel-Export. Du baust sie ebenfalls in Etappe 5; das Kalibrieren in Etappe 6 entfällt größtenteils. Auch das ist brauchbar – und du weißt es nach Wochen statt nach Monaten.</li>
+</ul>
+
+<h2>2.5 Was die App kann – und was nicht</h2>
+<p class="table-caption">Tabelle 2.2: Möglichkeiten und Grenzen der Messung von oben</p>
+<table class="t">
+<thead><tr><th>Das kann die App</th><th>Das kann sie nicht</th></tr></thead>
+<tbody>
+<tr><td>Pflanzenfläche messen (Größe, Wachstum; cm² nur ungefähr)</td><td>Mehltau diagnostizieren – sie misst nur sichtbare Symptome</td></tr>
+<tr><td>Anteil grün, gelb, braun in %; Befall % = gelb + braun</td><td>verdeckte untere Blätter sehen, an denen Befall beginnt</td></tr>
+<tr><td>daraus eine Note nach eurer Skala ableiten</td><td>Sporenrasen auf der Blattunterseite sehen</td></tr>
+<tr><td>jeden Topf nach denselben Regeln bewerten</td><td>die Ursache einer Vergilbung erkennen</td></tr>
+<tr><td>Kontrollbild, Warnungen, Foto-Archiv, Excel-Export</td><td>rote oder violette Sorten auswerten; Pflanzenhöhe messen</td></tr>
+</tbody>
+</table>
+<div class="box warn"><p class="box-title">Achtung</p><p>Das Ergebnis heißt immer „sichtbare Symptome (von oben)“ und ist keine Mehltau-Diagnose. Gelb kann auch von Nährstoffmangel, Staunässe, Lichtmangel oder alten Blättern kommen. Und laut Beratungsliteratur beginnt der Befall an den unteren Blättern – die Kamera sieht ihn spät. Die regelmäßige Kontrolle der Blattunterseite bleibt Pflicht.</p></div>
+
+<h2>2.6 Kosten und Zeit</h2>
+<p class="table-caption">Tabelle 2.3: Grobe Kosten (Schätzung, Stand 09/2026)</p>
+<table class="t">
+<colgroup><col width="23%"><col width="22%"><col width="55%"></colgroup>
+<thead><tr><th>Posten</th><th>ca. Kosten</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td>Fotobox-Material</td><td>150&#8288;–&#8288;250&nbsp;€</td><td>einmalig, davon Farbkarte 60–80 € (Einkaufsliste: Abschnitt 3.8)</td></tr>
+<tr><td>Box-Handy (gebraucht)</td><td>80&#8288;–&#8288;150&nbsp;€</td><td>entfällt, wenn ein passendes Gerät da ist (Abschnitt 3.2)</td></tr>
+<tr><td>Hosting (Platz im Internet für die App)</td><td>0 € oder kleiner Monatsbetrag</td><td>je nach Sichtbarkeit des Repositorys (Abschnitt 3.5)</td></tr>
+<tr><td><strong>Summe Hardware</strong></td><td><strong>150&#8288;–&#8288;250&nbsp;€</strong></td><td>mit gebrauchtem Handy ca. 230–400 €</td></tr>
+</tbody>
+</table>
+<p>Open Camera, OpenSCAD, GitHub im Gratis-Tarif und die fertige App kosten nichts. Nicht eingerechnet: dein kostenpflichtiges Claude-Abo (Abschnitt 3.9) und die Arbeitszeit, auch die der zwei Pilot-Personen.</p>
+<p><strong>Zeit:</strong> Alle Etappen zusammen dauern grob <strong>2–4 Monate nebenbei</strong> – ausdrücklich eine Schätzung. Am meisten hängt davon ab, wie schnell du genug befallene Pilot-Töpfe findest (möglichst 15–20 je Notenstufe).</p>
+</section>
+
+<section class="chapter" id="kap-3">
+<p class="kicker">Etappe 0 · ca. 1 Woche</p>
+<h1>3 Vorbereitung und Entscheidungen</h1>
+<p class="lead">In dieser Woche triffst du sieben Grundsatzentscheidungen, bestellst das Material und lässt Claude alles im Projekt festhalten. Unsicher? Nimm jeweils den Vorschlag – fast alles lässt sich später ändern.</p>
+<table class="stage-meta">
+<tr><th>Ziel</th><td>sieben Entscheidungen treffen, Material bestellen, Zugang zu GitHub und Claude prüfen</td></tr>
+<tr><th>Dauer</th><td>ca. 1 Woche; Lieferungen dürfen noch in Etappe 1 hineinreichen</td></tr>
+<tr><th>Du</th><td>entscheidest, misst, bestellst, sprichst die Pilot-Personen an, legst Ordner an</td></tr>
+<tr><th>Claude</th><td>trägt deine Entscheidungen in <code>docs/SPEZIFIKATION.md</code> ein und prüft sie (3.9)</td></tr>
+<tr><th>Du brauchst</th><td>Zollstock, 3–5 große Pflanzen, Zugang zu GitHub und Claude, Budget (3.8)</td></tr>
+<tr><th>Ergebnis</th><td>sieben angekreuzte Entscheidungskästen, Bestellungen, Eintrag im Repository</td></tr>
+</table>
+
+
+<h2>3.1 Entscheidung 1: Die Boniturskala</h2>
+<p>Die App berechnet zuerst den <strong>Befall %</strong> (Anteil gelber und brauner an der sichtbaren Pflanzenfläche) und macht daraus über eine Umrechnungstabelle eine Note. Deren Grenzen legst du erst im Pilot und bei der Kalibrierung fest. Jetzt entscheidest du nur, welche Skala gilt:</p>
+<ul>
+<li><strong>Eigene Skala</strong> (z. B. 0–3 oder 1–9): Nimm sie und schreib die Stufen auf. Am besten passt eine Skala nach Anteil befallener Blattfläche – den Sporenrasen der Blattunterseite sieht die Kamera nicht.</li>
+<li><strong>Keine feste Skala:</strong> Nimm Tabelle 3.1, angelehnt an Ben Naim et al. 2025 (Fachzeitschrift <em>Planta</em>).</li>
+</ul>
+<p class="table-caption">Tabelle 3.1: Vorgeschlagene Skala 0–4, angelehnt an Ben Naim et al. 2025</p>
+<table class="t">
+<thead><tr><th>Note</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td><strong>0</strong></td><td>keine sichtbaren Symptome</td></tr>
+<tr><td><strong>1</strong></td><td>bis 10 % der Blattfläche befallen</td></tr>
+<tr><td><strong>2</strong></td><td>über 10 bis 25 % der Blattfläche befallen</td></tr>
+<tr><td><strong>3</strong></td><td>über 25 bis 50 % der Blattfläche befallen</td></tr>
+<tr><td><strong>4</strong></td><td>über 50 % befallen oder starke Nekrosen (abgestorbenes, braunes Gewebe)</td></tr>
+</tbody>
+</table>
+<div class="box decision"><p class="box-title">Entscheidung 1 – Boniturskala</p>
+<ul class="checklist">
+<li>Eigene Skala: ______________________ (Stufen und Beschreibung liegen schriftlich vor)</li>
+<li>Vorgeschlagene Skala 0–4 aus Tabelle 3.1</li>
+</ul></div>
+
+<h2>3.2 Entscheidung 2: Das Box-Handy</h2>
+<p>Ein festes Android-Handy bleibt immer in der Box und wird für nichts anderes benutzt. Jedes Handymodell liefert etwas andere Farben; mit einem einzigen Gerät bleiben alle Fotos vergleichbar. Ein iPhone scheidet aus: Der iPhone-Browser kann Belichtung und Weißabgleich nicht zuverlässig festhalten, und Open Camera gibt es nur für Android. Der Handyhalter wird genau für dein Modell gedruckt. Kaufkriterien:</p>
+<ul class="checklist">
+<li>Android 10 oder neuer; Hauptkamera (Zoomstufe 1×, nicht Weitwinkel) mit mindestens 12 Megapixel.</li>
+<li>Kamera von Hand einstellbar. Test: die kostenlose App Open Camera aus dem Play Store installieren, in ihren Einstellungen „Camera-API“ auf „Camera2-API“ stellen (Kapitel 5.3). Danach müssen ISO (Lichtempfindlichkeit), Belichtungszeit, Weißabgleich (Kelvin) und Fokus von Hand gehen. Fehlt die Option oder geht das nicht, ist das Handy ungeeignet – vorher ausprobieren oder mit Rückgaberecht kaufen.</li>
+<li>Linse ohne Kratzer, Bildschirm ohne Risse, Akku in Ordnung, aktueller Chrome-Browser installierbar, genug freier Speicher (1000 Fotos brauchen ca. 2–3 GB).</li>
+<li>Möglichst ein verbreitetes Modell, damit du leicht ein gleiches Ersatzgerät findest. Ein anderes Modell heißt: neu prüfen und kalibrieren (Kapitel 10).</li>
+</ul>
+<div class="box decision"><p class="box-title">Entscheidung 2 – Box-Handy</p>
+<p>Hersteller und Modell: ____________________ &nbsp; Android-Version: ______ &nbsp; gekauft am: ___________</p></div>
+
+<h2>3.3 Entscheidung 3: Welche Sorten</h2>
+<p>Die Auswertung teilt jeden Bildpunkt nach seinem Farbton in grün, gelb oder braun ein. Das klappt nur bei <strong>grünen Sorten</strong>. Bei roten und violetten Sorten würden gesunde Blätter als „braun“ gezählt oder gar nicht als Pflanze erkannt – sie sind ausgeschlossen. Im Pilot gilt: Weniger ist einfacher – starte mit deiner Hauptsorte oder den zwei bis drei wichtigsten. Jede weitere Sorte wird später einmal geprüft (Kapitel 10), vor allem sehr hellgrüne, deren junge Triebe fast gelblich wirken.</p>
+<div class="box decision"><p class="box-title">Entscheidung 3 – Sorten</p>
+<p>Sorten im Pilot (nur grüne): __________________________ &nbsp; später dazu: __________________________</p></div>
+
+<h2>3.4 Entscheidung 4: Töpfe und Pflanzen ausmessen</h2>
+<p>Box-Höhe, Bildausschnitt, Zentrierring und Abdeckscheibe hängen von deinen Töpfen und Pflanzen ab. Der Leitfaden nimmt an: Topf ca. 11 cm hoch, Pflanze bis ca. 25 cm breit und bis ca. 25 cm hoch über dem Topf. Miss 3–5 der größten Pflanzen in ihrem größten Zustand (z. B. kurz vor dem Verkauf): A bis C am leeren Topf, D bis G an der Pflanze auf dem Tisch, D in zwei Richtungen. Der größte Wert kommt in Tabelle 3.2, bei mehreren Topfgrößen je eine Spalte.</p>
+<div class="box tip"><p class="box-title">Tipp</p><p>Höhen misst du genauer, wenn du ein Buch oder Brett waagerecht auf die höchste Blattspitze legst und vom Tisch bis zu dessen Unterkante misst. Den Durchmesser D misst du mit dem Zollstock knapp über der Pflanze, ohne Blätter anzudrücken.</p></div>
+<figure>
+<svg viewBox="0 0 800 318" role="img" aria-label="Maße A bis G an Topf und Pflanze" font-family="Source Sans 3, sans-serif">
+<defs>
+<marker id="k3-dim" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#2B5D8C"/></marker>
+</defs>
+<text x="135" y="18" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2A24">Leerer Topf</text>
+<text x="545" y="18" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2A24">Größte Pflanze (von der Seite)</text>
+<line x1="285" y1="6" x2="285" y2="312" stroke="#C9D2C6" stroke-width="1.5"/>
+<!-- panel 1: empty pot -->
+<path d="M62 130 L208 130 L190 260 L80 260 Z" fill="#6B7570"/>
+<rect x="56" y="116" width="158" height="14" rx="2" fill="#1F2A24"/>
+<g stroke="#6B7570" stroke-width="1" stroke-dasharray="4 3">
+<line x1="56" y1="112" x2="56" y2="88"/><line x1="214" y1="112" x2="214" y2="88"/>
+<line x1="80" y1="264" x2="80" y2="290"/><line x1="190" y1="264" x2="190" y2="290"/>
+<line x1="218" y1="116" x2="250" y2="116"/><line x1="194" y1="260" x2="250" y2="260"/>
+</g>
+<g stroke="#2B5D8C" stroke-width="1.6" marker-start="url(#k3-dim)" marker-end="url(#k3-dim)">
+<line x1="57" y1="96" x2="213" y2="96"/>
+<line x1="81" y1="282" x2="189" y2="282"/>
+<line x1="240" y1="117" x2="240" y2="259"/>
+</g>
+<g font-size="17" font-weight="700" fill="#2B5D8C">
+<text x="135" y="86" text-anchor="middle">A</text>
+<text x="135" y="306" text-anchor="middle">B</text>
+<text x="250" y="194">C</text>
+</g>
+<!-- panel 2: plant (drawing compressed vertically) -->
+<g transform="translate(0,-0.4) scale(1,0.88)">
+<line x1="330" y1="330" x2="722" y2="330" stroke="#1F2A24" stroke-width="2"/>
+<g stroke="#2F6B3A" stroke-width="3" stroke-linecap="round">
+<line x1="484" y1="258" x2="468" y2="200"/><line x1="490" y1="258" x2="490" y2="195"/><line x1="496" y1="258" x2="512" y2="200"/>
+</g>
+<g fill="#5B9A3C" stroke="#2F6B3A" stroke-width="1.2">
+<circle cx="437" cy="170" r="42"/><circle cx="543" cy="170" r="42"/>
+<circle cx="490" cy="150" r="60"/>
+<circle cx="455" cy="122" r="30"/><circle cx="526" cy="122" r="30"/>
+<circle cx="490" cy="112" r="32"/>
+</g>
+<ellipse cx="418" cy="188" rx="11" ry="6" fill="#D9B32E"/>
+<ellipse cx="562" cy="192" rx="10" ry="6" fill="#D9B32E"/>
+<ellipse cx="549" cy="200" rx="7" ry="4" fill="#8A5A2B"/>
+<path d="M440 268 L540 268 L528 330 L452 330 Z" fill="#6B7570"/>
+<rect x="436" y="258" width="108" height="10" rx="2" fill="#1F2A24"/>
+<g stroke="#6B7570" stroke-width="1" stroke-dasharray="4 3">
+<line x1="395" y1="168" x2="395" y2="54"/><line x1="585" y1="168" x2="585" y2="54"/>
+<line x1="492" y1="80" x2="690" y2="80"/>
+<line x1="546" y1="258" x2="635" y2="258"/>
+</g>
+</g>
+<text x="335" y="309" font-size="13" fill="#6B7570">Tisch</text>
+<g stroke="#2B5D8C" stroke-width="1.6" marker-start="url(#k3-dim)" marker-end="url(#k3-dim)">
+<line x1="396" y1="52" x2="584" y2="52"/>
+<line x1="625" y1="71" x2="625" y2="226"/>
+<line x1="680" y1="71" x2="680" y2="289"/>
+</g>
+<g stroke="#2B5D8C" stroke-width="1.6">
+<line x1="477" y1="207" x2="503" y2="207"/>
+<line x1="477" y1="202" x2="477" y2="212"/><line x1="503" y1="202" x2="503" y2="212"/>
+</g>
+<g font-size="17" font-weight="700" fill="#2B5D8C">
+<text x="490" y="42" text-anchor="middle">D</text>
+<text x="633" y="153">E</text>
+<text x="688" y="184">F</text>
+<text x="469" y="213" text-anchor="end">G</text>
+</g>
+</svg>
+<figcaption>Abb. 3.1: Diese Maße brauchst du. A bis C misst du am leeren Topf, D bis G an der größten Pflanze, die du später fotografieren willst. Die Buchstaben passen zu Tabelle 3.2.</figcaption>
+</figure>
+
+<p class="table-caption">Tabelle 3.2: Messbogen für Töpfe und Pflanzen (Werte in cm)</p>
+<table class="t">
+<thead><tr><th>Maß</th><th>Wofür</th><th>Annahme</th><th>Topf&nbsp;1</th><th>Topf&nbsp;2</th></tr></thead>
+<tbody>
+<tr><td><strong>A</strong> Topf oben (Außenkante Rand)</td><td>Abdeckscheibe (A + ca. 1 cm)</td><td>messen</td><td></td><td></td></tr>
+<tr><td><strong>B</strong> Topf unten</td><td>Zentrierring</td><td>messen</td><td></td><td></td></tr>
+<tr><td><strong>C</strong> Topfhöhe</td><td>Box-Höhe</td><td>ca. 11</td><td></td><td></td></tr>
+<tr><td><strong>D</strong> größter Pflanzendurchmesser</td><td>Bildausschnitt</td><td>bis ca. 25</td><td></td><td></td></tr>
+<tr><td><strong>E</strong> Pflanzenhöhe über dem Topfrand</td><td>Box-Höhe</td><td>bis ca. 25</td><td></td><td></td></tr>
+<tr><td><strong>F</strong> Tisch bis höchste Blattspitze</td><td>Abstand zur Kamera</td><td>bis ca. 36</td><td></td><td></td></tr>
+<tr><td><strong>G</strong> Stängel-Büschel über der Erde</td><td>Loch der Abdeckscheibe</td><td>Loch ca. 3</td><td></td><td></td></tr>
+</tbody>
+</table>
+<div class="box decision"><p class="box-title">Entscheidung 4 – passt die Box?</p>
+<p>Die Kamera liegt ca. 70 cm über dem Boxboden. Faustregel für die Hauptkamera (1×, erklärt in Abschnitt 4.3): Der Abstand zur Pflanzenoberkante ist ungefähr so groß wie die Bildbreite (kurze Bildseite). Also muss <strong>70 cm − F</strong> etwas größer sein als <strong>D</strong>. Mit den Annahmen: 70 − 36 = 34 cm, mehr als 25 cm.</p>
+<ul class="checklist">
+<li>Tabelle 3.2 ist ausgefüllt, und 70 cm − F ist etwas größer als D.</li>
+<li>Oder: Die Box muss höher werden – notiert für Etappe 1 (Kapitel 4, Karton-Test).</li>
+</ul></div>
+
+<h2>3.5 Entscheidung 5: Hosting – öffentliches oder privates Repository</h2>
+<p>Die Handy-App ist eine Webseite und muss dafür auf einem Server im Internet liegen; das nennt man <strong>Hosting</strong>. Für den Kamerazugriff muss die Seite verschlüsselt sein (HTTPS) – das bieten alle drei Dienste aus Tabelle 3.3. Welcher passt, hängt davon ab, ob dein Repository öffentlich oder privat ist. Stand 30.09.2026 ist es <strong>öffentlich</strong> („Public“ neben dem Namen auf GitHub).</p>
+<p class="table-caption">Tabelle 3.3: Öffentlich oder privat – was das bedeutet (Stand 09/2026)</p>
+<table class="t">
+<thead><tr><th></th><th>Öffentlich</th><th>Privat</th></tr></thead>
+<tbody>
+<tr><td>Sichtbar für</td><td>jeden, auch zum Kopieren: Code, Anleitungen, Referenzbilder, Pilot-Bonitur</td><td>nur dich und von dir Eingeladene</td></tr>
+<tr><td>GitHub Pages</td><td>kostenlos</td><td>nur mit kostenpflichtigem GitHub-Abo (z. B. GitHub Pro)</td></tr>
+<tr><td>Cloudflare Pages, Netlify</td><td>Gratis-Tarif (mit Monatslimits, siehe unten)</td><td>ebenfalls Gratis-Tarif – auch für private Repositories eines persönlichen GitHub-Kontos wie deinem</td></tr>
+<tr><td>Tests (GitHub Actions)</td><td>kostenlos</td><td>2.000 Minuten pro Monat gratis, voraussichtlich genug</td></tr>
+<tr><td>Claude Code</td><td>GitHub-Konto verbinden genügt</td><td>zusätzlich die Claude GitHub App für das Repository installieren</td></tr>
+</tbody>
+</table>
+<p>Ändern kann in beiden Fällen nur, wen du einlädst. Die App-Webseite selbst ist in der Regel öffentlich erreichbar (bei GitHub Pages auch aus einem privaten Repository) – unkritisch, denn die Messdaten bleiben auf dem Handy und in deinen Exporten. Die eigentliche Frage: <em>Stört es dich, wenn Fremde Referenzfotos, Pilot-Bonitur und Box-Pläne sehen?</em> Vertrauliche Sorten- oder Behandlungsnamen kannst du in der Pilot-Tabelle durch Codes ersetzen (z. B. „Sorte 1“, „Beh. 2“).</p>
+<p>Gratis-Limits (Stand 09/2026, ändern sich öfter): Cloudflare Pages 500 Veröffentlichungen im Monat; Netlify höchstens ca. 20 (300 „Credits“, je 15 pro Veröffentlichung, Vorschau-Links gratis) – danach ist die Seite bis zum nächsten Abrechnungsmonat pausiert. Bei Netlify mit privatem Repository vorher prüfen, ob auch Claudes Änderungen im Gratis-Tarif veröffentlicht werden.</p>
+<div class="box warn"><p class="box-title">Achtung</p><p>Umstellen geht jederzeit (GitHub: „Settings“ → „Danger Zone“ → „Change visibility“). Im Gratis-Tarif schaltet das Umstellen auf privat eine GitHub-Pages-Seite automatisch ab. Was einmal öffentlich war, kann schon kopiert worden sein; solche Kopien (Forks) bleiben öffentlich.</p></div>
+<div class="box decision"><p class="box-title">Entscheidung 5 – Repository und Hosting</p>
+<ul class="checklist">
+<li>Öffentlich + GitHub Pages (0 €)</li>
+<li>Privat + GitHub Pages mit kostenpflichtigem GitHub-Abo (aktuellen Preis auf github.com/pricing prüfen)</li>
+<li>Privat + Cloudflare Pages oder Netlify im Gratis-Tarif (Bedingungen vorher prüfen)</li>
+</ul>
+<p>Claude bereitet die Einrichtung im Baustein B3 vor; die wenigen Klicks in deinen Konten machst du (Kapitel 9.3).</p></div>
+
+<h2>3.6 Entscheidung 6: Wer im Pilot bonitiert</h2>
+<p>Im Pilot (Etappe 3) bonitieren <strong>zwei Personen</strong> jeden Topf unabhängig voneinander: Note, geschätzter Befall in % und Sporenrasen auf der Blattunterseite ja/nein. Wie gut die beiden übereinstimmen, ist der Maßstab für die App – sie soll mit den Menschen ungefähr so gut übereinstimmen wie die Menschen untereinander.</p>
+<ul>
+<li><strong>Wer passt:</strong> erfahren in der Sicht-Bonitur und in den 1–2 Pilot-Wochen verfügbar für 100–200 Töpfe. Du kannst selbst eine der beiden sein. Ideal: dieselben beiden auch bei der Kalibrierung (Etappe 6).</li>
+<li><strong>Spielregeln:</strong> dieselbe schriftliche Skala, keine sieht die Note der anderen, keine Absprache über einzelne Töpfe, nur Kürzel statt Namen.</li>
+</ul>
+<div class="box decision"><p class="box-title">Entscheidung 6 – Pilot-Personen</p>
+<p>Person A (Kürzel): _______ &nbsp; Person B (Kürzel): _______ &nbsp; Zeitraum: _______________________</p></div>
+
+<h2>3.7 Entscheidung 7: Wo die Daten gespeichert werden</h2>
+<p>Der Speicher im Handy-Browser ist kein Archiv. Nach jeder Sitzung kommen Excel-Datei und Foto-ZIP an einen festen Ort: Firmen-PC, <strong>NAS</strong> (Netzwerkspeicher im Betrieb) oder ein Cloud-Ordner, den dein Betrieb schon nutzt. Der Ort muss automatisch gesichert werden (Backup), vom Büro-PC erreichbar sein (dort läuft die Analyse-Werkstatt) und Platz haben: 1000 Fotos brauchen ca. 2–3 GB.</p>
+<p class="table-caption">Tabelle 3.4: Vorschlag für die Ordner</p>
+<table class="t">
+<colgroup><col width="38%"><col width="52%"><col width="10%"></colgroup>
+<thead><tr><th>Ordner</th><th>Was hineinkommt</th><th>Kapitel</th></tr></thead>
+<tbody>
+<tr><td><code>Bonitur/Pilot/</code></td><td>Pilot-Excel und Pilot-Fotos (Unterordner <code>fotos/</code>, darin ein Ordner je Tag)</td><td>6</td></tr>
+<tr><td><code>Bonitur/Kalibrierung/</code></td><td>Fotos und Excel der Kalibrierung</td><td>10</td></tr>
+<tr><td><code>Bonitur/2027/2027-02-10_Satz12/</code></td><td>je Sitzung im Betrieb ein Ordner mit Excel und Foto-ZIP; das Datum vorn, dann sortiert es sich von selbst</td><td>11</td></tr>
+<tr><td><code>Bonitur/Auswertungen/</code></td><td>deine eigenen Auswertungen – immer mit Kopien arbeiten</td><td>11</td></tr>
+</tbody>
+</table>
+<p><strong>Originalfotos nie löschen, umbenennen oder bearbeiten</strong> – nur mit ihnen kannst du später alles mit einer verbesserten Auswertung neu berechnen.</p>
+<div class="box decision"><p class="box-title">Entscheidung 7 – Datenablage</p>
+<ul class="checklist">
+<li>Firmen-PC mit automatischer Sicherung</li>
+<li>NAS</li>
+<li>Cloud-Ordner</li>
+</ul>
+<p>Pfad zum Ordner <code>Bonitur/</code>: ___________________________ &nbsp; Sicherung geprüft am: __________</p></div>
+
+<h2>3.8 Einkaufsliste</h2>
+<p>Bestell früh, vor allem Farbkarte und LED-Streifen. Preise sind grobe Richtwerte (Stand 09/2026), Zuschnitte folgen in Kapitel 4. Karton, Papier, Lampe und Zollstock für den Prototyp hast du meist schon.</p>
+<p class="table-caption">Tabelle 3.5: Einkaufsliste für Box und Handy</p>
+<table class="t">
+<thead><tr><th>Teil</th><th>Worauf achten</th><th>ca.&nbsp;Preis</th><th>Wo kaufen</th></tr></thead>
+<tbody>
+<tr><td>Farbkarte</td><td>24 Felder, z. B. Calibrite ColorChecker Classic Mini; Graukarte reicht nicht</td><td>60&#8288;–&#8288;80&nbsp;€</td><td>Fotohandel, Online-Shop</td></tr>
+<tr><td>LED&#8209;Streifen</td><td>5 V mit USB, CRI bzw. Ra ≥ 90 (Farbtreue; ohne Angabe nicht kaufen), 5000–6500 K, ca. 2 m; nie dimmen</td><td>15&#8288;–&#8288;30&nbsp;€</td><td>Online-Shop, Elektronikhandel</td></tr>
+<tr><td>Platten</td><td>Wände, Deckel matt weiß (Forex 3–5 mm oder Kapa 5 mm); Boden matt schwarz</td><td>20&#8288;–&#8288;40&nbsp;€</td><td>Baumarkt, Bastelbedarf</td></tr>
+<tr><td>Rahmen</td><td>Holzleisten 20 × 20 mm oder Alu-Profil 2020: 4 × 70 cm, 8 × 46–50 cm, Schrauben</td><td>20&#8288;–&#8288;40&nbsp;€</td><td>Baumarkt, Online-Shop</td></tr>
+<tr><td>Filament</td><td>PLA matt; PETG für stärker beanspruchte Teile</td><td>ca.&nbsp;20&nbsp;€</td><td>Online-Shop</td></tr>
+<tr><td>Diffusor</td><td>Milchglasfolie oder opales Material</td><td>5&#8288;–&#8288;10&nbsp;€</td><td>Baumarkt, Online-Shop</td></tr>
+<tr><td>Strom</td><td>USB-Netzteil oder Powerbank für die LEDs</td><td>10&#8288;–&#8288;20&nbsp;€</td><td>Elektronikhandel</td></tr>
+<tr><td>Klappe</td><td>kleine Magnete oder Scharniere</td><td>ca.&nbsp;5&nbsp;€</td><td>Baumarkt</td></tr>
+<tr><td>Maßstab-Karte</td><td>Quadrat 10 × 10 cm, matt, z. B. ausgedruckt und auf Karton geklebt; Sockel in typischer Blatthöhe (Abschnitt 7.7, 8.2)</td><td>ca.&nbsp;0&nbsp;€</td><td>selbst gemacht</td></tr>
+<tr><td><strong>Summe&nbsp;Box</strong></td><td></td><td><strong>150&#8288;–&#8288;250&nbsp;€</strong></td><td></td></tr>
+<tr><td>Box-Handy</td><td>falls nötig; gebraucht, Kriterien aus Abschnitt 3.2</td><td>80&#8288;–&#8288;150&nbsp;€</td><td>Gebrauchthandel</td></tr>
+</tbody>
+</table>
+
+<h2>3.9 Zugang prüfen: GitHub und Claude Code</h2>
+<ol class="steps">
+<li><strong>Repository öffnen.</strong> Bei GitHub anmelden, Repository öffnen (Link in 1.5): Siehst du <code>KONZEPT.md</code> und den Ordner <code>docs</code>?</li>
+<li><strong>Hauptzweig prüfen.</strong> Das Auswahlfeld über der Dateiliste zeigt den Hauptzweig (<strong>Branch</strong>, Kapitel 9). Die späteren Kapitel gehen von <code>main</code> aus. Steht dort etwas anderes (am 30.09.2026: <code>claude/&#8288;nice&#8288;-&#8288;ritchie&#8288;-&#8288;a0d3bl</code>), benenne ihn um: Auswahlfeld → „View all branches“ → beim Zweig „…“ → „Rename branch“ → <code>main</code> eintippen → „Rename branch“. Meldet GitHub, dass es <code>main</code> schon gibt, frag Claude, wie du weitermachst.</li>
+<li><strong>Claude Code öffnen.</strong> <a href="https://claude.ai/code">claude.ai/code</a> öffnen und anmelden (kostenpflichtiges Abo, Stand 09/2026: Pro, Max, Team; Enterprise je nach Lizenz). Beim ersten Mal GitHub verbinden und zustimmen, dann die Claude GitHub App für dein Repository installieren – bei privatem Repository Pflicht.</li>
+<li><strong>Testen.</strong> Sitzung starten, Beispiel-Prompt aus 1.4 schicken. Antwortet Claude mit einer Erklärung, klappt der Zugang.</li>
+<li><strong>Festhalten.</strong> Neue Sitzung starten, Prompt unten mit deinen Werten schicken, Rückfragen beantworten.</li>
+<li><strong>Übernehmen.</strong> Claude legt einen Änderungsvorschlag an (<strong>Pull Request</strong>) und nennt dir den Link. Sonst klickst du in Claude Code oben in der Änderungsansicht auf „Create PR“ – als normalen Pull Request, nicht als Entwurf („Draft“). Auf GitHub im Reiter „Files changed“ die Änderungen lesen, dann „Merge pull request“ und „Confirm merge“.</li>
+</ol>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – Entscheidungen aus Etappe 0 festhalten</p><pre>Lies docs/SPEZIFIKATION.md. Das sind meine Entscheidungen aus Etappe 0:
+- Boniturskala: [eigene Skala mit Stufen und Beschreibung / Vorschlag 0–4]
+- Box-Handy: [Hersteller, Modell, Android-Version]
+- Sorten im Pilot: [Sortennamen] (nur grüne Sorten)
+- Maße in cm: A [ ] B [ ] C [ ] D [ ] E [ ] F [ ] G [ ]
+- Repository: [öffentlich / privat], Hosting: [GitHub Pages / Cloudflare / Netlify]
+- Pilot-Bonitur: Person A [Kürzel], Person B [Kürzel], Zeitraum [von–bis]
+- Datenablage: [Firmen-PC / NAS / Cloud-Ordner], Hauptordner [Pfad]
+Bitte:
+1. Trage sie mit Datum als Abschnitt „Entscheidungen Etappe 0“ in
+   docs/SPEZIFIKATION.md ein.
+2. Prüfe auf Widersprüche zur Spezifikation, z. B. ob 70 cm Box-Höhe zu meinen
+   Pflanzenmaßen passt. Erkläre sie mir einfach und schlage eine Lösung vor,
+   bevor du andere Werte änderst.
+3. Nur Kürzel, keine Namen. Ändere keine anderen Dateien.
+4. Erstelle einen Pull Request und sag mir, was ich darin prüfen soll.</pre></div>
+
+<h2>3.10 Etappe 0 ist fertig, wenn …</h2>
+<ul class="checklist">
+<li>die Boniturskala schriftlich feststeht (eigene Skala oder Vorschlag 0–4),</li>
+<li>das Box-Handy geprüft, gekauft und das Modell notiert ist,</li>
+<li>die Pilot-Sorten (nur grüne) und die zwei Pilot-Personen mit Kürzeln feststehen,</li>
+<li>die Maße A bis G eingetragen sind und die Box-Höhe passt (oder die Änderung notiert ist),</li>
+<li>Repository-Sichtbarkeit und Hosting-Dienst entschieden sind,</li>
+<li>der Ordner <code>Bonitur/</code> angelegt ist und gesichert wird,</li>
+<li>das Material der Einkaufsliste bestellt ist,</li>
+<li>Claude Code auf dein Repository zugreift und dessen Hauptzweig <code>main</code> heißt,</li>
+<li>deine Entscheidungen per Pull Request in <code>docs/SPEZIFIKATION.md</code> stehen.</li>
+</ul>
+</section>

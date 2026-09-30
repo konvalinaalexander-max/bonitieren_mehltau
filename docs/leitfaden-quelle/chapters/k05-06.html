@@ -1,0 +1,506 @@
+<section class="chapter" id="kap-5">
+<p class="kicker">Etappe 2 · ca. 1 Tag</p>
+<h1>5 Das Box-Handy einrichten</h1>
+<p class="lead">An einem Tag machst du aus dem Box-Handy ein Messgerät: Die kostenlose Kamera-App Open Camera wird so eingestellt, dass Helligkeit, Farben und Schärfe bei jedem Foto gleich bleiben. Am Ende sehen zehn Fotos desselben Topfs gleich aus.</p>
+
+<table class="stage-meta">
+<tr><th>Ziel</th><td>Box-Handy mit festen Kamera-Einstellungen: gleiche Belichtung, gleiche Lichtfarbe, gleiche Schärfe bei jedem Foto.</td></tr>
+<tr><th>Dauer</th><td>ca. 1 Tag (Schätzung): Handy vorbereiten 1–2 Stunden, Einstellen in der Box 2–3 Stunden, Test 1 Stunde.</td></tr>
+<tr><th>Du</th><td>Handy vorbereiten, Open Camera installieren und einstellen, Werte notieren, Testfotos machen und vergleichen.</td></tr>
+<tr><th>Claude</th><td>Nichts Pflicht. Bei Fragen: Screenshot der Einstellung in eine Claude-Sitzung einfügen und nachfragen.</td></tr>
+<tr><th>Du brauchst</th><td>fertige Fotobox mit Farbkarte im Halter (Kapitel 4), Box-Handy mit Ladekabel und USB-Netzteil, WLAN, 1–2 gesunde Testtöpfe mit Abdeckscheibe, eine Topf-Karte, den Kelvin-Wert deiner LEDs (Abschnitt 4.7), Mikrofasertuch, PC mit USB-Kabel.</td></tr>
+<tr><th>Ergebnis</th><td>eingestelltes Box-Handy, ausgefüllter Einstellungs-Zettel (Tabelle 5.2), gesicherte Open-Camera-Einstellungen, bestandener 10-Foto-Test.</td></tr>
+</table>
+
+<h2>5.1 Warum ein festes Handy mit festen Einstellungen?</h2>
+<p>Jedes Handymodell hat einen anderen Bildsensor und rechnet Farben anders – deshalb bleibt ein einziges Gerät immer in der Box (Abschnitt 3.2). Doch auch ein einzelnes Handy stellt mit der normalen Kamera-App bei jedem Foto alles neu ein:</p>
+<ul>
+<li><strong>Belichtung:</strong> Bei viel schwarzer Abdeckscheibe im Bild hellt die Kamera auf, bei einer großen Pflanze weniger. Dasselbe Blatt ist dann mal heller, mal dunkler.</li>
+<li><strong>Weißabgleich:</strong> Die Kamera schätzt die Lichtfarbe und kann dabei eine gelbliche Pflanze „wegkorrigieren“ – genau die Farbe, die gemessen werden soll.</li>
+<li><strong>Schärfe und „Verschönern“:</strong> Der Autofokus trifft mal die Blätter, mal den Boden. HDR und ähnliche Modi verändern Kontrast und Farben je nach Motiv.</li>
+</ul>
+<p>Die Farbkarte gleicht kleine Unterschiede aus (Kapitel 7), große Sprünge nicht. Darum stellst du alles fest ein; dann ändert sich von Foto zu Foto nur noch die Pflanze. Dafür nimmst du <strong>Open Camera</strong>: eine kostenlose Kamera-App mit offenem Programmcode (Open Source). In ihr legst du ISO, Belichtungszeit, Weißabgleich und Fokus von Hand fest, und sie merkt sich die Werte. Sie bleibt auch später nützlich: Die eigene App kann Fotos aus Open Camera importieren (Kapitel 9).</p>
+
+<h2>5.2 Das Handy vorbereiten</h2>
+<ol class="steps">
+<li><strong>Einrichten.</strong> Sind noch Daten des Vorbesitzers drauf: auf Werkseinstellungen zurücksetzen. Dann Sprache Deutsch, WLAN, Google-Konto (oder F-Droid ohne Konto, siehe 5.3). Datum und Uhrzeit auf „automatisch“ – sie stehen später in jedem Dateinamen.</li>
+<li><strong>Einmal alles aktualisieren.</strong> System-Update installieren (meist unter Einstellungen → System oder Software-Update; der Name hängt vom Hersteller ab). Im Play Store unter Profilbild → „Apps und Geräte verwalten“ alle Updates installieren. Neu starten, Android-Version notieren.</li>
+<li><strong>Überraschungs-Updates abschalten.</strong> Im Play Store: Profilbild → Einstellungen → Netzwerkeinstellungen → „Apps automatisch aktualisieren“ → „Apps nicht automatisch aktualisieren“. Automatische System-Updates ausschalten, falls dein Handy das anbietet. Updates können Farben und Belichtung verändern; du aktualisierst nur geplant und machst danach ein Testfoto (Kapitel 11). Updates, die eine kritische Sicherheitslücke schließen, installiert Google laut Play-Hilfe eventuell trotzdem.</li>
+<li><strong>Störungen abstellen.</strong> „Bitte nicht stören“ bzw. „Nicht stören“ einschalten (Name je nach Handy): keine Benachrichtigung im Bild, kein Vibrieren, das ein Foto verwackelt. Eine SIM-Karte brauchst du nicht. Unnötige Apps entfernen; das Handy dient nur der Box. Der Bildschirm geht während einer Sitzung nicht aus, solange Open Camera offen ist: Dort ist „Bildschirm immer an“ (Einstellungen → Benutzeroberfläche…) schon voreingestellt.</li>
+<li><strong>Strom.</strong> Das Ladekabel bleibt in der Box. Befestige es am Deckel (Kabelclip), damit es nicht am Handy zieht – ein verrutschtes Handy verschiebt die Farbkarte. Akkuschutz (Laden bis ca. 80–85 %) einschalten, falls vorhanden.</li>
+<li><strong>Hülle ab, Linse putzen, Speicher prüfen.</strong> Ohne Hülle in den Halter. Linse mit trockenem Mikrofasertuch reinigen, auf Kratzer prüfen. Einige GB frei lassen: 1000 Fotos brauchen ca. 2–3 GB.</li>
+</ol>
+
+<h2>5.3 Open Camera installieren und einstellen</h2>
+<p>Open Camera gibt es kostenlos im Google Play Store (Entwickler: Mark Harman) und bei F-Droid, einem App-Laden für Open-Source-Apps, der ohne Google-Konto funktioniert. Offizielle Seite mit ausführlicher Hilfe (Englisch): <a href="https://opencamera.org.uk/">opencamera.org.uk</a>. Beim ersten Start die Kamera-Berechtigung erlauben; Standort und Mikrofon brauchst du nicht. Die normale Kamera-App benutzt du für Box-Fotos ab jetzt nicht mehr.</p>
+<p><strong>Wo was liegt:</strong> Die meisten Einstellungen liegen hinter dem Zahnrad („Einstellungen“). Blitz, Fokus, Foto-Modus und Weißabgleich stehen im Popup-Menü; ISO, Verschlusszeit und Farbtemperatur im Belichtungs-Symbol (Plus/Minus-Zeichen), das eine Leiste mit ISO-Werten und Schiebereglern öffnet. Tabelle 5.1 nennt die Namen der deutschen Übersetzung (Stand 09/2026), in Klammern die englischen; je nach Version weichen sie leicht ab. „Voreinstellung“ heißt: So ist es ab Werk eingestellt, du prüfst es nur.</p>
+<p><strong>Drei Begriffe:</strong> <em>ISO</em> ist die Lichtempfindlichkeit des Sensors (hoch = heller, aber körniger). Die <em>Belichtungszeit</em> (in Open Camera „Verschlusszeit“) sagt, wie lange der Sensor Licht sammelt (länger = heller). Der <em>Weißabgleich</em> legt fest, welche Lichtfarbe als neutrales Weiß gilt, angegeben in Kelvin (K).</p>
+
+<p class="table-caption">Tabelle 5.1: Die Einstellungen in Open Camera</p>
+<table class="t">
+<colgroup><col width="37%"><col width="24%"><col width="39%"></colgroup>
+<thead><tr><th>Einstellung (wo)</th><th>Wert</th><th>Warum</th></tr></thead>
+<tbody>
+<tr><td><strong>Camera-API</strong> (Camera API) – Einstellungen, Bereich „Verschiedenes“</td><td>„Camera2-API“</td><td>Nur damit gehen ISO, Verschlusszeit, Kelvin und Fokus von Hand; die App startet neu. Fehlt die Option: Abschnitt 3.2.</td></tr>
+<tr><td><strong>Foto Modus</strong> (Photo Mode) und <strong>Blitzmodus</strong> (Flash) – Popup-Menü</td><td>„Std“ (Standard); „Ohne Blitz“</td><td>HDR, DRO, NR, „X-“-Modi verändern Helligkeit und Kontrast; Licht nur von den LEDs.</td></tr>
+<tr><td><strong>Weißabgleich</strong> (White balance) – Popup-Menü</td><td>„Manuell“, Regler auf den LED-Wert, z. B. 5500</td><td>feste Lichtfarbe; der Regler erscheint im Belichtungs-Symbol (5.4).</td></tr>
+<tr><td><strong>ISO</strong> – Belichtungs-Symbol, obere Reihe</td><td>fest, z. B. 100 (nicht „AUTO“)</td><td>wenig Bildrauschen; danach erscheinen Regler für ISO und Verschlusszeit.</td></tr>
+<tr><td><strong>Verschlusszeit</strong> (Shutter speed) – Regler im Belichtungs-Symbol</td><td>fest, Wert in 5.4 finden</td><td>gleiche Helligkeit bei jedem Foto.</td></tr>
+<tr><td><strong>Fokus-Modus</strong> (Focus Mode) – Popup-Menü</td><td>„Manueller Fokus“, sonst „Fokus gesperrt“</td><td>scharf auf die Blätter, bei jedem Foto gleich (5.4).</td></tr>
+<tr><td><strong>Kamera-Auflösung</strong> (Camera resolution) – Einstellungen → Foto-Einstellungen…</td><td>ca. 8 MP im Format 4:3, z. B. 3264 × 2448</td><td>MP = Megapixel; reicht für die Auswertung, ca. 2–3 MB je Foto. Nicht 16:9 – das schneidet oben und unten Bild ab.</td></tr>
+<tr><td><strong>Bildqualität</strong> (Image quality), <strong>Bild-Format</strong> (Image format) und <strong>RAW</strong> – Foto-Einstellungen…</td><td>95 %; „JPEG“; „Nur JPEG“</td><td>wenig Kompressionsfehler (Voreinstellung 90 %); RAW-Dateien wären sehr groß.</td></tr>
+<tr><td><strong>Timer</strong> – Popup-Menü; <strong>Lautstärketasten</strong> (Volume keys) – Einstellungen → Mehr Kamera-Einstellungen…</td><td>Timer 2 s; Tasten „Foto aufnehmen …“ (Voreinstellung)</td><td>Auslösen ohne Bildschirm-Berührung; nach 2 s liegt das Handy ruhig.</td></tr>
+<tr><td><strong>Speicherort</strong> (Save location) und <strong>Foto-Präfix</strong> (Save photo prefix) – Mehr Kamera-Einstellungen…</td><td><code>Bonitur</code> und <code>BOX_</code></td><td>Ordner <code>DCIM/Bonitur</code> (ab Android 10 Namen eintippen). Name mit Datum, Uhrzeit: <code>BOX_20261012_101532.jpg</code></td></tr>
+<tr><td><strong>Foto-/Video-Orientierung sperren</strong> (Lock photo/video orientation) – Mehr Kamera-Einstellungen…</td><td>„Querformat“</td><td>Flach liegend erkennt das Handy „oben“ nicht sicher; so haben alle Fotos dieselbe Lage.</td></tr>
+<tr><td><strong>Aus lassen:</strong> Bildlagekorrektur (Auto-level) – Popup-Menü; Gesichtserkennung (Face detection) – Einstellungen; Fotos stempeln (Stamp photos) – Foto-Einstellungen…; Geotagging – Standort-Einstellungen…</td><td>aus (Voreinstellung)</td><td>drehen oder beschneiden das Bild, verstellen Fokus und Belichtung, schreiben Text hinein oder speichern den Standort.</td></tr>
+<tr><td><strong>Anzeige-Hilfen</strong> – Einstellungen → Kamera-Vorschau…: „Zeige ein Histogramm“, „Zeige Zebrastreifen“, „ISO-Wert anzeigen“</td><td>„Wert (Maximum)“; 95 %; an (Voreinstellung)</td><td>zum Einstellen der Belichtung (5.4); ISO und Verschlusszeit stehen ständig auf dem Bildschirm.</td></tr>
+</tbody>
+</table>
+
+<h2>5.4 Feineinstellung in der Box</h2>
+<p>Vorbereitung: LEDs einige Minuten an, Farbkarte im Halter, gesunder Testtopf mit Abdeckscheibe im Zentrierring, Topf-Karte im Etikettenhalter, Klappe zu, Open Camera offen.</p>
+<ol class="steps">
+<li><strong>Ausschnitt prüfen.</strong> Hauptkamera, nicht gezoomt (4.2); bei mehreren Kameras hinten wählst du sie mit dem Symbol „Zwischen mehreren Kameras wechseln“. Ganzer Boden im Bild, Farbkarte und Topf-Karte vollständig sichtbar, Topf in der Bildmitte (wie bei der Abnahme, 4.10).</li>
+<li><strong>Weißabgleich einstellen.</strong> Popup-Menü → Weißabgleich → „Manuell“. Im Belichtungs-Symbol den Farbtemperatur-Regler auf den Wert deiner LEDs schieben (z. B. 5500; der Wert wird kurz eingeblendet). Die Graufelder der Farbkarte sollen neutral wirken: bläulich – Wert etwas erhöhen, gelblich – senken. Vor allem muss der Wert fest bleiben; kleine Abweichungen korrigiert die Farbkarte.</li>
+<li><strong>ISO festlegen.</strong> Im Belichtungs-Symbol in der oberen Reihe 100 wählen (fehlt 100, den nächsten Wert). Jetzt erscheinen die Regler für ISO und Verschlusszeit.</li>
+<li><strong>Verschlusszeit finden.</strong> Das Histogramm zeigt links die dunklen, rechts die hellen Bildpunkte; Zebrastreifen markieren zu helle Stellen. Schieb den Regler langsam zu längeren Zeiten, bis das weiße Feld der Farbkarte (Reihe von Weiß über Grau bis Schwarz) Streifen zeigt, dann zurück, bis sie gerade verschwinden (Abbildung 5.1). Blätter ohne Streifen; Streifen auf den Wänden sind egal. Faustregel (Schätzung): Über ca. 1/15 s lieber ISO 200 nehmen und neu suchen – kurze Zeiten sind unempfindlicher, falls jemand an die Box stößt.</li>
+<li><strong>Scharf stellen.</strong> Popup-Menü → Fokus-Modus → „Manueller Fokus“. Mit „Fokus-Peaking“ (Einstellungen → Kamera-Vorschau…) werden scharfe Kanten hell markiert: Fokus-Regler schieben, bis die oberen Blätter am stärksten markiert sind, dann Peaking wieder aus. Ohne manuellen Fokus: „Fokus gesperrt“, einmal auf die Pflanze tippen, danach den Bildschirm nicht mehr berühren.</li>
+<li><strong>Probefoto und festhalten.</strong> Auslösen und in der Galerie prüfen: Blätter scharf, Farbkarte und Nummer gut zu erkennen, nichts zu hell. Histogramm und Zebrastreifen zeigen nur das Vorschaubild; das gespeicherte Foto kann leicht abweichen – deshalb zählt das Probefoto. Dann Tabelle 5.2 ausfüllen, Screenshots der Einstellungen machen und sichern: Einstellungen → Einstellungsmanager → „Sichere Einstellungen“ (zurück mit „Einstellungen wiederherstellen“). Beim Deinstallieren von Open Camera geht diese Sicherung verloren – darum zusätzlich Zettel und Screenshots.</li>
+</ol>
+<figure>
+<svg viewBox="0 0 800 258" role="img" aria-label="Drei Beispiele für die Belichtung: zu dunkel, richtig, zu hell, jeweils mit Graureihe der Farbkarte und Histogramm" font-family="Source Sans 3, sans-serif">
+<defs>
+<pattern id="k5-zebra" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#FFFFFF"/><rect width="4" height="8" fill="#1F2A24"/></pattern>
+</defs>
+<!-- panel frames -->
+<rect x="8" y="4" width="256" height="250" rx="6" fill="#F3F6F1" stroke="#C9D2C6" stroke-width="1.5"/>
+<rect x="272" y="4" width="256" height="250" rx="6" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="2"/>
+<rect x="536" y="4" width="256" height="250" rx="6" fill="#F3F6F1" stroke="#C9D2C6" stroke-width="1.5"/>
+<!-- titles with symbols -->
+<g font-size="17" font-weight="700" text-anchor="middle">
+<text x="136" y="32" fill="#1F2A24">Zu dunkel</text>
+<text x="400" y="32" fill="#2F6B3A">Richtig</text>
+<text x="664" y="32" fill="#1F2A24">Zu hell</text>
+</g>
+<circle cx="200" cy="26" r="10" fill="#C0392B"/>
+<path d="M195,21 L205,31 M205,21 L195,31" stroke="#FFFFFF" stroke-width="2.2"/>
+<circle cx="450" cy="26" r="10" fill="#2F6B3A"/>
+<path d="M445,26 L449,30.5 L456,21.5" stroke="#FFFFFF" stroke-width="2.4" fill="none"/>
+<circle cx="714" cy="26" r="10" fill="#C0392B"/>
+<path d="M709,21 L719,31 M719,21 L709,31" stroke="#FFFFFF" stroke-width="2.2"/>
+<!-- grey rows: panel 1 (dark) -->
+<g stroke="#6B7570" stroke-width="1">
+<rect x="36" y="48" width="30" height="30" fill="#1F2A24" fill-opacity="0.35"/>
+<rect x="70" y="48" width="30" height="30" fill="#1F2A24" fill-opacity="0.5"/>
+<rect x="104" y="48" width="30" height="30" fill="#1F2A24" fill-opacity="0.62"/>
+<rect x="138" y="48" width="30" height="30" fill="#1F2A24" fill-opacity="0.75"/>
+<rect x="172" y="48" width="30" height="30" fill="#1F2A24" fill-opacity="0.87"/>
+<rect x="206" y="48" width="30" height="30" fill="#1F2A24"/>
+</g>
+<!-- panel 2 (right) -->
+<g stroke="#6B7570" stroke-width="1">
+<rect x="300" y="48" width="30" height="30" fill="#FFFFFF"/>
+<rect x="334" y="48" width="30" height="30" fill="#1F2A24" fill-opacity="0.15"/>
+<rect x="368" y="48" width="30" height="30" fill="#1F2A24" fill-opacity="0.33"/>
+<rect x="402" y="48" width="30" height="30" fill="#1F2A24" fill-opacity="0.52"/>
+<rect x="436" y="48" width="30" height="30" fill="#1F2A24" fill-opacity="0.72"/>
+<rect x="470" y="48" width="30" height="30" fill="#1F2A24"/>
+</g>
+<!-- panel 3 (bright) -->
+<g stroke="#6B7570" stroke-width="1">
+<rect x="564" y="48" width="30" height="30" fill="url(#k5-zebra)"/>
+<rect x="598" y="48" width="30" height="30" fill="url(#k5-zebra)"/>
+<rect x="632" y="48" width="30" height="30" fill="#1F2A24" fill-opacity="0.1"/>
+<rect x="666" y="48" width="30" height="30" fill="#1F2A24" fill-opacity="0.25"/>
+<rect x="700" y="48" width="30" height="30" fill="#1F2A24" fill-opacity="0.45"/>
+<rect x="734" y="48" width="30" height="30" fill="#1F2A24" fill-opacity="0.8"/>
+</g>
+<!-- captions under grey rows -->
+<g font-size="13.5" fill="#1F2A24" text-anchor="middle">
+<text x="136" y="94">Weiß-Feld wirkt grau</text>
+<text x="400" y="94">Weiß-Feld hell, keine Streifen</text>
+<text x="664" y="94">Zebrastreifen auf Weiß</text>
+</g>
+<!-- histogram boxes -->
+<g fill="#FFFFFF" stroke="#C9D2C6" stroke-width="1.2">
+<rect x="36" y="104" width="200" height="78"/>
+<rect x="300" y="104" width="200" height="78"/>
+<rect x="564" y="104" width="200" height="78"/>
+</g>
+<!-- histograms -->
+<path d="M36,182 L41,156.5 L56,122.5 L76,115.7 L96,139.5 L121,163.3 L146,176.9 L166,180.3 L166,182 Z" fill="#6B7570"/>
+<path d="M315,182 L330,166.7 L355,143.75 L380,129.3 L405,135.25 L430,152.25 L450,165 L468,170.1 L478,161.6 L486,173.5 L490,182 Z" fill="#6B7570"/>
+<path d="M624,182 L649,169.25 L674,152.25 L704,135.25 L729,131 L749,143.75 L760,156.5 L760,182 Z" fill="#6B7570"/>
+<rect x="760" y="107" width="4" height="75" fill="#C0392B"/>
+<!-- reserve marker in correct panel -->
+<line x1="490" y1="112" x2="500" y2="112" stroke="#2F6B3A" stroke-width="2"/>
+<line x1="490" y1="107" x2="490" y2="117" stroke="#2F6B3A" stroke-width="1.5"/>
+<line x1="500" y1="107" x2="500" y2="117" stroke="#2F6B3A" stroke-width="1.5"/>
+<text x="484" y="117" font-size="13" fill="#2F6B3A" text-anchor="end">Lücke zum Rand</text>
+<!-- axis labels -->
+<g font-size="13" fill="#6B7570">
+<text x="36" y="198">dunkel</text><text x="236" y="198" text-anchor="end">hell</text>
+<text x="300" y="198">dunkel</text><text x="500" y="198" text-anchor="end">hell</text>
+<text x="564" y="198">dunkel</text><text x="764" y="198" text-anchor="end">hell</text>
+</g>
+<!-- advice -->
+<g font-size="14.5" fill="#1F2A24" text-anchor="middle">
+<text x="136" y="222">Histogramm links gedrängt</text>
+<text x="136" y="241" font-weight="700">Verschlusszeit länger</text>
+<text x="400" y="222">Histogramm endet vor dem Rand</text>
+<text x="400" y="241" font-weight="700" fill="#2F6B3A">so lassen</text>
+<text x="664" y="222">Berg klebt am rechten Rand</text>
+<text x="664" y="241" font-weight="700">Verschlusszeit kürzer</text>
+</g>
+</svg>
+<figcaption>Abb. 5.1: Belichtung einstellen – oben die Graureihe der Farbkarte, unten das Histogramm („Wert (Maximum)“). Richtig ist die längste Verschlusszeit ohne Zebrastreifen auf dem weißen Feld. Ein schmaler Strich ganz rechts kann von den Wänden kommen.</figcaption>
+</figure>
+<div class="box warn"><p class="box-title">Achtung: ab jetzt nichts mehr verstellen</p>
+<p>Jede Änderung an ISO, Verschlusszeit, Weißabgleich, Fokus, Auflösung, Handy-Position oder LEDs macht Fotos davor und danach schwer vergleichbar. Muss doch etwas geändert werden: im Box-Protokoll notieren (Datum, alter und neuer Wert), 10-Foto-Test wiederholen (5.5) und die Änderung in der nächsten Claude-Sitzung erwähnen.</p></div>
+<figure>
+<p class="table-caption">Tabelle 5.2: Einstellungs-Zettel – ausfüllen, ins Projekttagebuch kleben, eine Kopie an die Box</p>
+<table class="t">
+<thead><tr><th>Einstellung</th><th>Dein Wert</th><th>Einstellung</th><th>Dein Wert</th></tr></thead>
+<tbody>
+<tr><td>Handy-Modell, Android-Version</td><td>&nbsp;</td><td>Open-Camera-Version (Einstellungen → Über)</td><td>&nbsp;</td></tr>
+<tr><td>Weißabgleich (Kelvin)</td><td>&nbsp;</td><td>ISO</td><td>&nbsp;</td></tr>
+<tr><td>Verschlusszeit</td><td>&nbsp;</td><td>Fokus-Modus</td><td>&nbsp;</td></tr>
+<tr><td>Kamera-Auflösung</td><td>&nbsp;</td><td>Bildqualität</td><td>&nbsp;</td></tr>
+<tr><td>eingestellt am, Kürzel</td><td>&nbsp;</td><td>Speicherort, Präfix</td><td>DCIM/Bonitur, BOX_</td></tr>
+</tbody>
+</table>
+</figure>
+
+<h2>5.5 Test: zehn Fotos, ein Bild</h2>
+<ol class="steps">
+<li><strong>Fünf Fotos am Stück.</strong> Testtopf in der Box, nichts verändern, fünfmal mit der Lautstärketaste auslösen.</li>
+<li><strong>Neustart, dann fünf weitere.</strong> Handy neu starten, Open Camera öffnen: ISO, Verschlusszeit und Weißabgleich noch wie in Tabelle 5.2? Dann fünf weitere Fotos, Topf nicht bewegen.</li>
+<li><strong>Auf den PC kopieren.</strong> Handy per USB-Kabel anschließen, am Handy den USB-Modus „Dateiübertragung“ wählen (Name je nach Handy) und die zehn Fotos aus <code>DCIM/Bonitur</code> in den Ordner „Abnahme“ (Abschnitt 4.10) kopieren.</li>
+<li><strong>Vergleichen.</strong> Fotos in der Bildanzeige mit den Pfeiltasten schnell durchblättern. Nichts darf „springen“: Helligkeit, Farben, Schärfe und Ausschnitt bleiben gleich. Unter Windows zeigt Rechtsklick → Eigenschaften → Details auch ISO und Belichtungszeit.</li>
+<li><strong>Licht-Tests wiederholen.</strong> Flimmer-Test (Abschnitt 4.7) und Hallenlicht an/aus (Abschnitt 4.10) mit den festen Einstellungen: keine Streifen, kein Unterschied.</li>
+</ol>
+<div class="box tip"><p class="box-title">Wenn etwas springt</p>
+<p>Helligkeit schwankt: ISO steht auf „AUTO“ oder der Foto-Modus ist nicht „Std“. Farben schwanken: Weißabgleich nicht „Manuell“. Schärfe schwankt: Fokus nicht manuell bzw. gesperrt, oder der Bildschirm wurde angetippt. Mal hoch, mal quer: Orientierung nicht gesperrt. Nach dem Neustart anders: Werte neu setzen, Test wiederholen; bleibt es so, Screenshot an Claude schicken.</p></div>
+
+<h2>5.6 Etappe 2 ist fertig, wenn …</h2>
+<ul class="checklist">
+<li>das Handy aktualisiert ist, App-Updates aus sind und Datum und Uhrzeit automatisch laufen,</li>
+<li>die Hülle ab, die Linse sauber, das Ladekabel fest und „Nicht stören“ an ist,</li>
+<li>Open Camera mit Camera2-API läuft und alles aus Tabelle 5.1 eingestellt ist,</li>
+<li>das weiße Feld der Farbkarte hell ist, aber keine Zebrastreifen zeigt, und die Blätter scharf sind,</li>
+<li>Tabelle 5.2 ausgefüllt ist, Screenshots gemacht und die Einstellungen gesichert sind,</li>
+<li>die zehn Testfotos gleich aussehen (auch nach dem Neustart) und beide Licht-Tests bestanden sind,</li>
+<li>die Fotos als <code>DCIM/Bonitur/BOX_….jpg</code> ankommen.</li>
+</ul>
+</section>
+
+<section class="chapter" id="kap-6">
+<p class="kicker">Etappe 3 · ca. 1–2 Wochen</p>
+<h1>6 Der Pilot: Fotos und Sicht-Bonitur</h1>
+<p class="lead">Jetzt sammelst du die Daten, an denen sich alles entscheidet: 100–200 Töpfe, jeder in der Box fotografiert und von zwei Personen unabhängig bonitiert. Am Ende liegen Fotos und eine Excel-Tabelle bereit, und eine Auswahl von Referenzbildern ist im Repository.</p>
+
+<table class="stage-meta">
+<tr><th>Ziel</th><td>100–200 Töpfe von gesund bis stark befallen: je Topf ein Box-Foto, zwei unabhängige Bonituren und ein Blick auf die Blattunterseite. Dazu Wiederholungs- und Lichttest.</td></tr>
+<tr><th>Dauer</th><td>ca. 1–2 Wochen (Schätzung); je Topf grob 2–4 Minuten für alle Schritte. Am längsten dauert oft die Suche nach genug befallenen Töpfen.</td></tr>
+<tr><th>Du</th><td>Töpfe auswählen, Karten und Vorlagen vorbereiten, fotografieren, Excel führen, Fotos sichern, Referenzbilder hochladen. <span class="who team">Team</span> Person A und B bonitieren (Kürzel aus Abschnitt 3.6).</td></tr>
+<tr><th>Claude</th><td>erstellt auf Wunsch Topfnummer-Karten und Excel-Vorlage (6.3) und prüft die hochgeladenen Referenzbilder (6.7).</td></tr>
+<tr><th>Du brauchst</th><td>eingerichtete Box und Box-Handy (Kapitel 4 und 5), Topfnummer-Karten, Stecketiketten, zwei Klemmbretter mit Bonitur-Bögen (6.8), Skala ausgedruckt (Tabelle 3.1), Lupe (hilfreich), PC mit Excel und USB-Kabel.</td></tr>
+<tr><th>Ergebnis</th><td>Ordner <code>Bonitur/Pilot/</code> mit allen Originalfotos und <code>pilot_bonitur.xlsx</code>; Ordner <code>referenzbilder/</code> im Repository.</td></tr>
+</table>
+
+<h2>6.1 Ziel: Welche Frage beantwortet der Pilot?</h2>
+<p>Der Pilot ist ein Probelauf im Kleinen, bevor Zeit in die Handy-App fließt. Er beantwortet die wichtigste Frage des ganzen Projekts:</p>
+<div class="box decision"><p class="box-title">Die Pilot-Frage</p>
+<p>Stimmt der Befall %, den das Programm aus einem Foto von oben misst, ungefähr so gut mit dem Urteil eurer erfahrenen Leute überein wie die zwei Personen untereinander?</p></div>
+<p>Ausgewertet wird erst in Etappe 4 (Kapitel 8). Dafür brauchst du je Topf <strong>zwei unabhängige Noten</strong> – ihre Übereinstimmung ist der Maßstab für die App, denn Menschen bonitieren oft unterschiedlich, gerade bei wenig Befall –, ein <strong>Box-Foto vom selben Tag</strong> und den <strong>Befund der Blattunterseite</strong>: Er zeigt, wie viel Befall die Kamera von oben nicht sieht. Dazu kommen zwei <strong>Zusatztests</strong> (6.5): Liefert derselbe Topf immer denselben Wert? Stört Licht von außen?</p>
+<p>Aus denselben Daten legt ihr später die Umrechnungstabelle von Befall % in Noten fest. Deshalb: ehrlich sammeln, nichts schönen. Nimm auch schwierige Töpfe mit, und ändere keine Note, nachdem du das Foto gesehen hast.</p>
+
+<h2>6.2 Töpfe auswählen</h2>
+<p>Gesucht sind 100–200 Töpfe über die ganze Bandbreite, möglichst mindestens 15–20 je Notenstufe. Die Mindestmengen in Tabelle 6.1 ergeben zusammen erst 80–100 Töpfe; den Rest füllst du mit weiteren Töpfen aus allen Stufen auf. Führe die Strichliste, dann siehst du, welche Stufe noch fehlt. Beim Aussuchen zählt dein erster Eindruck; in die Auswertung gehen später die Noten von A und B ein.</p>
+<p class="table-caption">Tabelle 6.1: Zielmengen je Notenstufe (Skala 0–4 aus Tabelle 3.1; bei eigener Skala anpassen)</p>
+<table class="t">
+<colgroup><col width="10%"><col width="36%"><col width="18%"><col width="36%"></colgroup>
+<thead><tr><th>Note</th><th>Bedeutung</th><th>Mindestens</th><th>Strichliste</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>keine sichtbaren Symptome</td><td>20 (gern bis 40)</td><td>&nbsp;</td></tr>
+<tr><td>1</td><td>bis 10 % der Blattfläche befallen</td><td>15–20</td><td>&nbsp;</td></tr>
+<tr><td>2</td><td>über 10 bis 25 %</td><td>15–20</td><td>&nbsp;</td></tr>
+<tr><td>3</td><td>über 25 bis 50 %</td><td>15–20</td><td>&nbsp;</td></tr>
+<tr><td>4</td><td>über 50 % oder starke Nekrosen</td><td>15–20</td><td>&nbsp;</td></tr>
+<tr><td><strong>Summe</strong></td><td>Mindestmengen zusammen 80–100; mit weiteren Töpfen auffüllen</td><td><strong>100–200</strong></td><td>&nbsp;</td></tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Gesunde Töpfe gehören dazu</strong> – auch solche, die aus anderem Grund gelb sind (Nährstoffmangel, alte Blätter), und solche mit hellgrünem Neuaustrieb. Sie zeigen, wo sich das Programm täuschen könnte. Den Grund in „bemerkung“ notieren.</li>
+<li><strong>Sorte notieren.</strong> Nur grüne Sorten (Abschnitt 3.3), am besten die Hauptsorte, höchstens 2–3.</li>
+<li><strong>Mischen:</strong> kleine und große Pflanzen, verschiedene Sätze und, falls es einen Versuch gibt, verschiedene Behandlungen. Jeder Topf kommt nur einmal vor, sonst zählt er doppelt.</li>
+<li><strong>Trocken fotografieren,</strong> nicht direkt nach dem Gießen – nasse Blätter glänzen. Keine Blätter entfernen.</li>
+<li><strong>Wenig Befall im Bestand?</strong> Dann über die ganze Pilot-Zeit sammeln; die Stufen 3 und 4 fehlen oft am längsten.</li>
+</ul>
+<div class="box warn"><p class="box-title">Achtung: Hygiene</p>
+<p>Befallene Töpfe tragen Sporen, die sich über die Luft verbreiten. Bonitiere und fotografiere sie getrennt von verkaufsfähiger Ware, trag sie nicht quer durch gesunde Bestände und halte dich an eure betrieblichen Hygieneregeln. Sind Foto, Bonitur und Zusatztests eines Topfs erledigt, entsorge ihn nach diesen Regeln – die Beratung (University of Minnesota Extension) empfiehlt, befallene Pflanzen sofort zu entfernen und zu vernichten.</p></div>
+
+<h2>6.3 Vorbereiten</h2>
+<h3>Topfnummer-Karten</h3>
+<p>Jeder Pilot-Topf bekommt eine Nummer von P001 bis P200 (P für Pilot). Beim Foto steckt die Karte im Etikettenhalter. So steht die Nummer in jedem Foto, und Foto und Topf können nicht verwechselt werden.</p>
+<ul>
+<li>Visitenkartengröße 85 × 55 mm (passend zum Etikettenhalter aus Kapitel 4), weißes mattes Papier oder dünner Karton, nicht glänzend laminieren.</li>
+<li>Nummer schwarz und fett, 2–3 cm hoch, sonst nichts auf der Karte.</li>
+<li>Zusätzlich ein Stecketikett mit derselben Nummer (wasserfester Stift) in den Topf. Es bleibt beim Topf, während die Karte in der Box liegt.</li>
+</ul>
+
+<h3>Excel-Vorlage</h3>
+<p>Du führst eine Excel-Datei <code>pilot_bonitur.xlsx</code>. Ihr Blatt „Bonitur“ hat genau diese Spalten in Zeile 1 – genau so geschrieben (auch Groß- und Kleinschreibung, z. B. <code>note_A</code>), ohne Leerzeichen, damit das Programm sie später lesen kann:</p>
+<p class="table-caption">Tabelle 6.2: Spalten im Blatt „Bonitur“ (eine Zeile je Topf)</p>
+<table class="t">
+<thead><tr><th>Spalte</th><th>Inhalt</th><th>Beispiel</th></tr></thead>
+<tbody>
+<tr><td><code>topf_nr</code></td><td>Nummer der Topf-Karte</td><td>P017</td></tr>
+<tr><td><code>datum</code></td><td>Tag der Bonitur und des Fotos</td><td>12.10.2026</td></tr>
+<tr><td><code>sorte</code></td><td>Sortenname oder Code</td><td>Genovese</td></tr>
+<tr><td><code>satz</code></td><td>Satz bzw. Charge</td><td>12</td></tr>
+<tr><td><code>behandlung</code></td><td>Behandlung bei einem Versuch, sonst leer</td><td>unbehandelt</td></tr>
+<tr><td><code>note_A</code>, <code>note_B</code></td><td>Note von Person A bzw. B (ganze Zahl)</td><td>2 bzw. 1</td></tr>
+<tr><td><code>prozent_A</code>, <code>prozent_B</code></td><td>geschätzter Befall in % von A bzw. B</td><td>15 bzw. 10</td></tr>
+<tr><td><code>sporen_unten</code></td><td>Sporenrasen auf der Blattunterseite</td><td>ja</td></tr>
+<tr><td><code>foto_datei</code></td><td>Dateiname des Box-Fotos (6.6)</td><td>BOX_20261012_101532.jpg</td></tr>
+<tr><td><code>bemerkung</code></td><td>alles Auffällige</td><td>gelb durch Nährstoffmangel?</td></tr>
+</tbody>
+</table>
+<p>Dazu zwei kleine Blätter für die Zusatztests (6.5): „Wiederholung“ mit <code>topf_nr</code>, <code>durchgang</code> (1–5), <code>foto_datei</code>, <code>bemerkung</code> und „Lichttest“ mit <code>topf_nr</code>, <code>zeitpunkt</code> (morgens/mittags/abends), <code>hallenlicht</code> (an/aus), <code>foto_datei</code>, <code>bemerkung</code>. Du kannst die Datei selbst anlegen (Spaltennamen in Zeile 1) oder Karten und Excel-Vorlage von Claude bauen lassen:</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – Vorlagen für den Pilot</p><pre>Lies docs/SPEZIFIKATION.md (Abschnitt Pilot). Erstelle zwei Vorlagen für den
+Pilot im Ordner vorlagen/ (keine Betriebsdaten eintragen):
+1. topfkarten_pilot.pdf: A4 mit Karten 85 × 55 mm und Schnittlinien. Auf jeder
+   Karte nur eine Nummer von P001 bis P200, schwarz, fett, ca. 25 mm hoch.
+2. pilot_bonitur_vorlage.xlsx mit drei Tabellenblättern:
+   - "Bonitur": Spalten genau wie in der Spezifikation (topf_nr bis bemerkung),
+     Kopfzeile fixiert, Auswahllisten für note_A und note_B (unsere Skala) und
+     sporen_unten (ja/nein); prozent_A und prozent_B nur 0 bis 100.
+   - "Wiederholung": topf_nr, durchgang (1 bis 5), foto_datei, bemerkung.
+   - "Lichttest": topf_nr, zeitpunkt (morgens/mittags/abends),
+     hallenlicht (an/aus), foto_datei, bemerkung.
+Ergänze die beiden Zusatzblätter kurz in docs/SPEZIFIKATION.md.
+Arbeite auf einem eigenen Zweig, öffne einen Pull Request und erkläre mir,
+wie ich die Dateien herunterlade und ausdrucke.</pre></div>
+<p>Den Prompt schickst du ab wie in Abschnitt 1.4 und 3.9. Nach dem „Merge“ holst du die Dateien wie in Abschnitt 4.5 über „Code“ → „Download ZIP“; sie liegen im Ordner <code>vorlagen/</code>. Speichere die Excel-Vorlage als <code>pilot_bonitur.xlsx</code> in <code>Bonitur/Pilot/</code>. Die Karten druckst du in Originalgröße (100 %, nicht „an Seite anpassen“) und misst eine nach: 85 × 55 mm.</p>
+
+<h3>Regeln für die zwei Bonitur-Personen</h3>
+<div class="box info"><p class="box-title">Zum Ausdrucken – vor dem Start mit Person A und B besprechen</p>
+<ul>
+<li><strong>Unabhängig:</strong> Jede Person hat ein eigenes Klemmbrett mit Bonitur-Bogen (6.8). Nicht über Noten sprechen, nicht auf den anderen Bogen schauen.</li>
+<li><strong>Gleicher Platz, gleiches Licht:</strong> immer derselbe Tisch mit gleichmäßig hellem Licht, ohne direkte Sonne – für beide Personen und alle Töpfe.</li>
+<li><strong>Wie gewohnt bonitieren:</strong> die ganze Pflanze ansehen, Note nach der schriftlichen Skala geben (ganze Zahlen, keine Zwischennoten) und den Befall in % schätzen: Anteil gelber und brauner Blattfläche an der ganzen Pflanze. Bei kleinen Werten genauer (1, 2, 5 %), bei großen reichen 5er-Schritte.</li>
+<li><strong>Nicht anfassen:</strong> Vor dem Foto keine Blätter umdrehen, biegen oder abreißen.</li>
+<li><strong>Blattunterseite nach dem Foto:</strong> Eine fest eingeteilte Person (z. B. Person A) dreht einige untere und mittlere Blätter um und sucht grau-violetten bis schwarzen Sporenrasen; eine Lupe hilft. Der Befall beginnt meist an den unteren Blättern. Ergebnis: ja oder nein.</li>
+<li><strong>Nichts nachträglich ändern:</strong> Eine Note bleibt, wie sie ist – auch wenn das Foto später anders wirkt.</li>
+<li><strong>Nur Kürzel,</strong> keine Namen auf den Bögen.</li>
+</ul></div>
+
+<h2>6.4 Ablauf pro Topf</h2>
+<p>Vor jeder Sitzung: LEDs einige Minuten vorher einschalten, Open Camera öffnen und ISO und Verschlusszeit mit Tabelle 5.2 vergleichen, Farbkarte sauber und im Halter. Abbildung 6.1 zeigt die sechs Schritte je Topf.</p>
+<figure>
+<svg viewBox="0 0 800 226" role="img" aria-label="Ablauf pro Topf in sechs Schritten: Karte, Bonitur A, Bonitur B, Foto, Unterseite, Excel" font-family="Source Sans 3, sans-serif">
+<defs>
+<marker id="k6-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2F6B3A"/></marker>
+</defs>
+<!-- boxes -->
+<g fill="#F3F6F1" stroke="#2F6B3A" stroke-width="1.5">
+<rect x="2" y="22" width="116" height="124" rx="6"/>
+<rect x="138" y="22" width="116" height="124" rx="6"/>
+<rect x="274" y="22" width="116" height="124" rx="6"/>
+<rect x="410" y="22" width="116" height="124" rx="6" stroke="#2B5D8C" stroke-width="2"/>
+<rect x="546" y="22" width="116" height="124" rx="6"/>
+<rect x="682" y="22" width="116" height="124" rx="6"/>
+</g>
+<!-- arrows -->
+<g stroke="#2F6B3A" stroke-width="2" marker-end="url(#k6-arrow)">
+<line x1="120" y1="84" x2="135" y2="84"/>
+<line x1="256" y1="84" x2="271" y2="84"/>
+<line x1="392" y1="84" x2="407" y2="84"/>
+<line x1="528" y1="84" x2="543" y2="84"/>
+<line x1="664" y1="84" x2="679" y2="84"/>
+</g>
+<!-- number circles -->
+<g fill="#2F6B3A">
+<circle cx="60" cy="22" r="13"/><circle cx="196" cy="22" r="13"/><circle cx="332" cy="22" r="13"/>
+<circle cx="468" cy="22" r="13" fill="#2B5D8C"/><circle cx="604" cy="22" r="13"/><circle cx="740" cy="22" r="13"/>
+</g>
+<g font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+<text x="60" y="27">1</text><text x="196" y="27">2</text><text x="332" y="27">3</text>
+<text x="468" y="27">4</text><text x="604" y="27">5</text><text x="740" y="27">6</text>
+</g>
+<!-- titles -->
+<g font-size="16" font-weight="700" fill="#1F2A24" text-anchor="middle">
+<text x="60" y="60">Karte</text>
+<text x="196" y="60">Bonitur A</text>
+<text x="332" y="60">Bonitur B</text>
+<text x="468" y="60">Foto</text>
+<text x="604" y="60">Unterseite</text>
+<text x="740" y="60">Excel</text>
+</g>
+<!-- sub texts -->
+<g font-size="13.5" fill="#1F2A24" text-anchor="middle">
+<text x="60" y="84">Topfnummer-</text><text x="60" y="101">Karte und</text><text x="60" y="118">Stecketikett</text>
+<text x="196" y="84">Note und</text><text x="196" y="101">Befall % auf</text><text x="196" y="118">Bogen A</text>
+<text x="332" y="84">wie A, ohne</text><text x="332" y="101">Bogen A</text><text x="332" y="118">zu sehen</text>
+<text x="468" y="84">Karte in Halter,</text><text x="468" y="101">Scheibe drauf,</text><text x="468" y="118">Klappe zu</text>
+<text x="604" y="84">Sporenrasen</text><text x="604" y="101">ja oder nein</text><text x="604" y="118">notieren</text>
+<text x="740" y="84">eine Zeile</text><text x="740" y="101">je Topf</text>
+</g>
+<!-- who -->
+<g font-size="13" fill="#6B7570" text-anchor="middle">
+<text x="60" y="138">Du</text>
+<text x="196" y="138">Person A</text>
+<text x="332" y="138">Person B</text>
+<text x="468" y="138">Du</text>
+<text x="604" y="138">eingeteilte Person</text>
+<text x="740" y="138">Du</text>
+</g>
+<!-- brackets -->
+<g stroke="#8A5A2B" stroke-width="1.8" fill="none">
+<path d="M4,164 L4,174 L524,174 L524,164"/>
+</g>
+<g stroke="#2F6B3A" stroke-width="1.8" fill="none">
+<path d="M548,164 L548,174 L796,174 L796,164"/>
+</g>
+<text x="264" y="198" font-size="14.5" fill="#8A5A2B" text-anchor="middle" font-weight="700">Pflanze unberührt lassen:</text>
+<text x="264" y="216" font-size="14" fill="#1F2A24" text-anchor="middle">keine Blätter umdrehen, biegen oder entfernen</text>
+<text x="672" y="198" font-size="14.5" fill="#2F6B3A" text-anchor="middle" font-weight="700">nach dem Foto:</text>
+<text x="672" y="216" font-size="14" fill="#1F2A24" text-anchor="middle">Blätter umdrehen erlaubt</text>
+</svg>
+<figcaption>Abb. 6.1: Ablauf pro Topf. Erst bonitieren A und B unabhängig, dann wird fotografiert (blau: in der Box). Die Blattunterseite wird erst nach dem Foto geprüft, damit das Foto die unberührte Pflanze zeigt.</figcaption>
+</figure>
+<ol class="steps">
+<li><strong>Karte zuordnen.</strong> Topfnummer-Karte und Stecketikett zum Topf. Ist die Pflanze trocken?</li>
+<li><strong>Bonitur A.</strong> Person A bonitiert am Bonitur-Platz: Note und Befall % auf Bogen A.</li>
+<li><strong>Bonitur B.</strong> Person B bonitiert denselben Topf, ohne Bogen A zu sehen.</li>
+<li><strong>Foto in der Box.</strong> Karte in den Etikettenhalter (Nummer nach oben, immer gleich herum), Abdeckscheibe auf, Topf in den Zentrierring, eingeklemmte Blätter vorsichtig herausziehen, Klappe zu, mit der Lautstärketaste auslösen. Auf dem Bildschirm prüfen: ganze Pflanze, Nummer lesbar, Farbkarte frei. Missglückt? Neues Foto und „Foto wiederholt“ in die Bemerkung.</li>
+<li><strong>Unterseite prüfen.</strong> Topf aus der Box, Scheibe ab und Erdkrümel abklopfen (Abschnitt 4.9). Die eingeteilte Person prüft die Blattunterseiten und kreuzt ja oder nein auf ihrem Bogen an.</li>
+<li><strong>Excel-Zeile.</strong> Eine Zeile je Topf im Blatt „Bonitur“: direkt am Laptop neben der Box oder am Tagesende von den Bögen abgetippt – dann aber jeden Tag. Karte zurück zum Topf, nächster Topf.</li>
+</ol>
+<div class="box tip"><p class="box-title">Tipp: zu dritt geht es flüssig</p>
+<p>A und B bonitieren, du fotografierst und schreibst. Plane Sitzungen mit etwa 20–40 Töpfen (Schätzung) und mach Pausen – Müdigkeit verschlechtert die Bonitur. Heft die Bögen am Ende des Tages ab: Sie sind das Original.</p></div>
+
+<h2>6.5 Zusatztests</h2>
+<h3>Wiederholbarkeit: 5 Töpfe, je 5 Fotos</h3>
+<p>Liefert derselbe Topf immer denselben Wert? Wähle 5 Pilot-Töpfe, möglichst aus verschiedenen Notenstufen (0 bis 4). Fotografiere jeden fünfmal zusätzlich zum normalen Pilot-Foto, direkt nacheinander am selben Tag, und zwar jedes Mal komplett neu: Topf heraus, Scheibe ab, Scheibe wieder drauf, Topf zurück in den Zentrierring, Klappe zu, auslösen. Trag jedes Foto ins Blatt „Wiederholung“ ein (Durchgang 1 bis 5). In Etappe 4 wird geprüft, ob die Streuung (Standardabweichung, erklärt in Kapitel 8) des Befall % dabei höchstens 2 Prozentpunkte beträgt (Vorschlag).</p>
+<h3>Lichttest: 1 Topf, 6 Fotos</h3>
+<p>Stört Licht von außen? Fotografiere einen Topf an einem Tag morgens, mittags und abends, jeweils einmal mit Hallenlicht an und einmal aus – zusammen 6 Fotos. Zwischen „an“ und „aus“ bleibt der Topf unberührt in der Box, nur das Hallenlicht wird geschaltet. Die Bilder sollen gleich aussehen. Eintrag ins Blatt „Lichttest“.</p>
+
+<h2>6.6 Fotos sichern und benennen</h2>
+<p>Die Originalfotos sind der wertvollste Teil des Pilots: Mit ihnen kann jede verbesserte Auswertung später alles neu berechnen. Lege sie so ab (vgl. Tabelle 3.4) und erledige jeden Abend die drei Schritte unter der Tabelle.</p>
+<p class="table-caption">Tabelle 6.3: Ordner für den Pilot</p>
+<table class="t">
+<colgroup><col width="44%"><col width="56%"></colgroup>
+<thead><tr><th>Ordner</th><th>Was hineinkommt</th></tr></thead>
+<tbody>
+<tr><td><code>Bonitur/Pilot/</code></td><td><code>pilot_bonitur.xlsx</code>, Scans oder Fotos der Bonitur-Bögen</td></tr>
+<tr><td><code>Bonitur/Pilot/fotos/2026-10-12/</code></td><td>alle Box-Fotos dieses Tages (Pilot, Wiederholung, Lichttest), unverändert; ein Ordner je Tag</td></tr>
+<tr><td><code>Bonitur/Pilot/referenzbilder/</code></td><td>Kopie der Auswahl für das Repository (6.7)</td></tr>
+</tbody>
+</table>
+<ol class="steps">
+<li><strong>Kopieren.</strong> Handy per USB anschließen („Dateiübertragung“), die Fotos des Tages aus <code>DCIM/Bonitur</code> in den Tagesordner kopieren – kopieren, nicht verschieben. Anzahl vergleichen.</li>
+<li><strong>Zuordnen.</strong> Im Windows-Explorer die Ansicht „Details“ wählen und die Vorschau einschalten (Alt+P). Mit den Pfeiltasten von Foto zu Foto gehen: Topfnummer im Bild ablesen und den Dateinamen samt <code>.jpg</code> in die Spalte <code>foto_datei</code> der Zeile mit dieser Nummer eintragen. Fotos der Zusatztests trägst du genauso in die Blätter „Wiederholung“ und „Lichttest“ ein. Fehlt im Explorer die Endung <code>.jpg</code>, blende die Dateinamenerweiterungen in der Explorer-Ansicht ein.</li>
+<li><strong>Sichern.</strong> Prüfen, dass der Ordner <code>Bonitur/</code> in die Datensicherung läuft (Abschnitt 3.7). Die Fotos bleiben während des Pilots zusätzlich auf dem Handy.</li>
+</ol>
+<p>Die Nummer im Bild ist die sichere Verbindung zwischen Foto und Topf: Selbst wenn ein Dateiname falsch eingetragen ist, lässt sich die Zuordnung am Foto nachprüfen. Gibt es zu einem Topf zwei Fotos (Foto wiederholt), trägst du das gültige in <code>foto_datei</code> ein und das andere in die Bemerkung.</p>
+<div class="box warn"><p class="box-title">Achtung: Originale nie verändern</p>
+<p>Fotos nicht umbenennen, drehen, zuschneiden oder „verbessern“ – auch nicht kurz in einer Foto-App. Open Camera vergibt eindeutige Namen aus Datum und Uhrzeit, und genau diese stehen in der Excel-Tabelle. Auch missglückte Fotos nicht löschen, sondern in der Bemerkung erwähnen.</p></div>
+
+<h2>6.7 Referenzbilder ins Repository hochladen</h2>
+<p>Claude braucht echte Fotos, um den Analyse-Kern zu entwickeln und automatisch zu testen (Baustein B1, Kapitel 9). Dafür lädst du eine kleine Auswahl mit ihrer Bonitur ins Repository. Alle anderen Pilotfotos bleiben auf deinem PC; die Analyse-Werkstatt wertet sie dort aus (Kapitel 8).</p>
+<p class="table-caption">Tabelle 6.4: Welche Fotos als Referenzbilder?</p>
+<table class="t">
+<thead><tr><th>Gruppe</th><th>Anzahl</th><th>Darunter möglichst</th></tr></thead>
+<tbody>
+<tr><td>Note 0</td><td>4–6</td><td>ein Topf, der aus anderem Grund gelb ist; einer mit hellgrünem Neuaustrieb</td></tr>
+<tr><td>Note 1</td><td>4–6</td><td>ein Topf mit Sporen unten, aber oben kaum Symptomen</td></tr>
+<tr><td>Note 2</td><td>4–6</td><td>ein Topf, bei dem A und B verschiedene Noten gaben</td></tr>
+<tr><td>Note 3</td><td>4–6</td><td>eine sehr große Pflanze, die nah an Farbkarte oder Etikett reicht</td></tr>
+<tr><td>Note 4</td><td>4–6</td><td>ein Topf mit starken Nekrosen</td></tr>
+<tr><td>Wiederholung</td><td>25</td><td>alle Fotos aus dem Wiederholbarkeits-Test (6.5)</td></tr>
+<tr><td><strong>Summe</strong></td><td><strong>ca. 45–55</strong></td><td>dazu die Excel-Datei; zusammen unter 100 Dateien</td></tr>
+</tbody>
+</table>
+<p>Die Stufe richtet sich nach der Note, bei der A und B übereinstimmen (Ausnahme: der uneinige Topf bei Note 2). Nur gute Fotos: scharf, Farbkarte und Nummer frei. Die normalen Pilot-Fotos der 5 Wiederholungs-Töpfe gehören zur Auswahl – sonst fehlen die Noten zu den Wiederholungsfotos.</p>
+<h3>Vorbereiten</h3>
+<ol class="steps">
+<li><strong>Ordner anlegen.</strong> <code>Bonitur/Pilot/referenzbilder/</code> – der Name genau so, klein geschrieben. Ausgewählte Fotos und die 25 Wiederholungsfotos hineinkopieren.</li>
+<li><strong>Excel dazu.</strong> <code>pilot_bonitur.xlsx</code> als <code>referenzbilder.xlsx</code> in diesen Ordner kopieren. Darin im Blatt „Bonitur“ alle Zeilen löschen, deren Foto nicht dabei ist, und das Blatt „Lichttest“ löschen.</li>
+<li><strong>Vertrauliches entfernen.</strong> Ist das Repository öffentlich, vertrauliche Sorten- oder Behandlungsnamen durch Codes ersetzen (3.5); in <code>bemerkung</code> keine Namen. In Excel „Datei“ → „Info“ → „Auf Probleme überprüfen“ → „Dokument prüfen“, bei „Dokumenteigenschaften und persönliche Informationen“ „Alle entfernen“ – das löscht z. B. deinen Namen als Autor. Speichern.</li>
+</ol>
+<h3>Hochladen über die GitHub-Webseite</h3>
+<ol class="steps">
+<li><strong>Repository öffnen.</strong> Anmelden, dann <a href="https://github.com/konvalinaalexander-max/bonitieren_mehltau">github.com/konvalinaalexander-max/bonitieren_mehltau</a> öffnen.</li>
+<li><strong>Upload starten.</strong> Über der Dateiliste auf „Add file“ → „Upload files“ klicken.</li>
+<li><strong>Ordner hineinziehen.</strong> Den ganzen Ordner <code>referenzbilder</code> aus dem Explorer ins Browserfenster ziehen – so entsteht er auch im Repository („choose your files“ nimmt nur einzelne Dateien, ohne Ordner). Warten, bis alle Dateien gelistet sind.</li>
+<li><strong>Beschreiben.</strong> Ins Feld „Commit message“ z. B. „Referenzbilder aus dem Pilot“ schreiben. Ein Commit ist eine gespeicherte Änderung mit kurzer Beschreibung.</li>
+<li><strong>Speichern.</strong> Darunter den Hauptzweig (meist <code>main</code>) wählen – für Bilder genügt er, auch wenn GitHub einen neuen Zweig empfiehlt. Dann auf den grünen Knopf „Commit changes“ klicken.</li>
+<li><strong>Kontrollieren.</strong> Ordner <code>referenzbilder</code> öffnen: Stimmt die Anzahl? Ein Klick auf ein Foto zeigt es an.</li>
+</ol>
+<p>Grenzen im Browser (GitHub-Hilfe, Stand 09/2026): höchstens 25 MB je Datei (deine Fotos: ca. 2–3 MB) und 100 Dateien je Upload. Mehr Dateien? Zweimal hochladen, beim zweiten Mal im Ordner <code>referenzbilder</code>.</p>
+<div class="box warn"><p class="box-title">Achtung: nur Referenzbilder ins Repository</p>
+<p>Keine anderen Betriebsdaten: nicht die vollständige Pilot-Tabelle, keine Kunden, Preise oder Lieferlisten, keine Namen von Mitarbeitern (nur Kürzel), keine Fotos, auf denen Personen oder Firmenunterlagen zu sehen sind. Weil Geotagging aus ist (Tabelle 5.1), enthalten die Fotos keinen Standort. Bei einem öffentlichen Repository kann jeder die Dateien sehen und kopieren. Was einmal hochgeladen ist, bleibt in der Versionsgeschichte – auch wenn du die Datei später löschst.</p></div>
+<p>Zum Schluss lässt du Claude prüfen, ob alles zusammenpasst. Korrigierst du etwas, lädst du die Datei auf demselben Weg noch einmal in <code>referenzbilder</code> hoch; gleichnamige Dateien werden ersetzt.</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – Referenzbilder prüfen</p><pre>Lies docs/SPEZIFIKATION.md. Ich habe Pilotfotos und referenzbilder.xlsx in den
+Ordner referenzbilder/ hochgeladen. Prüfe bitte, ohne etwas zu ändern:
+1. Gehört zu jedem Foto eine Zeile (Spalte foto_datei in den Blättern
+   "Bonitur" und "Wiederholung") und zu jeder Zeile ein Foto?
+2. Fehlen Werte oder gibt es unplausible Werte (Note außerhalb unserer Skala,
+   Prozent über 100, sporen_unten nicht ja/nein)?
+3. Wie viele Fotos gibt es je Notenstufe, getrennt nach Person A und B?
+4. Sieh dir jedes Foto an: Sind Farbkarte und Topfnummer vollständig zu sehen,
+   passt die Nummer zur Zeile, ist etwas unscharf, zu dunkel oder zu hell?
+5. Stehen in den Dateien Namen oder andere Daten, die nicht ins Repository
+   gehören? Prüfe auch die Dateieigenschaften der Excel-Datei (z. B. Autor).
+Antworte in einfachen Worten mit einer kurzen Liste, was ich korrigieren soll.</pre></div>
+
+<div class="page-break"></div>
+<h2>6.8 Kopiervorlage: Bonitur-Bogen</h2>
+<p>Für jede Person und jede Sitzung ein eigener Bogen. Die Spalte „Sporen unten“ füllt nur die eingeteilte Person aus, nach dem Foto.</p>
+<div class="template">
+<h3>Bonitur-Bogen – Pilot (Etappe 3)</h3>
+<p>Datum: ______________ &nbsp;&nbsp; Person (Kürzel): ________ &nbsp;&nbsp; Satz: __________ &nbsp;&nbsp; Blatt ____ von ____</p>
+<p><strong>Skala:</strong> 0 keine Symptome · 1 bis 10 % · 2 über 10 bis 25 % · 3 über 25 bis 50 % · 4 über 50 % oder starke Nekrosen</p>
+<p><strong>Regeln:</strong> allein bonitieren, nicht absprechen · ganze Noten · Befall % = gelbe und braune Blattfläche an der ganzen Pflanze · vor dem Foto keine Blätter anfassen</p>
+<table class="t">
+<colgroup><col width="13%"><col width="17%"><col width="9%"><col width="11%"><col width="14%"><col width="36%"></colgroup>
+<thead><tr><th>Topf-Nr.</th><th>Sorte</th><th>Note</th><th>Befall %</th><th>Sporen unten</th><th>Bemerkung</th></tr></thead>
+<tbody>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+<tr><td>P</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>ja · nein</td><td>&nbsp;</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>6.9 Etappe 3 ist fertig, wenn …</h2>
+<ul class="checklist">
+<li>mindestens 100 Töpfe fotografiert und von A und B unabhängig bonitiert sind,</li>
+<li>möglichst jede Notenstufe die Mindestmenge aus Tabelle 6.1 erreicht (15–20 Töpfe, Note 0 mindestens 20),</li>
+<li>für jeden Topf <code>sporen_unten</code> eingetragen ist,</li>
+<li>jede Zeile im Blatt „Bonitur“ einen Dateinamen in <code>foto_datei</code> hat und du die Nummern im Foto geprüft hast,</li>
+<li>Wiederholungstest (5 × 5 Fotos) und Lichttest (6 Fotos) gemacht und eingetragen sind,</li>
+<li>alle Originalfotos unverändert in <code>Bonitur/Pilot/fotos/</code> liegen und gesichert sind und die Bögen abgeheftet sind,</li>
+<li>die Referenzbilder, die Wiederholungsfotos und <code>referenzbilder.xlsx</code> im Ordner <code>referenzbilder/</code> im Repository liegen,</li>
+<li>Claude die Referenzbilder geprüft hat und du gemeldete Fehler korrigiert hast,</li>
+<li>sonst keine Betriebsdaten im Repository liegen,</li>
+<li>Besonderheiten (z. B. „Box am 14.10. verschoben“) im Projekttagebuch stehen.</li>
+</ul>
+</section>

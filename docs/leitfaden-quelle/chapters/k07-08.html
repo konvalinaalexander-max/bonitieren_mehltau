@@ -1,0 +1,973 @@
+<section class="chapter" id="kap-7">
+<p class="kicker">Hintergrund</p>
+<h1>7 So rechnet das Programm</h1>
+<p class="lead">Wie aus einem Foto Befall&nbsp;% und Note werden: Schritt für Schritt, ohne Formeln im Kopf. Wenn du das verstehst, kannst du Kontrollbilder lesen und die Regler in der Werkstatt gezielt einstellen.</p>
+
+<h2>7.1 Überblick: vom Foto zur Note</h2>
+<p>Das Programm, das aus einem Foto die Zahlen macht, heißt <strong>Analyse-Kern</strong>. Dieselben Schritte laufen später in der Analyse-Werkstatt am PC (Kapitel 8) und in der Handy-App (Kapitel 9). Sie arbeiten mit festen Regeln, nicht mit künstlicher Intelligenz: Dasselbe Foto ergibt mit denselben Einstellungen immer dasselbe Ergebnis.</p>
+<figure>
+<svg viewBox="0 0 800 400" role="img" aria-label="Ablauf der Auswertung in sieben Schritten: Foto, Farbkorrektur, Auswertebereich, Pflanze erkennen, Farbklassen, Kennzahlen, Note und Kontrollbild; Qualitätschecks laufen mit" font-family="Source Sans 3, sans-serif">
+<defs>
+<marker id="k7-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2F6B3A"/></marker>
+<marker id="k7-arrow-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C0392B"/></marker>
+</defs>
+<g fill="#F3F6F1" stroke="#2F6B3A" stroke-width="1.5">
+<rect x="1" y="8" width="183" height="166" rx="6"/>
+<rect x="206" y="8" width="183" height="166" rx="6"/>
+<rect x="411" y="8" width="183" height="166" rx="6"/>
+<rect x="616" y="8" width="183" height="166" rx="6"/>
+<rect x="1" y="226" width="183" height="166" rx="6"/>
+<rect x="206" y="226" width="183" height="166" rx="6"/>
+<rect x="411" y="226" width="183" height="166" rx="6" stroke-width="2.5"/>
+</g>
+<rect x="616" y="226" width="183" height="166" rx="6" fill="#FFFFFF" stroke="#C0392B" stroke-width="1.5" stroke-dasharray="6 4"/>
+<!-- arrows -->
+<g stroke="#2F6B3A" stroke-width="2" fill="none" marker-end="url(#k7-arrow)">
+<line x1="187" y1="91" x2="203" y2="91"/>
+<line x1="392" y1="91" x2="408" y2="91"/>
+<line x1="597" y1="91" x2="613" y2="91"/>
+<path d="M707.5,176 V200 H92.5 V223"/>
+<line x1="187" y1="309" x2="203" y2="309"/>
+<line x1="392" y1="309" x2="408" y2="309"/>
+</g>
+<line x1="614" y1="309" x2="598" y2="309" stroke="#C0392B" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#k7-arrow-r)"/>
+<!-- step numbers -->
+<g fill="#2F6B3A"><circle cx="18" cy="25" r="11"/><circle cx="223" cy="25" r="11"/><circle cx="428" cy="25" r="11"/><circle cx="633" cy="25" r="11"/><circle cx="18" cy="243" r="11"/><circle cx="223" cy="243" r="11"/><circle cx="428" cy="243" r="11"/></g>
+<g fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle"><text x="18" y="29.5">1</text><text x="223" y="29.5">2</text><text x="428" y="29.5">3</text><text x="633" y="29.5">4</text><text x="18" y="247.5">5</text><text x="223" y="247.5">6</text><text x="428" y="247.5">7</text></g>
+<!-- icon 1 photo -->
+<rect x="57" y="26" width="72" height="50" rx="6" fill="#1F2A24"/>
+<rect x="62" y="31" width="62" height="40" fill="#6B7570"/>
+<circle cx="93" cy="51" r="12" fill="#5B9A3C"/>
+<rect x="65" y="34" width="10" height="7" fill="#D9B32E"/>
+<!-- icon 2 card -->
+<rect x="266" y="32" width="63" height="40" fill="#1F2A24"/>
+<rect x="267.2" y="33.2" width="8.1" height="7.6" fill="#8A5A2B"/>
+<rect x="277.7" y="33.2" width="8.1" height="7.6" fill="#D9B32E"/>
+<rect x="288.2" y="33.2" width="8.1" height="7.6" fill="#2B5D8C"/>
+<rect x="298.7" y="33.2" width="8.1" height="7.6" fill="#5B9A3C"/>
+<rect x="309.2" y="33.2" width="8.1" height="7.6" fill="#6B7570"/>
+<rect x="319.7" y="33.2" width="8.1" height="7.6" fill="#C9D2C6"/>
+<rect x="267.2" y="43.2" width="8.1" height="7.6" fill="#C0392B"/>
+<rect x="277.7" y="43.2" width="8.1" height="7.6" fill="#2F6B3A"/>
+<rect x="288.2" y="43.2" width="8.1" height="7.6" fill="#D9B32E"/>
+<rect x="298.7" y="43.2" width="8.1" height="7.6" fill="#2B5D8C"/>
+<rect x="309.2" y="43.2" width="8.1" height="7.6" fill="#8A5A2B"/>
+<rect x="319.7" y="43.2" width="8.1" height="7.6" fill="#5B9A3C"/>
+<rect x="267.2" y="53.2" width="8.1" height="7.6" fill="#2B5D8C"/>
+<rect x="277.7" y="53.2" width="8.1" height="7.6" fill="#5B9A3C"/>
+<rect x="288.2" y="53.2" width="8.1" height="7.6" fill="#C0392B"/>
+<rect x="298.7" y="53.2" width="8.1" height="7.6" fill="#D9B32E"/>
+<rect x="309.2" y="53.2" width="8.1" height="7.6" fill="#C0392B"/>
+<rect x="319.7" y="53.2" width="8.1" height="7.6" fill="#2B5D8C"/>
+<rect x="267.2" y="63.2" width="8.1" height="7.6" fill="#FFFFFF"/>
+<rect x="277.7" y="63.2" width="8.1" height="7.6" fill="#F3F6F1"/>
+<rect x="288.2" y="63.2" width="8.1" height="7.6" fill="#C9D2C6"/>
+<rect x="298.7" y="63.2" width="8.1" height="7.6" fill="#6B7570"/>
+<rect x="309.2" y="63.2" width="8.1" height="7.6" fill="#6B7570" fill-opacity="0.55"/>
+<rect x="319.7" y="63.2" width="8.1" height="7.6" fill="#1F2A24"/>
+<!-- icon 3 area -->
+<rect x="467" y="26" width="72" height="52" fill="#F3F6F1" stroke="#6B7570"/>
+<rect x="477" y="28" width="52" height="48" fill="#6B7570"/>
+<circle cx="503" cy="52" r="10" fill="#5B9A3C"/>
+<circle cx="503" cy="52" r="19" fill="none" stroke="#2B5D8C" stroke-width="2" stroke-dasharray="4 3"/>
+<rect x="479" y="30" width="10" height="7" fill="#D9B32E"/>
+<rect x="517" y="67" width="10" height="7" fill="#FFFFFF"/>
+<!-- icon 4 mask -->
+<rect x="672" y="26" width="72" height="52" fill="#1F2A24"/>
+<g fill="#5B9A3C"><ellipse cx="708" cy="52" rx="17" ry="8"/><ellipse cx="708" cy="52" rx="17" ry="8" transform="rotate(60 708 52)"/><ellipse cx="708" cy="52" rx="17" ry="8" transform="rotate(120 708 52)"/></g>
+<!-- icon 5 classes -->
+<rect x="59" y="258" width="20" height="20" fill="#5B9A3C"/>
+<rect x="83" y="258" width="20" height="20" fill="#D9B32E"/>
+<rect x="107" y="258" width="20" height="20" fill="#C0392B"/>
+<!-- icon 6 numbers -->
+<text x="297.5" y="282" text-anchor="middle" font-size="30" font-weight="700" fill="#2F6B3A">12 %</text>
+<!-- icon 7 result -->
+<circle cx="482" cy="268" r="22" fill="#5B9A3C"/>
+<circle cx="474" cy="261" r="6" fill="#D9B32E"/>
+<circle cx="490" cy="275" r="4.5" fill="#C0392B"/>
+<circle cx="532" cy="272" r="16" fill="#2F6B3A"/>
+<text x="532" y="278.5" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">2</text>
+<!-- icon checks -->
+<path d="M707.5,248 L728,284 L687,284 Z" fill="none" stroke="#C0392B" stroke-width="2.5" stroke-linejoin="round"/>
+<text x="707.5" y="280" text-anchor="middle" font-size="18" font-weight="700" fill="#C0392B">!</text>
+<!-- titles -->
+<g font-size="16" font-weight="700" fill="#1F2A24" text-anchor="middle">
+<text x="92.5" y="112">Foto</text><text x="297.5" y="112">Farbkorrektur</text><text x="502.5" y="112">Auswertebereich</text><text x="707.5" y="112">Pflanze erkennen</text>
+<text x="92.5" y="330">Farbklassen</text><text x="297.5" y="330">Kennzahlen</text><text x="502.5" y="330">Note + Kontrollbild</text><text x="707.5" y="330" fill="#C0392B">Qualitätschecks</text>
+</g>
+<g font-size="13.5" fill="#1F2A24" text-anchor="middle">
+<text x="92.5" y="132">Box-Handy, von oben;</text><text x="92.5" y="149">verkleinert auf 1600 px</text>
+<text x="297.5" y="132">24-Feld-Karte gleicht</text><text x="297.5" y="149">Kamera und Licht aus</text>
+<text x="502.5" y="132">nur der Kreis um</text><text x="502.5" y="149">den Topf zählt</text>
+<text x="707.5" y="132">jeder Pixel: Pflanze</text><text x="707.5" y="149">oder Hintergrund?</text>
+<text x="92.5" y="350">Pflanzenpixel: grün,</text><text x="92.5" y="367">gelb oder braun</text>
+<text x="297.5" y="350">Fläche, Anteile,</text><text x="297.5" y="367">Befall %, Grünwert</text>
+<text x="502.5" y="350">Umrechnungstabelle,</text><text x="502.5" y="367">eingefärbtes Foto</text>
+<text x="707.5" y="350">Farbkarte, Belichtung,</text><text x="707.5" y="367">Pflanze, Topf-ID</text>
+</g>
+<g font-size="13" fill="#6B7570" text-anchor="middle">
+<text x="92.5" y="166">Abschnitt 7.2</text><text x="297.5" y="166">Abschnitt 7.3</text><text x="502.5" y="166">Abschnitt 7.4</text><text x="707.5" y="166">Abschnitt 7.5</text>
+<text x="92.5" y="384">Abschnitt 7.6</text><text x="297.5" y="384">Abschnitt 7.7</text><text x="502.5" y="384">Abschnitte 7.8, 7.9</text><text x="707.5" y="384">→ Warnungen, 7.9</text>
+</g>
+</svg>
+<figcaption>Abb. 7.1: Die sieben Schritte der Auswertung. Die Qualitätschecks (rot gestrichelt) laufen bei jedem Foto mit und hängen Warnungen an das Ergebnis.</figcaption>
+</figure>
+<p>Alle Zahlen in diesem Kapitel sind <strong>Startwerte</strong>. Im Pilot (Kapitel 8) stellst du sie mit euren Fotos ein. Jede Ergebniszeile trägt die <strong>Algorithmus-Version</strong> (z. B. „A-1.0“). Ändern sich Regeln oder Werte, bekommt der Kern eine neue Version – so weißt du später, welche Ergebnisse vergleichbar sind.</p>
+
+<h2>7.2 Pixel, RGB und HSV</h2>
+<p>Ein Digitalfoto besteht aus winzigen Farbquadraten, den <strong>Pixeln</strong>. Das Box-Handy fotografiert mit ca. 8 Megapixeln, also rund 8 Millionen Pixeln (z. B. 3264 × 2448 Pixel). Das Programm verkleinert jedes Foto zuerst auf ca. 1600 × 1200 Pixel – knapp 2 Millionen. Das reicht: In Blatthöhe ist ein Pixel dann ungefähr 0,3 mm groß (Schätzung für die Box aus Kapitel 4), und die Auswertung bleibt auch auf dem Handy schnell.</p>
+<p>Jedes Pixel speichert seine Farbe als drei Zahlen von 0 bis 255: wie viel <strong>R</strong>ot, <strong>G</strong>rün und <strong>B</strong>lau darin steckt (<strong>RGB</strong>). Ein Basilikumblatt hat z. B. R 91, G 154, B 60. Diese Zahlen sind schwer zu deuten. Deshalb rechnet das Programm jedes Pixel in drei andere Werte um, den <strong>HSV-Farbraum</strong>:</p>
+<ul>
+<li><strong>Farbton H</strong> (englisch <em>hue</em>): welche Farbe, als Winkel auf dem Farbkreis von 0° bis 360°. Rot 0°, Gelb 60°, Grün 120°, Blau 240°.</li>
+<li><strong>Sättigung S</strong>: wie kräftig die Farbe ist, von 0 (grau) bis 1 (satte Farbe).</li>
+<li><strong>Helligkeit V</strong> (englisch <em>value</em>): von 0 (schwarz) bis 1 (ganz hell).</li>
+</ul>
+<p>Das Basilikum-Pixel aus dem Beispiel hat H 100°, S 0,61 und V 0,60. Der Vorteil: Liegt ein Blatt im Halbschatten, sinkt vor allem die Helligkeit – der Farbton bleibt fast gleich. Deshalb lassen sich grün, gelb und braun am Farbton gut trennen.</p>
+<figure>
+<svg viewBox="0 0 800 305" role="img" aria-label="Farbtonbalken von 0 bis 360 Grad mit den Bereichen braun 15 bis 45, gelb 45 bis 80, grün ab 80, Pflanze bis 170 Grad; darunter Sättigung und Helligkeit mit den Mindestwerten" font-family="Source Sans 3, sans-serif">
+<defs>
+<linearGradient id="k7-hue" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0.0000" stop-color="#EB3434"/>
+<stop offset="0.0417" stop-color="#EB6134"/>
+<stop offset="0.0833" stop-color="#EB8F34"/>
+<stop offset="0.1250" stop-color="#EBBD34"/>
+<stop offset="0.1667" stop-color="#EBEB34"/>
+<stop offset="0.2083" stop-color="#BDEB34"/>
+<stop offset="0.2500" stop-color="#8FEB34"/>
+<stop offset="0.2917" stop-color="#61EB34"/>
+<stop offset="0.3333" stop-color="#34EB34"/>
+<stop offset="0.3750" stop-color="#34EB61"/>
+<stop offset="0.4167" stop-color="#34EB8F"/>
+<stop offset="0.4583" stop-color="#34EBBD"/>
+<stop offset="0.5000" stop-color="#34EBEB"/>
+<stop offset="0.5417" stop-color="#34BDEB"/>
+<stop offset="0.5833" stop-color="#348FEB"/>
+<stop offset="0.6250" stop-color="#3461EB"/>
+<stop offset="0.6667" stop-color="#3434EB"/>
+<stop offset="0.7083" stop-color="#6134EB"/>
+<stop offset="0.7500" stop-color="#8F34EB"/>
+<stop offset="0.7917" stop-color="#BD34EB"/>
+<stop offset="0.8333" stop-color="#EB34EB"/>
+<stop offset="0.8750" stop-color="#EB34BD"/>
+<stop offset="0.9167" stop-color="#EB348F"/>
+<stop offset="0.9583" stop-color="#EB3461"/>
+<stop offset="1.0000" stop-color="#EB3434"/>
+</linearGradient>
+<linearGradient id="k7-sat" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#9E9E9E"/><stop offset="1" stop-color="#359E00"/></linearGradient>
+<linearGradient id="k7-val" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#000000"/><stop offset="1" stop-color="#96FF61"/></linearGradient>
+</defs>
+<!-- plant bracket -->
+<text x="225" y="16" text-anchor="middle" font-size="14" font-weight="700" fill="#2F6B3A">Pflanze: Farbton 15° bis 170°</text>
+<path d="M70,32 V24 H380 V32" fill="none" stroke="#2F6B3A" stroke-width="1.8"/>
+<!-- class labels -->
+<g text-anchor="middle" fill="#1F2A24">
+<text x="100" y="50" font-size="14" font-weight="700">braun</text><text x="100" y="67" font-size="13">15–45°</text>
+<text x="165" y="50" font-size="14" font-weight="700">gelb</text><text x="165" y="67" font-size="13">45–80°</text>
+<text x="290" y="50" font-size="14" font-weight="700">grün</text><text x="290" y="67" font-size="13">ab 80°</text>
+<text x="570" y="67" font-size="13" fill="#6B7570">außerhalb: zählt nicht als Pflanze</text>
+</g>
+<rect x="70" y="73" width="60" height="7" fill="#8A5A2B"/>
+<rect x="130" y="73" width="70" height="7" fill="#D9B32E"/>
+<rect x="200" y="73" width="180" height="7" fill="#5B9A3C"/>
+<!-- hue bar -->
+<rect x="40" y="84" width="720" height="40" fill="url(#k7-hue)"/>
+<rect x="40" y="84" width="30" height="40" fill="#FFFFFF" fill-opacity="0.62"/>
+<rect x="380" y="84" width="380" height="40" fill="#FFFFFF" fill-opacity="0.62"/>
+<rect x="40" y="84" width="720" height="40" fill="none" stroke="#6B7570" stroke-width="1"/>
+<text x="570" y="109" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2A24">keine Pflanze</text>
+<g stroke="#1F2A24" stroke-width="1.2"><line x1="70" y1="80" x2="70" y2="128"/><line x1="130" y1="80" x2="130" y2="128"/><line x1="200" y1="80" x2="200" y2="128"/><line x1="380" y1="80" x2="380" y2="128"/></g>
+<rect x="220" y="81" width="40" height="46" fill="none" stroke="#1F2A24" stroke-width="2.2"/>
+<!-- ticks -->
+<g stroke="#6B7570" stroke-width="1"><line x1="40" y1="124" x2="40" y2="131"/><line x1="160" y1="124" x2="160" y2="131"/><line x1="280" y1="124" x2="280" y2="131"/><line x1="400" y1="124" x2="400" y2="131"/><line x1="520" y1="124" x2="520" y2="131"/><line x1="640" y1="124" x2="640" y2="131"/><line x1="760" y1="124" x2="760" y2="131"/></g>
+<g font-size="13.5" text-anchor="middle" fill="#1F2A24"><text x="40" y="146">0°</text><text x="160" y="146">60°</text><text x="280" y="146">120°</text><text x="400" y="146">180°</text><text x="520" y="146">240°</text><text x="640" y="146">300°</text><text x="760" y="146">360°</text></g>
+<g font-size="13" text-anchor="middle" fill="#6B7570"><text x="40" y="163">Rot</text><text x="160" y="163">Gelb</text><text x="280" y="163">Grün</text><text x="400" y="163">Cyan</text><text x="520" y="163">Blau</text><text x="640" y="163">Magenta</text><text x="760" y="163">Rot</text></g>
+<line x1="240" y1="127" x2="240" y2="176" stroke="#1F2A24" stroke-width="1.2"/>
+<text x="240" y="192" text-anchor="middle" font-size="14" font-weight="700" fill="#1F2A24">typisches Basilikumgrün: ca. 90–110°</text>
+<!-- saturation -->
+<text x="40" y="226" font-size="14" font-weight="700" fill="#1F2A24">Sättigung S (Beispiel: Farbton 100°)</text>
+<rect x="40" y="236" width="340" height="24" fill="url(#k7-sat)" stroke="#6B7570" stroke-width="1"/>
+<line x1="108" y1="231" x2="108" y2="265" stroke="#C0392B" stroke-width="2.4"/>
+<text x="40" y="278" font-size="13" fill="#6B7570">0 = grau</text>
+<text x="380" y="278" font-size="13" fill="#6B7570" text-anchor="end">1 = kräftig</text>
+<text x="102" y="297" font-size="13" fill="#C0392B">ab 0,20 kann es Pflanze sein</text>
+<!-- value -->
+<text x="420" y="226" font-size="14" font-weight="700" fill="#1F2A24">Helligkeit V (Beispiel: Farbton 100°)</text>
+<rect x="420" y="236" width="340" height="24" fill="url(#k7-val)" stroke="#6B7570" stroke-width="1"/>
+<line x1="471" y1="231" x2="471" y2="265" stroke="#C0392B" stroke-width="2.4"/>
+<text x="420" y="278" font-size="13" fill="#6B7570">0 = schwarz</text>
+<text x="760" y="278" font-size="13" fill="#6B7570" text-anchor="end">1 = ganz hell</text>
+<text x="465" y="297" font-size="13" fill="#C0392B">ab 0,15 kann es Pflanze sein</text>
+</svg>
+<figcaption>Abb. 7.2: Oben der Farbton H von 0° bis 360° mit den Farbklassen (Startwerte). Nur Farbtöne von 15° bis 170° können Pflanze sein. Unten Sättigung und Helligkeit mit den Mindestwerten (rote Striche). Braun ist dabei ein dunkles Orange: gleicher Farbton-Bereich, meist geringere Helligkeit.</figcaption>
+</figure>
+
+<h2>7.3 Farbkorrektur mit der Farbkarte</h2>
+<p><strong>Warum?</strong> Auch mit festen Einstellungen sieht dasselbe Blatt nicht in jedem Foto gleich aus: LEDs verändern sich mit der Zeit, das Handy rechnet nach Updates anders, die Belichtung schwankt leicht. Schon wenige Grad Farbton-Fehler verschieben Pixel über die Grenze zwischen grün und gelb – und damit den Befall&nbsp;%. Die 24-Feld-Farbkarte in jedem Foto gleicht das aus. Eine Graukarte reicht nicht: Sie korrigiert nur den Weißabgleich, nicht die Farben selbst.</p>
+<h3>So funktioniert es (vereinfacht)</h3>
+<ol class="steps">
+<li><strong>Karte finden.</strong> Du klickst einmal die 4 Ecken der Karte an (Kapitel 8.2). Weil Box und Handy fest stehen, liegt sie in jedem Foto an derselben Stelle – und damit jedes der 24 Felder.</li>
+<li><strong>Felder messen.</strong> Aus der Mitte jedes Feldes nimmt das Programm den Mittelwert der Farbe; die Ränder lässt es weg.</li>
+<li><strong>Mit den Sollfarben vergleichen.</strong> Welche Farbe jedes Feld haben soll, veröffentlicht der Hersteller als Wertetabelle. Claude hinterlegt diese Sollwerte im Programm. Seit November 2014 wird die Karte mit neuen Farbstoffen hergestellt und hat eine eigene Wertetabelle („after November 2014“) – für eine neu gekaufte Karte gilt diese.</li>
+<li><strong>Korrektur-Rezept berechnen.</strong> Das Rezept ist eine <strong>3×3-Farbmatrix</strong>: neun Zahlen, die sagen, wie neues Rot, Grün und Blau aus altem Rot, Grün und Blau gemischt werden. Eine <strong>Ausgleichsrechnung</strong> sucht die neun Zahlen, mit denen alle 24 Felder ihren Sollfarben insgesamt am nächsten kommen.</li>
+<li><strong>Auf das ganze Bild anwenden.</strong> Jedes Pixel wird mit dem Rezept umgerechnet – bei jedem Foto neu.</li>
+</ol>
+<h3>Qualitätsprüfung: die Restabweichung ΔE</h3>
+<p>Nach der Korrektur misst das Programm, wie weit jedes Feld noch von seiner Sollfarbe entfernt ist. Dieser Farbabstand heißt <strong>ΔE</strong> („Delta E“) und ist so gebaut, dass er ungefähr dem menschlichen Auge entspricht. Faustregel: Bis ca. 1 sieht man keinen Unterschied, zwischen 1 und 2 nur bei genauem Hinsehen, darüber schon auf den ersten Blick. Ein kleiner Rest bleibt immer, weil neun Zahlen nicht jede Farbe perfekt treffen. Ist die Restabweichung zu groß, meldet das Programm <strong>„Farbkarte prüfen“</strong>. Die genaue Grenze legt Claude mit den Referenzbildern fest.</p>
+<div class="box warn"><p class="box-title">Achtung</p><p>Die Korrektur ist nur so gut wie die Karte. Ist sie schmutzig, verblasst, verrutscht oder teilweise von einem Blatt verdeckt, werden <em>alle</em> Farben im Foto falsch umgerechnet. Karte sauber halten, lichtgeschützt lagern, bei Verblassen ersetzen. Nach einem Kartenwechsel neu prüfen (Kapitel 10).</p></div>
+
+<h2>7.4 Der Auswertebereich</h2>
+<p>Das Foto zeigt mehr als die Pflanze: Wände, Boden, Farbkarte, Etikett. Deshalb zählt nur, was in einem <strong>Kreis um die Topfmitte</strong> liegt (Abb. 7.3). Mitte und Radius stellst du einmal ein, wie die Kartenecken. Der Kreis muss groß genug für die größte Pflanze sein, Farbkarte und Etikett müssen draußen bleiben. Blattspitzen außerhalb des Kreises werden nicht gezählt – die Fläche wäre dann zu klein.</p>
+<figure>
+<svg viewBox="0 0 800 300" role="img" aria-label="Foto von oben: Boden der Box, Farbkarte in einer Ecke mit vier nummerierten Ecken, Etikett in der gegenüberliegenden Ecke, Pflanze auf schwarzer Abdeckscheibe, gestrichelter Auswertekreis" font-family="Source Sans 3, sans-serif">
+<g transform="translate(40,0) scale(0.86)">
+<rect x="10" y="10" width="440" height="330" fill="#F3F6F1" stroke="#6B7570" stroke-width="1.2"/>
+<g stroke="#C9D2C6" stroke-width="1.2"><line x1="10" y1="10" x2="75" y2="20"/><line x1="450" y1="10" x2="385" y2="20"/><line x1="450" y1="340" x2="385" y2="330"/><line x1="10" y1="340" x2="75" y2="330"/></g>
+<rect x="75" y="20" width="310" height="310" fill="#6B7570"/>
+<circle cx="230" cy="175" r="62" fill="#1F2A24"/>
+<g transform="translate(230,175) scale(1.08)">
+<g transform="rotate(10) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(55) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(100) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#D9B32E" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<circle cx="45.9" cy="2.7" r="5.2" fill="#8A5A2B"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#8A5A2B" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(145) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(190) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(235) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#D9B32E" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<circle cx="37" cy="4.1" r="5.9" fill="#8A5A2B"/>
+<circle cx="53.3" cy="-3.4" r="4.4" fill="#8A5A2B"/>
+<path d="M63.6,-4.1 C68.8,-2 71.8,-0.7 74,0 C70.3,1.7 66.6,3.4 62.9,4.1 Z" fill="#8A5A2B"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#8A5A2B" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(280) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(325) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<ellipse cx="42.9" cy="-1.7" rx="14.8" ry="7.5" fill="#D9B32E"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(38) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="4.2" y1="0" x2="46.8" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(98) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<ellipse cx="30.2" cy="-1.3" rx="10.4" ry="5.7" fill="#D9B32E"/>
+<line x1="4.2" y1="0" x2="46.8" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(158) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="4.2" y1="0" x2="46.8" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(218) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="4.2" y1="0" x2="46.8" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(278) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="4.2" y1="0" x2="46.8" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(338) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="4.2" y1="0" x2="46.8" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(60) translate(3,0)"><path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#FFFFFF" fill-opacity="0.28"/>
+<line x1="2.1" y1="0" x2="23.4" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(150) translate(3,0)"><path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#FFFFFF" fill-opacity="0.28"/>
+<line x1="2.1" y1="0" x2="23.4" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(240) translate(3,0)"><path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#FFFFFF" fill-opacity="0.28"/>
+<line x1="2.1" y1="0" x2="23.4" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(330) translate(3,0)"><path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#FFFFFF" fill-opacity="0.28"/>
+<line x1="2.1" y1="0" x2="23.4" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<ellipse cx="-27.8" cy="11.2" rx="6" ry="3.5" fill="#FFFFFF" transform="rotate(-20 -27.8 11.2)"/>
+</g>
+<rect x="84" y="28" width="62" height="42" fill="#1F2A24"/>
+<rect x="85.2" y="29.2" width="7.9" height="8.1" fill="#8A5A2B"/>
+<rect x="95.5" y="29.2" width="7.9" height="8.1" fill="#D9B32E"/>
+<rect x="105.9" y="29.2" width="7.9" height="8.1" fill="#2B5D8C"/>
+<rect x="116.2" y="29.2" width="7.9" height="8.1" fill="#5B9A3C"/>
+<rect x="126.5" y="29.2" width="7.9" height="8.1" fill="#6B7570"/>
+<rect x="136.9" y="29.2" width="7.9" height="8.1" fill="#C9D2C6"/>
+<rect x="85.2" y="39.7" width="7.9" height="8.1" fill="#C0392B"/>
+<rect x="95.5" y="39.7" width="7.9" height="8.1" fill="#2F6B3A"/>
+<rect x="105.9" y="39.7" width="7.9" height="8.1" fill="#D9B32E"/>
+<rect x="116.2" y="39.7" width="7.9" height="8.1" fill="#2B5D8C"/>
+<rect x="126.5" y="39.7" width="7.9" height="8.1" fill="#8A5A2B"/>
+<rect x="136.9" y="39.7" width="7.9" height="8.1" fill="#5B9A3C"/>
+<rect x="85.2" y="50.2" width="7.9" height="8.1" fill="#2B5D8C"/>
+<rect x="95.5" y="50.2" width="7.9" height="8.1" fill="#5B9A3C"/>
+<rect x="105.9" y="50.2" width="7.9" height="8.1" fill="#C0392B"/>
+<rect x="116.2" y="50.2" width="7.9" height="8.1" fill="#D9B32E"/>
+<rect x="126.5" y="50.2" width="7.9" height="8.1" fill="#C0392B"/>
+<rect x="136.9" y="50.2" width="7.9" height="8.1" fill="#2B5D8C"/>
+<rect x="85.2" y="60.7" width="7.9" height="8.1" fill="#FFFFFF"/>
+<rect x="95.5" y="60.7" width="7.9" height="8.1" fill="#F3F6F1"/>
+<rect x="105.9" y="60.7" width="7.9" height="8.1" fill="#C9D2C6"/>
+<rect x="116.2" y="60.7" width="7.9" height="8.1" fill="#6B7570"/>
+<rect x="126.5" y="60.7" width="7.9" height="8.1" fill="#6B7570" fill-opacity="0.55"/>
+<rect x="136.9" y="60.7" width="7.9" height="8.1" fill="#1F2A24"/>
+<rect x="322" y="284" width="56" height="38" fill="#FFFFFF" stroke="#1F2A24" stroke-width="1"/>
+<text x="350" y="309" text-anchor="middle" font-size="16" font-weight="700" fill="#1F2A24">017</text>
+<circle cx="230" cy="175" r="118" fill="none" stroke="#2B5D8C" stroke-width="2.5" stroke-dasharray="8 5"/>
+<g stroke="#2B5D8C" stroke-width="2"><line x1="222" y1="175" x2="238" y2="175"/><line x1="230" y1="167" x2="230" y2="183"/></g>
+<g fill="#2B5D8C"><circle cx="84" cy="28" r="8"/><circle cx="146" cy="28" r="8"/><circle cx="146" cy="70" r="8"/><circle cx="84" cy="70" r="8"/></g>
+<g fill="#FFFFFF" font-size="11" font-weight="700" text-anchor="middle"><text x="84" y="32">1</text><text x="146" y="32">2</text><text x="146" y="74">3</text><text x="84" y="74">4</text></g>
+</g>
+<!-- annotations -->
+<g stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round">
+<polyline points="454,44 300,44 175,30"/>
+<polyline points="454,104 320,104 266,110"/>
+<polyline points="454,164 400,164 342,155"/>
+<polyline points="454,260 368,258"/>
+</g>
+<g stroke="#1F2A24" stroke-width="1.3" fill="none" stroke-linejoin="round">
+<polyline points="454,44 300,44 175,30"/>
+<polyline points="454,104 320,104 266,110"/>
+<polyline points="454,164 400,164 342,155"/>
+<polyline points="454,260 368,258"/>
+</g>
+<g fill="#FFFFFF" stroke="#1F2A24" stroke-width="1.3"><circle cx="175" cy="30" r="3"/><circle cx="264.5" cy="110.5" r="3"/><circle cx="342" cy="155" r="3"/><circle cx="368" cy="258" r="3"/></g>
+<g font-size="14" fill="#1F2A24">
+<text x="460" y="40" font-weight="700">Ecken 1–4 der Farbkarte</text>
+<text x="460" y="58">einmal anklicken (Kapitel 8.2)</text>
+<text x="460" y="100" font-weight="700">Abdeckscheibe, matt schwarz</text>
+<text x="460" y="118">verdeckt Erde und Topfrand</text>
+<text x="460" y="160" font-weight="700" fill="#2B5D8C">Auswertekreis</text>
+<text x="460" y="178">Mitte und Radius einmal einstellen;</text>
+<text x="460" y="196">nur Pixel im Kreis werden gezählt</text>
+<text x="460" y="256" font-weight="700">Etikett-Karte mit Topfnummer</text>
+<text x="460" y="274">liegt außerhalb des Kreises</text>
+</g>
+</svg>
+<figcaption>Abb. 7.3: Was die Kamera sieht (schematisch). Farbkarte und Etikett liegen in den Bodenecken, der Auswertekreis (blau gestrichelt) umschließt nur die Pflanze.</figcaption>
+</figure>
+
+<h2>7.5 Pflanze und Rest trennen</h2>
+<p>Im Kreis liegen noch die schwarze Abdeckscheibe, dunkle Lücken zwischen den Blättern und Glanzpunkte. Das Programm entscheidet deshalb für jedes Pixel: Pflanze oder nicht? Das Ergebnis heißt <strong>Maske</strong> – eine Schablone mit „ja“ oder „nein“ für jedes Pixel. Ein Pixel ist Pflanze, wenn es <em>alle drei</em> ersten Regeln aus Tabelle 7.1 erfüllt.</p>
+<div class="box info"><p class="box-title">Hintergrund</p><p>Erde hat farblich denselben Ton wie abgestorbenes Blatt. Keine Regel kann beides sicher trennen. Deshalb liegt die matt schwarze Abdeckscheibe auf dem Topf: Sie ist so dunkel (V unter 0,15), dass sie sicher aus der Maske fällt.</p></div>
+<p class="table-caption">Tabelle 7.1: Regeln der Pflanzen-Maske (Startwerte)</p>
+<table class="t">
+<thead><tr><th>Regel</th><th>Startwert</th><th>Was dadurch wegfällt</th></tr></thead>
+<tbody>
+<tr><td>Farbton H</td><td>zwischen 15° und 170°</td><td>rote, blaue und violette Flächen</td></tr>
+<tr><td>Sättigung S</td><td>mindestens 0,20</td><td>Weißes und Graues: Wände, blasse Reflexe</td></tr>
+<tr><td>Helligkeit V</td><td>mindestens 0,15</td><td>Abdeckscheibe, Boden, tiefe Schatten</td></tr>
+<tr><td>Glanzlicht</td><td>V über 0,90 und S unter 0,15</td><td>weiße Glanzpunkte auf Blättern: zählen weder als Pflanze noch als Befall</td></tr>
+<tr><td>Einzelflecken</td><td>sehr kleine Flecken entfernen (Größe legt Claude fest)</td><td>einzelne Störpixel, Staubkörner</td></tr>
+</tbody>
+</table>
+
+<h2>7.6 Die Farbklassen grün, gelb, braun</h2>
+<p>Jedes Pflanzenpixel kommt nach seinem Farbton in genau eine Klasse (Tabelle 7.2). Die Grenzen sind Startwerte und werden im Pilot eingestellt.</p>
+<p class="table-caption">Tabelle 7.2: Farbklassen (Startwerte)</p>
+<table class="t">
+<thead><tr><th>Klasse</th><th>Farbton H</th><th>Bedeutung</th><th>Farbe im Kontrollbild</th></tr></thead>
+<tbody>
+<tr><td><strong>grün</strong></td><td>80° bis 170°</td><td>gesundes Blatt (Basilikum meist 90–110°)</td><td>grün</td></tr>
+<tr><td><strong>gelb</strong></td><td>45° bis unter 80°</td><td>Aufhellung, Vergilbung (Chlorose)</td><td>gelb</td></tr>
+<tr><td><strong>braun</strong></td><td>15° bis unter 45°</td><td>abgestorbenes Gewebe (Nekrose)</td><td>rot markiert</td></tr>
+</tbody>
+</table>
+<p>Tabelle 7.3 zeigt, wie das Programm einige typische Pixel einordnet. Achte auf die zweite Zeile: Ein hellgrüner junger Trieb liegt knapp unter 80° und zählt als gelb.</p>
+<p class="table-caption">Tabelle 7.3: So werden Beispiel-Pixel eingeteilt</p>
+<table class="t">
+<thead><tr><th>Beispiel</th><th>R, G, B</th><th>H</th><th>S</th><th>V</th><th>Ergebnis</th></tr></thead>
+<tbody>
+<tr><td>gesundes Blatt</td><td>91, 154, 60</td><td>100°</td><td>0,61</td><td>0,60</td><td>Pflanze, grün</td></tr>
+<tr><td>junger Trieb, hellgrün</td><td>155, 190, 70</td><td>78°</td><td>0,63</td><td>0,75</td><td>Pflanze, <strong>gelb</strong> (Stolperfalle)</td></tr>
+<tr><td>vergilbte Stelle</td><td>217, 179, 46</td><td>47°</td><td>0,79</td><td>0,85</td><td>Pflanze, gelb</td></tr>
+<tr><td>abgestorbene Stelle</td><td>138, 90, 43</td><td>30°</td><td>0,69</td><td>0,54</td><td>Pflanze, braun</td></tr>
+<tr><td>Abdeckscheibe</td><td>28, 28, 30</td><td>–</td><td>0,07</td><td>0,12</td><td>keine Pflanze (zu dunkel)</td></tr>
+<tr><td>Glanzpunkt</td><td>242, 245, 238</td><td>–</td><td>0,03</td><td>0,96</td><td>Glanzlicht, ignoriert</td></tr>
+</tbody>
+</table>
+<p>„–“ heißt: Bei fast grauen Pixeln sagt der Farbton nichts aus. Sie fallen schon wegen zu geringer Sättigung oder Helligkeit heraus.</p>
+<p class="table-caption">Tabelle 7.4: Stolperfallen bei den Farbklassen</p>
+<table class="t">
+<thead><tr><th>Stolperfalle</th><th>Was passiert</th><th>Was hilft</th></tr></thead>
+<tbody>
+<tr><td>blasse junge Triebspitzen</td><td>Farbton knapp unter 80° → zählen als gelb, Befall&nbsp;% zu hoch</td><td>Kontrollbilder gesunder Töpfe prüfen; Grenze gelb/grün etwas senken</td></tr>
+<tr><td>Schatten zwischen Blättern</td><td>sehr dunkel, Farbton unsicher → wirkt wie braun</td><td>diffuses Licht; Mindest-Helligkeit V sortiert die dunkelsten Pixel aus</td></tr>
+<tr><td>Glanzlichter</td><td>weiße Punkte fehlen in der Maske → Fläche etwas zu klein</td><td>trocken fotografieren, Diffusor vor den LEDs</td></tr>
+<tr><td>sichtbare Erde, Topfrand</td><td>gleicher Farbton wie braun → zählt als Befall</td><td>Abdeckscheibe immer auflegen</td></tr>
+<tr><td>vertrocknetes, fahles Gewebe</td><td>sehr blass (S unter 0,20) → fällt aus der Maske, braun zu niedrig</td><td>im Kontrollbild prüfen; notfalls Mindest-Sättigung senken</td></tr>
+<tr><td>Vergilbung aus anderem Grund</td><td>Nährstoffmangel oder alte Blätter zählen als gelb</td><td>Ursache kennen; Ergebnis heißt „sichtbare Symptome“</td></tr>
+</tbody>
+</table>
+
+<h2>7.7 Die Kennzahlen</h2>
+<p>Zum Schluss zählt das Programm die Pixel jeder Klasse und berechnet daraus die Werte in Tabelle 7.5 – mit denselben Spaltennamen wie später in der Excel-Datei.</p>
+<p class="table-caption">Tabelle 7.5: Kennzahlen je Foto</p>
+<table class="t">
+<thead><tr><th>Kennzahl</th><th>Excel-Spalte</th><th>Bedeutung</th></tr></thead>
+<tbody>
+<tr><td>Pflanzenfläche</td><td><code>flaeche_px</code></td><td>Anzahl Pflanzenpixel (grün + gelb + braun). Maß für Größe und Wachstum.</td></tr>
+<tr><td>Fläche in cm²</td><td><code>flaeche_cm2_ca</code></td><td>Pflanzenpixel geteilt durch „Pixel je cm²“ aus der Maßstab-Karte – nur ungefähr</td></tr>
+<tr><td>Anteile</td><td><code>gruen_pct</code>, <code>gelb_pct</code>, <code>braun_pct</code></td><td>Anteil jeder Klasse an den Pflanzenpixeln in %; zusammen 100&nbsp;%</td></tr>
+<tr><td>Befall&nbsp;%</td><td><code>befall_pct</code></td><td>gelb % + braun % – der Hauptwert</td></tr>
+<tr><td>Grünwert</td><td><code>gruenwert</code></td><td>mittlerer Farbton aller Pflanzenpixel in Grad; sinkt, wenn die Pflanze insgesamt gelblicher wird</td></tr>
+<tr><td>Note</td><td><code>note_app</code></td><td>aus Befall&nbsp;% über die Umrechnungstabelle (Abschnitt 7.8)</td></tr>
+<tr><td>Qualität</td><td><code>qualitaet</code></td><td>„ok“ oder Warnung mit Grund (Abschnitt 7.9)</td></tr>
+</tbody>
+</table>
+<div class="box info"><p class="box-title">Die wichtigste Formel</p><p><strong>Befall&nbsp;% = (gelbe Pixel + braune Pixel) ÷ Pflanzenpixel × 100</strong></p><p>Beispiel: 375 000 Pflanzenpixel, davon 330 000 grün, 30 000 gelb, 15 000 braun. Grün 88&nbsp;%, gelb 8&nbsp;%, braun 4&nbsp;%. Befall&nbsp;% = (30 000 + 15 000) ÷ 375 000 × 100 = <strong>12&nbsp;%</strong>.</p></div>
+<h3>Fläche in cm² über die Maßstab-Karte</h3>
+<p>Einmal fotografierst du eine Karte mit genau 10 × 10 cm (100 cm²), die flach auf einer Unterlage in typischer Blatthöhe mittig in der Box liegt (wie das geht: Kapitel 8.2, Schritt 5). Druckst du das Quadrat selbst aus, miss es mit dem Lineal nach – Drucker verkleinern manchmal. Bedeckt die Karte z. B. 125 000 Pixel, sind das 1250 Pixel je cm². Die Pflanze aus dem Beispiel hat dann ca. 375 000 ÷ 1250 = <strong>300 cm²</strong> (Beispielzahlen).</p>
+<p>Das „ca.“ ist ernst gemeint: Blätter, die höher liegen als die Karte, sind näher an der Kamera und wirken größer; tiefere wirken kleiner. Für Vergleiche (Satz A gegen Satz B, Wachstum über die Zeit) reicht das, solange immer gleich fotografiert wird.</p>
+
+<h2>7.8 Vom Prozentwert zur Note</h2>
+<p>Befall&nbsp;% ist ein stufenloser Wert. Eure Bonitur arbeitet mit Noten. Eine <strong>Umrechnungstabelle</strong> übersetzt das eine in das andere. Tabelle 7.6 zeigt ein Beispiel für die vorgeschlagene Skala 0–4 (Kapitel 3). Habt ihr eine eigene Skala, hat die Tabelle so viele Zeilen wie eure Skala Noten.</p>
+<p class="table-caption">Tabelle 7.6: Umrechnungstabelle – Beispiel mit Startwerten, wird im Pilot festgelegt</p>
+<table class="t">
+<thead><tr><th>Note</th><th>Bedeutung in der Skala (Vorschlag)</th><th>App-Befall&nbsp;% (Startwert)</th></tr></thead>
+<tbody>
+<tr><td><strong>0</strong></td><td>keine sichtbaren Symptome</td><td>unter 2&nbsp;%</td></tr>
+<tr><td><strong>1</strong></td><td>bis 10&nbsp;% der Blattfläche befallen</td><td>2 bis 10&nbsp;%</td></tr>
+<tr><td><strong>2</strong></td><td>über 10 bis 25&nbsp;%</td><td>über 10 bis 25&nbsp;%</td></tr>
+<tr><td><strong>3</strong></td><td>über 25 bis 50&nbsp;%</td><td>über 25 bis 50&nbsp;%</td></tr>
+<tr><td><strong>4</strong></td><td>über 50&nbsp;% oder starke Nekrosen</td><td>über 50&nbsp;%</td></tr>
+</tbody>
+</table>
+<p>Warum beginnt Note 1 erst bei 2&nbsp;%? Auch eine gesunde Pflanze hat ein paar gelbliche Pixel: Triebspitzen, alte Blätter, Blattränder. Dieses Grundrauschen soll nicht als Befall zählen. Das Beispiel aus 7.7 (12&nbsp;%) ergibt Note 2.</p>
+<div class="box warn"><p class="box-title">Achtung</p><p>Die Prozentzahlen der App und die Schätzungen eurer Leute müssen nicht zusammenpassen. Menschen schätzen kleine Befallsanteile oft zu hoch ein (Bock et al. 2020, Anhang B). Es kann also sein, dass im Pilot schon 6&nbsp;% App-Befall der Note 2 eurer Leute entspricht. Das ist in Ordnung: Die <em>Note</em> soll übereinstimmen, nicht die Prozentzahl. Deshalb legst du die Grenzen erst mit den Pilot-Daten fest (Kapitel 8.6).</p></div>
+
+<h2>7.9 Kontrollbild und Qualitätschecks</h2>
+<p>Zu jedem Foto erzeugt das Programm ein <strong>Kontrollbild</strong>: das Foto, in dem jedes Pflanzenpixel in der Farbe seiner Klasse eingefärbt ist (Abb. 7.4). Braun wird rot markiert, damit es auffällt. Im Kontrollbild siehst du in zwei Sekunden, ob das Programm vernünftig gezählt hat – ohne jede Zahl.</p>
+<figure>
+<svg viewBox="0 0 800 318" role="img" aria-label="Links das farbkorrigierte Foto einer Basilikumpflanze von oben, in der Mitte das Kontrollbild mit grün, gelb und rot eingefärbten Klassen, rechts Legende und Ergebnis" font-family="Source Sans 3, sans-serif">
+<defs>
+<marker id="k7-arrow-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2F6B3A"/></marker>
+<clipPath id="k7-clipA"><rect x="10" y="35" width="250" height="270"/></clipPath>
+<clipPath id="k7-clipB"><rect x="300" y="35" width="250" height="270"/></clipPath>
+</defs>
+<text x="135" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2A24">Foto (farbkorrigiert)</text>
+<text x="425" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2A24">Kontrollbild</text>
+<g clip-path="url(#k7-clipA)">
+<rect x="10" y="35" width="250" height="270" fill="#6B7570"/>
+<circle cx="135" cy="170" r="62" fill="#1F2A24"/>
+<g transform="translate(135,170) scale(1.08)">
+<g transform="rotate(10) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(55) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(100) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#D9B32E" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<circle cx="45.9" cy="2.7" r="5.2" fill="#8A5A2B"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#8A5A2B" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(145) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(190) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(235) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#D9B32E" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<circle cx="37" cy="4.1" r="5.9" fill="#8A5A2B"/>
+<circle cx="53.3" cy="-3.4" r="4.4" fill="#8A5A2B"/>
+<path d="M63.6,-4.1 C68.8,-2 71.8,-0.7 74,0 C70.3,1.7 66.6,3.4 62.9,4.1 Z" fill="#8A5A2B"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#8A5A2B" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(280) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(325) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<ellipse cx="42.9" cy="-1.7" rx="14.8" ry="7.5" fill="#D9B32E"/>
+<line x1="5.9" y1="0" x2="66.6" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(38) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="4.2" y1="0" x2="46.8" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(98) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#2F6B3A" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<ellipse cx="30.2" cy="-1.3" rx="10.4" ry="5.7" fill="#D9B32E"/>
+<line x1="4.2" y1="0" x2="46.8" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(158) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="4.2" y1="0" x2="46.8" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(218) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="4.2" y1="0" x2="46.8" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(278) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="4.2" y1="0" x2="46.8" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(338) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<line x1="4.2" y1="0" x2="46.8" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(60) translate(3,0)"><path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#FFFFFF" fill-opacity="0.28"/>
+<line x1="2.1" y1="0" x2="23.4" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(150) translate(3,0)"><path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#FFFFFF" fill-opacity="0.28"/>
+<line x1="2.1" y1="0" x2="23.4" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(240) translate(3,0)"><path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#FFFFFF" fill-opacity="0.28"/>
+<line x1="2.1" y1="0" x2="23.4" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<g transform="rotate(330) translate(3,0)"><path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#FFFFFF" fill-opacity="0.28"/>
+<line x1="2.1" y1="0" x2="23.4" y2="0" stroke="#1F2A24" stroke-width="0.9" stroke-opacity="0.45"/>
+</g>
+<ellipse cx="-27.8" cy="11.2" rx="6" ry="3.5" fill="#FFFFFF" transform="rotate(-20 -27.8 11.2)"/>
+</g>
+<circle cx="135" cy="170" r="118" fill="none" stroke="#2B5D8C" stroke-width="2" stroke-dasharray="7 5"/>
+</g>
+<rect x="10" y="35" width="250" height="270" fill="none" stroke="#6B7570"/>
+<g clip-path="url(#k7-clipB)">
+<rect x="300" y="35" width="250" height="270" fill="#C9D2C6"/>
+<circle cx="425" cy="170" r="118" fill="#FFFFFF" stroke="#2B5D8C" stroke-width="2" stroke-dasharray="7 5"/>
+<g transform="translate(425,170) scale(1.08)">
+<g transform="rotate(10) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<g transform="rotate(55) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<g transform="rotate(100) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#D9B32E" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<circle cx="45.9" cy="2.7" r="5.2" fill="#C0392B"/>
+</g>
+<g transform="rotate(145) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<g transform="rotate(190) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<g transform="rotate(235) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#D9B32E" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<circle cx="37" cy="4.1" r="5.9" fill="#C0392B"/>
+<circle cx="53.3" cy="-3.4" r="4.4" fill="#C0392B"/>
+<path d="M63.6,-4.1 C68.8,-2 71.8,-0.7 74,0 C70.3,1.7 66.6,3.4 62.9,4.1 Z" fill="#C0392B"/>
+</g>
+<g transform="rotate(280) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<g transform="rotate(325) translate(16,0)"><path d="M0,0 C18.5,-20.4 53.3,-18.7 74,0 C53.3,18.7 18.5,20.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<ellipse cx="42.9" cy="-1.7" rx="14.8" ry="7.5" fill="#D9B32E"/>
+</g>
+<g transform="rotate(38) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<g transform="rotate(98) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+<ellipse cx="30.2" cy="-1.3" rx="10.4" ry="5.7" fill="#D9B32E"/>
+</g>
+<g transform="rotate(158) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<g transform="rotate(218) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<g transform="rotate(278) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<g transform="rotate(338) translate(7,0)"><path d="M0,0 C13,-15.6 37.4,-14.3 52,0 C37.4,14.3 13,15.6 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<g transform="rotate(60) translate(3,0)"><path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<g transform="rotate(150) translate(3,0)"><path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<g transform="rotate(240) translate(3,0)"><path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<g transform="rotate(330) translate(3,0)"><path d="M0,0 C6.5,-8.4 18.7,-7.7 26,0 C18.7,7.7 6.5,8.4 0,0 Z" fill="#5B9A3C" stroke="#1F2A24" stroke-width="0.6" stroke-opacity="0.5"/>
+</g>
+<ellipse cx="-27.8" cy="11.2" rx="6" ry="3.5" fill="#FFFFFF" stroke="#6B7570" stroke-width="0.8" stroke-dasharray="2 1.5" transform="rotate(-20 -27.8 11.2)"/>
+</g>
+</g>
+<rect x="300" y="35" width="250" height="270" fill="none" stroke="#6B7570"/>
+<line x1="266" y1="170" x2="294" y2="170" stroke="#2F6B3A" stroke-width="2.5" marker-end="url(#k7-arrow-b)"/>
+<!-- legend -->
+<g font-size="14" fill="#1F2A24">
+<text x="574" y="50" font-weight="700">Legende</text>
+<rect x="574" y="61" width="16" height="16" fill="#5B9A3C"/><text x="598" y="74">grün: gesund</text>
+<rect x="574" y="85" width="16" height="16" fill="#D9B32E"/><text x="598" y="98">gelb: aufgehellt</text>
+<rect x="574" y="109" width="16" height="16" fill="#C0392B"/><text x="598" y="122">braun (rot markiert)</text>
+<rect x="574" y="133" width="16" height="16" fill="#FFFFFF" stroke="#6B7570" stroke-dasharray="2 1.5"/><text x="598" y="146">Glanzlicht (ignoriert)</text>
+<text x="574" y="184" font-weight="700">Ergebnis</text>
+<text x="574" y="206" font-weight="700" fill="#2F6B3A">Befall 12 % → Note 2</text>
+<text x="574" y="227">grün 88 · gelb 8 · braun 4 %</text>
+<text x="574" y="248">Fläche ca. 300 cm²</text>
+<text x="574" y="269">Qualität: ok</text>
+<text x="574" y="290" fill="#6B7570">Algorithmus A-1.0</text>
+</g>
+</svg>
+<figcaption>Abb. 7.4: Foto und Kontrollbild (schematisch). Im Kontrollbild ist nur gefärbt, was das Programm als Pflanze zählt; alles außerhalb des Kreises ist grau.</figcaption>
+</figure>
+<p>Außerdem prüft das Programm bei jedem Foto vier Dinge (Tabelle 7.7). Schlägt eine Prüfung fehl, steht in der Spalte <code>qualitaet</code> eine Warnung mit Grund. Ein Ergebnis mit Warnung nie ungeprüft verwenden.</p>
+<p class="table-caption">Tabelle 7.7: Qualitätschecks</p>
+<table class="t">
+<thead><tr><th>Prüfung</th><th>Was geprüft wird</th><th>Häufige Ursache einer Warnung</th></tr></thead>
+<tbody>
+<tr><td>Farbkarte</td><td>Karte gefunden, Restabweichung ΔE klein</td><td>Karte verrutscht, verdeckt oder schmutzig; Handy nicht richtig im Halter</td></tr>
+<tr><td>Belichtung</td><td>Foto nicht zu dunkel und nicht zu hell (z. B. an den grauen Feldern der Karte)</td><td>LED aus oder Netzteil zu schwach; Kamera-Einstellung verstellt</td></tr>
+<tr><td>Pflanze gefunden</td><td>Pflanzenfläche über einem Mindestwert</td><td>kein Topf in der Box; Maske falsch eingestellt</td></tr>
+<tr><td>Topf-ID</td><td>QR-Code auf der Etikett-Karte gelesen (erst mit QR-Etiketten; im Pilot ordnet die Werkstatt über <code>foto_datei</code> zu)</td><td>Karte falsch eingesteckt oder verdeckt</td></tr>
+</tbody>
+</table>
+
+<h2>7.10 Die Stellschrauben</h2>
+<p>Tabelle 7.8 fasst zusammen, was du in der Werkstatt (Kapitel 8.6) und später in den App-Einstellungen verstellen kannst und was dann passiert. Die Glanzlicht-Regel bleibt in der Regel, wie sie ist.</p>
+<p class="table-caption">Tabelle 7.8: Stellschrauben mit Startwerten</p>
+<table class="t">
+<thead><tr><th>Stellschraube</th><th>Startwert</th><th>höher →</th><th>niedriger →</th></tr></thead>
+<tbody>
+<tr><td>Grenze gelb/grün</td><td>80°</td><td>mehr Pixel gelb, Befall&nbsp;% steigt; junge Triebe werden gelb</td><td>weniger gelb, Befall&nbsp;% sinkt; beginnende Aufhellung wird übersehen</td></tr>
+<tr><td>Grenze braun/gelb</td><td>45°</td><td>mehr braun, weniger gelb; Befall&nbsp;% bleibt gleich</td><td>weniger braun, mehr gelb; Befall&nbsp;% bleibt gleich</td></tr>
+<tr><td>Farbton-Untergrenze Pflanze</td><td>15°</td><td>rotbraune Stellen fallen weg, braun sinkt</td><td>rötliche Störungen zählen als braun</td></tr>
+<tr><td>Farbton-Obergrenze Pflanze</td><td>170°</td><td>Bläuliches zählt als Pflanze</td><td>bläulich-grüne Schattenblätter fallen weg</td></tr>
+<tr><td>Mindest-Sättigung S</td><td>0,20</td><td>blasse Blattstellen fallen weg</td><td>Graues und Weißes zählt als Pflanze</td></tr>
+<tr><td>Mindest-Helligkeit V</td><td>0,15</td><td>dunkle Blattstellen fallen weg</td><td>Schatten und Abdeckscheibe zählen mit, oft als braun</td></tr>
+<tr><td>Notengrenzen</td><td>2/10/25/50&nbsp;%</td><td>App gibt eher niedrigere Noten</td><td>App gibt eher höhere Noten</td></tr>
+<tr><td>Radius Auswertekreis</td><td>einmal eingestellt</td><td>Karte oder Etikett geraten in den Kreis</td><td>Blattspitzen werden abgeschnitten</td></tr>
+<tr><td>Mindestgröße Einzelflecken</td><td>legt Claude fest</td><td>kleine echte Flecken fallen weg</td><td>Störpixel zählen mit</td></tr>
+<tr><td>Warngrenze ΔE</td><td>legt Claude fest</td><td>schlechte Korrektur fällt nicht auf</td><td>häufiger Fehlalarm</td></tr>
+</tbody>
+</table>
+
+<h2>7.11 Was die Methode nicht sieht</h2>
+<p>Das Programm zählt Farben auf der Blattoberseite, von oben gesehen. Daraus folgen feste Grenzen:</p>
+<ul>
+<li><strong>Blattunterseite:</strong> Den grau-violetten Sporenrasen sieht die Kamera nicht.</li>
+<li><strong>Untere Blätter:</strong> Laut Beratungsliteratur beginnt der Befall unten. Von oben verdeckte Blätter fehlen – die App erkennt Befall später als ein Mensch, der die Pflanze umdreht. Wie groß dieser Effekt bei euch ist, misst der Pilot („unsichtbarer Befall“, Kapitel 8.5).</li>
+<li><strong>Frühe Infektion</strong> ohne Farbänderung bleibt unsichtbar.</li>
+<li><strong>Ursache:</strong> Gelb kann auch von Nährstoffmangel, Staunässe, Lichtmangel oder alten Blättern kommen. Die App misst Vergilbung, nicht den Pilz.</li>
+<li><strong>Muster:</strong> Mehltau-Aufhellungen sind oft von Blattadern begrenzt. Das Programm zählt nur Farben und erkennt keine Formen.</li>
+<li><strong>Rote und violette Sorten</strong> passen nicht zu den Farbregeln.</li>
+<li><strong>Pflanzenhöhe</strong> misst ein Foto von oben nicht; die Fläche in cm² ist nur ungefähr.</li>
+</ul>
+<div class="box warn"><p class="box-title">Achtung</p><p>Das Ergebnis heißt deshalb immer <strong>„sichtbare Symptome (von oben)“</strong> und ist keine Mehltau-Diagnose. Eine regelmäßige Kontrolle der Blattunterseite bleibt Pflicht.</p></div>
+</section>
+
+<section class="chapter" id="kap-8">
+<p class="kicker">Etappe 4 · ca. 1 Woche</p>
+<h1>8 Pilot auswerten und entscheiden</h1>
+<p class="lead">Du wertest die Pilotfotos mit der Analyse-Werkstatt aus und vergleichst die App mit eurer Bonitur. Am Ende steht eine klare Entscheidung: Go, Nachbessern oder No-Go.</p>
+<table class="stage-meta">
+<tr><th>Ziel</th><td>Prüfen, ob die Farbauswertung von oben gut genug mit eurer Sicht-Bonitur übereinstimmt – und danach entscheiden.</td></tr>
+<tr><th>Dauer</th><td>ca. 1 Woche (grobe Schätzung); vorher die Claude-Sitzungen für B1 und B2</td></tr>
+<tr><th>Du</th><td>Werkstatt einrichten, Kontrollbilder prüfen, Regler einstellen, Zahlen lesen, entscheiden</td></tr>
+<tr><th>Claude</th><td>baut Analyse-Kern (B1) und Analyse-Werkstatt (B2), erklärt Ergebnisse, schreibt den Pilotbericht</td></tr>
+<tr><th>Du brauchst</th><td>alle Pilotfotos und die Bonitur-Excel aus Etappe 3 auf dem Firmen-PC · Wiederholungs- und Lichttest-Fotos · Maßstab-Karte 10 × 10 cm bzw. ihr Foto (8.2) · PC mit Chrome oder Edge · Projekttagebuch</td></tr>
+<tr><th>Ergebnis</th><td>Entscheidung mit Datum · eingestellte Werte · Pilotbericht in <code>docs/</code></td></tr>
+</table>
+
+<h2>8.1 Vorher: Claude baut Analyse-Kern und Werkstatt</h2>
+<p>Die Werkstatt gibt es noch nicht – Claude baut sie in zwei Bausteinen. Die Kopier-Prompts dafür stehen in <strong>Kapitel 9.7</strong>; wie eine Sitzung mit Claude abläuft (Zweig, Pull Request, übernehmen), erklären Kapitel 9.1 und 9.2. Starte, sobald die Referenzbilder mit <code>referenzbilder.xlsx</code> im Ordner <code>referenzbilder/</code> des Repositorys liegen (Ende Etappe 3, Kapitel 6.7).</p>
+<ol class="steps">
+<li><strong>B1 Analyse-Kern.</strong> <span class="who claude">Claude</span> programmiert alle Schritte aus Kapitel 7 mit den Startwerten und legt automatische Tests mit den Referenzbildern an. Außerdem entsteht die Datei <code>CLAUDE.md</code> mit den Projektregeln.</li>
+<li><strong>Kern prüfen.</strong> <span class="who du">Du</span> siehst dir im Pull Request die vier Beispiel-Kontrollbilder an (Ordner <code>docs/beispiele/</code>, Noten 0, 1, 2 und 4) und prüfst, ob bei den Tests ein grüner Haken steht. Sieht die Färbung grob plausibel aus (Kapitel 8.4)? Dann übernimmst du B1.</li>
+<li><strong>B2 Analyse-Werkstatt.</strong> <span class="who claude">Claude</span> baut die Webseite für den PC. Frag am Ende: „Wie öffne ich die Werkstatt auf meinem Firmen-PC?“ – je nach Stand des Hostings über einen Link oder als heruntergeladene Datei.</li>
+<li><strong>Probelauf.</strong> <span class="who du">Du</span> wertest zuerst nur 5–10 Fotos aus. Läuft alles, kommen alle Fotos dran.</li>
+</ol>
+<div class="box info"><p class="box-title">Hintergrund</p><p>Die Werkstatt läuft komplett im Browser. Fotos und Excel werden auf deinem PC ausgewertet und nirgendwohin hochgeladen. Deshalb musst du außer den Referenzbildern keine Pilotfotos ins Repository legen.</p></div>
+
+<h2>8.2 Werkstatt öffnen und einrichten</h2>
+<p>Die Abschnitte 8.2 bis 8.6 beschreiben, wie die Werkstatt arbeiten <em>soll</em>. Claude baut sie nach dieser Beschreibung; Knöpfe können anders heißen. Fehlt etwas, bitte Claude, es nachzurüsten. Das Einrichten machst du einmal: Box und Handy stehen fest, deshalb gelten die Einstellungen für alle Fotos (vergleiche Abb.&nbsp;7.3).</p>
+<ol class="steps">
+<li><strong>Werkstatt öffnen.</strong> In Chrome oder Edge auf dem Firmen-PC, so wie Claude es dir am Ende von B2 erklärt hat (Link oder Datei).</li>
+<li><strong>Einrichtungsfoto laden.</strong> Nimm ein typisches Pilotfoto, auf dem die Farbkarte frei und gut sichtbar ist.</li>
+<li><strong>Farbkarte: 4 Ecken anklicken.</strong> In der Reihenfolge, die die Werkstatt anzeigt. Danach legt sie 24 kleine Messquadrate über die Karte. Prüfe: Jedes Quadrat liegt mitten in seinem Farbfeld, keines am Rand. Wenn nicht: Ecken neu setzen.</li>
+<li><strong>Topfkreis setzen.</strong> Auf die Mitte der Abdeckscheibe klicken, dann den Radius ziehen. Prüfe den Kreis mit dem Foto der <em>größten</em> Pflanze aus dem Pilot: Alle Blattspitzen innen, Farbkarte und Etikett außen.</li>
+<li><strong>Maßstab-Foto machen (nur falls es noch fehlt).</strong> Ein Quadrat von 10 × 10 cm auf festen Karton drucken oder kleben und mit dem Lineal nachmessen. An einer typischen Pilotpflanze mit dem Zollstock messen, wie hoch über dem Boxboden die meisten von oben sichtbaren Blätter liegen. Eine Unterlage in dieser Höhe bauen (z. B. Kiste oder umgedrehter Topf auf Büchern), die Karte flach und mittig unter der Kamera darauflegen, Klappe zu und mit dem Box-Handy wie gewohnt auslösen. Höhe und Dateiname ins Projekttagebuch.</li>
+<li><strong>Maßstab setzen.</strong> Das Foto der Maßstab-Karte in der Werkstatt laden (Abschnitt 7.7) und ihre 4 Ecken anklicken. Die Werkstatt rechnet daraus „Pixel je cm²“.</li>
+<li><strong>Einstellungen sichern.</strong> Als Datei auf dem Firmen-PC speichern, z. B. im Ordner <code>Bonitur/Pilot/auswertung/</code>, und den Namen ins Projekttagebuch schreiben. Dieselben Werte übernimmt später die Handy-App.</li>
+</ol>
+<div class="box tip"><p class="box-title">Tipp</p><p>Wurde das Handy während des Pilots aus dem Halter genommen oder die Box bewegt, kann sich die Kartenposition leicht verschoben haben. Prüfe die Messquadrate an einem Foto vom Anfang und einem vom Ende des Pilots. Passen sie nicht, braucht die Werkstatt für beide Zeiträume eigene Einstellungen – sag Claude Bescheid.</p></div>
+
+<h2>8.3 Fotos und Excel laden, Fotos den Töpfen zuordnen</h2>
+<ol class="steps">
+<li><strong>Kopie anlegen.</strong> Arbeite mit einer Kopie der Bonitur-Excel <code>pilot_bonitur.xlsx</code> (Kapitel 6.3). Das Original bleibt unverändert.</li>
+<li><strong>Ordner und Excel auswählen.</strong> In der Werkstatt den Ordner <code>Bonitur/Pilot/fotos/</code> mit allen Tagesordnern darin und die Excel-Kopie auswählen.</li>
+<li><strong>Zuordnung prüfen.</strong> Die Werkstatt verbindet Foto und Topf über die Spalte <code>foto_datei</code>. Sie zeigt an: wie viele Fotos, wie viele Excel-Zeilen, wie viele zugeordnet – und listet Fotos ohne Zeile, Zeilen ohne Foto und doppelte Einträge.</li>
+<li><strong>Fehler beheben.</strong> Meist ist es ein Tippfehler im Dateinamen oder ein vergessenes Foto. Fotos ohne Zeile sind oft missglückte Aufnahmen, die ihr wiederholt habt (Bemerkung „Foto wiederholt“) – die darfst du ignorieren. Korrigiere die Excel-Kopie, nicht die Fotos, und lade sie neu. Erst weiter, wenn jede Zeile ihr Foto hat – schon eine einzige Verwechslung verschlechtert die Übereinstimmung, ohne dass die App schuld ist.</li>
+<li><strong>Wiederholungs- und Lichttest-Fotos prüfen.</strong> Die Werkstatt liest sie aus den Excel-Blättern „Wiederholung“ und „Lichttest“ (Kapitel 6.5) und wertet sie getrennt aus. Prüfe, dass alle 25 Wiederholungsfotos (5 Töpfe × 5) und alle 6 Lichttest-Fotos zugeordnet sind.</li>
+<li><strong>Auswerten.</strong> Je nach PC dauert das einige Minuten. Danach gibt es eine Ergebnis-Excel (eine Zeile je Foto mit den Kennzahlen aus Tabelle 7.5 und euren Noten), die Kontrollbilder und die Übersicht mit Diagramm und Kennzahlen.</li>
+</ol>
+
+<h2>8.4 Kontrollbilder prüfen</h2>
+<p>Schau dir die Kontrollbilder an, <em>bevor</em> du auf die Zahlen schaust. Sie zeigen dir, ob das Programm überhaupt das Richtige zählt. Diese Reihenfolge spart Zeit:</p>
+<ol class="steps">
+<li><strong>Alle Fotos mit Warnung.</strong> Ursache suchen (Tabelle 7.7). Unbrauchbare Fotos markieren, nicht löschen.</li>
+<li><strong>20 zufällige Fotos</strong> quer über alle Noten.</li>
+<li><strong>Die größten Abweichungen.</strong> Töpfe, bei denen App-Note und Menschen-Note am weitesten auseinanderliegen. Die Werkstatt sollte danach sortieren können; sonst Claude bitten.</li>
+</ol>
+<p>Achte in jedem Kontrollbild auf diese Punkte:</p>
+<ul class="checklist">
+<li>Die ganze Pflanze ist eingefärbt, kein Blatt fehlt.</li>
+<li>Nichts außer der Pflanze ist eingefärbt: keine Abdeckscheibe, kein Boden, kein Topfrand.</li>
+<li>Junge Triebspitzen sind grün, nicht gelb.</li>
+<li>Kein Rot in Schatten zwischen den Blättern.</li>
+<li>Kein Rot, wo Erde durchschaut (Abdeckscheibe vergessen oder verrutscht?).</li>
+<li>Gelb und Rot sitzen dort, wo auch du Symptome siehst.</li>
+<li>Glanzlicht-Löcher sind selten und klein.</li>
+</ul>
+<p>Schreib Auffälliges in eine Liste: Topfnummer, was falsch ist, Screenshot. Wiederholt sich ein Fehler, ist es ein Fall für die Regler (8.6) oder für Claude.</p>
+
+<h2>8.5 Die Zahlen verstehen</h2>
+<h3>Das Streudiagramm</h3>
+<p>Im <strong>Streudiagramm</strong> ist jeder Topf ein Punkt: waagerecht die Note der Menschen, senkrecht der Befall&nbsp;%, den die App gemessen hat (Abb. 8.1). Gut ist: Die Punktwolken steigen von links nach rechts treppenartig an und überlappen wenig. Die gestrichelten Linien sind die Notengrenzen der Umrechnungstabelle. Liegen sie zwischen den Wolken, passt die Tabelle.</p>
+
+<h3>Rangkorrelation: stimmt die Reihenfolge?</h3>
+<p>Stell dir vor, du sortierst alle Töpfe einmal nach App-Befall&nbsp;% und einmal nach der Note der Menschen. Die <strong>Rangkorrelation</strong> (nach Spearman) misst, wie ähnlich die beiden Reihenfolgen sind: 1 heißt gleiche Reihenfolge, 0 heißt kein Zusammenhang. Sie braucht keine Umrechnungstabelle. Das macht sie zu einem guten Wegweiser:</p>
+<ul>
+<li>Rangkorrelation hoch, Kappa (siehe unten) niedrig: Die App misst das Richtige, nur die Notengrenzen sitzen falsch – leicht zu beheben (8.6).</li>
+<li>Beide niedrig: Die App misst nicht das, was eure Leute sehen – schwer zu beheben; zuerst Kontrollbilder prüfen.</li>
+</ul>
+
+<figure>
+<svg viewBox="0 0 800 430" role="img" aria-label="Beispiel mit erfundenen Daten: Streudiagramm App-Befall in Prozent gegen Note der Menschen 0 bis 4, mit Notengrenzen bei 2, 10, 25 und 50 Prozent" font-family="Source Sans 3, sans-serif">
+<!-- grid and thresholds -->
+<g stroke="#C9D2C6" stroke-width="1"><line x1="55" y1="302" x2="615" y2="302"/><line x1="55" y1="258" x2="615" y2="258"/><line x1="55" y1="214" x2="615" y2="214"/><line x1="55" y1="170" x2="615" y2="170"/><line x1="55" y1="126" x2="615" y2="126"/><line x1="55" y1="82" x2="615" y2="82"/><line x1="55" y1="38" x2="615" y2="38"/></g>
+<g stroke="#2B5D8C" stroke-width="1.6" stroke-dasharray="7 5"><line x1="55" y1="337.2" x2="615" y2="337.2"/><line x1="55" y1="302" x2="615" y2="302"/><line x1="55" y1="236" x2="615" y2="236"/><line x1="55" y1="126" x2="615" y2="126"/></g>
+<!-- axes -->
+<line x1="55" y1="346" x2="615" y2="346" stroke="#1F2A24" stroke-width="1.5"/>
+<line x1="55" y1="346" x2="55" y2="20" stroke="#1F2A24" stroke-width="1.5"/>
+<g font-size="13.5" fill="#1F2A24" text-anchor="end"><text x="48" y="350">0</text><text x="48" y="306">10</text><text x="48" y="262">20</text><text x="48" y="218">30</text><text x="48" y="174">40</text><text x="48" y="130">50</text><text x="48" y="86">60</text><text x="48" y="42">70</text></g>
+<text x="16" y="183" transform="rotate(-90 16 183)" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1F2A24">App-Befall %</text>
+<g font-size="15" font-weight="700" fill="#1F2A24" text-anchor="middle"><text x="110" y="368">0</text><text x="222" y="368">1</text><text x="334" y="368">2</text><text x="446" y="368">3</text><text x="558" y="368">4</text></g>
+<text x="334" y="391" text-anchor="middle" font-size="14.5" font-weight="700" fill="#1F2A24">Note der Menschen (hier: Person A)</text>
+<!-- label -->
+<rect x="68" y="26" width="244" height="30" rx="3" fill="#FFFFFF" stroke="#C0392B" stroke-width="1.8"/>
+<text x="190" y="46.5" text-anchor="middle" font-size="15" font-weight="700" fill="#C0392B">Beispiel mit erfundenen Daten</text>
+<!-- points -->
+<circle cx="116.6" cy="341" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="104.1" cy="339.7" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="89.6" cy="340.1" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="92" cy="340.7" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="93.4" cy="333.4" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="129.7" cy="337.3" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="131" cy="336.1" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="100.7" cy="336.8" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="101.6" cy="343" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="113.6" cy="335.9" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="112.1" cy="335.8" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="97.1" cy="344.4" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="101.8" cy="334.8" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="101.2" cy="335.5" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="98.7" cy="331.1" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="238.5" cy="304.9" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="243.1" cy="307.6" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="233.3" cy="323.3" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="201.7" cy="319.9" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="225.2" cy="294.1" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="230.6" cy="302" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="220.1" cy="302.5" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="220.9" cy="282.6" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="230.9" cy="317.1" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="236.2" cy="287.3" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="229.4" cy="318.9" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="207.4" cy="325" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="233.8" cy="335" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="217.2" cy="328.4" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="219.8" cy="309.7" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="236" cy="294.1" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="330.3" cy="258.7" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="354.1" cy="252.9" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="322.2" cy="305.3" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="337.9" cy="282.9" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="330.4" cy="308.7" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="353.9" cy="270.5" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="339.2" cy="255" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="351.6" cy="282.2" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="347.1" cy="229.4" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="316.6" cy="278.7" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="315" cy="284.2" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="327" cy="302.8" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="318.7" cy="321" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="313.1" cy="297.4" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="430.5" cy="166.5" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="440" cy="236.9" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="467.7" cy="207.4" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="427.8" cy="209.2" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="435.6" cy="249.2" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="425" cy="206" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="430.5" cy="167.2" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="447.2" cy="239.2" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="454.6" cy="138.5" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="431.3" cy="234.7" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="458.3" cy="181.1" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="459.7" cy="240.6" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="571.5" cy="44.2" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="546" cy="70" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="537.3" cy="133.3" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="547.4" cy="185.6" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="555.7" cy="61.6" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="578" cy="36.1" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="546" cy="159.9" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="563.5" cy="176.9" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="557.1" cy="53.2" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="539.7" cy="79.8" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<circle cx="210" cy="343.8" r="6" fill="#FFFFFF" stroke="#C0392B" stroke-width="2.4"/>
+<circle cx="236" cy="342.5" r="6" fill="#FFFFFF" stroke="#C0392B" stroke-width="2.4"/>
+<circle cx="338" cy="343.4" r="6" fill="#FFFFFF" stroke="#C0392B" stroke-width="2.4"/>
+<!-- zone labels -->
+<text x="624" y="24" font-size="14" font-weight="700" fill="#2B5D8C">App-Note (Startwerte)</text>
+<g font-size="14" fill="#2B5D8C"><text x="624" y="80">Note 4: über 50 %</text><text x="624" y="185">Note 3: 25–50 %</text><text x="624" y="273">Note 2: 10–25 %</text><text x="624" y="324">Note 1: 2–10 %</text><text x="624" y="350">Note 0: unter 2 %</text></g>
+<!-- legend -->
+<circle cx="66" cy="416" r="4.6" fill="#2F6B3A" fill-opacity="0.72"/>
+<text x="78" y="421" font-size="13.5" fill="#1F2A24">ein Topf</text>
+<circle cx="160" cy="416" r="6" fill="#FFFFFF" stroke="#C0392B" stroke-width="2.4"/>
+<text x="173" y="421" font-size="13.5" fill="#1F2A24">Sporenrasen unten, aber App-Befall unter 1 % („unsichtbarer Befall“)</text>
+</svg>
+<figcaption>Abb. 8.1: Streudiagramm – Beispiel mit erfundenen Daten. Jeder Punkt ist ein Topf. Die Wolken steigen an, überlappen aber zwischen benachbarten Noten; die roten Ringe sind Töpfe mit Sporenrasen unten, bei denen die App fast nichts sieht.</figcaption>
+</figure>
+<h3>Gewichtetes Kappa: stimmen die Noten überein?</h3>
+<p><strong>Kappa</strong> misst, wie gut zwei Bewerter bei den Noten übereinstimmen – und zieht ab, was schon durch Zufall passen würde. 0 heißt „nicht besser als Zufall“, 1 heißt „perfekt“. <strong>Gewichtet</strong> (hier quadratisch) heißt: Ein Unterschied von einer Note kostet 1 Strafpunkt, zwei Noten kosten 4, drei Noten 9. Kleine Abweichungen sind also viel weniger schlimm als große. Ein Beispiel mit nur sechs Töpfen (echte Werte brauchen 100–200):</p>
+<p class="table-caption">Tabelle 8.1: Kappa-Beispiel mit sechs Töpfen</p>
+<table class="t">
+<thead><tr><th>Topf</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>Summe</th></tr></thead>
+<tbody>
+<tr><td>Note Person A</td><td>0</td><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td></td></tr>
+<tr><td>Note App</td><td>0</td><td>2</td><td>1</td><td>2</td><td>3</td><td>2</td><td></td></tr>
+<tr><td>Unterschied</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>2</td><td></td></tr>
+<tr><td>Strafpunkte (Unterschied²)</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>4</td><td><strong>5</strong></td></tr>
+</tbody>
+</table>
+<p>Nun die Zufalls-Probe: Verteilt man dieselben App-Noten wahllos auf die sechs Töpfe, entstehen im Durchschnitt 16,3 Strafpunkte. Kappa = 1 − 5 ÷ 16,3 = <strong>0,69</strong>. Die Werkstatt rechnet das für dich. Faustregel für Kappa: unter 0,4 schwach · 0,4–0,6 mittel · 0,6–0,8 gut · über 0,8 sehr gut.</p>
+<p>Die Werkstatt zeigt Kappa für Person A–&#8288;B, für App–&#8288;A und App–&#8288;B und dazu den Mittelwert aus App–&#8288;A und App–&#8288;B. Diesen Mittelwert nimmst du als <strong>Kappa App–&#8288;Menschen</strong> (Vorschlag). So vergleichst du fair: immer ein Bewerter mit einem anderen. Die zentrale Frage lautet: Stimmt die App mit den Menschen ungefähr so gut überein wie die Menschen untereinander?</p>
+
+<h3>Wiederholbarkeit und Lichttest</h3>
+<p>Von 5 Töpfen gibt es je 5 Fotos, jedes Mal neu eingesetzt. Für jeden Topf berechnet die Werkstatt die <strong>Streuung</strong> (Standardabweichung) des Befall&nbsp;%: wie stark die 5 Werte typischerweise um ihren Mittelwert schwanken. Beispiel: 12, 13, 11, 12 und 14&nbsp;% ergeben im Mittel 12,4&nbsp;% und eine Streuung von ca. 1,1 <strong>Prozentpunkten</strong> (der Abstand zwischen 12&nbsp;% und 14&nbsp;% sind 2 Prozentpunkte). Vorschlag: Bei jedem der 5 Töpfe höchstens 2 Prozentpunkte. Beim Lichttest (morgens, mittags, abends, Hallenlicht an und aus) sollten die Werte ähnlich wenig schwanken. Schwanken sie deutlich mehr, dringt vermutlich Raumlicht in die Box: Klappe, Kameraloch und Fugen prüfen.</p>
+
+<h3>Unsichtbarer Befall</h3>
+<p>Gezählt werden Töpfe mit Sporenrasen auf der Blattunterseite, bei denen die App unter 1&nbsp;% Befall misst – z. B. 6 von 40 Töpfen mit Sporen (15&nbsp;%). Diese Töpfe würde eine App-Bonitur allein übersehen. Wie viele zu viele sind, hängt vom Zweck ab: Für Behandlungsvergleiche und den Verlauf über die Zeit ist das weniger kritisch als für die Früherkennung. Leg deine Grenze fest, <em>bevor</em> du die Zahl ansiehst (z. B. „höchstens jeder zehnte Topf mit Sporen“), und notiere sie im Projekttagebuch.</p>
+
+<h2>8.6 Schwellen mit Reglern einstellen</h2>
+<p>Die Werkstatt hat Regler für die Stellschrauben aus Tabelle 7.8. Jede Änderung wirkt sofort auf Kontrollbilder, Streudiagramm und Kappa. Vorher eine Warnung:</p>
+<div class="box warn"><p class="box-title">Achtung: Täusch dich nicht selbst</p><p>Wenn du lange genug an den Reglern drehst, passen die Werte irgendwann perfekt zu genau diesen Pilot-Töpfen – samt ihren zufälligen Eigenheiten. Bei neuen Töpfen wird die Übereinstimmung dann schlechter. Das Kappa aus Etappe 4 ist deshalb fast immer etwas zu optimistisch. Die ehrliche Prüfung kommt in Etappe 6 mit <strong>neuen</strong> Töpfen, aufgeteilt in Übungs- und Prüfhälfte (Kapitel 10). So hältst du den Effekt klein:</p>
+<ul>
+<li>Nur wenige Regler bewegen, runde Werte wählen (z. B. 75° statt 76,4°).</li>
+<li>Eine Änderung nur, wenn die Kontrollbilder sie begründen – nicht nur, weil Kappa steigt.</li>
+<li>Bringt eine Änderung nur ein winziges Plus (z. B. 0,71 statt 0,70), lass sie weg.</li>
+</ul></div>
+<p>Geh dann in dieser Reihenfolge vor:</p>
+<ol class="steps">
+<li><strong>Erst die Maske.</strong> Mindest-Sättigung und Mindest-Helligkeit so einstellen, dass in den Kontrollbildern die ganze Pflanze und nichts anderes gefärbt ist.</li>
+<li><strong>Dann gelb/grün.</strong> Bei Töpfen, die beide Personen mit 0 bewertet haben, soll Befall&nbsp;% niedrig sein und junge Triebe grün. Bei Note-1-Töpfen soll beginnende Aufhellung gelb werden.</li>
+<li><strong>Dann die Notengrenzen.</strong> Die vier Grenzen so schieben, dass sie im Streudiagramm zwischen den Wolken liegen und Kappa App–&#8288;Menschen möglichst hoch ist.</li>
+<li><strong>Aufschreiben.</strong> Jede Änderung mit altem Wert, neuem Wert und Grund ins Projekttagebuch.</li>
+</ol>
+
+<h2>8.7 Entscheiden: Go, Nachbessern oder No-Go</h2>
+<p>Jetzt entscheidest du mit Tabelle 8.2 und Abb. 8.2. Die Grenzen sind ein <strong>Vorschlag</strong>. Du kannst sie begründet anpassen – aber nicht nachträglich, nur damit dein Ergebnis besser aussieht. Deine Werte hältst du in der Kopiervorlage in Abschnitt 8.8 fest.</p>
+<p class="table-caption">Tabelle 8.2: Entscheidungsregeln (Vorschlag)</p>
+<table class="t">
+<thead><tr><th>Ergebnis</th><th>Bedingung</th><th>Was du dann tust</th></tr></thead>
+<tbody>
+<tr><td><strong>GO</strong></td><td>alle vier erfüllt: Kappa App–&#8288;Menschen ≥ 0,6 · höchstens 0,1 unter Kappa A–&#8288;B · Streuung der Wiederholungsfotos ≤ 2 Prozentpunkte · Farbkarte in ≥ 95&nbsp;% der Fotos erkannt</td><td>Etappe 5: Handy-App mit automatischer Analyse (Kapitel 9); eingestellte Werte übernehmen</td></tr>
+<tr><td><strong>NACHBESSERN</strong></td><td>Kappa 0,4–0,6 oder Wiederholbarkeit schlecht; beim ersten Durchgang auch Kappa unter 0,4; ebenso, wenn Go knapp verfehlt wird (z.&nbsp;B. Farbkarte unter 95&nbsp;%)</td><td>Licht, Abdeckscheibe, Schwellen verbessern, evtl. zusätzliches Schrägfoto; danach Teil-Pilot mit 30–50 Töpfen und neu auswerten</td></tr>
+<tr><td><strong>NO-GO</strong></td><td>Kappa unter 0,4 auch nach Nachbessern, oder viele Töpfe mit Sporen unten, aber App-Befall unter 1&nbsp;% (mehr als deine vorher festgelegte Grenze, Kapitel 8.5)</td><td>Handy-App ohne automatische Analyse: digitale Sicht-Bonitur mit Referenzfotos je Notenstufe, Foto-Archiv, Excel</td></tr>
+</tbody>
+</table>
+<figure>
+<svg viewBox="0 0 800 436" role="img" aria-label="Entscheidungsbaum: vier Fragen führen zu No-Go, Nachbessern oder Go; Nachbessern führt zurück zum Start" font-family="Source Sans 3, sans-serif">
+<defs>
+<marker id="k8-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2A24"/></marker>
+</defs>
+<rect x="90" y="6" width="320" height="36" rx="18" fill="#F3F6F1" stroke="#1F2A24" stroke-width="1.5"/>
+<text x="250" y="29" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2A24">Start: Kennzahlen aus der Werkstatt</text>
+<g fill="#FFFFFF" stroke="#2F6B3A" stroke-width="1.8">
+<rect x="30" y="64" width="440" height="52" rx="4"/>
+<rect x="30" y="138" width="440" height="52" rx="4"/>
+<rect x="30" y="212" width="440" height="52" rx="4"/>
+<rect x="30" y="286" width="440" height="52" rx="4"/>
+</g>
+<g font-size="14.5" fill="#1F2A24" text-anchor="middle">
+<text x="250" y="85">Sporenrasen unten, aber App-Befall unter 1 % –</text><text x="250" y="104">bei mehr Töpfen, als deine Grenze erlaubt?</text>
+<text x="250" y="159">Kappa App–Menschen unter 0,4,</text><text x="250" y="178">obwohl schon einmal nachgebessert?</text>
+<text x="250" y="233">Kappa App–Menschen mindestens 0,6 und</text><text x="250" y="252">höchstens 0,1 unter Kappa Person A–B?</text>
+<text x="250" y="307">Streuung Wiederholungsfotos ≤ 2 Prozentpunkte</text><text x="250" y="326">und Farbkarte in ≥ 95 % der Fotos erkannt?</text>
+</g>
+<rect x="540" y="64" width="220" height="126" rx="4" fill="#FFFFFF" stroke="#C0392B" stroke-width="2"/>
+<rect x="540" y="64" width="220" height="28" rx="4" fill="#C0392B"/>
+<text x="650" y="84" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">NO-GO</text>
+<g font-size="14" fill="#1F2A24" text-anchor="middle"><text x="650" y="111">Handy-App ohne</text><text x="650" y="128">automatische Analyse:</text><text x="650" y="145">Sicht-Bonitur mit</text><text x="650" y="162">Referenzfotos,</text><text x="650" y="179">Foto-Archiv, Excel</text></g>
+<rect x="540" y="212" width="220" height="126" rx="4" fill="#FFFFFF" stroke="#D9B32E" stroke-width="2.5"/>
+<rect x="540" y="212" width="220" height="28" rx="4" fill="#D9B32E"/>
+<text x="650" y="232" text-anchor="middle" font-size="16" font-weight="700" fill="#1F2A24">NACHBESSERN</text>
+<g font-size="14" fill="#1F2A24" text-anchor="middle"><text x="650" y="259">Licht, Abdeckscheibe,</text><text x="650" y="276">Schwellen, evtl.</text><text x="650" y="293">Schrägfoto; dann</text><text x="650" y="310">Teil-Pilot mit</text><text x="650" y="327">30–50 Töpfen</text></g>
+<rect x="90" y="360" width="320" height="70" rx="4" fill="#FFFFFF" stroke="#2F6B3A" stroke-width="2.5"/>
+<rect x="90" y="360" width="320" height="28" rx="4" fill="#2F6B3A"/>
+<text x="250" y="380" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">GO</text>
+<g font-size="14" fill="#1F2A24" text-anchor="middle"><text x="250" y="405">Handy-App mit automatischer</text><text x="250" y="422">Analyse bauen (Kapitel 9)</text></g>
+<g stroke="#1F2A24" stroke-width="1.8" fill="none" marker-end="url(#k8-arrow)">
+<line x1="250" y1="42" x2="250" y2="62"/>
+<line x1="250" y1="116" x2="250" y2="136"/>
+<line x1="250" y1="190" x2="250" y2="210"/>
+<line x1="250" y1="264" x2="250" y2="284"/>
+<line x1="250" y1="338" x2="250" y2="358"/>
+<line x1="470" y1="90" x2="538" y2="90"/>
+<line x1="470" y1="164" x2="538" y2="164"/>
+<line x1="470" y1="238" x2="538" y2="238"/>
+<line x1="470" y1="312" x2="538" y2="312"/>
+<path d="M760,275 H786 V24 H412"/>
+</g>
+<g font-size="13.5" font-weight="700" fill="#1F2A24">
+<text x="258" y="131">nein</text><text x="258" y="205">nein</text><text x="258" y="279">ja</text><text x="258" y="353">ja</text>
+<text x="504" y="84" text-anchor="middle">ja</text><text x="504" y="158" text-anchor="middle">ja</text><text x="504" y="232" text-anchor="middle">nein</text><text x="504" y="306" text-anchor="middle">nein</text>
+</g>
+<text x="600" y="17" text-anchor="middle" font-size="13.5" fill="#6B7570">danach neu auswerten</text>
+</svg>
+<figcaption>Abb. 8.2: Entscheidungsbaum (Vorschlag). Von oben nach unten durchgehen; die erste zutreffende Antwort entscheidet. Nach dem Nachbessern beginnt die Prüfung von vorn.</figcaption>
+</figure>
+<div class="box info"><p class="box-title">Wenn schon die Menschen uneins sind</p><p>Ist Kappa Person A–&#8288;B selbst niedrig (unter 0,6), fehlt der App ein verlässlicher Maßstab. Dann lohnt es sich zuerst, die Skala gemeinsam zu schärfen: Referenzfotos je Notenstufe aussuchen, strittige Töpfe zusammen anschauen, ein paar Töpfe neu bonitieren. Die App bewertet immer gleich – das ist ein echter Vorteil, wenn die Menschen schwanken.</p></div>
+<div class="box decision"><p class="box-title">Entscheidung</p><p>Ergebnis ankreuzen und mit Datum ins Projekttagebuch: ☐ Go ☐ Nachbessern ☐ No-Go. Ein No-Go ist kein Scheitern: Die Handy-App wird trotzdem gebaut (Kapitel 9), nur ohne automatische Analyse – und du weißt es nach Wochen statt nach Monaten.</p></div>
+
+<h2>8.8 Ergebnis festhalten</h2>
+<p>Trag deine Werte in die Kopiervorlage ein und hefte sie ins Projekttagebuch. Sichere Ergebnis-Excel, Kontrollbilder und Einstellungsdatei auf dem Firmen-PC, z. B. im Ordner <code>Bonitur/Pilot/auswertung/</code> neben den Pilotfotos.</p>
+<div class="template">
+<h3>Kopiervorlage: Pilot-Kennzahlen (Etappe 4)</h3>
+<table class="t">
+<thead><tr><th>Kennzahl</th><th>Vorschlag für Go</th><th style="width:30%">Dein Wert</th></tr></thead>
+<tbody>
+<tr><td>ausgewertete Töpfe</td><td>100–200</td><td></td></tr>
+<tr><td>Kappa Person A–&#8288;B</td><td>Maßstab für die App</td><td></td></tr>
+<tr><td>Kappa App–&#8288;A / App–&#8288;B / Mittel</td><td>Mittel ≥ 0,6; max. 0,1 unter A–&#8288;B</td><td></td></tr>
+<tr><td>Rangkorrelation</td><td>je näher an 1, desto besser</td><td></td></tr>
+<tr><td>Streuung 5×-Fotos (größter Wert)</td><td>≤ 2 Prozentpunkte</td><td></td></tr>
+<tr><td>Lichttest: größte Abweichung</td><td>etwa wie die Streuung</td><td></td></tr>
+<tr><td>Farbkarte erkannt</td><td>≥ 95&nbsp;% der Fotos</td><td></td></tr>
+<tr><td>unsichtbarer Befall</td><td>unter deiner Grenze (8.5): ___ %</td><td>___ von ___</td></tr>
+<tr><td>Entscheidung</td><td>Go · Nachbessern · No-Go</td><td>am ________</td></tr>
+</tbody>
+</table>
+</div>
+<p>Ins Repository kommt nur ein kurzer <strong>Pilotbericht</strong> mit Kennzahlen, ohne Rohdaten und ohne Namen. Ihn schreibt Claude. Ersetze im Prompt die eckigen Klammern durch deine Werte aus der Kopiervorlage.</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – Pilotbericht</p><pre>Lies docs/SPEZIFIKATION.md, CLAUDE.md und docs/FORTSCHRITT.md. Schreibe
+einen kurzen Pilotbericht als docs/PILOTBERICHT.md: höchstens 2 Seiten,
+einfache Sprache. Gliederung: Ziel, Vorgehen, Ergebnisse (Tabelle),
+Entscheidung mit Begründung, offene Punkte, nächste Schritte.
+Keine Rohdaten, keine Namen.
+
+Meine Ergebnisse aus der Analyse-Werkstatt:
+- Pilot vom [Datum] bis [Datum], ausgewertete Töpfe: [Anzahl], Sorten: [...]
+- Kappa Person A-B: [Wert] / App-A: [Wert] / App-B: [Wert] / Mittel: [Wert]
+- Rangkorrelation App-Befall % zu Menschen-Note: [Wert]
+- Streuung Wiederholungsfotos je Topf: [5 Werte] Prozentpunkte
+- Lichttest: [Beobachtung]
+- Farbkarte erkannt: [x] von [y] Fotos
+- Unsichtbarer Befall: [x] von [y] Töpfen mit Sporenrasen unten
+  (meine vorher festgelegte Grenze: [..] %)
+- Eingestellte Werte: gelb/grün [..]°, braun/gelb [..]°, S [..], V [..],
+  Notengrenzen [..] / [..] / [..] / [..] %
+- Auffälligkeiten aus den Kontrollbildern: [Stichpunkte]
+- Meine Entscheidung: [Go / Nachbessern / No-Go] am [Datum]
+
+Übernimm die eingestellten Werte als neue Standardwerte in den Analyse-Kern
+und in docs/SPEZIFIKATION.md, erhöhe die Algorithmus-Version und lass die
+Tests laufen. Erkläre mir, welche Testergebnisse sich dadurch ändern.
+Trag die Entscheidung in docs/FORTSCHRITT.md ein.
+Erstelle dann einen Pull Request.</pre></div>
+<p>Prüfe den Bericht im Pull Request: Stimmen alle Zahlen mit deiner Kopiervorlage überein? Dann übernehmen.</p>
+<h2>8.9 Etappe 4 ist fertig, wenn …</h2>
+<ul class="checklist">
+<li>B1 Analyse-Kern und B2 Analyse-Werkstatt sind übernommen, die automatischen Tests laufen fehlerfrei.</li>
+<li>Die Werkstatt ist eingerichtet: Farbkarte (4 Ecken), Topfkreis, Maßstab; Einstellungen als Datei gesichert.</li>
+<li>Jedes Pilotfoto ist seinem Topf zugeordnet, keine offenen Fehlzuordnungen.</li>
+<li>Alle Kontrollbilder mit Warnung, 20 zufällige und die größten Abweichungen sind angesehen.</li>
+<li>Kappa (A–&#8288;B, App–&#8288;A, App–&#8288;B), Rangkorrelation, Wiederholbarkeit, Lichttest, Farbkarten-Quote und unsichtbarer Befall (mit deiner vorher festgelegten Grenze) stehen in der Kopiervorlage.</li>
+<li>Jede Regler-Änderung ist mit Grund im Projekttagebuch notiert.</li>
+<li>Die Entscheidung Go, Nachbessern oder No-Go steht mit Datum im Projekttagebuch.</li>
+<li>Der Pilotbericht liegt in <code>docs/</code>; Ergebnis-Excel, Kontrollbilder und Einstellungsdatei sind auf dem Firmen-PC gesichert.</li>
+</ul>
+</section>

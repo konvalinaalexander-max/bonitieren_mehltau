@@ -7,5 +7,7 @@ und leitet daraus eine Befallsnote ab.
 
 Aktueller Stand: Planungsphase.
 
+- [docs/Leitfaden_Mehltau-Bonitur.pdf](docs/Leitfaden_Mehltau-Bonitur.pdf) – **Leitfaden:** Schritt für Schritt von der Fotobox bis zur fertigen App
+- [docs/SPEZIFIKATION.md](docs/SPEZIFIKATION.md) – verbindliche Zahlen, Entscheidungen und technische Vorgaben
 - [KONZEPT.md](KONZEPT.md) – Machbarkeit, Messprinzip, Fotobox, App, Fahrplan
 - [RECHERCHE.md](RECHERCHE.md) – Selbst bauen oder fertige App? Marktüberblick mit Quellen

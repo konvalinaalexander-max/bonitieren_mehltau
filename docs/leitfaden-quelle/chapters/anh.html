@@ -1,0 +1,187 @@
+<section class="chapter" id="anh-a">
+  <p class="kicker">Anhang</p>
+  <h1>A Glossar</h1>
+  <p class="lead">Die wichtigsten Fach- und Technikbegriffe dieses Leitfadens von A bis Z, jeweils in ein bis zwei Sätzen erklärt. Die Spalte „Kapitel“ sagt dir, wo der Begriff ausführlich vorkommt.</p>
+
+  <div class="box tip">
+    <p class="box-title">Tipp</p>
+    <p>Taucht in einem Pull Request oder in Claudes Antwort ein Wort auf, das hier fehlt? Frag Claude direkt: „Erklär mir … in zwei einfachen Sätzen.“ Gute Erklärungen kannst du in dein Projekttagebuch übernehmen.</p>
+  </div>
+
+  <p class="table-caption">Tabelle A.1: Begriffe von A bis Z</p>
+  <table class="t">
+    <thead>
+      <tr><th style="width:21%">Begriff</th><th>Erklärung</th><th style="width:12%">Kapitel</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Abdeckscheibe</strong></td><td>Matt schwarze Druckscheibe mit Schlitz, die vor dem Foto auf den Topf kommt. Sie verdeckt Erde und Topfrand, die sonst als „braun“ zählen würden.</td><td>4.9</td></tr>
+      <tr><td><strong>Algorithmus-Version</strong></td><td>Versionsnummer der Rechenregeln der Auswertung, z. B. „A-1.0“. Sie steht in jeder Ergebniszeile, damit du nur Werte vergleichst, die gleich berechnet wurden.</td><td>7.1, 9.8</td></tr>
+      <tr><td><strong>Analyse-Kern</strong></td><td>Programmteil, das aus einem Foto die Kennzahlen berechnet: Farbkorrektur, Maske, Farbklassen, Befall %, Note. Werkstatt und App nutzen denselben Kern.</td><td>8.1, 9.4</td></tr>
+      <tr><td><strong>Analyse-Werkstatt</strong></td><td>Webseite im PC-Browser (Chrome oder Edge), die viele Fotos auf einmal auswertet und mit eurer Bonitur-Excel vergleicht. Die Fotos bleiben auf dem PC.</td><td>8</td></tr>
+      <tr><td><strong>AUDPC</strong></td><td>Englisch „area under the disease progress curve“: Fläche unter der Befallsverlaufskurve, eine Zahl für den ganzen Verlauf. Je zwei aufeinanderfolgende Termine: (Befall 1 + Befall 2) ÷ 2 × Tage dazwischen; alles addieren.</td><td>11.4</td></tr>
+      <tr><td><strong>Auswertekreis (Topfkreis)</strong></td><td>Kreis um die Topfmitte; nur die Pixel darin werden ausgewertet. Mitte und Radius stellst du einmal ein, Farbkarte und Etikett liegen außerhalb.</td><td>7.4, 8.2</td></tr>
+      <tr><td><strong>Baustein</strong></td><td>Arbeitspaket für Claude beim Programmieren, B1 bis B9, jeder mit eigenem Kopier-Prompt. B1 und B2 (Analyse-Kern, Werkstatt) brauchst du schon in Etappe 4.</td><td>9.7</td></tr>
+      <tr><td><strong>Befall %</strong></td><td>Anteil der gelben und braunen Fläche an der von oben sichtbaren Pflanzenfläche. Daraus rechnet die App über die Umrechnungstabelle die Note.</td><td>7.7</td></tr>
+      <tr><td><strong>Belichtung</strong></td><td>Wie hell ein Foto wird. Beim Handy bestimmen das vor allem die Belichtungszeit (wie lange Licht auf den Sensor fällt; in Open Camera „Verschlusszeit“) und der ISO-Wert. Im Box-Handy fest eingestellt, damit alle Fotos gleich hell sind.</td><td>5.3</td></tr>
+      <tr><td><strong>Bibliothek</strong></td><td>Fertiger, frei nutzbarer Programmbaustein, den Claude einbaut, statt alles neu zu schreiben: jsQR (QR-Codes lesen), SheetJS (Excel), JSZip (ZIP-Dateien).</td><td>9.4</td></tr>
+      <tr><td><strong>Bonitur</strong></td><td>Bewertung von Pflanzen nach einer festen Skala, hier: wie stark die Mehltau-Symptome sind. Das Ergebnis ist eine Note, z. B. 0 bis 4.</td><td>3.1, 6.4</td></tr>
+      <tr><td><strong>Box-Handy</strong></td><td>Gebrauchtes Android-Handy, das immer in der Fotobox bleibt und nur dafür dient. Ein einziges Gerät mit festen Kamera-Einstellungen hält die Farben vergleichbar.</td><td>3.2, 5</td></tr>
+      <tr><td><strong>Branch (Zweig)</strong></td><td>Arbeitskopie neben dem Hauptstand, der <code>main</code> heißt. Claude arbeitet immer auf einem eigenen Zweig; <code>main</code> ändert sich erst, wenn du übernimmst (Merge).</td><td>9.2</td></tr>
+      <tr><td><strong>Camera2-API</strong></td><td>Android-Schnittstelle, über die eine Kamera-App ISO, Belichtungszeit, Weißabgleich und Fokus von Hand steuert. In Open Camera einschalten.</td><td>5.3</td></tr>
+      <tr><td><strong>Chlorose</strong></td><td>Gelbfärbung oder Aufhellung von Blattgewebe, beim Falschen Mehltau oft aderbegrenzt. Kann auch von Nährstoffmangel, Staunässe oder Lichtmangel kommen.</td><td>7.6</td></tr>
+      <tr><td><strong>Claude Code</strong></td><td>Arbeitsumgebung, in der Claude mit deinem Repository arbeitet: im Browser (claude.ai/code) oder in der App. Dort schreibt, testet und lädt Claude den Code.</td><td>3.9, 9.1</td></tr>
+      <tr><td><strong>CLAUDE.md</strong></td><td>Datei im Repository mit den Projektregeln für Claude. Claude legt sie in Baustein B1 an und hält sie aktuell.</td><td>9.1</td></tr>
+      <tr><td><strong>Commit</strong></td><td>Gespeicherte Änderung im Repository mit kurzer Beschreibung, wie ein Eintrag im Änderungsbuch. Jeder frühere Stand lässt sich wiederherstellen.</td><td>6.7, 9.2</td></tr>
+      <tr><td><strong>CRI (Ra)</strong></td><td>Farbwiedergabeindex einer Lampe, höchstens 100. Ab 90 zeigt das Licht Farben naturgetreu; billige LEDs verfälschen gerade Grün- und Gelbtöne.</td><td>4.7</td></tr>
+      <tr><td><strong>Delta E (ΔE)</strong></td><td>Maß für den Abstand zweier Farben, etwa so, wie das Auge ihn wahrnimmt. Ein kleiner Rest-ΔE auf der Farbkarte zeigt: Die Farbkorrektur hat geklappt.</td><td>7.3</td></tr>
+      <tr><td><strong>Diffusor</strong></td><td>Lichtstreuendes Material vor den LEDs, z. B. Milchglasfolie oder opaler Kunststoff. Macht das Licht weich: keine Glanzpunkte, keine harten Schatten.</td><td>4.7</td></tr>
+      <tr><td><strong>Einstellungsdatei</strong></td><td>Datei mit Kartenposition, Topfkreis, Maßstab, Schwellwerten und Notentabelle. Du speicherst sie in der Werkstatt und importierst sie in die Handy-App.</td><td>8.2, 9.7</td></tr>
+      <tr><td><strong>Etappe</strong></td><td>Arbeitsabschnitt mit klarem Ergebnis. Der Leitfaden hat acht Etappen (0 bis 7), jede mit eigenem Kapitel.</td><td>1.2, 2.3</td></tr>
+      <tr><td><strong>Etikett-Karte</strong></td><td>Siehe Topf-Karte.</td><td>4.9</td></tr>
+      <tr><td><strong>Falscher Mehltau</strong></td><td>Krankheit durch den Erreger <em>Peronospora belbahrii</em>: oben gelbe, oft von Adern begrenzte Flecken, unten grau-violetter Sporenrasen, später braune Blätter. Nicht verwechseln mit Echtem Mehltau (weißer, mehliger Belag).</td><td>1.1, 7.11</td></tr>
+      <tr><td><strong>Farbkarte</strong></td><td>Karte mit 24 genormten Farbfeldern (z. B. ColorChecker Classic Mini), die in jedem Foto liegt. Eine Graukarte reicht nicht, sie korrigiert nur den Weißabgleich.</td><td>4.8, 7.3</td></tr>
+      <tr><td><strong>Farbkorrektur</strong></td><td>Rechnet jedes Foto so um, dass die 24 Felder der Farbkarte ihre bekannten Sollfarben zeigen (3×3-Farbmatrix). Gleicht Schwankungen von Licht und Kamera aus.</td><td>7.3</td></tr>
+      <tr><td><strong>Farbton (H)</strong></td><td>Die Farbe selbst, als Winkel auf dem Farbkreis: Rot 0°, Gelb 60°, Grün 120°, Blau 240°. Basilikumgrün: ca. 90–110°. Daran trennt die App grün, gelb, braun.</td><td>7.2, 7.6</td></tr>
+      <tr><td><strong>FORTSCHRITT.md</strong></td><td>Datei im Ordner <code>docs/</code>, in der Claude festhält, welcher Baustein fertig und was noch offen ist. Claude legt sie in B1 an.</td><td>9.1</td></tr>
+      <tr><td><strong>GitHub Actions</strong></td><td>Automaten bei GitHub: Sie lassen bei jedem Pull Request die Tests laufen und veröffentlichen die App. Grüner Haken heißt bestanden, rotes Kreuz heißt Fehler.</td><td>9.2, 9.3</td></tr>
+      <tr><td><strong>GitHub Pages</strong></td><td>Webhosting von GitHub: macht aus Dateien im Repository eine Webseite mit fester Adresse. Mit kostenlosem Konto nur für öffentliche Repositorys, für private braucht es ein bezahltes Abo (z. B. GitHub Pro).</td><td>3.5, 9.3</td></tr>
+      <tr><td><strong>Glanzlicht</strong></td><td>Heller, fast weißer Lichtreflex auf einem Blatt, z. B. auf nassen Blättern oder bei direktem Licht. Die App ignoriert solche Pixel (V über 0,90 und S unter 0,15); Diffusor und trockene Pflanzen halten sie klein.</td><td>7.5</td></tr>
+      <tr><td><strong>Go/No-Go</strong></td><td>Entscheidung nach dem Pilot (Kriterien als Vorschlag). Go: App mit automatischer Analyse. Nachbessern: Licht, Abdeckscheibe oder Schwellen verbessern, Teil-Pilot wiederholen. No-Go: nur digitale Sicht-Bonitur.</td><td>8.7</td></tr>
+      <tr><td><strong>Grünwert</strong></td><td>Mittlerer Farbton aller Pflanzenpixel in Grad (Spalte <code>gruenwert</code>). Eine stufenlose Kennzahl: Sie sinkt, wenn die Pflanze insgesamt gelblicher wird.</td><td>7.7</td></tr>
+      <tr><td><strong>HDR, DRO</strong></td><td>Kamera-Automatiken (High Dynamic Range, Dynamic Range Optimisation), die Helligkeit und Kontrast nachträglich verändern. Für Messfotos immer aus.</td><td>5.3</td></tr>
+      <tr><td><strong>Helligkeit (V)</strong></td><td>Siehe HSV.</td><td>7.2</td></tr>
+      <tr><td><strong>Histogramm</strong></td><td>Kurve in Open Camera, die zeigt, wie viele Bildpunkte dunkel (links) oder hell (rechts) sind. Hilft beim Einstellen der Verschlusszeit.</td><td>5.4</td></tr>
+      <tr><td><strong>Hosting</strong></td><td>Platz im Internet, auf dem die App als Webseite liegt: GitHub Pages, Netlify oder Cloudflare Pages.</td><td>3.5, 9.3</td></tr>
+      <tr><td><strong>HSV</strong></td><td>Beschreibung einer Farbe mit drei Werten: Farbton H (0–360°), Sättigung S (0&nbsp;=&nbsp;grau bis 1&nbsp;=&nbsp;kräftig) und Helligkeit V (0&nbsp;=&nbsp;schwarz bis 1&nbsp;=&nbsp;ganz hell). So lassen sich grün, gelb und braun leichter trennen als mit Rot-Grün-Blau-Werten.</td><td>7.2</td></tr>
+      <tr><td><strong>HTTPS</strong></td><td>Verschlüsselte Verbindung zu einer Webseite; die Adresse beginnt mit https://. Ohne HTTPS erlaubt der Browser der App keinen Zugriff auf die Kamera.</td><td>3.5, 9.3</td></tr>
+      <tr><td><strong>IndexedDB</strong></td><td>Datenbank im Browser des Handys, in der die App Messungen und Fotos speichert. Sie ist kein Archiv: Wird der Browser-Speicher gelöscht, ist alles weg – deshalb nach jeder Sitzung exportieren.</td><td>9.4, 11.3</td></tr>
+      <tr><td><strong>ISO</strong></td><td>Lichtempfindlichkeit der Kamera. Niedrige Werte (z. B. 100–200) ergeben rauscharme Bilder; im Box-Handy fest eingestellt.</td><td>5.3</td></tr>
+      <tr><td><strong>JPEG</strong></td><td>Übliches Dateiformat für Fotos (Endung .jpg). Spart Platz durch Kompression; bei hoher Qualitätsstufe sind die Verluste gering.</td><td>5.3</td></tr>
+      <tr><td><strong>Kalibrierung</strong></td><td>Einstellen von Schwellwerten und Umrechnungstabelle, bis die App-Noten zu den Noten eurer erfahrenen Leute passen. Geprüft an 100–200 neuen Töpfen.</td><td>10</td></tr>
+      <tr><td><strong>Kappa, gewichtetes</strong></td><td>Kennzahl für die Übereinstimmung zweier Bewerter, bereinigt um Zufallstreffer: 0&nbsp;=&nbsp;Zufall, 1&nbsp;=&nbsp;perfekt. Quadratisch gewichtet heißt: 1 Note Unterschied kostet 1 Strafpunkt, 2 Noten kosten 4, 3 Noten 9.</td><td>8.5</td></tr>
+      <tr><td><strong>Kelvin (K)</strong></td><td>Maßeinheit für die Lichtfarbe. Niedrige Werte (um 3000 K) wirken warm-gelblich, 5000–6500 K ist Tageslichtweiß. Auch der Weißabgleich wird in Kelvin eingestellt.</td><td>4.7, 5.3</td></tr>
+      <tr><td><strong>Kontrollbild</strong></td><td>Das Foto mit eingefärbten Farbklassen und Warnungen: Grün und Gelb in ihrer Farbe, Braun rot markiert. Zeigt auf einen Blick, ob die App richtig erkannt hat.</td><td>7.9</td></tr>
+      <tr><td><strong>Kontroll-Pflanze</strong></td><td>Kunstpflanze, die z. B. wöchentlich fotografiert wird. Sie ändert sich nie; verschieben sich ihre Werte, haben sich Licht oder Kamera verändert.</td><td>10.7</td></tr>
+      <tr><td><strong>Kurzprüfung</strong></td><td>Nachprüfung mit 30–50 Töpfen und den festen Werten, ohne Aufteilung, z. B. bei neuer Sorte oder Saison. Fällt sie durch, folgt eine volle Kalibrierung.</td><td>10.6</td></tr>
+      <tr><td><strong>Maske</strong></td><td>Auswahl aller Pixel, die zur Pflanze gehören (passender Farbton, genug Sättigung und Helligkeit). Dunkle Abdeckscheibe und Boden fallen heraus.</td><td>7.5</td></tr>
+      <tr><td><strong>Maßstab-Karte</strong></td><td>Quadrat von genau 10 × 10 cm, einmal in typischer Blatthöhe in der Box fotografiert. Damit rechnet das Programm Pixel in ungefähre cm² um.</td><td>7.7, 8.2</td></tr>
+      <tr><td><strong>Median</strong></td><td>Der Wert in der Mitte, wenn man alle Werte der Größe nach sortiert. Einzelne Ausreißer verschieben ihn kaum; Startpunkt für die Notengrenzen.</td><td>10.4</td></tr>
+      <tr><td><strong>Merge</strong></td><td>Übernehmen eines Pull Requests in den Hauptstand <code>main</code>. Etwa 1–2 Minuten später ist die Änderung live.</td><td>9.2</td></tr>
+      <tr><td><strong>NAS</strong></td><td>Netzwerkspeicher (englisch „network attached storage“): Festplatte im Firmennetz, auf die mehrere PCs zugreifen. Möglicher Ablageort für die Exporte.</td><td>3.7, 11.3</td></tr>
+      <tr><td><strong>Nekrose</strong></td><td>Abgestorbenes, braunes Blattgewebe. Beim Falschen Mehltau im späteren Verlauf; Note 4 der vorgeschlagenen Skala schließt starke Nekrosen ein.</td><td>3.1, 7.6</td></tr>
+      <tr><td><strong>Open Camera</strong></td><td>Kostenlose Kamera-App für Android mit offenem Programmcode. Darin lassen sich ISO, Belichtungszeit, Weißabgleich und Fokus fest einstellen.</td><td>5.3</td></tr>
+      <tr><td><strong>OpenSCAD</strong></td><td>Kostenloses CAD-Programm, in dem 3D-Teile als Text mit Maßen beschrieben werden. Claude schreibt die Dateien, du passt Maße an und exportierst STL.</td><td>4.5</td></tr>
+      <tr><td><strong>Open Source</strong></td><td>Software mit offenem Programmcode, den jeder ansehen und je nach Lizenz weiterverwenden darf. Die MIT-Lizenz (z. B. bei LeafScan) erlaubt die Wiederverwendung, wenn der Lizenzhinweis erhalten bleibt.</td><td>5.1</td></tr>
+      <tr><td><strong>Peronospora belbahrii</strong></td><td>Wissenschaftlicher Name des Erregers. Ein Eipilz (Oomycet), kein echter Pilz; siehe Falscher Mehltau.</td><td>1.1</td></tr>
+      <tr><td><strong>Pilot</strong></td><td>Probelauf vor dem App-Bau: 100–200 Töpfe fotografieren und von zwei Personen bonitieren lassen, um zu prüfen, ob die Farbauswertung von oben funktioniert.</td><td>6, 8</td></tr>
+      <tr><td><strong>Pixel</strong></td><td>Kleinster Bildpunkt eines Fotos. Die App zählt Pixel, um Fläche und Farbanteile zu messen; 1 Megapixel (MP) sind 1 Million Pixel.</td><td>7.2</td></tr>
+      <tr><td><strong>PLA, PETG</strong></td><td>Kunststoffe (Filamente) für den 3D-Druck. PLA lässt sich leicht drucken; PETG ist zäher und wärmefester und eignet sich für stärker beanspruchte Teile.</td><td>4.5</td></tr>
+      <tr><td><strong>Projekttagebuch</strong></td><td>Heft oder Excel-Datei, in die du nach jedem Arbeitsschritt Datum, Erledigtes, Entscheidungen und offene Fragen einträgst.</td><td>1.6</td></tr>
+      <tr><td><strong>Prompt</strong></td><td>Arbeitsauftrag an Claude in Textform. Die Kopier-Prompts in diesem Leitfaden fügst du in Claude Code ein und ergänzt sie bei Bedarf.</td><td>1.4, 9.1</td></tr>
+      <tr><td><strong>Prozentpunkt</strong></td><td>Abstand zweier Prozentwerte: Von 12 % auf 14 % sind es 2 Prozentpunkte.</td><td>8.5</td></tr>
+      <tr><td><strong>Pull Request (PR)</strong></td><td>Änderungsvorschlag im Repository: „Übernimm die Änderungen aus Zweig X nach <code>main</code>.“ Du testest ihn auf dem Box-Handy und übernimmst ihn mit Merge.</td><td>9.2</td></tr>
+      <tr><td><strong>PWA</strong></td><td>„Progressive Web App“: Webseite, die du zum Startbildschirm hinzufügst und die wie eine App läuft – dank Service Worker auch offline. Kein App Store nötig.</td><td>9.4</td></tr>
+      <tr><td><strong>PWM (Flimmern)</strong></td><td>Pulsweitenmodulation: Viele Dimmer schalten LEDs sehr schnell an und aus. Das Auge merkt es nicht, die Kamera schon (dunkle Streifen). Deshalb nicht dimmen.</td><td>4.7</td></tr>
+      <tr><td><strong>QR-Code</strong></td><td>Quadratischer Code, der eine kurze Information speichert, hier die Topf-ID. Die App liest ihn direkt aus dem Foto (Topf-Karte im Etikettenhalter).</td><td>4.9, 9.7</td></tr>
+      <tr><td><strong>Rangkorrelation (Spearman)</strong></td><td>Prüft, ob zwei Messungen die Töpfe in dieselbe Reihenfolge bringen: 1&nbsp;=&nbsp;gleiche Reihenfolge, 0&nbsp;=&nbsp;kein Zusammenhang. Braucht keine Umrechnungstabelle.</td><td>8.5</td></tr>
+      <tr><td><strong>Referenzbilder</strong></td><td>20–30 Pilotfotos quer über alle Notenstufen plus die Wiederholungsfotos, im Ordner <code>referenzbilder/</code> des Repositorys. Claude prüft damit automatisch, ob eine Änderung Ergebnisse verschiebt.</td><td>6.7</td></tr>
+      <tr><td><strong>Regelkarte</strong></td><td>Verlaufsdiagramm der Kontroll-Pflanze mit Mittellinie und Toleranzband (Vorschlag: ± 2 Prozentpunkte). Werte außerhalb oder ein stetiger Trend sind Warnsignale.</td><td>10.7</td></tr>
+      <tr><td><strong>Repository (Repo)</strong></td><td>Projektordner im Internet, der sich jede Änderung merkt. Deiner liegt bei GitHub: konvalinaalexander-max/bonitieren_mehltau.</td><td>9.2</td></tr>
+      <tr><td><strong>Revert</strong></td><td>Einen übernommenen Pull Request rückgängig machen. Dabei entsteht ein neuer Pull Request, den du wie gewohnt übernimmst – so kommst du nach einer missglückten Änderung zum alten Stand zurück.</td><td>9.2, 9.8</td></tr>
+      <tr><td><strong>Sättigung (S)</strong></td><td>Siehe HSV.</td><td>7.2</td></tr>
+      <tr><td><strong>Satz</strong></td><td>Gruppe von Töpfen, die gemeinsam gesät oder getopft wurden und zusammen heranwachsen (Anbausatz). In der App wählst du beim Start einer Sitzung den Satz oder Versuch; die Übersicht fasst die Ergebnisse je Satz zusammen.</td><td>9.5, 11.4</td></tr>
+      <tr><td><strong>Schwellwert</strong></td><td>Grenzwert, an dem die App entscheidet, z. B. Farbton ab 80°&nbsp;=&nbsp;grün, von 45° bis 80°&nbsp;=&nbsp;gelb. Die Startwerte werden im Pilot und bei der Kalibrierung eingestellt.</td><td>7.10, 8.6</td></tr>
+      <tr><td><strong>Service Worker</strong></td><td>Siehe PWA.</td><td>9.4</td></tr>
+      <tr><td><strong>Sicht-Bonitur</strong></td><td>Bonitur mit dem Auge, wie ihr sie heute macht. Bei No-Go wird die App zur digitalen Sicht-Bonitur: Note antippen, Referenzfotos je Notenstufe, Foto-Archiv, Excel.</td><td>6, 9.7</td></tr>
+      <tr><td><strong>Sitzung</strong></td><td>Zwei Bedeutungen: (1) in der App ein Bonitur-Durchgang mit Datum, Mitarbeiter-Kürzel und Satz, der am Ende exportiert wird; (2) in Claude Code ein Arbeitsauftrag an Claude – am besten ein Baustein pro Sitzung.</td><td>1.4, 9.5</td></tr>
+      <tr><td><strong>Slicer</strong></td><td>Programm, das eine STL-Datei für deinen 3D-Drucker vorbereitet, z. B. PrusaSlicer, Cura oder Bambu Studio.</td><td>4.5</td></tr>
+      <tr><td><strong>SPEZIFIKATION.md</strong></td><td>Datei im Ordner <code>docs/</code> des Repositorys mit allen verbindlichen Zahlen und Entscheidungen. Die Prompts sagen Claude, dass es sie zuerst lesen soll.</td><td>1.5, 9.1</td></tr>
+      <tr><td><strong>Sporenrasen</strong></td><td>Grau-violetter bis schwarzer, samtiger Belag auf der Blattunterseite, in dem der Erreger seine Sporen bildet. Die Kamera von oben sieht ihn nicht.</td><td>6.3, 8.5</td></tr>
+      <tr><td><strong>Stammdaten</strong></td><td>Listen, aus denen du in der App auswählst statt zu tippen: Sätze, Sorten, Behandlungen, Tische, Mitarbeiter-Kürzel.</td><td>9.6</td></tr>
+      <tr><td><strong>Standardabweichung</strong></td><td>Maß dafür, wie stark Werte um ihren Mittelwert streuen. Vorschlag: Bei den 5 Fotos eines Topfs soll sie für Befall % höchstens 2 Prozentpunkte betragen.</td><td>8.5</td></tr>
+      <tr><td><strong>STL</strong></td><td>Dateiformat für 3D-Modelle, das jeder Slicer öffnet. Export aus OpenSCAD.</td><td>4.5</td></tr>
+      <tr><td><strong>Streudiagramm</strong></td><td>Grafik, in der jeder Topf ein Punkt ist: waagerecht die Note der Menschen, senkrecht der Befall % der App. Gut: Die Wolken steigen treppenartig an.</td><td>8.5</td></tr>
+      <tr><td><strong>Streuung</strong></td><td>Siehe Standardabweichung.</td><td>8.5</td></tr>
+      <tr><td><strong>Teil-Pilot</strong></td><td>Kleiner Pilot mit 30–50 Töpfen nach dem Nachbessern; danach wird neu ausgewertet und entschieden.</td><td>8.7</td></tr>
+      <tr><td><strong>Topf-Karte</strong></td><td>Karte (85 × 55 mm) mit großer Topfnummer, später mit QR-Code; sie steckt beim Foto im Etikettenhalter, damit die Topf-ID in jedem Foto steht. Auch „Etikett-Karte“, im Pilot „Topfnummer-Karte“.</td><td>4.9, 6.3, 9.7</td></tr>
+      <tr><td><strong>Übungs- und Prüfhälfte</strong></td><td>Die Kalibrier-Töpfe werden geteilt: An der Übungshälfte stellst du Schwellen und Tabelle ein, an der Prüfhälfte prüfst du sie. So täuschst du dich nicht selbst.</td><td>10.3</td></tr>
+      <tr><td><strong>Umrechnungstabelle</strong></td><td>Tabelle, die Befall % in eine Note übersetzt, z. B. „über 10 bis 25 % → Note 2“. Wird im Pilot und bei der Kalibrierung festgelegt.</td><td>7.8, 10.4</td></tr>
+      <tr><td><strong>Unsichtbarer Befall</strong></td><td>Töpfe mit Sporenrasen auf der Blattunterseite, bei denen die App unter 1 % Befall misst. Der Pilot zählt, wie oft das vorkommt (Kriterium für Go/No-Go).</td><td>7.11, 8.5</td></tr>
+      <tr><td><strong>Verschlusszeit</strong></td><td>Name der Belichtungszeit in Open Camera; siehe Belichtung.</td><td>5.3</td></tr>
+      <tr><td><strong>Vorschau-Link</strong></td><td>Adresse, unter der Netlify oder Cloudflare Pages die Version aus einem Pull Request zeigt, bevor du übernimmst – mit eigenem Speicher, getrennt von der echten App.</td><td>9.3, 9.8</td></tr>
+      <tr><td><strong>Weißabgleich</strong></td><td>Kamera-Einstellung, welche Lichtfarbe als neutrales Weiß gilt (in Kelvin). Fest eingestellt (z. B. 5500 K), damit die Kamera die Farben nicht verschiebt.</td><td>5.3</td></tr>
+      <tr><td><strong>Wiederholbarkeit</strong></td><td>Bleibt der Wert gleich, wenn derselbe Topf neu eingesetzt und fotografiert wird? Geprüft an 5 Töpfen mit je 5 Fotos, gemessen als Standardabweichung.</td><td>6.5, 8.5</td></tr>
+      <tr><td><strong>Zebrastreifen</strong></td><td>Schraffur in der Vorschau von Open Camera, die zu helle Bildstellen markiert. Auf dem weißen Feld der Farbkarte soll sie gerade nicht erscheinen.</td><td>5.4</td></tr>
+      <tr><td><strong>Zentrierring</strong></td><td>Flacher Druckring am Boxboden, der den Topf immer an dieselbe Stelle unter der Kamera stellt; je Topfgröße ein eigener Ring.</td><td>4.5, 4.6</td></tr>
+      <tr><td><strong>ZIP</strong></td><td>Datei, die viele Dateien zu einem Paket bündelt, hier alle Fotos einer Sitzung. Zusammen mit der Excel-Datei ist sie der Export einer Sitzung.</td><td>9.5, 11.3</td></tr>
+      <tr><td><strong>Zweig</strong></td><td>Siehe Branch.</td><td>9.2</td></tr>
+    </tbody>
+  </table>
+
+
+</section>
+
+<section class="chapter" id="anh-b">
+  <p class="kicker">Anhang</p>
+  <h1>B Quellen und Links</h1>
+  <p class="lead">Die Quellen dieses Leitfadens, jeweils mit einem Satz, wofür sie dir nützen. Meist auf Englisch.</p>
+
+  <div class="box info">
+    <p class="box-title">Hintergrund</p>
+    <p>Alle Links wurden am 30.09.2026 geprüft. Geht einer nicht mehr, such nach dem Titel oder bei Fachartikeln nach der DOI (Nummer hinter doi.org/); sie führt dauerhaft zur Verlagsseite.</p>
+  </div>
+
+  <h2>B.1 Fachliches zum Basilikum-Mehltau</h2>
+  <ul>
+    <li style="break-inside: avoid"><strong>Ben Naim, Mattera, Cohen, Wyenandt, Simon (2025), Planta</strong> – Fachartikel „Predicting the resistance of basil entries to downy mildew based on their genetics, pathogen race, growth stage, and environmental conditions“ zur Resistenz von Basilikum gegen Falschen Mehltau. Nützlich, weil er die Befallsskala 0–4 nach Anteil befallener Blattfläche beschreibt, an die sich der Skalen-Vorschlag in Kapitel 3.1 anlehnt. Frei lesbar.<br>
+      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12122581/">pmc.ncbi.nlm.nih.gov/articles/PMC12122581/</a></li>
+    <li style="break-inside: avoid"><strong>University of Minnesota Extension: Basil downy mildew</strong> – kurzes Merkblatt der Beratung (Marissa Schuh, Michelle Grabowski). Nützlich für Symptome und Bekämpfung; bestätigt, dass der Befall an den unteren Blättern beginnt und nach oben wandert – deshalb bleibt die Kontrolle der Blattunterseite Pflicht.<br>
+      <a href="https://extension.umn.edu/diseases/basil-downy-mildew">extension.umn.edu/diseases/basil-downy-mildew</a></li>
+    <li style="break-inside: avoid"><strong>Cornell Vegetables: Basil downy mildew</strong> – ausführliches Merkblatt der Cornell University. Nützlich als Nachschlagewerk zu Erreger, Erkennung, resistenten Sorten und Bekämpfung im Freiland und unter Glas.<br>
+      <a href="https://www.vegetables.cornell.edu/pest-management/disease-factsheets/basil-downy-mildew/">www.vegetables.cornell.edu/pest-management/<wbr>disease-factsheets/basil-downy-mildew/</a></li>
+  </ul>
+
+  <h2>B.2 Bildanalyse und Werkzeuge</h2>
+  <ul>
+    <li style="break-inside: avoid"><strong>Bock, Barbedo, Del Ponte, Bohnenkamp, Mahlein (2020), Phytopathology Research</strong> – Übersichtsartikel „From visual estimates to fully automated sensor-based measurements of plant disease severity“. Nützlich, weil er erklärt, wie genau Sicht-Bonituren sind, was Skalen, Schulung und Standard-Flächendiagramme bringen und was Bildanalyse unter kontrollierten Bedingungen leistet. Frei lesbar.<br>
+      <a href="https://doi.org/10.1186/s42483-020-00049-8">doi.org/10.1186/s42483-020-00049-8</a></li>
+    <li style="break-inside: avoid"><strong>Pethybridge, Nelson (2015), Plant Disease</strong> – Fachartikel „Leaf Doctor: A New Portable Application for Quantifying Plant Disease Severity“ zur iPhone-App Leaf Doctor, die den Befall über Farbschwellen schätzt. Nützlich, weil er zeigt, dass dieses Grundprinzip gut mit der Standard-Software Assess übereinstimmt – geprüft an Bildern von sechs Krankheiten. Die App selbst wurde seit 2017 nicht mehr aktualisiert.<br>
+      <a href="https://doi.org/10.1094/PDIS-03-15-0319-RE">doi.org/10.1094/PDIS-03-15-0319-RE</a></li>
+    <li style="break-inside: avoid"><strong>LeafScan</strong> – kostenloses Browser-Werkzeug, das Blattfotos in gesund, gelb (chlorotisch) und braun (nekrotisch) einteilt, mit einstellbaren HSV-Schwellen und CSV-Export. Nützlich, weil der Code unter MIT-Lizenz steht und Claude Ideen daraus für den Analyse-Kern verwendet.<br>
+      <a href="https://github.com/LeonLenzo/leaf-scan">github.com/LeonLenzo/leaf-scan</a></li>
+    <li style="break-inside: avoid"><strong>PlantCV</strong> – Open-Source-Bildanalyse für die Pflanzenforschung (Donald Danforth Plant Science Center). Nützlich als erprobte Referenz, falls du oder Claude Ergebnisse gegenprüfen wollt.<br>
+      <a href="https://plantcv.org/">plantcv.org</a></li>
+    <li style="break-inside: avoid"><strong>PlantCV-Anleitung „Correct Color“</strong> – beschreibt die Farbkorrektur mit einer 24-Feld-Farbkarte. Nützlich als Hintergrund zu Kapitel 7.3: So ähnlich rechnet auch deine App.<br>
+      <a href="https://docs.plantcv.org/en/latest/transform_correct_color/">docs.plantcv.org/en/latest/transform_correct_color/</a></li>
+  </ul>
+
+  <h2>B.3 Hardware: Fotobox und Box-Handy</h2>
+  <ul>
+    <li style="break-inside: avoid"><strong>Calibrite ColorChecker Classic Mini</strong> – Herstellerseite der empfohlenen Farbkarte (24 Felder, laut Hersteller 63,5 × 109 mm). Nützlich beim Kauf und für die Maße des Farbkarten-Halters.<br>
+      <a href="https://calibrite.com/us/product/colorchecker-classic-mini/">calibrite.com/us/product/colorchecker-classic-mini/</a></li>
+    <li style="break-inside: avoid"><strong>Open Camera</strong> – offizielle Seite der kostenlosen Kamera-App für Android (Entwickler: Mark Harman). Nützlich wegen der ausführlichen Hilfe zu allen Einstellungen, die du in Kapitel 5.3 festlegst.<br>
+      <a href="https://opencamera.org.uk/">opencamera.org.uk</a></li>
+    <li style="break-inside: avoid"><strong>Open Camera bei SourceForge</strong> – Programmcode und Installationsdatei (APK), falls du den Play Store nicht nutzen kannst. Dafür musst du am Handy die Installation aus unbekannten Quellen erlauben.<br>
+      <a href="https://sourceforge.net/projects/opencamera/">sourceforge.net/projects/opencamera/</a></li>
+    <li style="break-inside: avoid"><strong>OpenSCAD</strong> – kostenloses CAD-Programm für Windows, Mac und Linux. Nützlich, weil du damit die Druckdateien von Claude öffnest, Maße anpasst und STL-Dateien exportierst (Kapitel 4.5).<br>
+      <a href="https://openscad.org/">openscad.org</a></li>
+  </ul>
+
+  <h2>B.4 Software-Bausteine</h2>
+  <ul>
+    <li style="break-inside: avoid"><strong>GitHub Pages – Dokumentation</strong> – offizielle Anleitung von GitHub zum Hosting (Kapitel 3.5 und 9.3). Dort steht auch: Mit kostenlosem Konto (GitHub Free) muss das Repository öffentlich sein.<br>
+      <a href="https://docs.github.com/pages">docs.github.com/pages</a></li>
+    <li style="break-inside: avoid"><strong>SheetJS</strong> – Programmbaustein, der Excel-Dateien im Browser liest und schreibt. Nützlich, weil Werkstatt und App damit eure Bonitur-Excel einlesen und die Ergebnis-Excel erzeugen.<br>
+      <a href="https://docs.sheetjs.com/">docs.sheetjs.com</a></li>
+    <li style="break-inside: avoid"><strong>jsQR</strong> – Programmbaustein, der QR-Codes aus einem Bild liest. Nützlich, weil die App damit die Topf-ID direkt aus dem Foto erkennt.<br>
+      <a href="https://github.com/cozmo/jsQR">github.com/cozmo/jsQR</a></li>
+    <li style="break-inside: avoid"><strong>JSZip</strong> – Programmbaustein, der ZIP-Dateien im Browser erstellt. Nützlich, weil die App damit alle Fotos einer Sitzung in eine Datei für die Datensicherung packt.<br>
+      <a href="https://stuk.github.io/jszip/">stuk.github.io/jszip/</a></li>
+  </ul>
+
+  <h2>B.5 Projekt</h2>
+  <ul>
+    <li style="break-inside: avoid"><strong>Dein Projekt-Repository bonitieren_mehltau</strong> – zentrale Ablage für Code, Referenzbilder und Unterlagen: <code>KONZEPT.md</code> (Idee und Machbarkeit), <code>RECHERCHE.md</code> (warum es keine fertige App gibt), <code>docs/SPEZIFIKATION.md</code> (alle verbindlichen Zahlen) und ab Baustein B1 <code>CLAUDE.md</code> (Regeln für Claude).<br>
+      <a href="https://github.com/konvalinaalexander-max/bonitieren_mehltau">github.com/konvalinaalexander-max/bonitieren_mehltau</a></li>
+  </ul>
+</section>

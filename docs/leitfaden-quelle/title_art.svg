@@ -1,0 +1,82 @@
+<svg viewBox="0 0 600 330" role="img" aria-label="Fotobox mit Basilikumtopf und Handy, daneben das Ergebnis in der App" font-family="Source Sans 3, sans-serif">
+  <defs>
+    <marker id="tp-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2B5D8C"/>
+    </marker>
+  </defs>
+  <!-- box -->
+  <rect x="48" y="56" width="264" height="244" fill="#F3F6F1"/>
+  <ellipse cx="180" cy="64" rx="128" ry="12" fill="#FFF3C4" opacity="0.8"/>
+  <rect x="48" y="56" width="264" height="5" fill="#F4E6A8"/>
+  <polygon points="180,58 66,300 294,300" fill="#2B5D8C" opacity="0.07"/>
+  <line x1="180" y1="58" x2="66" y2="300" stroke="#2B5D8C" stroke-width="1.2" stroke-dasharray="5 5"/>
+  <line x1="180" y1="58" x2="294" y2="300" stroke="#2B5D8C" stroke-width="1.2" stroke-dasharray="5 5"/>
+  <rect x="32" y="44" width="296" height="12" fill="#2F6B3A"/>
+  <rect x="40" y="56" width="8" height="244" fill="#2F6B3A"/>
+  <rect x="312" y="56" width="8" height="244" fill="#2F6B3A"/>
+  <rect x="32" y="300" width="296" height="10" fill="#1F2A24"/>
+  <!-- phone on lid -->
+  <rect x="128" y="30" width="104" height="14" rx="3" fill="#1F2A24"/>
+  <circle cx="180" cy="57" r="4" fill="#2B5D8C"/>
+  <!-- pot -->
+  <polygon points="146,240 214,240 206,299 154,299" fill="#1F2A24"/>
+  <ellipse cx="180" cy="240" rx="44" ry="6" fill="#39443E"/>
+  <!-- stems -->
+  <g stroke="#3F7F3A" stroke-width="2.5" stroke-linecap="round">
+    <line x1="180" y1="238" x2="178" y2="170"/>
+    <line x1="176" y1="236" x2="150" y2="190"/>
+    <line x1="184" y1="236" x2="214" y2="188"/>
+  </g>
+  <!-- leaves -->
+  <g>
+    <ellipse cx="140" cy="216" rx="25" ry="11" transform="rotate(12 140 216)" fill="#D9B32E"/>
+    <ellipse cx="118" cy="203" rx="18" ry="9" transform="rotate(-28 118 203)" fill="#C4A73A"/>
+    <ellipse cx="222" cy="215" rx="25" ry="11" transform="rotate(-10 222 215)" fill="#A9BE4A"/>
+    <ellipse cx="246" cy="203" rx="16" ry="8" transform="rotate(34 246 203)" fill="#8A5A2B"/>
+    <ellipse cx="176" cy="213" rx="22" ry="11" transform="rotate(4 176 213)" fill="#5B9A3C"/>
+    <ellipse cx="130" cy="189" rx="24" ry="12" transform="rotate(-20 130 189)" fill="#5B9A3C"/>
+    <ellipse cx="232" cy="187" rx="24" ry="12" transform="rotate(20 232 187)" fill="#4E8A33"/>
+    <ellipse cx="160" cy="190" rx="21" ry="11" transform="rotate(15 160 190)" fill="#2F6B3A"/>
+    <ellipse cx="200" cy="188" rx="21" ry="11" transform="rotate(-15 200 188)" fill="#3F7F3A"/>
+    <ellipse cx="150" cy="165" rx="22" ry="12" transform="rotate(-35 150 165)" fill="#5B9A3C"/>
+    <ellipse cx="212" cy="163" rx="22" ry="12" transform="rotate(30 212 163)" fill="#4E8A33"/>
+    <ellipse cx="180" cy="175" rx="18" ry="10" fill="#6FAF4A"/>
+    <ellipse cx="180" cy="150" rx="20" ry="11" transform="rotate(-8 180 150)" fill="#5B9A3C"/>
+  </g>
+  <!-- colour card and label on floor -->
+  <g>
+    <rect x="258" y="284" width="42" height="14" fill="#1F2A24"/>
+    <rect x="260" y="286" width="6" height="5" fill="#735244"/><rect x="267" y="286" width="6" height="5" fill="#C29682"/>
+    <rect x="274" y="286" width="6" height="5" fill="#627A9D"/><rect x="281" y="286" width="6" height="5" fill="#576C43"/>
+    <rect x="288" y="286" width="6" height="5" fill="#8580B1"/><rect x="295" y="286" width="3" height="5" fill="#67BDAA"/>
+    <rect x="260" y="292" width="6" height="5" fill="#F3F3F2"/><rect x="267" y="292" width="6" height="5" fill="#C8C8C8"/>
+    <rect x="274" y="292" width="6" height="5" fill="#A0A0A0"/><rect x="281" y="292" width="6" height="5" fill="#7A7A79"/>
+    <rect x="288" y="292" width="6" height="5" fill="#555555"/><rect x="295" y="292" width="3" height="5" fill="#343434"/>
+  </g>
+  <g>
+    <rect x="62" y="284" width="26" height="14" fill="#FFFFFF" stroke="#6B7570" stroke-width="0.8"/>
+    <rect x="65" y="286" width="4" height="4" fill="#1F2A24"/><rect x="71" y="286" width="2" height="2" fill="#1F2A24"/>
+    <rect x="65" y="292" width="4" height="4" fill="#1F2A24"/><rect x="75" y="290" width="3" height="3" fill="#1F2A24"/>
+    <rect x="80" y="286" width="4" height="4" fill="#1F2A24"/><rect x="80" y="293" width="2" height="3" fill="#1F2A24"/>
+  </g>
+  <!-- arrow -->
+  <line x1="338" y1="172" x2="388" y2="172" stroke="#2B5D8C" stroke-width="3" marker-end="url(#tp-arrow)"/>
+  <!-- phone with result -->
+  <rect x="400" y="36" width="152" height="276" rx="18" fill="#1F2A24"/>
+  <rect x="409" y="52" width="134" height="244" rx="6" fill="#FFFFFF"/>
+  <text x="419" y="72" font-size="12.5" font-weight="700" fill="#1F2A24">Topf 12-B-07</text>
+  <rect x="419" y="80" width="114" height="84" fill="#F3F6F1"/>
+  <circle cx="476" cy="122" r="33" fill="#5B9A3C"/>
+  <path d="M447,112 a33,33 0 0 1 14,-20 l10,14 z" fill="#D9B32E"/>
+  <path d="M500,142 a33,33 0 0 1 -8,8 l-6,-10 z" fill="#C0392B"/>
+  <path d="M452,138 q6,10 16,14 l2,-10 z" fill="#D9B32E"/>
+  <g font-size="10.5" fill="#1F2A24">
+    <text x="419" y="182">grün</text><rect x="452" y="174" width="58" height="9" fill="#5B9A3C"/><text x="514" y="182" font-size="9.5">84 %</text>
+    <text x="419" y="199">gelb</text><rect x="452" y="191" width="10" height="9" fill="#D9B32E"/><text x="466" y="199" font-size="9.5">12 %</text>
+    <text x="419" y="216">braun</text><rect x="452" y="208" width="4" height="9" fill="#8A5A2B"/><text x="460" y="216" font-size="9.5">4 %</text>
+  </g>
+  <text x="419" y="240" font-size="12" fill="#6B7570">Befall 16 %</text>
+  <text x="419" y="262" font-size="19" font-weight="700" fill="#2F6B3A">Note 2</text>
+  <rect x="419" y="270" width="114" height="18" rx="4" fill="#2F6B3A"/>
+  <text x="476" y="283" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">Speichern</text>
+</svg>

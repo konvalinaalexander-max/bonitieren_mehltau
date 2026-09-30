@@ -1,0 +1,530 @@
+<section class="chapter" id="kap-10">
+<p class="kicker">Etappe 6 · ca. 2–4 Wochen</p>
+<h1>10 Kalibrieren und prüfen</h1>
+<p class="lead">Die App ist gebaut. Jetzt prüfst du sie ehrlich: an 100–200 neuen Töpfen, die sie noch nie gesehen hat. Am Ende stehen eine festgeschriebene Umrechnungstabelle, die Freigabe für den Betrieb und eine Kontroll-Pflanze, die künftig schleichende Veränderungen meldet.</p>
+
+<table class="stage-meta">
+<tr><th>Ziel</th><td>Die fertige App an neuen Töpfen prüfen, die Umrechnungstabelle von Befall % in die Note festschreiben, die App für den Alltag freigeben.</td></tr>
+<tr><th>Dauer</th><td>ca. 2–4 Wochen (Schätzung), davon 1–2 Wochen bonitieren und fotografieren.</td></tr>
+<tr><th>Du</th><td>Töpfe auswählen, fotografieren, Tabelle einstellen und festschreiben, Prüfhälfte auswerten, freigeben, Kontroll-Pflanze einführen. <span class="who team">Team</span> Person A und B bonitieren unabhängig.</td></tr>
+<tr><th>Claude</th><td>baut den Kalibrier-Modus der Werkstatt (10.3), übernimmt nach der Freigabe die Werte und erhöht die Algorithmus-Version (10.5), ergänzt auf Wunsch die Regelkarte in der App (10.7).</td></tr>
+<tr><th>Du brauchst</th><td>fertige App auf dem Box-Handy (Kapitel 9), Analyse-Werkstatt, zwei bonitierende Personen, Bonitur-Bögen (6.8), QR-Etiketten, eine Kunstpflanze.</td></tr>
+<tr><th>Ergebnis</th><td>festgeschriebene Tabelle mit Algorithmus-Version, Freigabe mit Datum, <code>docs/KALIBRIERUNG.md</code>, laufende Regelkarte der Kontroll-Pflanze.</td></tr>
+</table>
+
+<div class="box info"><p class="box-title">Wenn du in Etappe 4 „No-Go“ entschieden hast</p><p>Dann rechnet deine App keine Note aus; 10.2 bis 10.5 und 10.7 entfallen. Übernimm nur die vierteljährliche Stichprobe aus 10.6 – dort vergleichst du dann Person A mit Person B statt App mit Menschen. Sie zeigt, ob eure Leute weiterhin gleich bonitieren. Dann mach mit Kapitel 11 weiter.</p></div>
+
+<h2>10.1 Warum noch einmal – mit neuen Töpfen?</h2>
+<p>In Etappe 4 hast du Schwellen und Notengrenzen an den Pilot-Töpfen eingestellt. Dort passen sie besonders gut – samt deren zufälligen Eigenheiten. Das ist wie eine Prüfung, deren Fragen man vorher kennt: Die Note sieht gut aus, sagt aber wenig über neue Fragen. Das Pilot-Kappa ist deshalb fast immer etwas zu optimistisch (Abschnitt 8.6). Außerdem hat sich die Kette verändert: Die Fotos kommen jetzt aus deiner App, die Analyse läuft auf dem Handy.</p>
+<p><strong>Kalibrieren</strong> heißt hier: die Umrechnungstabelle (falls nötig auch die Farbschwellen) so einstellen, dass die App-Note zur Note eurer Leute passt – und das an Töpfen nachweisen, die weder du noch das Programm kennen.</p>
+
+<h2>10.2 Neue Töpfe und Ablauf</h2>
+<ul>
+<li><strong>100–200 neue Töpfe</strong>, keine aus dem Pilot – auch nicht dieselben Pflanzen Wochen später. Quer über alle Noten, möglichst 15–20 je Stufe (Tabelle 6.1), verteilt auf mehrere Termine, Sätze und die Sorten, die du im Alltag bonitierst.</li>
+<li><strong>Eigene Nummern</strong>, z. B. <code>K001</code> bis <code>K160</code> (P steht schon für Pilot). Die QR-Etiketten druckst du mit der App (Baustein B7).</li>
+<li><strong>Zwei Personen</strong>, möglichst dieselben wie im Pilot, mit denselben Spielregeln (Abschnitt 3.6): jede ihren eigenen Bogen (Kopiervorlage aus 6.8, oben „Kalibrierung“ dazuschreiben), keine Absprache.</li>
+<li><strong>Vorher prüfen:</strong> Hat der Ergebnis-Bildschirm der App ein Eingabefeld für die Hand-Note <code>note_manuell</code> (Tabelle 9.3)? Wenn nicht, lass Claude es ergänzen, bevor du anfängst.</li>
+</ul>
+<p><strong>Ablauf pro Topf:</strong></p>
+<ol class="steps">
+<li><strong>Bonitur A und B.</strong> Beide bewerten den Topf unabhängig und schreiben Note und Befall % auf ihren Bogen – vor dem Foto.</li>
+<li><strong>Foto mit der App.</strong> Sitzung mit dem Satz „Kalibrierung“. Topf trocken, Abdeckscheibe drauf, Etikett-Karte in den Halter, Topf in den Zentrierring, Klappe zu, auslösen – direkt in der App oder per Import aus Open Camera, wie in Baustein B5 festgelegt.</li>
+<li><strong>Note A übertragen.</strong> Die Note von Bogen A in das Feld <code>note_manuell</code> eintragen. Nur abschreiben, auch wenn die App etwas anderes zeigt. Die Werkstatt vergleicht später Bogen und App und findet so Zuordnungs- und Tippfehler, z. B. eine falsch gelesene Topf-ID.</li>
+<li><strong>Speichern, Unterseite prüfen.</strong> Kontrollbild ansehen, speichern. Dann die Blattunterseite: „Sporen unten ja/nein“ auf Bogen A.</li>
+</ol>
+<p>Nach jeder Sitzung sicherst du den Export wie in Abschnitt 11.3, hier aber in den Ordner <code>Bonitur/Kalibrierung/</code>. Die Bögen tippst du in eine <strong>Kalibrier-Excel</strong> im selben Ordner, mit den Spalten <code>topf_id</code> · <code>datum</code> · <code>sorte</code> · <code>satz</code> · <code>note_A</code> · <code>note_B</code> · <code>prozent_A</code> · <code>prozent_B</code> · <code>sporen_unten</code> · <code>bemerkung</code>. Außerdem wiederholst du den Wiederholungstest aus 6.5 mit der App: 5 Töpfe je 5-mal, jedes Mal neu eingesetzt, in einer eigenen Sitzung mit dem Satz „Wiederholung“. Dass die App dort doppelte Topf-IDs meldet, ist hier gewollt. Nimmt die App die Fotos selbst auf (statt aus Open Camera zu importieren), machst du auch den Lichttest noch einmal.</p>
+
+<h2>10.3 Übungs- und Prüfhälfte</h2>
+<p>Die Werkstatt teilt die neuen Töpfe per Zufall in zwei gleich große Hälften, getrennt je Notenstufe (Abb. 10.1). An der <strong>Übungshälfte</strong> stellst du ein, so oft du willst. Die <strong>Prüfhälfte</strong> bleibt verschlossen, bis die Tabelle festgeschrieben ist, und wird dann genau einmal ausgewertet. Ihr Ergebnis ist die ehrliche Antwort auf die Frage: Wie gut ist die App bei Töpfen, die sie nicht kennt?</p>
+<div class="box warn"><p class="box-title">Achtung: Die Prüfhälfte ist ein Einweg-Test</p><p>Drehst du nach dem Blick auf die Prüfhälfte noch an den Reglern, ist sie verbraucht – sie ist dann nur eine weitere Übungshälfte. Fällt die Prüfung durch: Ursache in den Kontrollbildern suchen, nachbessern und mit <strong>neuen</strong> Töpfen prüfen (mindestens 30–50, wie beim Teil-Pilot in 8.7).</p></div>
+<figure>
+<svg viewBox="0 0 800 330" role="img" aria-label="Ablauf: 160 neue Töpfe werden per Zufall in Übungs- und Prüfhälfte geteilt. An der Übungshälfte wird eingestellt, dann die Tabelle festgeschrieben. Erst danach wird die Prüfhälfte einmal ausgewertet: Kriterien erfüllt bedeutet Freigabe, sonst Nachbessern und mit neuen Töpfen prüfen." font-family="Source Sans 3, sans-serif">
+<defs>
+<marker id="k10-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2F6B3A"/></marker>
+<marker id="k10-arrow-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C0392B"/></marker>
+</defs>
+<!-- source -->
+<rect x="10" y="115" width="150" height="110" rx="6" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="1.5"/>
+<text x="85" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2A24">160 neue Töpfe</text>
+<text x="85" y="167" text-anchor="middle" font-size="13" fill="#6B7570">nicht aus dem Pilot</text>
+<text x="85" y="192" text-anchor="middle" font-size="13" fill="#1F2A24">Zufall teilt</text>
+<text x="85" y="210" text-anchor="middle" font-size="13" fill="#1F2A24">je Notenstufe</text>
+<line x1="160" y1="150" x2="186" y2="95" stroke="#2F6B3A" stroke-width="2" marker-end="url(#k10-arrow)"/>
+<line x1="160" y1="190" x2="186" y2="245" stroke="#2F6B3A" stroke-width="2" marker-end="url(#k10-arrow)"/>
+<!-- training half -->
+<rect x="190" y="20" width="220" height="100" rx="6" fill="#F3F6F1" stroke="#5B9A3C" stroke-width="2"/>
+<text x="300" y="50" text-anchor="middle" font-size="15" font-weight="700" fill="#2F6B3A">Übungshälfte · 80 Töpfe</text>
+<text x="300" y="76" text-anchor="middle" font-size="13" fill="#1F2A24">Regler und Tabelle einstellen,</text>
+<text x="300" y="95" text-anchor="middle" font-size="13" fill="#1F2A24">so oft du willst</text>
+<!-- test half -->
+<rect x="190" y="210" width="220" height="100" rx="6" fill="#FFFFFF" stroke="#2B5D8C" stroke-width="2"/>
+<text x="300" y="240" text-anchor="middle" font-size="15" font-weight="700" fill="#2B5D8C">Prüfhälfte · 80 Töpfe</text>
+<text x="300" y="266" text-anchor="middle" font-size="13" fill="#1F2A24">bleibt verschlossen, bis</text>
+<text x="300" y="285" text-anchor="middle" font-size="13" fill="#1F2A24">die Tabelle feststeht</text>
+<!-- fix -->
+<rect x="450" y="20" width="190" height="100" rx="6" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="2"/>
+<text x="545" y="50" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2A24">Tabelle festschreiben</text>
+<text x="545" y="76" text-anchor="middle" font-size="13" fill="#1F2A24">Werte und Datum notieren,</text>
+<text x="545" y="95" text-anchor="middle" font-size="13" fill="#1F2A24">Regler sperren</text>
+<line x1="410" y1="70" x2="447" y2="70" stroke="#2F6B3A" stroke-width="2" marker-end="url(#k10-arrow)"/>
+<!-- evaluate once -->
+<rect x="450" y="210" width="190" height="100" rx="6" fill="#F3F6F1" stroke="#2B5D8C" stroke-width="2"/>
+<text x="545" y="240" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2A24">Einmal auswerten</text>
+<text x="545" y="266" text-anchor="middle" font-size="13" fill="#1F2A24">Kappa und Co. mit</text>
+<text x="545" y="285" text-anchor="middle" font-size="13" fill="#1F2A24">der festen Tabelle</text>
+<line x1="545" y1="120" x2="545" y2="207" stroke="#2F6B3A" stroke-width="2" marker-end="url(#k10-arrow)"/>
+<line x1="410" y1="260" x2="447" y2="260" stroke="#2F6B3A" stroke-width="2" marker-end="url(#k10-arrow)"/>
+<!-- forbidden way back -->
+<line x1="470" y1="210" x2="398" y2="124" stroke="#C0392B" stroke-width="1.8" stroke-dasharray="5 4" marker-end="url(#k10-arrow-r)"/>
+<line x1="426" y1="159" x2="442" y2="175" stroke="#C0392B" stroke-width="2.5"/>
+<line x1="442" y1="159" x2="426" y2="175" stroke="#C0392B" stroke-width="2.5"/>
+<text x="408" y="158" text-anchor="end" font-size="13" fill="#C0392B">nie an der Prüfhälfte</text>
+<text x="408" y="176" text-anchor="end" font-size="13" fill="#C0392B">nachstellen</text>
+<!-- outcomes -->
+<line x1="640" y1="240" x2="667" y2="195" stroke="#2F6B3A" stroke-width="2" marker-end="url(#k10-arrow)"/>
+<line x1="640" y1="285" x2="667" y2="285" stroke="#2F6B3A" stroke-width="2" marker-end="url(#k10-arrow)"/>
+<rect x="670" y="150" width="122" height="70" rx="6" fill="#F3F6F1" stroke="#5B9A3C" stroke-width="2"/>
+<text x="731" y="180" text-anchor="middle" font-size="15" font-weight="700" fill="#2F6B3A">Freigabe</text>
+<text x="731" y="202" text-anchor="middle" font-size="13" fill="#1F2A24">Kriterien erfüllt</text>
+<rect x="670" y="240" width="122" height="84" rx="6" fill="#FFFFFF" stroke="#C0392B" stroke-width="2"/>
+<text x="731" y="265" text-anchor="middle" font-size="15" font-weight="700" fill="#C0392B">Nachbessern</text>
+<text x="731" y="287" text-anchor="middle" font-size="13" fill="#1F2A24">dann mit neuen</text>
+<text x="731" y="305" text-anchor="middle" font-size="13" fill="#1F2A24">Töpfen prüfen</text>
+</svg>
+<figcaption>Abb. 10.1: Übungs- und Prüfhälfte am Beispiel von 160 Töpfen. Eingestellt wird nur an der Übungshälfte. Die Prüfhälfte wird erst ausgewertet, wenn die Tabelle festgeschrieben ist – und dann nur einmal.</figcaption>
+</figure>
+<p>Den Kalibrier-Modus baut Claude, während ihr fotografiert. Schick den Prompt ab, sobald die ersten Sitzungen gesichert sind – dann kannst du ihn gleich mit echten Exporten ausprobieren.</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – Kalibrier-Modus in der Werkstatt</p><pre>Lies CLAUDE.md, KONZEPT.md, docs/SPEZIFIKATION.md (Abschnitt Kalibrieren)
+und docs/FORTSCHRITT.md. Etappe 6: Erweitere die Analyse-Werkstatt um einen
+Kalibrier-Modus.
+1. Einlesen: App-Exporte (Excel + ZIP) und meine Kalibrier-Excel (topf_id,
+   note_A, note_B, prozent_A, prozent_B, sporen_unten), verknüpft über
+   topf_id. Liste Töpfe ohne Partner und Töpfe mit note_manuell ungleich note_A.
+2. Zufällige Aufteilung in Übungs- und Prüfhälfte je Notenstufe (Mittel aus
+   note_A und note_B, gerundet). Aufteilung als Datei speichern.
+3. Übungshälfte: Streudiagramm, Kappa und Regler wie in Etappe 4, dazu den
+   Median von befall_pct je Notenstufe.
+4. Knopf "Festschreiben": speichert die Werte mit Datum, sperrt die Regler
+   und wertet erst dann die Prüfhälfte aus (Kennzahlen wie in Etappe 4).
+5. Wiederholbarkeit aus der Sitzung "Wiederholung" (5 Töpfe je 5 Fotos,
+   gleiche topf_id): Streuung von befall_pct je Topf.
+6. Option "ohne Aufteilung" für Kurzprüfungen und Stichproben: alle Töpfe
+   mit den festen Werten auswerten, keine Regler.
+Alles lokal im Browser, keine Fotos und keine Messdaten ins Repository.
+
+Arbeite nach CLAUDE.md: erst Plan in 5-10 Zeilen, dann auf mein OK warten;
+kleine Schritte; Tests schreiben und alle laufen lassen; keine echten
+Betriebsdaten ins Repository; CLAUDE.md und docs/ aktualisieren.
+Zum Schluss Pull Request und in einfachem Deutsch erklären, was du gemacht
+hast und wie ich es am PC teste.</pre></div>
+
+<h2>10.4 Die Umrechnungstabelle festschreiben</h2>
+<p>An der Übungshälfte stellst du ein wie in Abschnitt 8.6. Meist musst du nur noch die Notengrenzen verschieben. Ein guter Startpunkt ist der <strong>Median</strong> je Notenstufe: Sortiert man alle Töpfe einer Note nach App-Befall %, ist er der Wert in der Mitte. Anders als der Mittelwert verschieben ihn einzelne Ausreißer kaum. Die Note eines Topfs ist dabei das Mittel aus Note A und Note B, gerundet.</p>
+<p class="table-caption">Tabelle 10.1: Beispiel – Notengrenzen aus der Übungshälfte (erfundene Werte)</p>
+<table class="t" style="break-inside: avoid">
+<thead><tr><th>Grenze</th><th>bisher (Etappe 4)</th><th>Median untere Note</th><th>Median obere Note</th><th>Mitte</th><th>Neue Grenze</th></tr></thead>
+<tbody>
+<tr><td>Note 0 | 1</td><td>2 %</td><td>0,8 % (Note 0)</td><td>3,5 % (Note 1)</td><td>2,15 %</td><td><strong>2 %</strong></td></tr>
+<tr><td>Note 1 | 2</td><td>7 %</td><td>3,5 % (Note 1)</td><td>9 % (Note 2)</td><td>6,25 %</td><td><strong>6 %</strong></td></tr>
+<tr><td>Note 2 | 3</td><td>15 %</td><td>9 % (Note 2)</td><td>19 % (Note 3)</td><td>14 %</td><td><strong>14 %</strong></td></tr>
+<tr><td>Note 3 | 4</td><td>32 %</td><td>19 % (Note 3)</td><td>41 % (Note 4)</td><td>30 %</td><td><strong>30 %</strong></td></tr>
+</tbody>
+</table>
+<p>So liest du die Tabelle: Die Spalte „bisher“ zeigt die Grenzen, die du in Etappe 4 eingestellt hast und die jetzt in der App stehen. Note-1-Töpfe haben im Median 3,5 % App-Befall, Note-2-Töpfe 9 %. Die Grenze 1 | 2 liegt in der Mitte, bei rund 6 %. Dann probierst du mit dem Regler die Nachbarwerte (5 und 7 %) und nimmst sie nur, wenn Kappa der Übungshälfte dort deutlich besser ist. Immer ganze Prozentzahlen. Liegen die oberen Grenzen wie hier weit unter den Startwerten aus Tabelle 7.6 (2, 10, 25 und 50 %), ist das kein Fehler: Menschen schätzen kleine Befallsanteile oft zu hoch ein (Abschnitt 7.8).</p>
+<p><strong>Festschreiben:</strong> die vier Grenzen, geänderte Farbschwellen und Kappa der Übungshälfte mit Datum ins Projekttagebuch, dann in der Werkstatt „Festschreiben“ drücken. Erst jetzt wertest du die Prüfhälfte aus – einmal – und notierst das Ergebnis, egal wie es ausfällt.</p>
+
+<h2>10.5 Freigabe-Kriterien</h2>
+<p>Die Freigabe folgt denselben Regeln wie das Go in Etappe 4 (Tabelle 8.2), gemessen an der Prüfhälfte. Die Grenzen sind ein <strong>Vorschlag</strong>; leg sie vorher fest, nicht nachträglich.</p>
+<p class="table-caption">Tabelle 10.2: Freigabe-Kriterien (Vorschlag) – zum Ausfüllen</p>
+<table class="t">
+<colgroup><col width="36%"><col width="26%"><col width="20%"><col width="18%"></colgroup>
+<thead><tr><th>Kriterium</th><th>Grenze</th><th>gemessen an</th><th>Dein Wert</th></tr></thead>
+<tbody>
+<tr><td>Kappa App–Menschen (Mittel aus App–A, App–B)</td><td>mindestens 0,6</td><td>Prüfhälfte</td><td></td></tr>
+<tr><td>Abstand zu Kappa Person A–B</td><td>höchstens 0,1 darunter</td><td>Prüfhälfte</td><td>A–B:</td></tr>
+<tr><td>Streuung von Befall % je Topf</td><td>höchstens 2 Prozentpunkte</td><td>5 Töpfe × 5 Fotos</td><td></td></tr>
+<tr><td>Farbkarte erkannt</td><td>in mindestens 95 % der Fotos</td><td>alle Fotos</td><td></td></tr>
+<tr><td>zur Einordnung: unsichtbarer Befall (Sporen unten, App unter 1 %)</td><td>unter deiner Grenze aus 8.5</td><td>alle Töpfe</td><td>___ von ___</td></tr>
+</tbody>
+</table>
+<p>Ist Kappa der Prüfhälfte deutlich schlechter als das der Übungshälfte (z. B. 0,55 statt 0,75), sind die Werte vermutlich zu fein auf die Übungstöpfe eingestellt. Und bei nur 80 Töpfen ist Kappa selbst etwas unsicher: Knapp an der Grenze heißt lieber nachbessern als schönreden.</p>
+<div class="box decision"><p class="box-title">Entscheidung</p><p>Die vier Kriterien in den Zeilen 1 bis 4 erfüllt? Ankreuzen und mit Datum ins Projekttagebuch: ☐ Freigabe ☐ Nachbessern. Die letzte Zeile ist keine Bedingung; liegt sie über deiner Grenze, ist die Kontrolle der Blattunterseite im Alltag besonders wichtig. Bei Freigabe übernimmt Claude die Werte.</p></div>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – Freigabe und Kalibrierbericht</p><pre>Lies CLAUDE.md, KONZEPT.md, docs/SPEZIFIKATION.md und docs/FORTSCHRITT.md.
+Ich gebe die App nach der Kalibrierung frei. Festgeschriebene Werte:
+Notengrenzen 0|1 [..] %, 1|2 [..] %, 2|3 [..] %, 3|4 [..] %;
+gelb/grün [..]°, braun/gelb [..]°; sonst geändert: [.. oder "nichts"].
+Prüfhälfte ([Anzahl] Töpfe): Kappa A-B [..], App-A [..], App-B [..].
+Farbkarte erkannt [x] von [y]. Wiederholbarkeit [5 Werte] Prozentpunkte.
+1. Übernimm die Werte als Standard in Analyse-Kern, Handy-App und
+   docs/SPEZIFIKATION.md. Erkläre mir, wie das Box-Handy die neuen Werte
+   bekommt (z. B. neue Einstellungsdatei importieren).
+2. Erhöhe die Algorithmus-Version nach unserem Nummernschema (z. B. A-1.1
+   auf A-1.2) und trag die neuen Sollwerte der Referenzbilder ein.
+3. Schreibe docs/KALIBRIERUNG.md: Datum, Version, alte und neue Werte,
+   Ergebnisse. Keine Rohdaten, keine Namen. Trag die Freigabe in
+   docs/FORTSCHRITT.md ein.
+4. Sag mir, welche Referenzbilder jetzt eine andere Note bekommen.
+
+Arbeite nach CLAUDE.md: erst Plan in 5-10 Zeilen, dann auf mein OK warten;
+kleine Schritte; Tests schreiben und alle laufen lassen; keine echten
+Betriebsdaten ins Repository; CLAUDE.md, docs/ und app_version aktualisieren.
+Zum Schluss Pull Request und in einfachem Deutsch erklären, was du gemacht
+hast und wie ich es auf dem Box-Handy teste.</pre></div>
+<p>Nach dem Übernehmen („Merge“) öffnest du die App auf dem Box-Handy einmal mit Internet und folgst Claudes Anleitung aus dem Pull Request. Dann prüfst du in den Einstellungen die neue Algorithmus-Version. Ab jetzt steht sie in jeder Excel-Zeile.</p>
+
+<h2>10.6 Wann du neu prüfen musst</h2>
+<p>Die Kalibrierung gilt für genau diese Kette aus Box, Licht, Handy, Farbkarte, Programm und Pflanzen. Ändert sich ein Glied, prüfst du neu.</p>
+<p class="table-caption">Tabelle 10.3: Anlässe für eine neue Prüfung (Umfang: Vorschlag)</p>
+<table class="t">
+<colgroup><col width="30%"><col width="70%"></colgroup>
+<thead><tr><th>Anlass</th><th>Was du tust</th></tr></thead>
+<tbody>
+<tr><td>neue Sorte</td><td>Kurzprüfung mit 30–50 Töpfen dieser Sorte</td></tr>
+<tr><td>neue Saison (Sommer/Winter)</td><td>Kurzprüfung zu Saisonbeginn</td></tr>
+<tr><td>neues Box-Handy</td><td>Handyhalter anpassen und neu drucken (Kapitel 4), einrichten wie in Kapitel 5, Farbkarte und Topfkreis neu einstellen, volle Kalibrierung</td></tr>
+<tr><td>neue LEDs</td><td>Kontroll-Pflanze vorher und nachher fotografieren, dann Kurzprüfung</td></tr>
+<tr><td>neue Farbkarte</td><td>Kontroll-Pflanze vorher und nachher; weicht sie ab, Kurzprüfung</td></tr>
+<tr><td>Änderung am Algorithmus</td><td>Claude prüft mit den Referenzbildern; ändern sich Noten, Kurzprüfung</td></tr>
+</tbody>
+</table>
+<p>Eine <strong>Kurzprüfung</strong> läuft wie diese Etappe, nur mit 30–50 Töpfen und ohne Aufteilung: zwei Personen, App mit den festen Werten, Auswertung im Kalibrier-Modus „ohne Aufteilung“, Kriterien aus Tabelle 10.2. Fällt sie durch, folgt eine volle Kalibrierung. Nach Änderungen an Handy, LEDs oder Farbkarte bekommt die Kontroll-Pflanze eine neue Basis (10.7).</p>
+<p><strong>Vierteljährliche Stichprobe (Vorschlag):</strong> Auch ohne Anlass kann sich etwas verschieben. Alle drei Monate bonitieren zwei Personen 20 Töpfe quer über die Noten, dazu Foto mit der App und Note A in <code>note_manuell</code>. Bei 20 Töpfen schwankt Kappa stark; achte deshalb auf zwei Warnsignale:</p>
+<ul>
+<li>Bei mehr als 2 der 20 Töpfe liegt die App 2 oder mehr Noten neben <em>beiden</em> Personen.</li>
+<li>Wo App und Menschen abweichen, liegt die App fast immer auf derselben Seite (fast immer höher oder fast immer niedriger).</li>
+</ul>
+<p>Tritt eines davon auf: Kontrollbilder dieser Töpfe ansehen, Regelkarte prüfen, dann Kurzprüfung.</p>
+
+<h2>10.7 Die Kontroll-Pflanze</h2>
+<p>Manche Veränderungen kommen schleichend: LEDs werden schwächer, ein Update verstellt die Kamera, der Halter gibt nach. Echte Pflanzen verraten das nicht, denn sie verändern sich selbst. Eine <strong>Kontroll-Pflanze</strong> aus Kunststoff bleibt immer gleich. Ändern sich ihre Werte, hat sich die Box oder das Handy verändert.</p>
+<ul>
+<li><strong>Pflanze:</strong> eine Kunstpflanze, etwa so groß wie euer Basilikum, mit matten Blättern. Ideal sind einige gelbliche oder bräunliche Blätter (notfalls mit matter Farbe bemalen) – dann zeigt sie auch, ob sich die Farbgrenzen verschieben.</li>
+<li><strong>Topf und Etikett:</strong> fest in einem Topf wie euren, damit sie in den Zentrierring passt. Eine Markierung am Rand zeigt immer zur Klappe. Eigene Etikett-Karte mit der Topf-ID <code>KONTROLLE</code>.</li>
+<li><strong>Lagern:</strong> staubfrei und dunkel. Sonnenlicht bleicht Kunststoff aus – dann driftet die Kontroll-Pflanze selbst.</li>
+</ul>
+<p>Einmal pro Woche, z. B. montags vor der ersten Sitzung, fotografierst du sie in einer kurzen Sitzung der Sitzungsart „Kontroll-Pflanze“ (Baustein B9), mit Abdeckscheibe. Den Wert <code>befall_pct</code> trägst du in eine <strong>Regelkarte</strong> ein – ein Verlaufsdiagramm mit einem Band für normale Schwankungen (Abb. 10.2): Die Mittellinie ist das Mittel der ersten 5 Wochen nach der Freigabe, das Toleranzband reicht 2 Prozentpunkte darüber und darunter (Vorschlag). Bei einer Streuung um 1 Prozentpunkt wie im Beispiel in 8.5 fällt rein zufällig nur etwa jeder zwanzigste Wert heraus – deshalb erst neu fotografieren, dann Ursachen suchen. Auch <code>flaeche_px</code> darf sich kaum ändern, denn die Pflanze wächst nicht. Springt die Fläche (Vorschlag: um mehr als 5 %), sitzt das Handy anders im Halter oder die Kunstpflanze ist verbogen.</p>
+<p><strong>So liest du die Regelkarte</strong> (Faustregeln, Vorschlag):</p>
+<ul>
+<li><strong>Ein Wert außerhalb:</strong> Kontroll-Pflanze zweimal neu einsetzen und fotografieren. Wieder im Band: Ausreißer, notieren. Weiter außerhalb: Ursache suchen (Tabelle 11.6).</li>
+<li><strong>Sechs Werte in Folge, die stetig steigen (oder stetig fallen):</strong> schleichende Veränderung. Ursache suchen, auch wenn der Wert noch im Band liegt. Diese Trendregel ist bei Regelkarten in der Qualitätssicherung üblich.</li>
+<li><strong>Ursache lässt sich nicht beheben</strong> (z. B. LED-Streifen ersetzt): neu prüfen (10.6), danach neue Basis aus 5 Wochen.</li>
+</ul>
+<figure>
+<svg viewBox="0 0 800 345" role="img" aria-label="Regelkarte: Befall-Prozent der Kontroll-Pflanze über 20 Wochen. Bis Woche 11 schwanken die Werte um 8 Prozent im Band von 6 bis 10 Prozent. Von Woche 12 bis 17 steigen sie sechs Werte lang stetig an, in Woche 18 liegt der Wert mit 10,6 Prozent außerhalb. Nach Behebung der Ursache liegen die Wochen 19 und 20 wieder bei 8 Prozent." font-family="Source Sans 3, sans-serif">
+<text x="20" y="22" font-size="14" font-weight="700" fill="#1F2A24">Befall % der Kontroll-Pflanze</text>
+<!-- band -->
+<rect x="60" y="105" width="715" height="130" fill="#5B9A3C" fill-opacity="0.13"/>
+<line x1="60" y1="105" x2="775" y2="105" stroke="#5B9A3C" stroke-width="1.2" stroke-dasharray="6 4"/>
+<line x1="60" y1="235" x2="775" y2="235" stroke="#5B9A3C" stroke-width="1.2" stroke-dasharray="6 4"/>
+<!-- grid -->
+<line x1="60" y1="40" x2="775" y2="40" stroke="#C9D2C6" stroke-width="1"/>
+<line x1="60" y1="170" x2="775" y2="170" stroke="#2F6B3A" stroke-width="1.5"/>
+<line x1="60" y1="300" x2="775" y2="300" stroke="#6B7570" stroke-width="1.2"/>
+<line x1="60" y1="40" x2="60" y2="300" stroke="#6B7570" stroke-width="1.2"/>
+<g font-size="13" fill="#6B7570" text-anchor="end">
+<text x="52" y="44">12</text><text x="52" y="109">10</text><text x="52" y="174">8</text><text x="52" y="239">6</text><text x="52" y="304">4</text>
+</g>
+<g font-size="13" fill="#6B7570" text-anchor="middle">
+<text x="87.5" y="320">1</text><text x="227.5" y="320">5</text><text x="402.5" y="320">10</text><text x="577.5" y="320">15</text><text x="752.5" y="320">20</text>
+<text x="415" y="340">Woche</text>
+</g>
+<g stroke="#6B7570" stroke-width="1">
+<line x1="87.5" y1="300" x2="87.5" y2="305"/><line x1="227.5" y1="300" x2="227.5" y2="305"/><line x1="402.5" y1="300" x2="402.5" y2="305"/><line x1="577.5" y1="300" x2="577.5" y2="305"/><line x1="752.5" y1="300" x2="752.5" y2="305"/>
+</g>
+<text x="68" y="122" font-size="13" fill="#2F6B3A">Toleranzband 8,0 ± 2 Prozentpunkte</text>
+<text x="68" y="227" font-size="13" fill="#2F6B3A">Mittellinie 8,0 % = Mittel der Wochen 1–5</text>
+<!-- data -->
+<polyline fill="none" stroke="#2F6B3A" stroke-width="2" points="87.5,163.5 122.5,183.0 157.5,157.0 192.5,173.2 227.5,166.8 262.5,150.5 297.5,179.8 332.5,170.0 367.5,160.2 402.5,176.5 437.5,153.8 472.5,183.0 507.5,173.2 542.5,157.0 577.5,140.8 612.5,124.5 647.5,108.2 682.5,85.5 717.5,163.5 752.5,173.2"/>
+<g fill="#2F6B3A" stroke="#FFFFFF" stroke-width="2">
+<circle cx="87.5" cy="163.5" r="5"/><circle cx="122.5" cy="183.0" r="5"/><circle cx="157.5" cy="157.0" r="5"/><circle cx="192.5" cy="173.2" r="5"/><circle cx="227.5" cy="166.8" r="5"/><circle cx="262.5" cy="150.5" r="5"/><circle cx="297.5" cy="179.8" r="5"/><circle cx="332.5" cy="170.0" r="5"/><circle cx="367.5" cy="160.2" r="5"/><circle cx="402.5" cy="176.5" r="5"/><circle cx="437.5" cy="153.8" r="5"/><circle cx="472.5" cy="183.0" r="5"/><circle cx="507.5" cy="173.2" r="5"/><circle cx="542.5" cy="157.0" r="5"/><circle cx="577.5" cy="140.8" r="5"/><circle cx="612.5" cy="124.5" r="5"/><circle cx="647.5" cy="108.2" r="5"/><circle cx="717.5" cy="163.5" r="5"/><circle cx="752.5" cy="173.2" r="5"/>
+</g>
+<circle cx="682.5" cy="85.5" r="6.5" fill="#C0392B" stroke="#FFFFFF" stroke-width="2"/>
+<!-- annotations -->
+<text x="668" y="74" text-anchor="end" font-size="13" font-weight="700" fill="#C0392B">Woche 18: außerhalb des Bands</text>
+<path d="M472.5,244 L472.5,251 L647.5,251 L647.5,244" fill="none" stroke="#6B7570" stroke-width="1.2"/>
+<text x="560" y="270" text-anchor="middle" font-size="13" fill="#1F2A24">Wochen 12–17: sechs Werte in Folge,</text>
+<text x="560" y="287" text-anchor="middle" font-size="13" fill="#1F2A24">stetig steigend = Warnsignal</text>
+<text x="772" y="212" text-anchor="end" font-size="13" fill="#6B7570">Ursache behoben: wieder im Band</text>
+</svg>
+<figcaption>Abb. 10.2: Regelkarte der Kontroll-Pflanze – Beispiel mit erfundenen Werten. Bis Woche 11 schwanken die Werte zufällig um die Mittellinie. Ab Woche 12 steigen sie schleichend; nach sechs stetig steigenden Werten (Woche 17) suchst du die Ursache, noch bevor der Wert in Woche 18 das Band verlässt.</figcaption>
+</figure>
+<p>Die Regelkarte kannst du in Excel führen: eine Zeile je Woche, dazu ein Liniendiagramm mit Mittellinie und Band. Den Verlauf zeigt auch die App schon (Sitzungsart „Kontroll-Pflanze“ aus B9). Mittellinie, Band und die Warnregeln von oben kann Claude in einer eigenen Sitzung ergänzen – bitte dabei auch darum, die Werte der Kontroll-Pflanze dauerhaft zu behalten, wenn alte Fotos gelöscht werden.</p>
+
+<h2>10.8 Etappe 6 ist fertig, wenn …</h2>
+<ul class="checklist">
+<li>100–200 neue Töpfe sind von zwei Personen unabhängig bonitiert und mit der App fotografiert; der Wiederholungstest mit der App ist gemacht.</li>
+<li>Die Umrechnungstabelle ist an der Übungshälfte eingestellt und festgeschrieben, bevor die Prüfhälfte ausgewertet wurde.</li>
+<li>Die Prüfhälfte erfüllt die Kriterien aus Tabelle 10.2; die Freigabe steht mit Datum im Projekttagebuch.</li>
+<li>Claude hat die Werte übernommen und die Algorithmus-Version erhöht; <code>docs/KALIBRIERUNG.md</code> liegt im Repository; das Box-Handy zeigt die neue Version.</li>
+<li>Die Kontroll-Pflanze ist eingerichtet und zum ersten Mal fotografiert; die Regelkarte ist angelegt.</li>
+<li>Die vierteljährliche Stichprobe steht im Kalender.</li>
+</ul>
+</section>
+
+<section class="chapter" id="kap-11">
+<p class="kicker">Etappe 7 · laufend</p>
+<h1>11 Im Betrieb</h1>
+<p class="lead">Ab jetzt ist die App ein Werkzeug im Alltag. Dieses Kapitel zeigt, wie du dein Team einweist, die Daten sicherst, die Ergebnisse auswertest und Box und App über Jahre verlässlich hältst.</p>
+
+<table class="stage-meta">
+<tr><th>Ziel</th><td>Die App läuft verlässlich im Alltag: Team eingewiesen, Daten gesichert, Ergebnisse ausgewertet, Box gepflegt.</td></tr>
+<tr><th>Dauer</th><td>laufend. Einführung ca. ein halber Tag; danach ca. 5 Minuten je Sitzung für Export und Sicherung und 15–30 Minuten pro Woche für Kontroll-Pflanze und Wartung (Schätzung).</td></tr>
+<tr><th>Du</th><td>Team einweisen, Datensicherung und Wartung überwachen, auswerten, Updates planen. <span class="who team">Team</span> fotografiert nach Kurzanleitung und exportiert nach jeder Sitzung.</td></tr>
+<tr><th>Claude</th><td>behebt Fehler, die du mit Screenshot meldest; baut auf Wunsch die Saison-Auswertung (11.4) und Erweiterungen (11.7).</td></tr>
+<tr><th>Du brauchst</th><td>freigegebene App (Kapitel 10), Kurzanleitung (Kopiervorlage am Ende des Kapitels), 10 Übungstöpfe, die Datenablage aus Abschnitt 3.7, die Kontroll-Pflanze.</td></tr>
+<tr><th>Ergebnis</th><td>eingespieltes Team, lückenlos gesicherte Sitzungen, Auswertungen je Satz und Behandlung, gepflegte Box.</td></tr>
+</table>
+
+<div class="box info"><p class="box-title">Bei „No-Go“ in Etappe 4</p><p>Dieses Kapitel gilt genauso – nur ohne Kontrollbild, Analyse-Warnungen und Kontroll-Pflanze. Die Note tippt ihr nach den Referenzfotos ein (<code>note_manuell</code>); ausgewertet wird dann mit den Noten statt mit Befall %.</p></div>
+
+<h2>11.1 Das Team einführen</h2>
+<p>Alle, die fotografieren sollen, bekommen eine Einweisung von etwa 30 Minuten, am besten zu zweit oder zu dritt. Jede Person bekommt ein <strong>Kürzel</strong> aus zwei oder drei Buchstaben; in der App stehen keine Namen (Datenschutz). Vorher: Kurzanleitung an die Box hängen und 10 Übungstöpfe quer über die Noten mit Etikett-Karten bereitstellen. Wer fotografiert, startet eine eigene Sitzung mit dem eigenen Kürzel und dem Satz „Schulung“ – so üben alle auch den Sitzungsstart, und die Übungsfotos geraten nicht in eure Auswertungen.</p>
+<p>Vier Botschaften sollen nach der Einweisung hängen bleiben: (1) Jedes Kontrollbild ansehen – das dauert zwei Sekunden. (2) Eine Warnung nie wegklicken, erst die Ursache beheben. (3) Nach jeder Sitzung exportieren und sichern. (4) Die App sieht nur, was von oben sichtbar ist; die Blattunterseite wird weiterhin regelmäßig kontrolliert.</p>
+<p class="table-caption">Tabelle 11.1: Ablauf der Einweisung (ca. 30 Minuten)</p>
+<table class="t" style="break-inside: avoid">
+<colgroup><col width="13%"><col width="23%"><col width="64%"></colgroup>
+<thead><tr><th>Zeit</th><th>Schritt</th><th>Was passiert</th></tr></thead>
+<tbody>
+<tr><td>0–10 min</td><td><strong>Vorführen</strong> <span class="who du">Du</span></td><td>Einen Topf komplett nach Kurzanleitung. Kontrollbild erklären: grün = gesund, gelb = vergilbt, rot = braun. Eine Warnung absichtlich auslösen (z. B. ohne Etikett-Karte) und zeigen, was zu tun ist.</td></tr>
+<tr><td>10–25 min</td><td><strong>Selbst machen</strong> <span class="who team">Team</span></td><td>Jede Person bonitiert alle 10 Töpfe erst mit dem Auge und notiert die Noten. Dann fotografieren alle reihum, jede Person mindestens drei Töpfe. Du greifst nur ein, wenn nötig.</td></tr>
+<tr><td>25–30 min</td><td><strong>Vergleichen</strong></td><td>Eigene Note neben die App-Note legen. Töpfe mit 2 oder mehr Noten Unterschied gemeinsam am Kontrollbild ansehen. Fragen klären.</td></tr>
+</tbody>
+</table>
+
+<h2>11.2 Kurzanleitung zum Aushängen</h2>
+<p>Die <strong>Kurzanleitung</strong> fasst die Bedienung auf einer Seite zusammen: die Schritte, die Warnungen und was bei Problemen zu tun ist. Du findest sie als Kopiervorlage auf der letzten Seite dieses Kapitels. Bevor du sie kopierst: Warntexte mit deiner App abgleichen (sie können leicht anders lauten), in Schritt 6 ankreuzen, wie bei euch ausgelöst wird (direkt in der App oder per Import aus Open Camera, siehe Baustein B5), und Ansprechperson eintragen. Am besten laminiert an die Box hängen, daneben den Wartungsplan (11.5).</p>
+
+<h2>11.3 Datensicherung</h2>
+<p>Die App speichert alles im Speicher des Handy-Browsers. Das ist kein Archiv: Ein defektes Handy, ein Zurücksetzen oder „Browserdaten löschen“ mit „Cookies und Websitedaten“ – und alles ist weg. Wird der Speicher auf dem Handy knapp, darf der Browser Websitedaten sogar von sich aus löschen, wenn die App keinen „dauerhaften Speicher“ bekommen hat (Kapitel 9.4). Gesichert ist eine Sitzung erst, wenn Excel und Foto-ZIP am Ort aus Abschnitt 3.7 liegen (Firmen-PC, NAS oder Cloud-Ordner).</p>
+<p class="table-caption">Tabelle 11.2: Ordnerstruktur</p>
+<table class="t">
+<colgroup><col width="46%"><col width="54%"></colgroup>
+<thead><tr><th>Ordner</th><th>Was hineinkommt</th></tr></thead>
+<tbody>
+<tr><td><code>Bonitur/2027/</code></td><td>ein Ordner je Jahr</td></tr>
+<tr><td><code>Bonitur/2027/2027-02-10_Satz12/</code></td><td>eine Sitzung (Datum vorn, dann sortiert der PC richtig; zweite am selben Tag: <code>_2</code>): Excel und Foto-ZIP, unverändert</td></tr>
+<tr><td><code>Bonitur/2027/2027-02-15_Kontrolle/</code></td><td>wöchentliches Foto der Kontroll-Pflanze</td></tr>
+<tr><td><code>Bonitur/Pilot/</code>, <code>Bonitur/Kalibrierung/</code></td><td>Pilot (6.6) und Kalibrierung (Kapitel 10)</td></tr>
+<tr><td><code>Bonitur/Auswertungen/</code></td><td>deine Auswertungen – immer mit Kopien arbeiten</td></tr>
+</tbody>
+</table>
+<p><strong>Nach jeder Sitzung:</strong></p>
+<ol class="steps">
+<li><strong>Exportieren.</strong> In der App Excel und Foto-ZIP der Sitzung exportieren.</li>
+<li><strong>Übertragen.</strong> Per USB-Kabel oder über euren Cloud-Ordner in einen neuen Sitzungsordner kopieren.</li>
+<li><strong>Prüfen.</strong> ZIP öffnet sich? Anzahl Originalfotos im ZIP = Zeilen in der Excel = fotografierte Töpfe? Ein Foto stichprobenartig öffnen.</li>
+<li><strong>Bestätigen.</strong> Erst jetzt in der App den Export als gesichert bestätigen.</li>
+</ol>
+<div class="box warn"><p class="box-title">Achtung: Erst sichern, dann löschen</p><p>Fotos auf dem Handy löschst du erst, wenn der Export bestätigt ist <strong>und</strong> der Ordner mindestens einmal in der Datensicherung von PC, NAS oder Cloud war – z. B. am nächsten Tag. Originalfotos nie verändern: Nur mit ihnen kann eine verbesserte Auswertung später alles neu berechnen.</p></div>
+<p><strong>Jede Woche:</strong></p>
+<ul class="checklist">
+<li>Für jede Sitzung der Woche gibt es einen Ordner mit Excel und ZIP.</li>
+<li>Die Datensicherung ist gelaufen (Datum der letzten Sicherung ansehen).</li>
+<li>Auf dem Handy ist genug Speicher frei (1000 Fotos brauchen ca. 2–3 GB). Wird er knapp: alte Sitzungen löschen, die bestätigt und schon in der Datensicherung sind.</li>
+</ul>
+
+<h2>11.4 Ergebnisse auswerten</h2>
+<p>Die Übersicht der App zeigt für eine Sitzung Mittelwerte je Satz und Behandlung und den Verlauf über die Termine. Drei Regeln machen die Zahlen vergleichbar:</p>
+<ul>
+<li><strong>Immer dieselben Töpfe</strong> zu jedem Termin fotografieren (gleiche Topf-IDs). Dann zeigt der Verlauf die Entwicklung, nicht einen Wechsel der Töpfe.</li>
+<li><strong>Befall % mitteln, Noten ergänzend.</strong> Befall % ist stufenlos und genauer. Die mittlere Note ist leichter zu erklären, aber grob: 1,5 kann „halb 1, halb 2“ oder „halb 0, halb 3“ bedeuten.</li>
+<li><strong>Nur gleiche Algorithmus-Versionen vergleichen.</strong> Hat sich die Version geändert, wertet die Werkstatt die alten Originalfotos neu aus. Zeilen mit Warnung vorher einzeln prüfen.</li>
+</ul>
+<p>Für einen Versuch über mehrere Wochen kopierst du die Zeilen aller Exporte in ein Excel-Blatt (in <code>Bonitur/Auswertungen/</code>) und bildest die Mittelwerte mit der Funktion <code>MITTELWERTWENNS</code> – sie mittelt nur die Zeilen, die zu Satz, Behandlung und Termin passen (dafür eine Spalte „termin“ anlegen, in der nur das Datum ohne Uhrzeit steht) – oder mit einer PivotTable (Excel-Werkzeug, das eine Tabelle nach Gruppen zusammenfasst). Vorsicht: <code>MITTELWERT</code> rechnet auch Zeilen mit, die ein Filter gerade ausblendet. Bequemer ist die Saison-Auswertung (Prompt unten).</p>
+<h3>AUDPC: der Befall über die ganze Zeit in einer Zahl</h3>
+<p>Pflanzenschutzversuche fassen den Verlauf oft in der <strong>AUDPC</strong> zusammen (englisch „area under the disease progress curve“): der <strong>Fläche unter der Befallsverlaufskurve</strong>. Sie ist groß, wenn der Befall früh kommt, hoch steigt oder lange anhält. So rechnest du:</p>
+<ol class="steps">
+<li><strong>Abschnitte.</strong> Je zwei aufeinanderfolgende Termine bilden einen Abschnitt; vier Termine ergeben drei Abschnitte.</li>
+<li><strong>Fläche je Abschnitt.</strong> (Befall am ersten Termin + Befall am zweiten Termin) ÷ 2 × Tage dazwischen. Das ist ein Trapez unter der Kurve.</li>
+<li><strong>Addieren.</strong> Alle Flächen zusammenzählen. Die Einheit heißt „Prozent-Tage“ (%-Tage).</li>
+</ol>
+<p class="table-caption">Tabelle 11.3: Beispiel – mittlerer Befall % an vier Terminen (erfundene Werte)</p>
+<table class="t" style="break-inside: avoid">
+<thead><tr><th>Termin</th><th>Datum</th><th>Tag</th><th>Behandlung A</th><th>Behandlung B</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>10.02.2027</td><td>0</td><td>1 %</td><td>1 %</td></tr>
+<tr><td>2</td><td>15.02.2027</td><td>5</td><td>4 %</td><td>2 %</td></tr>
+<tr><td>3</td><td>22.02.2027</td><td>12</td><td>12 %</td><td>5 %</td></tr>
+<tr><td>4</td><td>01.03.2027</td><td>19</td><td>28 %</td><td>11 %</td></tr>
+</tbody>
+</table>
+<p class="table-caption">Tabelle 11.4: AUDPC Schritt für Schritt (Behandlung A)</p>
+<table class="t" style="break-inside: avoid">
+<thead><tr><th>Abschnitt</th><th>Mittelwert Befall</th><th>Tage dazwischen</th><th>Fläche</th></tr></thead>
+<tbody>
+<tr><td>Termin 1 → 2</td><td>(1 + 4) ÷ 2 = 2,5 %</td><td>5 − 0 = 5</td><td>2,5 × 5 = 12,5</td></tr>
+<tr><td>Termin 2 → 3</td><td>(4 + 12) ÷ 2 = 8 %</td><td>12 − 5 = 7</td><td>8 × 7 = 56</td></tr>
+<tr><td>Termin 3 → 4</td><td>(12 + 28) ÷ 2 = 20 %</td><td>19 − 12 = 7</td><td>20 × 7 = 140</td></tr>
+<tr><td colspan="3"><strong>AUDPC Behandlung A</strong> = 12,5 + 56 + 140</td><td><strong>208,5 %-Tage</strong></td></tr>
+</tbody>
+</table>
+<p>Für Behandlung B genauso: (1 + 2) ÷ 2 × 5 = 7,5; (2 + 5) ÷ 2 × 7 = 24,5; (5 + 11) ÷ 2 × 7 = 56. Zusammen <strong>88 %-Tage</strong>. B hat also nur gut 40 % der Befallsfläche von A (88 ÷ 208,5 = 0,42).</p>
+<figure>
+<svg viewBox="0 0 800 360" role="img" aria-label="Befallsverlauf über 19 Tage: Behandlung A steigt von 1 auf 28 Prozent, die Fläche darunter ist braun gefüllt und in drei Trapeze mit 12,5, 56 und 140 Prozent-Tagen geteilt. Behandlung B steigt gestrichelt von 1 auf 11 Prozent." font-family="Source Sans 3, sans-serif">
+<text x="20" y="25" font-size="14" font-weight="700" fill="#1F2A24">Befall %</text>
+<!-- grid -->
+<g stroke="#C9D2C6" stroke-width="1">
+<line x1="90" y1="40" x2="720" y2="40"/><line x1="90" y1="130" x2="720" y2="130"/><line x1="90" y1="220" x2="720" y2="220"/>
+</g>
+<g font-size="13" fill="#6B7570" text-anchor="end">
+<text x="80" y="44">30</text><text x="80" y="134">20</text><text x="80" y="224">10</text><text x="80" y="314">0</text>
+</g>
+<!-- area A -->
+<polygon points="90,310 90,301 255.8,274 487.9,202 720,58 720,310" fill="#8A5A2B" fill-opacity="0.18"/>
+<g stroke="#8A5A2B" stroke-width="1.2" stroke-dasharray="4 3">
+<line x1="255.8" y1="310" x2="255.8" y2="274"/><line x1="487.9" y1="310" x2="487.9" y2="202"/>
+</g>
+<!-- axes -->
+<line x1="90" y1="310" x2="725" y2="310" stroke="#6B7570" stroke-width="1.2"/>
+<line x1="90" y1="40" x2="90" y2="310" stroke="#6B7570" stroke-width="1.2"/>
+<g font-size="13" text-anchor="middle">
+<text x="90" y="330" fill="#1F2A24">Tag 0</text><text x="90" y="347" fill="#6B7570">10.02.</text>
+<text x="255.8" y="330" fill="#1F2A24">Tag 5</text><text x="255.8" y="347" fill="#6B7570">15.02.</text>
+<text x="487.9" y="330" fill="#1F2A24">Tag 12</text><text x="487.9" y="347" fill="#6B7570">22.02.</text>
+<text x="720" y="330" fill="#1F2A24">Tag 19</text><text x="720" y="347" fill="#6B7570">01.03.</text>
+</g>
+<!-- trapezoid labels -->
+<line x1="172" y1="256" x2="172" y2="304" stroke="#1F2A24" stroke-width="1"/>
+<text x="172" y="250" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2A24">12,5</text>
+<text x="372" y="264" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2A24">56</text>
+<text x="604" y="200" text-anchor="middle" font-size="15" font-weight="700" fill="#1F2A24">140</text>
+<!-- line B -->
+<polyline fill="none" stroke="#2B5D8C" stroke-width="2.5" stroke-dasharray="8 5" points="90,301 255.8,292 487.9,265 720,211"/>
+<g fill="#2B5D8C" stroke="#FFFFFF" stroke-width="2">
+<rect x="85" y="296" width="10" height="10"/><rect x="250.8" y="287" width="10" height="10"/><rect x="482.9" y="260" width="10" height="10"/><rect x="715" y="206" width="10" height="10"/>
+</g>
+<!-- line A -->
+<polyline fill="none" stroke="#8A5A2B" stroke-width="2.5" points="90,301 255.8,274 487.9,202 720,58"/>
+<g fill="#8A5A2B" stroke="#FFFFFF" stroke-width="2">
+<circle cx="90" cy="301" r="5.5"/><circle cx="255.8" cy="274" r="5.5"/><circle cx="487.9" cy="202" r="5.5"/><circle cx="720" cy="58" r="5.5"/>
+</g>
+<!-- direct labels -->
+<text x="732" y="63" font-size="14" fill="#1F2A24">A: 28 %</text>
+<text x="732" y="216" font-size="14" fill="#1F2A24">B: 11 %</text>
+<!-- legend -->
+<rect x="110" y="55" width="28" height="16" fill="#8A5A2B" fill-opacity="0.18" stroke="#8A5A2B" stroke-width="2"/>
+<text x="148" y="68" font-size="14" fill="#1F2A24">Behandlung A – Fläche = AUDPC 208,5 %-Tage</text>
+<line x1="110" y1="92" x2="138" y2="92" stroke="#2B5D8C" stroke-width="2.5" stroke-dasharray="8 5"/>
+<rect x="119" y="87" width="10" height="10" fill="#2B5D8C"/>
+<text x="148" y="97" font-size="14" fill="#1F2A24">Behandlung B – AUDPC 88 %-Tage</text>
+</svg>
+<figcaption>Abb. 11.1: Befallsverlauf zweier Behandlungen – Beispiel mit den erfundenen Werten aus Tabelle 11.3. Die braune Fläche unter der Kurve von Behandlung A ist ihre AUDPC; die gestrichelten Linien teilen sie in die drei Trapeze aus Tabelle 11.4.</figcaption>
+</figure>
+<div class="box tip"><p class="box-title">Tipp: AUDPC fair vergleichen</p><p>Direkt vergleichen kannst du AUDPC-Werte nur, wenn die Versuche gleich lang laufen, am besten mit denselben Terminen. Laufen sie unterschiedlich lang, teil die AUDPC durch die Tage vom ersten bis zum letzten Termin. Das ergibt den mittleren Befall über die ganze Zeit (Fachbegriff: standardisierte AUDPC): A 208,5 ÷ 19 = ca. 11,0 %, B 88 ÷ 19 = ca. 4,6 %. Mit Noten rechnest du genauso.</p></div>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – Saison-Auswertung in der Werkstatt</p><pre>Lies CLAUDE.md, KONZEPT.md, docs/SPEZIFIKATION.md (Abschnitt Betrieb) und
+docs/FORTSCHRITT.md. Erweitere die Analyse-Werkstatt um eine
+Saison-Auswertung:
+1. Ich wähle mehrere Export-Excel-Dateien der Handy-App aus (ohne Fotos).
+2. Filter: Zeitraum, Satz, Sorte, Behandlung. Zeilen mit Warnung und die
+   Kontroll-Pflanze sind standardmäßig ausgeschlossen (umschaltbar).
+3. Je Satz, Behandlung und Termin: Anzahl Töpfe, Mittelwert befall_pct
+   und note_app; Verlaufskurve je Behandlung; AUDPC nach der Formel in
+   der Spezifikation (Tage zwischen den Terminen aus dem Datum).
+4. Deutlicher Hinweis, wenn Algorithmus-Versionen gemischt sind.
+5. Ergebnisse als Excel speichern. Alles lokal im Browser.
+Prüfe die AUDPC-Rechnung mit einem Test: Tage 0, 5, 12, 19 und Befall
+1, 4, 12, 28 % ergeben 208,5.
+
+Arbeite nach CLAUDE.md: erst Plan in 5-10 Zeilen, dann auf mein OK warten;
+kleine Schritte; Tests schreiben und alle laufen lassen; keine echten
+Betriebsdaten ins Repository; CLAUDE.md und docs/ aktualisieren.
+Zum Schluss Pull Request und in einfachem Deutsch erklären, was du gemacht
+hast und wie ich es am PC teste.</pre></div>
+
+<h2>11.5 Wartungsplan</h2>
+<p class="table-caption">Tabelle 11.5: Wartungsplan</p>
+<table class="t">
+<colgroup><col width="17%"><col width="67%"><col width="16%"></colgroup>
+<thead><tr><th>Wann</th><th>Was</th><th>Wer</th></tr></thead>
+<tbody>
+<tr><td>jede Sitzung</td><td>LED an und gleichmäßig hell · Handy geladen und fest im Halter · Kameralinse sauber (weiches Brillen- oder Mikrofasertuch) · Abdeckscheibe sauber und trocken · Farbkarte frei, sauber, nicht verrutscht · danach LED aus, Klappe zu: So liegt die Farbkarte im Dunkeln</td><td><span class="who team">Team</span></td></tr>
+<tr><td>jede Woche</td><td>Kontroll-Pflanze fotografieren, Regelkarte (10.7) · Box innen von Erde und Blattresten befreien · Abdeckscheibe und Zentrierring reinigen · Datensicherung prüfen (11.3)</td><td><span class="who du">Du</span> <span class="who team">Team</span></td></tr>
+<tr><td>jeden Monat</td><td>LED-Streifen: alle LEDs an, keine dunklen Stellen · Farbkarte auf Flecken und Kratzer prüfen; die Farbfelder nie mit den Fingern berühren (Hautfett verändert sie) · Halter, Klappe, Scharniere oder Magnete fest · Speicher auf dem Handy</td><td><span class="who du">Du</span></td></tr>
+<tr><td>jedes Quartal</td><td>Stichprobe: 20 Töpfe doppelt bonitieren (10.6)</td><td><span class="who du">Du</span>, A und B</td></tr>
+<tr><td>Saisonwechsel (Sommer/Winter)</td><td>Kurzprüfung nach Tabelle 10.3 · Team kurz auffrischen</td><td><span class="who du">Du</span></td></tr>
+<tr><td>jedes Jahr</td><td>Farbkarte auf Verblassen prüfen; der Hersteller Calibrite empfiehlt, sie je nach Lichtbelastung alle 2–4 Jahre zu ersetzen (danach neu prüfen, Tabelle 10.3) · Verschleißteile nachdrucken (Abdeckscheibe, Etikettenhalter) · Wiederherstellung testen: eine alte Sitzung aus der Sicherung zurückholen und öffnen</td><td><span class="who du">Du</span></td></tr>
+</tbody>
+</table>
+<p><strong>Handy-Updates planen.</strong> Updates von System, Browser oder Kamera können Farben und Belichtung verändern; deshalb hast du automatische App-Updates und, soweit möglich, auch automatische System-Updates abgeschaltet (Kapitel 5.2). Spiel sie geplant ein, nicht mitten in einer Versuchsreihe:</p>
+<ol class="steps">
+<li><strong>Vorher.</strong> Kontroll-Pflanze fotografieren, Werte notieren.</li>
+<li><strong>Update.</strong> System- und App-Updates installieren (Kapitel 5.2), Handy neu starten.</li>
+<li><strong>Nachher.</strong> Testfoto und Kontroll-Pflanze. Im Band, keine Warnung? Weiter wie bisher. Sonst Ursache suchen (Tabelle 11.6), notfalls neu prüfen (10.6).</li>
+</ol>
+
+<h2>11.6 Fehlerbehebung</h2>
+<p class="table-caption">Tabelle 11.6: Häufige Probleme, wahrscheinliche Ursachen, was du tust</p>
+<table class="t">
+<colgroup><col width="27%"><col width="33%"><col width="40%"></colgroup>
+<thead><tr><th>Problem</th><th>Wahrscheinliche Ursache</th><th>Was du tust</th></tr></thead>
+<tbody>
+<tr><td>„Farbkarte nicht gefunden“ bzw. „Farbkarte prüfen“</td><td>Karte verrutscht, verdeckt, schmutzig; Handy schief im Halter</td><td>Karte zurück in den Halter, Handy richtig einsetzen, wiederholen</td></tr>
+<tr><td>„Bild zu dunkel“ (oder zu hell)</td><td>LED aus, Netzteil zu schwach, Powerbank leer; bei „zu hell“: Kamera-Einstellung verstellt</td><td>LED und Stromversorgung prüfen; Kamera-Einstellungen mit dem Einstellungs-Zettel (Tabelle 5.2) vergleichen; wiederholen</td></tr>
+<tr><td>„Topf-ID nicht gelesen“</td><td>Karte falsch herum, nicht ganz eingesteckt oder verknickt</td><td>richtig einstecken oder ID von Hand eintragen; verknickte Karten neu drucken</td></tr>
+<tr><td>unplausibel viel Braun (Rot im Kontrollbild)</td><td>Abdeckscheibe vergessen oder verrutscht, Erde sichtbar</td><td>Abdeckscheibe auflegen, wiederholen</td></tr>
+<tr><td>weiße Flecken oder Lücken auf Blättern</td><td>Glanzlichter: Pflanze nass</td><td>abtrocknen lassen, später fotografieren</td></tr>
+<tr><td>junge Triebspitzen gelb gefärbt</td><td>Grenze gelb/grün sitzt zu hoch</td><td>nicht spontan nachstellen: Beispiele sammeln, bei der nächsten Prüfung ansehen (10.6)</td></tr>
+<tr><td>Streifen im Foto</td><td>LED gedimmt oder ungeeignetes Netzteil (Flimmern)</td><td>nicht dimmen, das vorgesehene USB-Netzteil nutzen</td></tr>
+<tr><td>Foto unscharf</td><td>Linse schmutzig, Fokus verstellt</td><td>Linse reinigen, Fokus-Einstellung prüfen (Kapitel 5)</td></tr>
+<tr><td>plötzlich Warnungen bei fast allen Fotos</td><td>Handy im Halter verschoben, Update</td><td>Handy richtig einsetzen; Farbkarte und Topfkreis in den Einstellungen prüfen</td></tr>
+<tr><td>Werte der Kontroll-Pflanze verschoben</td><td>Licht oder Kamera verändert (LED gealtert, Update, Halter)</td><td>Ursache suchen und beheben; sonst neu kalibrieren (10.6)</td></tr>
+<tr><td>App lädt nicht</td><td>Offline-Daten fehlen, z. B. nach einem Update</td><td>einmal mit Internet öffnen, danach geht sie wieder offline</td></tr>
+<tr><td>Fehler in der App</td><td>Programmfehler</td><td>Screenshot und Schritte aufschreiben, mit dem Prompt „Fehler melden“ aus Abschnitt 9.8 an Claude geben</td></tr>
+</tbody>
+</table>
+
+<h2>11.7 Weiterentwickeln – nur wenn nötig</h2>
+<p>Jede Erweiterung kostet Zeit, bekommt eine neue Algorithmus-Version und durchläuft Etappe 6 erneut. Baue nur, was deine Daten verlangen – die archivierten Originalfotos lassen sich dann neu auswerten.</p>
+<p class="table-caption">Tabelle 11.7: Mögliche Erweiterungen</p>
+<table class="t">
+<colgroup><col width="21%"><col width="46%"><col width="33%"></colgroup>
+<thead><tr><th>Erweiterung</th><th>Was sie bringt, was sie braucht</th><th>Wann sinnvoll</th></tr></thead>
+<tbody>
+<tr><td><strong>Mehrere Töpfe pro Foto</strong></td><td>schneller: ein Foto für eine ganze Palette. Braucht eine größere Box und eine höhere Kamera.</td><td>wenn das Fotografieren zum Engpass wird</td></tr>
+<tr><td><strong>Zusätzliches Schrägfoto</strong></td><td>sieht untere Blätter, an denen der Befall beginnt. Braucht eine zweite Kameraposition.</td><td>wenn der unsichtbare Befall für euren Zweck zu hoch ist</td></tr>
+<tr><td><strong>KI-Segmentierung</strong></td><td>lernendes Modell statt Farbschwellen, z. B. für Erde gegen Nekrose. Braucht Hunderte markierte Fotos.</td><td>wenn Kontrollbilder Fehler zeigen, die Schwellen nicht beheben</td></tr>
+<tr><td><strong>Zentrale Datenbank</strong></td><td>alle Sitzungen an einem Ort. Braucht Online-Speicher, Zugangsregeln, Datenschutz-Prüfung und Pflege.</td><td>wenn mehrere Boxen oder Standorte Daten liefern</td></tr>
+</tbody>
+</table>
+
+<h2>11.8 Läuft der Betrieb rund?</h2>
+<ul class="checklist">
+<li>Alle, die fotografieren, sind eingewiesen und haben ein Kürzel (keine Namen in der App).</li>
+<li>Die Kurzanleitung hängt an der Box, Warntexte und Ansprechperson sind eingetragen.</li>
+<li>Jede Sitzung ist in <code>Bonitur/Jahr/Datum_Satz/</code> gesichert, bevor Fotos vom Handy gelöscht werden.</li>
+<li>Kontroll-Pflanze, Wartungsplan und Quartals-Stichprobe laufen nach Kalender.</li>
+<li>Der erste Versuch ist ausgewertet, die AUDPC einmal von Hand nachgerechnet.</li>
+<li>Die Blattunterseite wird weiterhin regelmäßig kontrolliert.</li>
+</ul>
+<div class="page-break"></div>
+<div class="template" style="font-size:11pt">
+<h3 style="font-size:16pt">Kurzanleitung: Bonitur mit der Fotobox</h3>
+<p style="font-size:9.5pt">Stand: ______________ &nbsp;&nbsp; App-Version: ______________</p>
+<ol class="steps">
+<li><strong>Licht an.</strong> LED-Streifen einschalten.</li>
+<li><strong>App öffnen, Sitzung starten.</strong> Datum prüfen, dein Kürzel, Satz bzw. Versuch wählen.</li>
+<li><strong>Topf vorbereiten.</strong> Pflanze trocken (nicht direkt nach dem Gießen), keine Blätter entfernen. Abdeckscheibe um die Stängel auf den Topf legen.</li>
+<li><strong>Etikett-Karte</strong> in den Etikettenhalter stecken, QR-Code nach oben.</li>
+<li><strong>Topf einsetzen.</strong> In den Zentrierring stellen. Klappe zu.</li>
+<li><strong>Auslösen:</strong> ☐ in der App &nbsp; ☐ in Open Camera mit der Lautstärketaste, dann das Foto in der App importieren. Das Handy dabei nicht verschieben.</li>
+<li><strong>Kontrollbild prüfen.</strong> Färbung plausibel? Warnung da? Topf-ID richtig?</li>
+<li><strong>Speichern</strong> – oder „Wiederholen“, wenn etwas nicht stimmt. Nächster Topf: weiter bei Schritt 3.</li>
+<li><strong>Nach der Sitzung: exportieren und sichern.</strong> Excel und Foto-ZIP in den Ordner <code>Bonitur/Jahr/Datum_Satz/</code> kopieren, Anzahl der Fotos prüfen, dann den Export in der App bestätigen. Licht aus.</li>
+</ol>
+<table class="t" style="font-size:9.5pt">
+<colgroup><col width="38%"><col width="62%"></colgroup>
+<thead><tr><th>Warnung / was du siehst</th><th>Was tun</th></tr></thead>
+<tbody>
+<tr><td>„Farbkarte nicht gefunden“, „Farbkarte prüfen“</td><td>Karte im Halter, frei von Blättern? Handy richtig im Halter? „Wiederholen“.</td></tr>
+<tr><td>„Bild zu dunkel“</td><td>LED an? Netzteil bzw. Powerbank eingesteckt und geladen? „Wiederholen“.</td></tr>
+<tr><td>„Topf-ID nicht gelesen“</td><td>Karte richtig herum und ganz im Halter? „Wiederholen“ oder ID von Hand eintragen.</td></tr>
+<tr><td>„Keine Pflanze gefunden“</td><td>Topf im Zentrierring? Klappe zu? „Wiederholen“.</td></tr>
+<tr><td>viel Rot auf Erde oder Topfrand</td><td>Abdeckscheibe vergessen oder verrutscht: auflegen, „Wiederholen“.</td></tr>
+<tr><td>weiße Flecken, Lücken in Blättern</td><td>Pflanze nass? Später noch einmal fotografieren.</td></tr>
+</tbody>
+</table>
+<p><strong>Bei Problemen:</strong> Einmal „Wiederholen“. Klappt es wieder nicht: Topf zur Seite stellen, in „Bemerkung“ notieren, mit dem nächsten Topf weitermachen. App lädt nicht: Handy mit dem Internet verbinden und die App neu öffnen.</p>
+<p><strong>Bitte nie:</strong> Einstellungen in der App ändern · Sitzungen oder Fotos löschen · das Handy aus dem Halter nehmen.</p>
+<p><strong>Geht gar nichts mehr, Bescheid geben:</strong> ______________________ &nbsp; Tel.: ______________</p>
+</div>
+</section>

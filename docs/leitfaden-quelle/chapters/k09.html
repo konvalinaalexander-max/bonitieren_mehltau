@@ -1,0 +1,719 @@
+<section class="chapter" id="kap-9">
+<p class="kicker">Etappe 5 · ca. 3–6 Wochen</p>
+<h1>9 Die Handy-App bauen – mit Claude</h1>
+<p class="lead">Claude baut die Handy-App in neun Bausteinen, du prüfst jeden davon auf dem Box-Handy und gibst ihn frei. Am Ende läuft auf dem Box-Handy eine App, die auch ohne Internet funktioniert und die Ergebnisse als Excel-Datei und ZIP-Archiv ausgibt.</p>
+<table class="stage-meta">
+<tr><th>Ziel</th><td>Die Handy-App Baustein für Baustein bauen lassen, auf dem Box-Handy testen und übernehmen – mit automatischer Analyse (Go) oder als digitale Sicht-Bonitur (No-Go).</td></tr>
+<tr><th>Dauer</th><td>ca. 3–6 Wochen nebenbei (grobe Schätzung); je Baustein meist 1–3 Claude-Sitzungen plus Testen</td></tr>
+<tr><th>Du</th><td>Prompts abschicken, Fragen beantworten, auf dem Box-Handy testen, Fehler melden, übernehmen („Merge“), Einstellungen in deinen Konten (Hosting)</td></tr>
+<tr><th>Claude</th><td>schreibt Code, automatische Tests und Dokumentation, bereitet Hosting und Tests bei GitHub vor, erklärt jeden Schritt</td></tr>
+<tr><th>Du brauchst</th><td>Claude-Abo mit Claude Code und GitHub-Zugang (3.9) · Hosting-Entscheidung (3.5) · Pilot-Entscheidung und Einstellungsdatei aus Etappe 4 · fertige Fotobox und Box-Handy mit Chrome · ca. 20 Testtöpfe · Firmen-PC · Drucker · Projekttagebuch</td></tr>
+<tr><th>Ergebnis</th><td>installierte Handy-App auf dem Box-Handy, die offline misst, speichert und exportiert · Code, Tests und Dokumentation im Repository</td></tr>
+</table>
+<p><strong>Wo du stehst:</strong> Die ersten beiden Bausteine – B1 Analyse-Kern und B2 Analyse-Werkstatt – hast du schon in Etappe 4 gebraucht (Kapitel 8.1). Ihre Prompts stehen trotzdem hier in 9.7, damit alle Bausteine an einer Stelle sind. In dieser Etappe folgen B3 bis B9. Hat der Pilot ein No-Go ergeben, baust du dieselbe App ohne automatische Analyse; der Unterschied steckt fast nur in Baustein B6.</p>
+
+<h2>9.1 So arbeitest du mit Claude</h2>
+<p>Du arbeitest in <strong>Claude Code</strong>: im Browser unter <a href="https://claude.ai/code">claude.ai/code</a> oder im Reiter „Code“ der Claude-App. Eine <strong>Sitzung</strong> ist ein Gespräch, in dem Claude an deinem Repository arbeitet. Claude kopiert das Repository dafür auf einen Rechner in der Cloud, schreibt dort den Code, lässt die Tests laufen und lädt das Ergebnis als eigenen <strong>Zweig</strong> zu GitHub hoch. Dein Hauptstand, der Zweig <code>main</code>, bleibt unberührt, bis du die Änderung übernimmst.</p>
+<ol class="steps">
+<li><strong>Sitzung starten.</strong> Claude Code öffnen, unter dem Eingabefeld das Repository <code>bonitieren_mehltau</code> auswählen, den Kopier-Prompt aus 9.7 einfügen, eckige Klammern ersetzen, absenden.</li>
+<li><strong>Plan bestätigen.</strong> Claude nennt zuerst einen kurzen Plan und offene Fragen. Du antwortest in normalen Worten. Verstehst du etwas nicht, schreib: „Erkläre mir das ohne Fachbegriffe.“ Noch sicherer: Wählst du vor dem Absenden im Modus-Feld neben dem Eingabefeld „Plan“, ändert Claude keine Datei, bevor du den Plan freigegeben hast.</li>
+<li><strong>Claude arbeitet.</strong> Das dauert Minuten bis etwa eine Stunde. Du kannst das Fenster schließen – die Sitzung läuft in der Cloud weiter.</li>
+<li><strong>Pull Request.</strong> Wenn Claude fertig ist, lädt es seinen Zweig zu GitHub hoch und erklärt, was es gemacht hat. Die Kopier-Prompts bitten Claude, den Änderungsvorschlag selbst anzulegen. Klappt das nicht, tippst du auf die Änderungsanzeige (z. B. „+42 −18“) und oben in der Änderungsansicht auf „Create PR“ – als normalen Pull Request, nicht als Entwurf („Draft“), denn einen Entwurf kannst du nicht direkt übernehmen. Du bekommst einen Link zum Pull Request auf GitHub.</li>
+<li><strong>Automatische Tests abwarten.</strong> Im Pull Request laufen die Tests von selbst. Grüner Haken: alles bestanden. Rotes Kreuz: nicht übernehmen, sondern Claude in derselben Sitzung Bescheid sagen.</li>
+<li><strong>Auf dem Box-Handy testen.</strong> Nach Claudes Test-Anleitung und der Checkliste in 9.8.</li>
+<li><strong>Rückmeldung oder übernehmen.</strong> Stimmt etwas nicht, schreibst du es in dieselbe Sitzung. Claude bessert auf demselben Zweig nach, der Pull Request aktualisiert sich von selbst. Auch nach Tagen kannst du die Sitzung in der Liste wieder öffnen – das Gespräch ist noch da. Passt alles: auf GitHub „Merge pull request“ und dann „Confirm merge“.</li>
+<li><strong>Live.</strong> Meist nach 1–2 Minuten ist die neue Version online (laut GitHub kann es bis zu 10 Minuten dauern). Öffnest du die App mit Internet, meldet sie „Neue Version“.</li>
+<li><strong>Nächster Baustein, neue Sitzung.</strong> Die alte Sitzung kannst du archivieren. Jeder Baustein bekommt eine frische Sitzung.</li>
+</ol>
+<figure>
+<svg viewBox="0 0 800 334" role="img" aria-label="Arbeitszyklus mit Claude: Idee und Prompt, Claude arbeitet auf eigenem Zweig, Pull Request, Test auf dem Box-Handy, Merge, live; bei Fehlern zurück zu Claude" font-family="Source Sans 3, sans-serif">
+<defs>
+<marker id="k9-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2F6B3A"/></marker>
+<marker id="k9-arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C0392B"/></marker>
+</defs>
+<!-- row 1 -->
+<rect x="10" y="30" width="210" height="96" rx="8" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="2"/>
+<rect x="295" y="30" width="210" height="96" rx="8" fill="#F3F6F1" stroke="#2B5D8C" stroke-width="2"/>
+<rect x="580" y="30" width="210" height="96" rx="8" fill="#F3F6F1" stroke="#2B5D8C" stroke-width="2"/>
+<!-- row 2 -->
+<rect x="580" y="196" width="210" height="96" rx="8" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="2"/>
+<rect x="295" y="196" width="210" height="96" rx="8" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="2"/>
+<rect x="10" y="196" width="210" height="96" rx="8" fill="#F3F6F1" stroke="#6B7570" stroke-width="2"/>
+<g text-anchor="middle" fill="#1F2A24">
+<text x="115" y="62" font-size="16" font-weight="700">1  Idee und Prompt</text>
+<text x="115" y="86" font-size="14">Baustein wählen,</text>
+<text x="115" y="106" font-size="14">Kopier-Prompt einfügen</text>
+<text x="400" y="62" font-size="16" font-weight="700">2  Claude arbeitet</text>
+<text x="400" y="86" font-size="14">auf eigenem Zweig:</text>
+<text x="400" y="106" font-size="14">Code, Tests, Doku</text>
+<text x="685" y="62" font-size="16" font-weight="700">3  Pull Request</text>
+<text x="685" y="86" font-size="14">Änderungsvorschlag,</text>
+<text x="685" y="106" font-size="14">Tests laufen automatisch</text>
+<text x="685" y="228" font-size="16" font-weight="700">4  Testen</text>
+<text x="685" y="252" font-size="14">auf dem Box-Handy</text>
+<text x="685" y="272" font-size="14">(Vorschau, Checkliste 9.8)</text>
+<text x="400" y="228" font-size="16" font-weight="700">5  Merge</text>
+<text x="400" y="252" font-size="14">Du übernimmst die</text>
+<text x="400" y="272" font-size="14">Änderung nach main</text>
+<text x="115" y="228" font-size="16" font-weight="700">6  Live</text>
+<text x="115" y="252" font-size="14">nach ca. 1–2 Minuten</text>
+<text x="115" y="272" font-size="14">neue Version online</text>
+</g>
+<g stroke="#2F6B3A" stroke-width="2.2" fill="none" marker-end="url(#k9-arrow)">
+<line x1="222" y1="78" x2="290" y2="78"/>
+<line x1="507" y1="78" x2="575" y2="78"/>
+<line x1="740" y1="128" x2="740" y2="191"/>
+<line x1="578" y1="244" x2="510" y2="244"/>
+<line x1="293" y1="244" x2="225" y2="244"/>
+<line x1="60" y1="194" x2="60" y2="131"/>
+</g>
+<text x="72" y="167" font-size="13" fill="#6B7570">nächster Baustein</text>
+<path d="M620 194 V168 H420 V131" fill="none" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#k9-arrow-red)"/>
+<text x="432" y="159" font-size="13" fill="#C0392B">Fehler? Beschreiben – Claude bessert nach</text>
+<!-- legend -->
+<g font-size="13" fill="#1F2A24">
+<rect x="10" y="310" width="14" height="14" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="2"/><text x="30" y="322">Du</text>
+<rect x="80" y="310" width="14" height="14" fill="#F3F6F1" stroke="#2B5D8C" stroke-width="2"/><text x="100" y="322">Claude</text>
+<rect x="170" y="310" width="14" height="14" fill="#F3F6F1" stroke="#6B7570" stroke-width="2"/><text x="190" y="322">automatisch (GitHub bzw. Hosting-Dienst)</text>
+</g>
+</svg>
+<figcaption>Abb. 9.1: Der Arbeitszyklus für jeden Baustein. Dein Hauptstand <code>main</code> ändert sich erst in Schritt 5 – vorher kannst du alles verwerfen.</figcaption>
+</figure>
+<div class="box info"><p class="box-title">Claude hat kein Gedächtnis zwischen Sitzungen</p><p>Jede Sitzung beginnt bei null. Was Claude wissen muss, steht deshalb in Dateien im Repository: <code>CLAUDE.md</code> (Projektregeln), <code>docs/SPEZIFIKATION.md</code> (Zahlen und Entscheidungen) und <code>docs/FORTSCHRITT.md</code> (welcher Baustein fertig ist, was offen ist). Alle drei legt oder pflegt Claude selbst. <code>CLAUDE.md</code> liest Claude Code zu Beginn jeder Sitzung sogar von selbst; die Kopier-Prompts in 9.7 lassen sie ab B2 zur Sicherheit ausdrücklich lesen.</p></div>
+<div class="box tip"><p class="box-title">Tipp</p><p>Sitzungen verbrauchen das Nutzungskontingent deines Claude-Abos – gemeinsam mit deiner übrigen Claude-Nutzung. Kleine, klar umrissene Aufträge kommen schneller zum Ziel als ein Riesenauftrag – und sind leichter zu testen.</p></div>
+
+<div class="box tip"><p class="box-title">So nutzt du die Prompts</p><p>Jeder Kopier-Prompt in 9.7 ist vollständig – kopier ihn ganz, auch den Schlussabsatz „Arbeite …“. Er sorgt dafür, dass Claude zuerst einen Plan zeigt, Tests schreibt, die Dokumentation pflegt und dir erklärt, wie du testest. Stellen in eckigen Klammern ersetzt du. Reicht eine Sitzung nicht, schreib nach dem Übernehmen in einer neuen Sitzung: „Mach bei B5 weiter, lies docs/FORTSCHRITT.md.“</p></div>
+
+<h2>9.2 Die wichtigsten GitHub-Begriffe</h2>
+<p>GitHub ist die Plattform, auf der dein Repository liegt. Tabelle 9.1 erklärt die Wörter, die dir dabei begegnen. Die Knöpfe auf GitHub sind englisch beschriftet.</p>
+<p class="table-caption">Tabelle 9.1: GitHub-Begriffe in einfachem Deutsch</p>
+<table class="t">
+<thead><tr><th style="width:21%">Begriff</th><th>Einfach gesagt</th><th style="width:30%">Wo du es siehst</th></tr></thead>
+<tbody>
+<tr><td><strong>Repository</strong> („Repo“)</td><td>Projektordner im Internet, der sich jede Änderung merkt</td><td>github.com/konvalinaalexander-max/bonitieren_mehltau</td></tr>
+<tr><td><strong>Commit</strong></td><td>eine gespeicherte Änderung mit kurzer Beschreibung – wie ein Eintrag in einem Änderungsbuch</td><td>Versionsgeschichte des Repositorys, Beschreibung neben jeder Datei</td></tr>
+<tr><td><strong>Branch</strong> (Zweig)</td><td>Arbeitskopie neben dem Hauptstand. Der Hauptzweig heißt <code>main</code>; Claude arbeitet immer auf einem eigenen Zweig.</td><td>Auswahlfeld mit dem Zweignamen über der Dateiliste</td></tr>
+<tr><td><strong>Pull Request</strong> (PR)</td><td>Änderungsvorschlag: „Übernimm die Änderungen aus Zweig X nach <code>main</code>.“ Mit Beschreibung, Änderungsliste und Testergebnis.</td><td>Reiter „Pull requests“; Änderungen im Reiter „Files changed“</td></tr>
+<tr><td><strong>Merge</strong></td><td>Übernehmen: Der Pull Request kommt in <code>main</code> und wird damit gültig.</td><td>Knopf „Merge pull request“, dann „Confirm merge“</td></tr>
+<tr><td><strong>Revert</strong></td><td>einen übernommenen Pull Request rückgängig machen; dabei entsteht ein neuer Pull Request</td><td>Knopf „Revert“ unten im übernommenen Pull Request</td></tr>
+<tr><td><strong>Diff</strong></td><td>Gegenüberstellung alt/neu: rot entfernt, grün hinzugefügt</td><td>Reiter „Files changed“; in Claude Code z. B. „+42 −18“</td></tr>
+<tr><td><strong>GitHub Actions</strong></td><td>Automaten bei GitHub: lassen bei jedem Pull Request die Tests laufen und veröffentlichen die App</td><td>Reiter „Actions“; im Pull Request grüner Haken oder rotes Kreuz</td></tr>
+<tr><td><strong>GitHub Pages</strong></td><td>Webhosting von GitHub: macht aus Dateien im Repository eine Webseite mit fester Adresse</td><td>„Settings“ → „Pages“</td></tr>
+<tr><td><strong>Issue</strong></td><td>Notizzettel für Fehler, Wünsche und Aufgaben, mit Nummer</td><td>Reiter „Issues“</td></tr>
+</tbody>
+</table>
+<div class="box warn"><p class="box-title">Wenn Claude eine Datei für GitHub Actions nicht hochladen darf</p><p>Die Anweisungen für GitHub Actions liegen im Ordner <code>.github/workflows/</code>. Stand 09/2026 lehnt GitHub es ab, wenn Claude solche Dateien aus einer Cloud-Sitzung hochladen will (Fehlermeldung „refusing to allow … workflow …“). Rechne also damit, dass du solche Dateien selbst anlegst (meist in B1 für die Tests und in B3 für die Veröffentlichung); Claude nennt dir Zweig, Dateinamen und Inhalt. Auf GitHub über der Dateiliste den Zweig wählen → „Add file“ → „Create new file“ → Namen mit Ordnern eintippen, z. B. <code>.github/workflows/tests.yml</code> (jeder Schrägstrich legt einen Ordner an) → Inhalt aus Claudes Antwort einfügen → „Commit changes …“ → „Commit changes“. Danach Claude in der Sitzung Bescheid sagen. Das ist die einzige Ausnahme von der Regel „Nicht selbst am Code ändern“ (9.9).</p></div>
+
+<h2>9.3 Hosting einrichten</h2>
+<p>Die App ist eine Webseite und braucht deshalb einen Platz im Internet (Hosting, Kapitel 3.5). Nur über eine verschlüsselte Adresse (<strong>HTTPS</strong>) darf eine Webseite die Kamera benutzen – alle drei Dienste bieten das. <span class="who claude">Claude</span> bereitet alles vor, was sich mit Dateien erledigen lässt. Die Klicks in deinen Konten machst <span class="who du">Du</span>: Einstellungen bei GitHub, Konto bei Netlify oder Cloudflare, App auf dem Handy installieren. Gib Claude nie deine Passwörter.</p>
+<h3>GitHub Pages (Standardweg)</h3>
+<ol class="steps">
+<li><strong>Claude bereitet vor.</strong> Im Baustein B3 legt Claude eine Anweisung für GitHub Actions an (<code>.github/workflows/</code>), die App, Werkstatt, Analyse-Kern und Bibliotheken veröffentlicht (wahrscheinlich legst du diese Datei selbst an, Kasten in 9.2). Möchtest du die Werkstatt schon in Etappe 4 per Link öffnen, bitte Claude in B2 darum.</li>
+<li><strong>Quelle umstellen.</strong> Im Repository oben „Settings“ → in der linken Leiste im Abschnitt „Code, planning, and automation“ (in älteren Ansichten „Code and automation“) auf „Pages“ → unter „Build and deployment“ bei „Source“ die Option „GitHub Actions“ wählen. Das machst du am besten, bevor du den Pull Request übernimmst.</li>
+<li><strong>Übernehmen und zuschauen.</strong> Pull Request übernehmen. Im Reiter „Actions“ läuft danach die Veröffentlichung; ein grüner Haken heißt: online.</li>
+<li><strong>Adresse notieren.</strong> Unter „Settings“ → „Pages“ steht die Adresse mit dem Link „Visit site“. Sie hat die Form <code>https://konvalinaalexander-max.github.io/bonitieren_mehltau/</code>; die App liegt in einem Unterordner, den Claude dir nennt (z. B. <code>…/app/</code>). Adresse ins Projekttagebuch.</li>
+<li><strong>Auf dem Box-Handy installieren.</strong> Adresse in Chrome öffnen, Menü (drei Punkte) → Eintrag zum Installieren wählen. Je nach Chrome-Version heißt er z. B. „Installieren und Verknüpfung erstellen“ oder „Zum Startbildschirm hinzufügen“. Dann „Installieren“ antippen. Danach liegt ein App-Symbol auf dem Startbildschirm.</li>
+</ol>
+<div class="box warn"><p class="box-title">Achtung: nur die App veröffentlichen</p><p>Die Webseite ist für jeden erreichbar, der die Adresse kennt – auch wenn das Repository privat ist (Kapitel 3.5). Unkritisch, denn die Messdaten bleiben auf dem Handy und in deinen Exporten. Veröffentlicht werden aber nur App, Werkstatt, Kern und Bibliotheken, nie <code>referenzbilder/</code> oder <code>docs/</code>. Ist dein Repository privat, brauchst du für GitHub Pages ein kostenpflichtiges GitHub-Abo; ohne Abo nimm eine der Alternativen.</p></div>
+<h3>Alternative: Netlify oder Cloudflare Pages</h3>
+<p>Beide verbinden sich mit deinem GitHub-Repository und veröffentlichen die App nach jedem Merge von selbst. Ihr Vorteil: Zu jedem Pull Request entsteht automatisch ein <strong>Vorschau-Link</strong> (bei Netlify „Deploy Preview“ genannt). So testest du auf dem Box-Handy, bevor du übernimmst. Einrichten: Konto anlegen, GitHub verbinden, Repository auswählen, als Ausgabeordner (Netlify: „Publish directory“, Cloudflare: „Build output directory“) den Ordner eintragen, den Claude dir nennt. Einen Build-Befehl braucht die App nicht, das Feld bleibt leer. Die Bedingungen der Gratis-Tarife ändern sich – vor dem Einrichten auf der Webseite des Anbieters prüfen.</p>
+
+<h2>9.4 Wie die App aufgebaut ist</h2>
+<p>Herzstück ist der <strong>Analyse-Kern</strong> (Kapitel 7): das Programmteil, das aus einem Foto die Zahlen macht. Werkstatt und Handy-App benutzen dieselbe Datei. Dasselbe Foto ergibt deshalb am PC und auf dem Handy dieselben Werte, und was du in Etappe 4 eingestellt hast, gilt auch in der App. Abbildung 9.2 zeigt, wie die Teile zusammenhängen.</p>
+<figure>
+<svg viewBox="0 0 800 526" role="img" aria-label="Aufbau: Analyse-Kern in der Mitte, geprüft durch automatische Tests, genutzt von Analyse-Werkstatt und Handy-App; App speichert in IndexedDB und exportiert Excel und ZIP auf den Firmen-PC; GitHub Pages liefert alles aus" font-family="Source Sans 3, sans-serif">
+<defs>
+<marker id="k9-arrow-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2A24"/></marker>
+</defs>
+<!-- top row -->
+<rect x="10" y="20" width="220" height="110" rx="8" fill="#FFFFFF" stroke="#6B7570" stroke-width="2" stroke-dasharray="6 4"/>
+<rect x="270" y="20" width="260" height="110" rx="8" fill="#F3F6F1" stroke="#2B5D8C" stroke-width="3"/>
+<rect x="570" y="20" width="220" height="110" rx="8" fill="#FFFFFF" stroke="#6B7570" stroke-width="2"/>
+<g text-anchor="middle" fill="#1F2A24">
+<text x="120" y="46" font-size="15" font-weight="700">Automatische Tests</text>
+<text x="120" y="70" font-size="14">Referenzbilder + Sollwerte;</text>
+<text x="120" y="90" font-size="14">GitHub Actions prüft</text>
+<text x="120" y="110" font-size="14">jeden Pull Request</text>
+<text x="400" y="48" font-size="17" font-weight="700" fill="#2B5D8C">Analyse-Kern</text>
+<text x="400" y="72" font-size="14">Farbkorrektur · Maske · Klassen</text>
+<text x="400" y="92" font-size="14">Kennzahlen · Note · Kontrollbild</text>
+<text x="400" y="114" font-size="13" fill="#6B7570">Version z. B. A-1.0</text>
+<text x="680" y="46" font-size="15" font-weight="700">Bibliotheken</text>
+<text x="680" y="70" font-size="14">jsQR – QR-Code lesen</text>
+<text x="680" y="90" font-size="14">SheetJS – Excel</text>
+<text x="680" y="110" font-size="14">JSZip – ZIP-Archiv</text>
+</g>
+<!-- middle row -->
+<rect x="40" y="190" width="300" height="110" rx="8" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="2"/>
+<rect x="460" y="190" width="300" height="110" rx="8" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="2"/>
+<g text-anchor="middle" fill="#1F2A24">
+<text x="190" y="216" font-size="16" font-weight="700">Analyse-Werkstatt</text>
+<text x="190" y="240" font-size="14">PC-Browser (Chrome, Edge)</text>
+<text x="190" y="260" font-size="14">viele Fotos auf einmal,</text>
+<text x="190" y="280" font-size="14">Regler, Streudiagramm, Kappa</text>
+<text x="610" y="216" font-size="16" font-weight="700">Handy-App (PWA)</text>
+<text x="610" y="240" font-size="14">Box-Handy, Chrome, offline</text>
+<text x="610" y="260" font-size="14">Aufnahme, Ergebnis,</text>
+<text x="610" y="280" font-size="14">Übersicht, Export</text>
+</g>
+<!-- bottom row -->
+<rect x="40" y="350" width="300" height="100" rx="8" fill="#FFFFFF" stroke="#1F2A24" stroke-width="2"/>
+<rect x="460" y="350" width="140" height="100" rx="8" fill="#FFFFFF" stroke="#8A5A2B" stroke-width="2"/>
+<rect x="620" y="350" width="140" height="100" rx="8" fill="#FFFFFF" stroke="#8A5A2B" stroke-width="2"/>
+<g text-anchor="middle" fill="#1F2A24">
+<text x="190" y="376" font-size="15" font-weight="700">Firmen-PC / NAS / Cloud</text>
+<text x="190" y="400" font-size="14">Pilotfotos, Bonitur-Excel,</text>
+<text x="190" y="420" font-size="14">Exporte der App (Excel + ZIP)</text>
+<text x="190" y="440" font-size="13" fill="#6B7570">bleiben im Betrieb</text>
+<text x="530" y="376" font-size="15" font-weight="700">IndexedDB</text>
+<text x="530" y="400" font-size="14">Speicher im</text>
+<text x="530" y="420" font-size="14">Handy-Browser</text>
+<text x="530" y="440" font-size="13" fill="#C0392B">kein Archiv!</text>
+<text x="690" y="376" font-size="15" font-weight="700">Export</text>
+<text x="690" y="400" font-size="14">Excel (.xlsx)</text>
+<text x="690" y="420" font-size="14">+ ZIP mit</text>
+<text x="690" y="440" font-size="14">Originalfotos</text>
+</g>
+<!-- arrows -->
+<g stroke="#1F2A24" stroke-width="2" fill="none" marker-end="url(#k9-arrow-b)">
+<line x1="232" y1="75" x2="265" y2="75"/>
+<line x1="360" y1="132" x2="235" y2="186"/>
+<line x1="440" y1="132" x2="565" y2="186"/>
+<line x1="720" y1="132" x2="720" y2="186"/>
+<line x1="190" y1="348" x2="190" y2="305"/>
+<line x1="530" y1="302" x2="530" y2="345"/>
+<line x1="690" y1="302" x2="690" y2="345"/>
+<path d="M690 452 V474 H250 V455"/>
+</g>
+<text x="249" y="67" font-size="13" fill="#6B7570" text-anchor="middle">prüft</text>
+<text x="400" y="170" font-size="14" fill="#2B5D8C" text-anchor="middle" font-weight="700">derselbe Kern</text>
+<text x="200" y="332" font-size="13" fill="#6B7570">Ordner auswählen</text>
+<text x="470" y="467" font-size="13" fill="#6B7570" text-anchor="middle">nach jeder Sitzung sichern</text>
+<!-- hosting band -->
+<rect x="10" y="488" width="780" height="32" rx="6" fill="#F3F6F1" stroke="#C9D2C6"/>
+<text x="400" y="509" font-size="14" fill="#1F2A24" text-anchor="middle">GitHub Pages (oder Netlify / Cloudflare Pages) liefert Werkstatt und App über HTTPS aus</text>
+</svg>
+<figcaption>Abb. 9.2: Aufbau der Software. Werkstatt und App nutzen denselben Analyse-Kern; die automatischen Tests prüfen ihn bei jeder Änderung. Fotos und Messdaten bleiben im Betrieb – im Internet liegt nur das Programm.</figcaption>
+</figure>
+<p>Die <strong>automatischen Tests</strong> sind deine Versicherung: Zu jedem Referenzbild ist das Ergebnis als Sollwert gespeichert. Bei jedem Pull Request rechnet GitHub alle Referenzbilder neu. Verschiebt eine Änderung die Ergebnisse, erscheint ein rotes Kreuz – auch wenn Claude das gar nicht vorhatte. Ist die Verschiebung gewollt (z. B. neue Schwellwerte nach der Kalibrierung, Kapitel 10), trägt Claude neue Sollwerte ein, erhöht die Algorithmus-Version (9.8) und zeigt dir, welche Werte sich geändert haben.</p>
+<p>So ungefähr wird das Repository aussehen. Die genaue Ordnerstruktur legt Claude in B1 fest und beschreibt sie in <code>CLAUDE.md</code>:</p>
+<ul>
+<li><code>kern/</code> – Analyse-Kern · <code>werkstatt/</code> – Analyse-Werkstatt · <code>app/</code> – Handy-App</li>
+<li><code>bibliotheken/</code> – jsQR, SheetJS, JSZip als Dateien, damit alles offline läuft</li>
+<li><code>tests/</code> – automatische Tests und Sollwerte · <code>referenzbilder/</code> – deine Pilotfotos mit Bonitur (Kapitel 6.7)</li>
+<li><code>docs/</code> – Spezifikation, Fortschritt, Pilotbericht, Beispielbilder · <code>.github/workflows/</code> – Anweisungen für GitHub Actions</li>
+</ul>
+<div class="box info"><p class="box-title">Was ist eine PWA, und wie geht offline?</p><p>Eine <strong>PWA</strong> (Progressive Web App) ist eine Webseite, die sich wie eine App verhält: eigenes Symbol auf dem Startbildschirm, eigenes Fenster ohne Adressleiste, kein App Store, kein Entwicklerkonto. Beim ersten Öffnen lädt das Handy alle Programmteile herunter. Ein <strong>Service Worker</strong> – ein kleines Hilfsprogramm im Browser – legt sie in einen Zwischenspeicher. Danach startet die App auch ohne Internet. Deine Messungen und Fotos speichert sie in der <strong>IndexedDB</strong>, einer Datenbank im Browser des Handys.</p>
+<p>Zwei Folgen: Updates kommen nur an, wenn du die App ab und zu mit Internet öffnest. Und der Browser-Speicher ist kein Archiv – wer in Chrome die Browserdaten löscht, kann alle Messungen löschen. Bei knappem Speicher darf der Browser Daten sogar selbst aufräumen, wenn die App keinen „dauerhaften Speicher“ bekommen hat; deshalb fordert sie ihn an (B3). Trotzdem gilt: nach jeder Sitzung exportieren (B8, Kapitel 11.3).</p></div>
+
+<h2>9.5 Die Bildschirme</h2>
+<p>Tabelle 9.2 listet alle sechs Bildschirme der App, Abbildung 9.3 zeigt drei davon als Skizze. Claude baut sie nach dieser Beschreibung; Aussehen und Beschriftung können abweichen.</p>
+<p class="table-caption">Tabelle 9.2: Die sechs Bildschirme der Handy-App</p>
+<table class="t">
+<thead><tr><th style="width:4%">Nr.</th><th style="width:18%">Bildschirm</th><th>Was dort passiert</th><th style="width:12%">Baustein</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><strong>Start</strong></td><td>Sitzung starten (Datum, Mitarbeiter-Kürzel, Satz/Versuch), frühere Sitzungen, Weg zum Export</td><td>B3, B4</td></tr>
+<tr><td>2</td><td><strong>Aufnahme</strong></td><td>Kamera-Vorschau mit Hilfslinien (Kreis für die Topfposition, Rahmen für die Farbkarte) oder Foto-Import aus Open Camera</td><td>B5</td></tr>
+<tr><td>3</td><td><strong>Ergebnis</strong></td><td>Kontrollbild, Kennzahlen, Note, erkannte Topf-ID (änderbar), Warnungen, Knöpfe „Speichern“ und „Wiederholen“</td><td>B6, B7</td></tr>
+<tr><td>4</td><td><strong>Übersicht</strong></td><td>Tabelle der Sitzung, Mittelwerte je Satz und Behandlung, Verlauf über die Termine, AUDPC</td><td>B9</td></tr>
+<tr><td>5</td><td><strong>Export</strong></td><td>Excel-Datei (.xlsx) und ZIP mit den Fotos, Erinnerung an die Datensicherung</td><td>B8</td></tr>
+<tr><td>6</td><td><strong>Einstellungen</strong> (geschützt)</td><td>Position der Farbkarte, Topfkreis, Schwellwerte, Notentabelle, QR-Etiketten drucken, Versionen</td><td>B4, B6, B7, B9</td></tr>
+</tbody>
+</table>
+<figure>
+<svg viewBox="0 0 800 470" role="img" aria-label="Skizzen von drei Handy-Bildschirmen: Aufnahme mit Kamera-Vorschau und Hilfslinien, Ergebnis mit Kontrollbild und Kennzahlen, Übersicht mit Tabelle, Verlauf und Export-Knopf" font-family="Source Sans 3, sans-serif">
+<!-- phone frames -->
+<rect x="20" y="5" width="230" height="460" rx="22" fill="#1F2A24"/>
+<rect x="285" y="5" width="230" height="460" rx="22" fill="#1F2A24"/>
+<rect x="550" y="5" width="230" height="460" rx="22" fill="#1F2A24"/>
+<rect x="30" y="25" width="210" height="420" fill="#FFFFFF"/>
+<rect x="295" y="25" width="210" height="420" fill="#FFFFFF"/>
+<rect x="560" y="25" width="210" height="420" fill="#FFFFFF"/>
+<rect x="30" y="25" width="210" height="34" fill="#2F6B3A"/>
+<rect x="295" y="25" width="210" height="34" fill="#2F6B3A"/>
+<rect x="560" y="25" width="210" height="34" fill="#2F6B3A"/>
+<g font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+<text x="135" y="47">Aufnahme · Satz 12</text>
+<text x="400" y="47">Ergebnis · Topf 12-017</text>
+<text x="665" y="47">Übersicht · Satz 12</text>
+</g>
+<!-- phone 1: Aufnahme -->
+<text x="135" y="78" font-size="13" fill="#6B7570" text-anchor="middle">Topf 17 von 40 · Kürzel MK</text>
+<rect x="40" y="88" width="190" height="200" fill="#1F2A24"/>
+<circle cx="135" cy="192" r="44" fill="#5B9A3C"/>
+<circle cx="118" cy="178" r="14" fill="#2F6B3A"/>
+<circle cx="152" cy="204" r="12" fill="#2F6B3A"/>
+<circle cx="135" cy="192" r="62" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="6 4"/>
+<rect x="46" y="94" width="44" height="28" fill="none" stroke="#D9B32E" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="96" y="112" font-size="13" fill="#FFFFFF">Farbkarte</text>
+<rect x="180" y="254" width="44" height="28" fill="none" stroke="#D9B32E" stroke-width="2" stroke-dasharray="5 3"/>
+<text x="174" y="274" font-size="13" fill="#FFFFFF" text-anchor="end">Etikett</text>
+<text x="135" y="308" font-size="13" fill="#6B7570" text-anchor="middle">Kreis = Topfposition</text>
+<circle cx="135" cy="346" r="24" fill="#2F6B3A"/>
+<circle cx="135" cy="346" r="17" fill="none" stroke="#FFFFFF" stroke-width="2"/>
+<text x="135" y="388" font-size="13" fill="#1F2A24" text-anchor="middle">Auslösen</text>
+<rect x="50" y="400" width="170" height="32" rx="6" fill="#FFFFFF" stroke="#2F6B3A" stroke-width="2"/>
+<text x="135" y="421" font-size="14" fill="#2F6B3A" text-anchor="middle" font-weight="700">Foto importieren</text>
+<!-- phone 2: Ergebnis -->
+<rect x="325" y="68" width="150" height="150" fill="#C9D2C6"/>
+<circle cx="400" cy="143" r="66" fill="#1F2A24"/>
+<circle cx="400" cy="143" r="54" fill="#5B9A3C"/>
+<circle cx="380" cy="122" r="11" fill="#D9B32E"/>
+<circle cx="425" cy="160" r="9" fill="#D9B32E"/>
+<circle cx="418" cy="118" r="7" fill="#C0392B"/>
+<circle cx="372" cy="168" r="6" fill="#C0392B"/>
+<text x="400" y="246" font-size="17" font-weight="700" fill="#1F2A24" text-anchor="middle">Befall 12 % · Note 2</text>
+<g font-size="13" fill="#1F2A24" text-anchor="middle">
+<text x="400" y="268">grün 88 · gelb 8 · braun 4 (%)</text>
+<text x="400" y="288">Fläche ca. 300 cm²</text>
+<text x="400" y="308" fill="#2B5D8C">Topf-ID: 12-017 (ändern)</text>
+</g>
+<rect x="310" y="320" width="180" height="28" rx="4" fill="#F3F6F1" stroke="#5B9A3C" stroke-width="1.5"/>
+<text x="400" y="339" font-size="13" fill="#2F6B3A" text-anchor="middle" font-weight="700">Qualität: ok</text>
+<rect x="305" y="396" width="92" height="34" rx="6" fill="#FFFFFF" stroke="#2F6B3A" stroke-width="2"/>
+<rect x="403" y="396" width="92" height="34" rx="6" fill="#2F6B3A"/>
+<text x="351" y="418" font-size="13" fill="#2F6B3A" text-anchor="middle" font-weight="700">Wiederholen</text>
+<text x="449" y="418" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">Speichern</text>
+<!-- phone 3: Übersicht / Export -->
+<g font-size="13" fill="#6B7570" font-weight="700">
+<text x="572" y="82">Topf</text>
+<text x="700" y="82" text-anchor="end">Befall</text>
+<text x="755" y="82" text-anchor="end">Note</text>
+</g>
+<line x1="570" y1="88" x2="760" y2="88" stroke="#C9D2C6" stroke-width="1.5"/>
+<g font-size="13" fill="#1F2A24">
+<text x="572" y="106">12-015</text><text x="700" y="106" text-anchor="end">3 %</text><text x="755" y="106" text-anchor="end">1</text>
+<text x="572" y="125">12-016</text><text x="700" y="125" text-anchor="end">0 %</text><text x="755" y="125" text-anchor="end">0</text>
+<text x="572" y="144">12-017</text><text x="700" y="144" text-anchor="end">12 %</text><text x="755" y="144" text-anchor="end">2</text>
+<text x="572" y="163">12-018</text><text x="700" y="163" text-anchor="end">27 %</text><text x="755" y="163" text-anchor="end">3</text>
+</g>
+<line x1="570" y1="171" x2="760" y2="171" stroke="#C9D2C6" stroke-width="1.5"/>
+<g font-size="13" fill="#1F2A24" font-weight="700">
+<text x="572" y="189">Mittel</text><text x="700" y="189" text-anchor="end">10,5 %</text><text x="755" y="189" text-anchor="end">1,5</text>
+</g>
+<text x="572" y="220" font-size="13" fill="#6B7570">Verlauf (Befall %)</text>
+<line x1="582" y1="232" x2="582" y2="306" stroke="#6B7570" stroke-width="1.5"/>
+<line x1="582" y1="306" x2="756" y2="306" stroke="#6B7570" stroke-width="1.5"/>
+<polyline points="600,300 645,290 690,268 735,242" fill="none" stroke="#8A5A2B" stroke-width="2.5"/>
+<g fill="#8A5A2B"><circle cx="600" cy="300" r="4"/><circle cx="645" cy="290" r="4"/><circle cx="690" cy="268" r="4"/><circle cx="735" cy="242" r="4"/></g>
+<text x="669" y="324" font-size="13" fill="#6B7570" text-anchor="middle">Termine</text>
+<rect x="575" y="342" width="180" height="34" rx="6" fill="#2F6B3A"/>
+<text x="665" y="364" font-size="13" fill="#FFFFFF" text-anchor="middle" font-weight="700">Excel + ZIP exportieren</text>
+<text x="665" y="402" font-size="13" fill="#C0392B" text-anchor="middle" font-weight="700">Noch nicht gesichert!</text>
+<text x="665" y="422" font-size="13" fill="#6B7570" text-anchor="middle">Nach dem Export auf den PC</text>
+</svg>
+<figcaption>Abb. 9.3: Skizzen von drei Bildschirmen (Beispielwerte). Links die Aufnahme mit Hilfslinien für Topf, Farbkarte und Etikett, in der Mitte das Ergebnis mit Kontrollbild (Braun rot markiert), rechts Übersicht und Export mit Erinnerung an die Datensicherung.</figcaption>
+</figure>
+
+<h2>9.6 Was die App je Topf speichert</h2>
+<p>Jede Messung ist später eine Zeile in der Excel-Datei. Tabelle 9.3 zeigt alle Spalten mit Beispielwerten; die Messwerte stammen aus dem Rechenbeispiel in Kapitel 7.7. Die Spaltennamen sind absichtlich ohne Umlaute und Leerzeichen, damit Excel und Programme sie sicher lesen.</p>
+<p class="table-caption">Tabelle 9.3: Datenfelder je Messung (Excel-Spalten)</p>
+<table class="t">
+<thead><tr><th style="width:22%">Spalte</th><th>Bedeutung</th><th style="width:21%">Beispiel</th><th style="width:15%">Woher</th></tr></thead>
+<tbody>
+<tr><td><code>mess_id</code></td><td>eindeutige Nummer der Messung</td><td>fortlaufend</td><td>automatisch</td></tr>
+<tr><td><code>datum_zeit</code></td><td>Datum und Uhrzeit des Fotos</td><td>2027-02-10 09:32</td><td>automatisch</td></tr>
+<tr><td><code>mitarbeiter</code></td><td>Kürzel der Person, nie der Name</td><td>MK</td><td>Sitzung</td></tr>
+<tr><td><code>sitzung_id</code></td><td>verbindet alle Töpfe eines Durchgangs</td><td>2027-02-10_Satz12</td><td>automatisch</td></tr>
+<tr><td><code>topf_id</code></td><td>Nummer des Topfs, aus dem QR-Code gelesen</td><td>12-017</td><td>QR / Eingabe</td></tr>
+<tr><td><code>satz</code></td><td>Satz bzw. Versuch</td><td>12</td><td>Sitzung</td></tr>
+<tr><td><code>sorte</code></td><td>Basilikumsorte</td><td>[Sortenname]</td><td>Stammdaten</td></tr>
+<tr><td><code>behandlung</code></td><td>Behandlung im Versuch</td><td>Kontrolle</td><td>Stammdaten</td></tr>
+<tr><td><code>tisch</code></td><td>Tisch bzw. Standort</td><td>T3</td><td>Stammdaten</td></tr>
+<tr><td><code>foto_datei</code></td><td>Dateiname des Originalfotos im ZIP</td><td>BOX_20270210_093215.jpg</td><td>automatisch</td></tr>
+<tr><td><code>flaeche_px</code></td><td>Pflanzenfläche in Pixeln</td><td>375000</td><td>Analyse</td></tr>
+<tr><td><code>flaeche_cm2_ca</code></td><td>Pflanzenfläche in cm², nur ungefähr</td><td>300</td><td>Analyse</td></tr>
+<tr><td><code>gruen_pct</code>, <code>gelb_pct</code>, <code>braun_pct</code></td><td>Anteile an der Pflanzenfläche in %, zusammen 100</td><td>88 / 8 / 4</td><td>Analyse</td></tr>
+<tr><td><code>befall_pct</code></td><td>Befall % = gelb + braun, der Hauptwert</td><td>12</td><td>Analyse</td></tr>
+<tr><td><code>gruenwert</code></td><td>mittlerer Farbton in Grad; sinkt bei Vergilbung</td><td>96</td><td>Analyse</td></tr>
+<tr><td><code>note_app</code></td><td>Note aus der Umrechnungstabelle</td><td>2</td><td>Analyse</td></tr>
+<tr><td><code>note_manuell</code></td><td>optional: Note eines Menschen (Vergleich, Kalibrierung in Kapitel 10, No-Go-Variante)</td><td>2</td><td>Eingabe</td></tr>
+<tr><td><code>qualitaet</code></td><td>„ok“ oder Warnung mit Grund, z. B. „Warnung: Farbkarte prüfen“</td><td>ok</td><td>Analyse</td></tr>
+<tr><td><code>algorithmus_version</code></td><td>Version der Auswertung (9.8)</td><td>A-1.0</td><td>automatisch</td></tr>
+<tr><td><code>app_version</code></td><td>Version der App (9.8)</td><td>1.4</td><td>automatisch</td></tr>
+<tr><td><code>handy_modell</code></td><td>Modell des Box-Handys</td><td>[Modell]</td><td>Einstellungen</td></tr>
+<tr><td><code>bemerkung</code></td><td>freier Text</td><td>Blätter nass</td><td>Eingabe</td></tr>
+</tbody>
+</table>
+<p>„Stammdaten“ sind die Listen, aus denen man in der App auswählt: Sätze, Sorten, Behandlungen, Tische und Mitarbeiter-Kürzel (Baustein B4). Auswählen statt tippen verhindert Schreibfehler, die später jede Auswertung stören.</p>
+
+<h2>9.7 Die Bausteine B1 bis B9</h2>
+<p>Tabelle 9.4 zeigt die Reihenfolge. Jeder Baustein baut auf den vorigen auf – überspring keinen. Zu jedem Baustein findest du das <strong>Ziel</strong>, den Kopier-Prompt (wie du ihn benutzt: Kasten „So nutzt du die Prompts“ in 9.1) und woran du selbst erkennst, dass er <strong>fertig</strong> ist.</p>
+<p class="table-caption">Tabelle 9.4: Die neun Bausteine</p>
+<table class="t">
+<thead><tr><th style="width:7%">Nr.</th><th>Inhalt</th><th style="width:10%">Etappe</th><th style="width:33%">Voraussetzung</th></tr></thead>
+<tbody>
+<tr><td>B1</td><td>Analyse-Kern und automatische Tests mit Referenzbildern</td><td>4</td><td>Referenzbilder im Repository (6.7)</td></tr>
+<tr><td>B2</td><td>Analyse-Werkstatt für den PC</td><td>4</td><td>B1</td></tr>
+<tr><td>B3</td><td>App-Grundgerüst, Hosting, offline (PWA)</td><td>5</td><td>Hosting-Entscheidung (3.5)</td></tr>
+<tr><td>B4</td><td>Sitzungen und Stammdaten</td><td>5</td><td>B3</td></tr>
+<tr><td>B5</td><td>Aufnahme, Foto-Import, Foto-Archiv</td><td>5</td><td>B4, Box und Box-Handy</td></tr>
+<tr><td>B6</td><td>Analyse in der App, Kontrollbild, Qualitätschecks</td><td>5</td><td>B5, Einstellungsdatei aus Etappe 4</td></tr>
+<tr><td>B7</td><td>QR-Etiketten drucken, QR aus dem Foto lesen</td><td>5</td><td>B6</td></tr>
+<tr><td>B8</td><td>Export (Excel + ZIP), Erinnerung an die Datensicherung</td><td>5</td><td>B7</td></tr>
+<tr><td>B9</td><td>Einstellungen/Kalibrierung, Übersicht, Verlauf, AUDPC</td><td>5</td><td>B8</td></tr>
+</tbody>
+</table>
+
+<h3>B1 Analyse-Kern und automatische Tests</h3>
+<p><strong>Ziel:</strong> Das Programmteil, das aus einem Foto Kennzahlen, Note und Kontrollbild macht (Kapitel 7) – geprüft mit deinen Referenzbildern. Dazu entstehen die Projektregeln <code>CLAUDE.md</code> und die Fortschrittsliste. <strong>Wann:</strong> Etappe 4, sobald die Referenzbilder hochgeladen sind.</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – B1 Analyse-Kern und automatische Tests</p><pre>Lies KONZEPT.md und docs/SPEZIFIKATION.md (vor allem den Abschnitt Analyse) und sieh
+dir den Ordner referenzbilder/ mit referenzbilder.xlsx an.
+Aufgabe: Baustein B1 - Analyse-Kern und automatische Tests.
+1. Lege CLAUDE.md mit den Projektregeln an: Ich programmiere nicht; erkläre alles in
+   einfachem Deutsch. Technik: reines HTML/CSS/JavaScript ohne Build-Schritt, Nutzer
+   müssen nichts installieren; läuft in Chrome auf Android und in Chrome/Edge am PC.
+   Bibliotheken (jsQR, SheetJS, JSZip) als Dateien im Repository, nicht aus dem
+   Internet. Keine echten Betriebsdaten außer referenzbilder/; Kürzel statt Namen.
+   Arbeitsweise: erst Plan, kleine Schritte, Tests zu jeder Funktion, Doku aktuell,
+   zum Schluss Pull Request mit einfacher Erklärung und Test-Anleitung. Darfst du
+   Dateien in .github/workflows/ nicht hochladen: nenne mir Zweig, Dateiname, Inhalt
+   und wie ich sie selbst anlege. Beschreibe auch die Ordnerstruktur.
+2. Lege docs/FORTSCHRITT.md an: Bausteine B1-B9 mit Stand und offenen Punkten.
+3. Programmiere den Analyse-Kern als eigenes Modul, das Werkstatt und Handy-App
+   später gemeinsam nutzen: alle Schritte aus dem Abschnitt Analyse mit Startwerten
+   (verkleinern, Farbkorrektur mit 24 Feldern und 3x3-Matrix, Auswertekreis, HSV,
+   Pflanzen-Maske, Klassen, Kennzahlen, Note, Kontrollbild, Qualitätschecks). Alle
+   Schwellwerte an einer Stelle als Einstellungen; Algorithmus-Version "A-1.0" in
+   jedem Ergebnis.
+4. Tests: (a) künstliche Testbilder mit genau bekannten Anteilen grün, gelb, braun;
+   (b) alle Referenzbilder: Ergebnisse als Sollwerte in einer Datei festhalten; der
+   Test schlägt fehl, wenn sich ein Wert über eine kleine Toleranz hinaus ändert, und
+   listet die Änderungen auf (gewollte Änderungen: Sollwerte nur zusammen mit neuer
+   Algorithmus-Version aktualisieren); (c) die Tests laufen in deiner Sitzung und bei
+   jedem Pull Request automatisch in GitHub Actions.
+5. Lege Kontrollbilder von 4 Referenzbildern (Note 0, 1, 2 und 4) als PNG in
+   docs/beispiele/ ab, damit ich sie im Pull Request ansehen kann.
+Brauchst du Angaben von mir (z. B. Position der Farbkarte), frag mich.
+
+Arbeite so: erst Plan (5-10 Zeilen), dann auf mein OK warten; kleine Schritte; Tests
+schreiben und alle laufen lassen; keine echten Betriebsdaten ins Repository. Zum
+Schluss Pull Request und in einfachem Deutsch: was du gemacht hast, wie ich es prüfe.</pre></div>
+<p style="break-after: avoid"><strong>Fertig, wenn …</strong></p>
+<ul class="checklist">
+<li>im Pull Request bei den Tests ein grüner Haken steht,</li>
+<li>die vier Beispiel-Kontrollbilder in <code>docs/beispiele/</code> plausibel aussehen: ganze Pflanze gefärbt, sonst nichts, junge Triebe grün (Kapitel 8.4) – du siehst sie im Pull Request im Reiter „Files changed“,</li>
+<li>du <code>CLAUDE.md</code> einmal gelesen hast und die Regeln darin zu diesem Leitfaden passen.</li>
+</ul>
+
+<h3>B2 Analyse-Werkstatt</h3>
+<p><strong>Ziel:</strong> Die Webseite für den PC, mit der du in Etappe 4 den Pilot auswertest und Schwellen einstellst (Kapitel 8.2 bis 8.6). Fotos werden nur lokal im Browser verarbeitet. <strong>Wann:</strong> Etappe 4, nach B1.</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – B2 Analyse-Werkstatt</p><pre>Lies CLAUDE.md, KONZEPT.md, docs/SPEZIFIKATION.md (Abschnitte Analyse,
+Analyse-Werkstatt, Pilot, Go/No-Go) und docs/FORTSCHRITT.md.
+Aufgabe: Baustein B2 - Analyse-Werkstatt (Webseite für den PC-Browser).
+1. Ordner mit Fotos und die Bonitur-Excel (Blätter "Bonitur", "Wiederholung",
+   "Lichttest") auswählen. Alles läuft lokal, nichts wird hochgeladen.
+2. Einrichten: Farbkarte (4 Ecken anklicken, 24 Messquadrate anzeigen), Topfkreis,
+   Maßstab-Karte. Einstellungen als Datei speichern und laden - dieselbe Datei soll
+   später die Handy-App lesen können.
+3. Zuordnung Foto zu Zeile über foto_datei prüfen; Fotos ohne Zeile, Zeilen ohne
+   Foto und doppelte Einträge auflisten.
+4. Auswerten mit dem Analyse-Kern (dieselbe Datei, keine Kopie).
+5. Ergebnisse: Kontrollbilder (sortierbar nach größter Abweichung App/Mensch),
+   Streudiagramm App-Befall % gegen Menschen-Note mit Notengrenzen, quadratisch
+   gewichtetes Kappa für A-B, App-A, App-B und deren Mittel, Rangkorrelation
+   (Spearman), Wiederholbarkeit (Standardabweichung je Topf), Lichttest, Anteil
+   erkannter Farbkarten, "unsichtbarer Befall" (Sporen unten, App-Befall unter 1 %).
+6. Regler für alle Stellschrauben mit sofortiger Wirkung auf Kontrollbilder,
+   Diagramm und Kappa.
+7. Export: Ergebnis-Excel (eine Zeile je Foto) und Kontrollbilder als ZIP.
+8. Teste Kappa und Spearman mit Rechenbeispielen, die du von Hand nachrechnest.
+Erkläre mir, wie ich die Werkstatt auf meinem Firmen-PC ohne Installation öffne:
+per Link, falls das Hosting schon läuft, sonst als heruntergeladene Datei per
+Doppelklick (das muss ohne Server funktionieren).
+
+Arbeite nach CLAUDE.md: erst Plan (5-10 Zeilen), auf mein OK warten; kleine Schritte;
+Tests schreiben, alle laufen lassen; keine echten Betriebsdaten ins Repository;
+CLAUDE.md und docs/ aktuell halten. Zum Schluss Pull Request und in einfachem
+Deutsch erklären, was du gemacht hast und wie ich es am Firmen-PC prüfe.</pre></div>
+<p style="break-after: avoid"><strong>Fertig, wenn …</strong></p>
+<ul class="checklist">
+<li>sich die Werkstatt auf dem Firmen-PC in Chrome oder Edge ohne Installation öffnet,</li>
+<li>mit 5–10 Pilotfotos und der Bonitur-Excel Kontrollbilder, Streudiagramm und Kappa erscheinen,</li>
+<li>sich die Einstellungsdatei speichern und wieder laden lässt – mit denselben Werten.</li>
+</ul>
+
+<h3>B3 App-Grundgerüst, Hosting und offline</h3>
+<p><strong>Ziel:</strong> Eine installierbare App mit allen sechs Bildschirmen (noch leer), die ohne Internet startet, ihre Version anzeigt und sich selbst aktualisiert. Dazu die Veröffentlichung (9.3). <strong>Wann:</strong> Beginn von Etappe 5.</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – B3 App-Grundgerüst, Hosting und offline</p><pre>Lies CLAUDE.md, KONZEPT.md, docs/SPEZIFIKATION.md (Abschnitt Handy-App) und
+docs/FORTSCHRITT.md. Hosting: [GitHub Pages / Netlify / Cloudflare Pages],
+Repository: [öffentlich / privat].
+Aufgabe: Baustein B3 - Grundgerüst der Handy-App (PWA), Hosting, offline.
+1. Die 6 Bildschirme aus der Spezifikation, zunächst leer, mit Navigation; große
+   Knöpfe und große Schrift (Bedienung an der Fotobox).
+2. PWA mit Manifest, App-Symbol und Service Worker: Nach dem ersten Öffnen läuft
+   alles ohne Internet. Bei neuer Version Hinweis "Neue Version - tippen zum Laden".
+   app_version und algorithmus_version sichtbar.
+3. IndexedDB mit eindeutigem Namen; dauerhaften Speicher anfordern; belegten und
+   freien Speicher anzeigen.
+4. Veröffentlichung einrichten (bei GitHub Pages über GitHub Actions): nur App,
+   Werkstatt, Kern und Bibliotheken, nie referenzbilder/ oder docs/. Sag mir Klick
+   für Klick, was ich in meinen Konten einstellen muss, und die Adresse.
+5. Ich will jeden Pull Request vorher auf dem Box-Handy testen: Schlag mir den
+   einfachsten Weg vor. Test-Versionen dürfen echte Daten nie verändern.
+
+Arbeite nach CLAUDE.md: erst Plan (5-10 Zeilen), auf mein OK warten; kleine Schritte;
+Tests schreiben, alle laufen lassen; keine echten Betriebsdaten ins Repository;
+CLAUDE.md, docs/ und app_version aktualisieren. Zum Schluss Pull Request und in
+einfachem Deutsch erklären, was du gemacht hast und wie ich es am Box-Handy teste.</pre></div>
+<p style="break-after: avoid"><strong>Fertig, wenn …</strong></p>
+<ul class="checklist">
+<li>die App auf dem Box-Handy installiert ist und ein eigenes Symbol hat,</li>
+<li>sie im Flugmodus startet und sich alle sechs Bildschirme öffnen lassen,</li>
+<li>die Versionsnummer sichtbar ist und nach einer kleinen Test-Änderung „Neue Version“ erscheint.</li>
+</ul>
+
+<h3>B4 Sitzungen und Stammdaten</h3>
+<p><strong>Ziel:</strong> Eine Bonitur beginnt mit „Sitzung starten“. Sätze, Sorten, Behandlungen, Tische und Kürzel kommen aus Listen. <strong>Wann:</strong> nach B3.</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – B4 Sitzungen und Stammdaten</p><pre>Lies CLAUDE.md, KONZEPT.md, docs/SPEZIFIKATION.md (Abschnitt Handy-App) und
+docs/FORTSCHRITT.md. B3 ist übernommen.
+Aufgabe: Baustein B4 - Sitzungen und Stammdaten.
+1. Listen für Sätze, Sorten, Behandlungen, Tische und Mitarbeiter-Kürzel (nur
+   Kürzel, keine Namen): in den Einstellungen bearbeiten, als Excel importieren
+   und exportieren.
+2. Start-Bildschirm: "Sitzung starten" mit Datum (automatisch), Kürzel und
+   Satz/Versuch aus den Listen; frühere Sitzungen; Weg zum Export.
+3. Eine Sitzung bleibt offen, bis ich sie beende - auch nach einem Neustart.
+4. Datenmodell mit allen Datenfeldern je Messung aus der Spezifikation. Spätere
+   Änderungen am Datenmodell müssen vorhandene Daten übernehmen, ohne dass etwas
+   verloren geht - mit Test.
+
+Arbeite nach CLAUDE.md: erst Plan (5-10 Zeilen), auf mein OK warten; kleine Schritte;
+Tests schreiben, alle laufen lassen; keine echten Betriebsdaten ins Repository;
+CLAUDE.md, docs/ und app_version aktualisieren. Zum Schluss Pull Request und in
+einfachem Deutsch erklären, was du gemacht hast und wie ich es am Box-Handy teste.</pre></div>
+<p style="break-after: avoid"><strong>Fertig, wenn …</strong></p>
+<ul class="checklist">
+<li>eine gestartete Sitzung noch da ist, nachdem du die App geschlossen und das Handy neu gestartet hast,</li>
+<li>du die Listen selbst bearbeiten kannst und die App nirgends nach vollen Namen fragt.</li>
+</ul>
+
+<h3>B5 Aufnahme, Foto-Import und Foto-Archiv</h3>
+<p><strong>Ziel:</strong> Fotos kommen in die App – per Import aus Open Camera (geht immer) oder direkt aus der Kamera, falls das Box-Handy Belichtung und Weißabgleich im Browser festhalten kann. Das klärt eine Kamera-Test-Seite. <strong>Wann:</strong> nach B4, mit fertiger Box.</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – B5 Aufnahme, Foto-Import und Foto-Archiv</p><pre>Lies CLAUDE.md, KONZEPT.md, docs/SPEZIFIKATION.md (Abschnitte Box-Handy und
+Handy-App) und docs/FORTSCHRITT.md. Box-Handy: [Modell, Android-Version].
+Aufgabe: Baustein B5 - Aufnahme, Foto-Import und Foto-Archiv.
+1. Import mehrerer Fotos aus Open Camera (Ordner DCIM/Bonitur): Original Byte für
+   Byte unverändert speichern, mit Dateinamen, der Sitzung zugeordnet.
+2. Direkte Aufnahme: Kamera-Vorschau mit Hilfslinien (Kreis = Topfposition,
+   Rahmen = Farbkarte und Etikett; Positionen aus den Einstellungen).
+3. Kamera-Test-Seite: Welche Einstellungen kann das Box-Handy im Browser festhalten
+   (Weißabgleich, Belichtungszeit, ISO, Fokus), welche Auflösung? 5 Testfotos
+   nacheinander, Graufelder der Farbkarte vergleichen. Geht das Festhalten nicht,
+   bleibt der Import der Standardweg.
+4. Foto-Archiv je Sitzung mit Vorschaubildern und Speicheranzeige; Löschen gesperrt,
+   bis ein Export bestätigt ist (kommt in B8).
+
+Arbeite nach CLAUDE.md: erst Plan (5-10 Zeilen), auf mein OK warten; kleine Schritte;
+Tests schreiben, alle laufen lassen; keine echten Betriebsdaten ins Repository;
+CLAUDE.md, docs/ und app_version aktualisieren. Zum Schluss Pull Request und in
+einfachem Deutsch erklären, was du gemacht hast und wie ich es am Box-Handy teste.</pre></div>
+<p style="break-after: avoid"><strong>Fertig, wenn …</strong></p>
+<ul class="checklist">
+<li>10 Fotos aus Open Camera importiert sind und die App sie mit Originalname und -größe anzeigt,</li>
+<li>die Hilfslinien in der Box auf Topf, Farbkarte und Etikett passen,</li>
+<li>das Ergebnis der Kamera-Test-Seite („Direktaufnahme geht“ oder „Import bleibt Standard“) mit Datum im Projekttagebuch steht.</li>
+</ul>
+
+<h3>B6 Analyse in der App</h3>
+<p><strong>Ziel:</strong> Nach dem Foto zeigt die App Kontrollbild, Kennzahlen, Note und Warnungen – mit genau dem Kern und den Einstellungen aus Etappe 4. <strong>Wann:</strong> nach B5.</p>
+<div class="box decision"><p class="box-title">Go oder No-Go: welcher Prompt?</p><p>Der erste Prompt unten gilt bei <strong>Go</strong>. Hat Etappe 4 ein <strong>No-Go</strong> ergeben, schickst du stattdessen den zweiten Prompt „B6 No-Go-Variante“: Die App zeigt dann Referenzfotos je Notenstufe, die Felder der automatischen Analyse bleiben leer, die Note steht in <code>note_manuell</code>. In B7 bis B9 hängst du an die erste Zeile des Prompts an: „Wir nutzen die No-Go-Variante ohne automatische Analyse.“</p></div>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – B6 Analyse in der App</p><pre>Lies CLAUDE.md, KONZEPT.md, docs/SPEZIFIKATION.md (Abschnitte Analyse und Handy-App),
+docs/PILOTBERICHT.md und docs/FORTSCHRITT.md. B5 ist übernommen.
+Aufgabe: Baustein B6 - Analyse in der App.
+1. Analyse-Kern einbinden - dieselbe Datei wie in der Werkstatt, keine Kopie.
+2. Einstellungsdatei aus der Werkstatt importieren (Farbkarte, Topfkreis, Maßstab,
+   Schwellwerte, Notentabelle).
+3. Ergebnis-Bildschirm nach Aufnahme oder Import: Kontrollbild (zum Vergrößern),
+   Befall %, grün/gelb/braun %, Fläche ca. cm², Note, Topf-ID (änderbar), Warnungen
+   deutlich in Rot, Knöpfe "Speichern" und "Wiederholen"; Speichern trotz Warnung
+   nur mit Bestätigung. Dazu ein optionales Eingabefeld note_manuell (Hand-Note für
+   Vergleich und Kalibrierung).
+4. Test: Für 5 Referenzbilder liefern App und Werkstatt dieselben Werte.
+5. Zeig an, wie lange die Auswertung auf dem Box-Handy dauert.
+
+Arbeite nach CLAUDE.md: erst Plan (5-10 Zeilen), auf mein OK warten; kleine Schritte;
+Tests schreiben, alle laufen lassen; keine echten Betriebsdaten ins Repository;
+CLAUDE.md, docs/ und app_version aktualisieren. Zum Schluss Pull Request und in
+einfachem Deutsch erklären, was du gemacht hast und wie ich es am Box-Handy teste.</pre></div>
+<p style="break-after: avoid"><strong>Fertig, wenn …</strong></p>
+<ul class="checklist">
+<li>die App für 5 Referenzbilder dieselben Werte zeigt wie die Werkstatt,</li>
+<li>ein echter Topf in der Box nach wenigen Sekunden ein plausibles Kontrollbild ergibt,</li>
+<li>ein Foto mit verdeckter Farbkarte eine deutliche Warnung auslöst.</li>
+</ul>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – B6 No-Go-Variante (digitale Sicht-Bonitur)</p><pre>Lies CLAUDE.md, KONZEPT.md, docs/SPEZIFIKATION.md (Abschnitte Go/No-Go und
+Handy-App), docs/PILOTBERICHT.md und docs/FORTSCHRITT.md. B5 ist übernommen.
+Aufgabe: Baustein B6 (No-Go-Variante) - digitale Sicht-Bonitur.
+Der Pilot hat ergeben: keine automatische Analyse. Baue stattdessen:
+1. Nach Aufnahme oder Import: Foto groß anzeigen, darunter je Notenstufe ein
+   Referenzfoto zum Vergleich. Die Referenzfotos lade ich einmal in den
+   Einstellungen auf das Handy; sie werden nicht veröffentlicht.
+2. Note antippen, wird als note_manuell gespeichert; Topf-ID eingeben (Lesen aus
+   dem QR-Code kommt in B7); Knöpfe "Speichern" und "Wiederholen".
+3. Die Felder der automatischen Analyse bleiben leer. Das Originalfoto wird
+   trotzdem archiviert, damit es später ausgewertet werden kann.
+
+Arbeite nach CLAUDE.md: erst Plan (5-10 Zeilen), auf mein OK warten; kleine Schritte;
+Tests schreiben, alle laufen lassen; keine echten Betriebsdaten ins Repository;
+CLAUDE.md, docs/ und app_version aktualisieren. Zum Schluss Pull Request und in
+einfachem Deutsch erklären, was du gemacht hast und wie ich es am Box-Handy teste.</pre></div>
+<p><strong>Fertig bei No-Go, wenn</strong> nach dem Foto je Notenstufe ein Referenzfoto erscheint, die angetippte Note gespeichert ist und das Originalfoto im Archiv liegt.</p>
+
+<h3>B7 QR-Etiketten drucken und lesen</h3>
+<p><strong>Ziel:</strong> Topf-Karten mit QR-Code für den Etikettenhalter; die App liest die Topf-ID aus dem Foto. So können Foto und Topf nicht verwechselt werden. <strong>Wann:</strong> nach B6.</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – B7 QR-Etiketten drucken und lesen</p><pre>Lies CLAUDE.md, KONZEPT.md, docs/SPEZIFIKATION.md (Abschnitte Fotobox und Handy-App)
+und docs/FORTSCHRITT.md. B6 ist übernommen.
+Aufgabe: Baustein B7 - QR-Etiketten drucken und QR aus dem Foto lesen.
+1. Druckseite A4 mit Schnittlinien für Topf-Karten 85 x 55 mm: große Topfnummer
+   (ca. 25 mm hoch), QR-Code mit der topf_id, klein Satz und Sorte. Nummernformat
+   [z. B. 12-001]; Nummern als Bereich oder aus Excel.
+2. Brauchst du zum Erzeugen der QR-Codes eine weitere Bibliothek mit freier
+   Lizenz, nenne sie mir vorher.
+3. Lesen mit jsQR im Originalfoto (volle Auflösung): erst im Bereich des
+   Etikettenhalters, sonst im ganzen Bild. Nicht gelesen: Warnung und Eingabefeld.
+   Doppelte Topf-ID in der Sitzung: Warnung.
+4. Tests mit künstlichen QR-Bildern; sag mir, welche Testfotos ich in der Box
+   machen soll.
+
+Arbeite nach CLAUDE.md: erst Plan (5-10 Zeilen), auf mein OK warten; kleine Schritte;
+Tests schreiben, alle laufen lassen; keine echten Betriebsdaten ins Repository;
+CLAUDE.md, docs/ und app_version aktualisieren. Zum Schluss Pull Request und in
+einfachem Deutsch erklären, was du gemacht hast und wie ich es am Box-Handy teste.</pre></div>
+<p style="break-after: avoid"><strong>Fertig, wenn …</strong></p>
+<ul class="checklist">
+<li>10 gedruckte Karten in den Etikettenhalter passen und die Nummer auch für Menschen gut lesbar ist,</li>
+<li>die App bei 10 Fotos alle 10 Topf-IDs richtig liest,</li>
+<li>eine verdeckte Karte eine Warnung mit Eingabefeld auslöst und eine doppelte ID gemeldet wird.</li>
+</ul>
+
+<h3>B8 Export und Datensicherung</h3>
+<p><strong>Ziel:</strong> Nach jeder Sitzung eine Excel-Datei und ein ZIP mit allen Originalfotos für den Firmen-PC. Die App erinnert daran und löscht Fotos erst nach bestätigter Sicherung. <strong>Wann:</strong> nach B7.</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – B8 Export und Datensicherung</p><pre>Lies CLAUDE.md, KONZEPT.md, docs/SPEZIFIKATION.md (Abschnitte Handy-App und Betrieb)
+und docs/FORTSCHRITT.md. B7 ist übernommen.
+Aufgabe: Baustein B8 - Export (Excel + ZIP) und Datensicherung.
+1. Excel (.xlsx) je Sitzung: Blatt "Messungen" mit genau den Datenfeldern der
+   Spezifikation (Zahlen als Zahlen), Blatt "Sitzung" mit Datum, Kürzel, Satz,
+   Versionen und den verwendeten Einstellungen.
+2. ZIP mit Excel, Kontrollbildern und allen Originalfotos (unverändert, Namen wie
+   in foto_datei). Dateiname nach Muster 2027-02-10_Satz12.
+3. Weitergabe: Download-Ordner oder "Teilen" an einen Cloud-Ordner - erkläre mir,
+   was auf dem Box-Handy geht.
+4. Sitzungen ohne bestätigten Export deutlich markieren. Fotos erst löschen lassen,
+   wenn ich bestätigt habe, dass der Export auf dem PC ist.
+5. Test: Export wieder einlesen - jede Zeile hat ihr Foto.
+
+Arbeite nach CLAUDE.md: erst Plan (5-10 Zeilen), auf mein OK warten; kleine Schritte;
+Tests schreiben, alle laufen lassen; keine echten Betriebsdaten ins Repository;
+CLAUDE.md, docs/ und app_version aktualisieren. Zum Schluss Pull Request und in
+einfachem Deutsch erklären, was du gemacht hast und wie ich es am Box-Handy teste.</pre></div>
+<p style="break-after: avoid"><strong>Fertig, wenn …</strong></p>
+<ul class="checklist">
+<li>sich der Export einer Test-Sitzung (10 Töpfe) am Firmen-PC in Excel öffnen lässt, alle Spalten aus Tabelle 9.3 hat und Excel damit rechnen kann (z. B. Mittelwert),</li>
+<li>das ZIP alle Fotos enthält und jeder Name aus <code>foto_datei</code> darin vorkommt,</li>
+<li>die App das Löschen erst nach deiner Bestätigung der Sicherung erlaubt.</li>
+</ul>
+
+<h3>B9 Einstellungen, Übersicht und Verlauf</h3>
+<p><strong>Ziel:</strong> Geschützte Einstellungen zum Kalibrieren (Etappe 6) und eine Übersicht mit Mittelwerten, Verlauf und AUDPC (Fläche unter der Befallsverlaufskurve, Kapitel 11.4). <strong>Wann:</strong> nach B8.</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – B9 Einstellungen, Übersicht und Verlauf</p><pre>Lies CLAUDE.md, KONZEPT.md, docs/SPEZIFIKATION.md (Abschnitte Handy-App, Kalibrieren,
+Betrieb) und docs/FORTSCHRITT.md. B8 ist übernommen.
+Aufgabe: Baustein B9 - Einstellungen/Kalibrierung, Übersicht und Verlauf.
+1. Einstellungen mit PIN (lege ich am Handy fest, nie ins Repository): Farbkarte
+   (4 Ecken antippen), Topfkreis, Maßstab, Etikettenposition, Schwellwerte,
+   Notentabelle, Handymodell, QR-Druck, Versionen. Import und Export der
+   Einstellungsdatei im Format der Werkstatt.
+2. Änderungen an Schwellwerten oder Notentabelle erhöhen die algorithmus_version und
+   kommen mit Datum in ein Änderungsprotokoll. Schlag ein Nummernschema vor, bei dem
+   Änderungen am Handy und im Code nie dieselbe Nummer bekommen.
+3. Übersicht: Mittelwerte von Befall % und Note je Satz und Behandlung, Verlauf
+   über die Termine als Kurve.
+4. AUDPC je Satz = Summe über aufeinanderfolgende Termine von
+   (Befall_1 + Befall_2) / 2 x Tage dazwischen. Testfall: Tag 0 = 2 %,
+   Tag 7 = 10 %, Tag 14 = 30 % ergibt 182 (Prozent-Tage).
+5. Sitzungsart "Kontroll-Pflanze" mit eigenem Verlauf (für Etappe 6).
+
+Arbeite nach CLAUDE.md: erst Plan (5-10 Zeilen), auf mein OK warten; kleine Schritte;
+Tests schreiben, alle laufen lassen; keine echten Betriebsdaten ins Repository;
+CLAUDE.md, docs/ und app_version aktualisieren. Zum Schluss Pull Request und in
+einfachem Deutsch erklären, was du gemacht hast und wie ich es am Box-Handy teste.</pre></div>
+<p style="break-after: avoid"><strong>Fertig, wenn …</strong></p>
+<ul class="checklist">
+<li>die Einstellungen nur mit PIN aufgehen und die importierte Einstellungsdatei der Werkstatt dort mit denselben Werten steht,</li>
+<li>eine geänderte Schwelle die Algorithmus-Version erhöht,</li>
+<li>die Übersicht Mittelwerte und Verlauf zeigt und Claude bestätigt, dass der AUDPC-Test aus dem Prompt (Ergebnis 182) bestanden ist.</li>
+</ul>
+
+<h2>9.8 Testen, Fehler melden, Versionen</h2>
+<p>Die automatischen Tests prüfen die Rechnung. Ob die App an der Box im Alltag funktioniert, prüfst nur du. Teste immer auf dem <strong>Box-Handy</strong> in der Box, mit eingeschalteten LEDs und echten Töpfen – nicht nur am PC.</p>
+<h3>Wie du vor dem Übernehmen an die neue Version kommst</h3>
+<ul>
+<li><strong>Netlify oder Cloudflare Pages:</strong> Zu jedem Pull Request entsteht automatisch ein Vorschau-Link. Du findest ihn im Pull Request (als Kommentar oder in den Details zum Prüf-Status des Dienstes) oder in deinem Konto beim Dienst. Öffne ihn auf dem Box-Handy in Chrome. Die Vorschau hat eine eigene Adresse und damit einen eigenen Speicher: Deine echten Sitzungen siehst du dort nicht, und Testdaten landen nicht in der echten App. Leg dort eine Test-Sitzung an.</li>
+<li><strong>GitHub Pages:</strong> Eine Vorschau je Pull Request ist nicht eingebaut. Claude schlägt dir in B3 einen Weg vor (Punkt 5 im Prompt). Einfachster Notbehelf, solange nur du die App nutzt: kleine Änderung übernehmen, sofort testen, bei einem Fehler rückgängig machen (unten).</li>
+</ul>
+<h3>Checkliste für jeden Test</h3>
+<ul class="checklist">
+<li>Im Pull Request steht bei den Tests ein grüner Haken.</li>
+<li>Die App zeigt die neue <code>app_version</code> (sonst: mit Internet neu öffnen, Hinweis „Neue Version“ antippen).</li>
+<li>Das Neue funktioniert so, wie Claude es beschrieben hat – Schritt für Schritt nach Claudes Test-Anleitung.</li>
+<li>Das Alte funktioniert noch: kurzer Rundgang mit einem Topf – Sitzung starten, Foto, Ergebnis, Speichern, Export.</li>
+<li>Flugmodus an, App schließen und neu öffnen: Sie startet, frühere Sitzungen sind noch da (in der Vorschau: deine Test-Sitzung).</li>
+<li>Alles ist gut lesbar, die Knöpfe sind groß genug, nichts ist abgeschnitten.</li>
+<li>Bei Änderungen an der Analyse: Kontrollbilder von 3 Töpfen verschiedener Stärke sehen plausibel aus.</li>
+</ul>
+<h3>Einen Fehler melden</h3>
+<p>Je genauer die Beschreibung, desto schneller die Lösung. Mach einen <strong>Screenshot</strong> (bei den meisten Android-Handys: Ein-/Aus-Taste und Leiser-Taste gleichzeitig), hol ihn wie die Fotos per USB-Kabel auf den PC (Kapitel 5.5) und füge ihn in die Sitzung ein, sofern deine Claude-Oberfläche das Anhängen von Bildern anbietet; sonst beschreibe genau, was auf dem Bildschirm steht. Schreib den Fehler in dieselbe Sitzung, wenn der Pull Request noch offen ist – sonst in eine neue.</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – Fehler melden</p><pre>Lies CLAUDE.md und docs/FORTSCHRITT.md. Ich habe einen Fehler gefunden.
+- App-Version: [..], Pull Request: [#..], Box-Handy: [Modell]
+- Was ich gemacht habe: 1. [..] 2. [..] 3. [..]
+- Was ich erwartet habe: [..]
+- Was passiert ist: [..] (Screenshot anbei)
+- Wie oft: [immer / manchmal / einmal]; mit Internet: [ja / nein]
+Finde die Ursache und erkläre sie mir einfach. Behebe den Fehler und schreibe einen
+Test, der genau diesen Fehler künftig erkennt. Zum Schluss Pull Request (oder den
+offenen ergänzen); sag mir, wie ich die Korrektur auf dem Box-Handy prüfe.</pre></div>
+<h3>Zwei Versionsnummern</h3>
+<p class="table-caption">Tabelle 9.5: Versionsnummern in jeder Excel-Zeile</p>
+<table class="t">
+<thead><tr><th style="width:22%">Nummer</th><th>Was sie zählt</th><th style="width:34%">Was du daraus machst</th></tr></thead>
+<tbody>
+<tr><td><code>app_version</code><br>z. B. 1.4</td><td>jede Änderung an der App, auch an Knöpfen oder Texten</td><td>zeigt, welche Version bei einer Messung lief – wichtig bei Fehlermeldungen</td></tr>
+<tr><td><code>algorithmus_version</code><br>z. B. A-1.0 → A-1.1</td><td>nur Änderungen, die Ergebnisse verschieben können: Rechenweg, Schwellwerte, Notentabelle</td><td>Datum der neuen Version ins Projekttagebuch. Nur Werte mit gleicher Version direkt vergleichen; ältere Originalfotos bei Bedarf in der Werkstatt neu auswerten.</td></tr>
+</tbody>
+</table>
+<h3>Wenn etwas kaputtgeht</h3>
+<ol class="steps">
+<li><strong>Ruhig bleiben.</strong> Deine Messungen liegen im Speicher des Handys, nicht im Code. Wenn möglich: zuerst exportieren.</li>
+<li><strong>Rückgängig machen.</strong> Auf GitHub den Reiter „Pull requests“ öffnen, den übernommenen Pull Request anklicken (Filter „Closed“), unten auf „Revert“ klicken. Es entsteht ein neuer Pull Request (zeigt GitHub erst ein Formular, dort „Create pull request“ klicken) – diesen mit „Merge pull request“ und „Confirm merge“ übernehmen. Oder Claude in einer neuen Sitzung bitten: „Mach Pull Request #[Nummer] rückgängig und erstelle dafür einen Pull Request.“</li>
+<li><strong>Prüfen.</strong> Nach ein paar Minuten die App mit Internet öffnen, ggf. den Hinweis „Neue Version“ antippen: Die alte Version ist zurück, auch ihre alte <code>app_version</code>.</li>
+<li><strong>In Ruhe reparieren.</strong> Neue Sitzung, Fehler melden wie oben, Korrektur als neuer Pull Request.</li>
+</ol>
+<div class="box warn"><p class="box-title">Achtung</p><p>Nie einen Pull Request mit rotem Kreuz übernehmen. Und sobald dein Team die App im Alltag nutzt: vor jedem Update alle Sitzungen exportieren. Ändert eine neue Version die Art, wie Daten gespeichert werden, holt ein „Revert“ die Daten nicht immer zurück.</p></div>
+
+<h2>9.9 Regeln für die Zusammenarbeit</h2>
+<ol class="steps">
+<li><strong>Ein Baustein pro Sitzung.</strong> Neuer Baustein, neue Sitzung. Lieber drei kleine Pull Requests als ein großer.</li>
+<li><strong>Immer lesen lassen.</strong> Jeder Baustein-Prompt ab B2 lässt Claude zuerst <code>CLAUDE.md</code>, <code>KONZEPT.md</code>, <code>docs/SPEZIFIKATION.md</code> und <code>docs/FORTSCHRITT.md</code> lesen – Claude erinnert sich nicht an frühere Sitzungen. Eigene Prompts beginnst du genauso.</li>
+<li><strong>Ziel beschreiben, nicht die Lösung.</strong> „Die Mitarbeiter sollen den Topf in 15 Sekunden erfassen“ hilft Claude mehr als „Mach den Knopf grün“. Zahlen und Beispiele helfen immer.</li>
+<li><strong>Erst den Plan, dann den Code.</strong> Passt der Plan nicht, sag es sofort – Korrekturen am Plan kosten nichts.</li>
+<li><strong>Fragen ist erlaubt.</strong> „Warum?“, „Was heißt das?“, „Gibt es einen einfacheren Weg?“ – so oft du willst.</li>
+<li><strong>Nur Getestetes übernehmen.</strong> Grüner Haken <em>und</em> Test auf dem Box-Handy. Nie bei rotem Kreuz.</li>
+<li><strong>Entscheidungen festhalten.</strong> Im Projekttagebuch mit Datum; wichtige Entscheidungen lässt du Claude in <code>docs/SPEZIFIKATION.md</code> eintragen.</li>
+<li><strong>Keine echten Daten ins Repository.</strong> Keine Messdaten, keine Namen, keine Passwörter oder PINs. Einzige Ausnahme: die Referenzbilder (Kapitel 6.7).</li>
+<li><strong>Nicht selbst am Code ändern.</strong> Auch nicht „schnell“ über die GitHub-Webseite. Bitte Claude darum – dann laufen die Tests mit. Einzige Ausnahme: eine Datei für GitHub Actions, die Claude dir vorgibt (Kasten in 9.2).</li>
+<li><strong>Bei Verwirrung neu anfangen.</strong> Dreht sich Claude nach zwei, drei Versuchen im Kreis: Sitzung beenden, Pull Request nicht übernehmen, neue Sitzung mit einer kurzen Zusammenfassung des Problems.</li>
+<li><strong>Selbst prüfen.</strong> Claude kann sich irren. Was an der Box mit echten Pflanzen nicht stimmt, stimmt nicht – egal, was die Tests sagen.</li>
+</ol>
+
+<h2>9.10 Etappe 5 ist fertig, wenn …</h2>
+<ul class="checklist">
+<li>die Bausteine B3 bis B9 übernommen sind und bei allen Tests ein grüner Haken steht,</li>
+<li>die App auf dem Box-Handy installiert ist, im Flugmodus startet und ihre Versionen anzeigt,</li>
+<li>die Einstellungsdatei aus Etappe 4 importiert ist und die App für 5 Referenzbilder dieselben Werte liefert wie die Werkstatt (bei No-Go: Sicht-Bonitur mit Referenzfotos funktioniert),</li>
+<li>eine Probe-Sitzung mit 20 Töpfen durchgelaufen ist: Topf-IDs per QR gelesen, Ergebnisse gespeichert, keine offenen Warnungen ohne Grund,</li>
+<li>Excel und ZIP dieser Probe-Sitzung auf dem Firmen-PC im Ordner <code>Bonitur/</code> liegen, sich öffnen lassen und vollständig sind,</li>
+<li>du einmal einen Pull Request rückgängig gemacht hast (zur Übung, z. B. eine kleine Textänderung),</li>
+<li><code>CLAUDE.md</code>, <code>docs/SPEZIFIKATION.md</code> und <code>docs/FORTSCHRITT.md</code> den aktuellen Stand zeigen,</li>
+<li>die App-Adresse, die Versionsnummern und alle Entscheidungen mit Datum im Projekttagebuch stehen.</li>
+</ul>
+</section>

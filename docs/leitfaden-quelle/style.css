@@ -1,0 +1,108 @@
+@import url('fonts/fonts.css');
+
+:root {
+  --ink: #1F2A24; --grey: #6B7570; --line: #C9D2C6; --bg: #F3F6F1;
+  --dgreen: #2F6B3A; --green: #5B9A3C; --yellow: #D9B32E; --brown: #8A5A2B;
+  --red: #C0392B; --blue: #2B5D8C; --white: #FFFFFF;
+}
+
+@page {
+  size: A4;
+  margin: 20mm 18mm 20mm 18mm;
+  @bottom-left { content: "Leitfaden Mehltau-Bonitur"; font: 8pt 'Source Sans 3', sans-serif; color: #6B7570; }
+  @bottom-right { content: "Seite " counter(page); font: 8pt 'Source Sans 3', sans-serif; color: #6B7570; }
+}
+@page :first { @bottom-left { content: none; } @bottom-right { content: none; } }
+
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: 'Source Sans 3', sans-serif; font-size: 10.5pt; line-height: 1.45; color: var(--ink); background: var(--white); margin: 0; hyphens: auto; }
+p { margin: 0 0 0.6em; orphans: 3; widows: 3; }
+a { color: var(--blue); text-decoration: none; }
+strong { font-weight: 700; }
+code { font-family: 'Source Code Pro', monospace; font-size: 0.88em; background: var(--bg); padding: 0 0.25em; border-radius: 2px; }
+
+/* ---------- title page ---------- */
+.titlepage { height: 250mm; display: flex; flex-direction: column; justify-content: space-between; break-after: page; }
+.titlepage .tp-top { border-top: 6px solid var(--dgreen); padding-top: 14mm; }
+.titlepage .tp-kicker { font-size: 11pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dgreen); font-weight: 700; margin-bottom: 6mm; }
+.titlepage h1 { font-family: 'Source Serif 4', serif; font-size: 34pt; line-height: 1.12; margin: 0 0 6mm; color: var(--ink); }
+.titlepage .tp-sub { font-size: 14pt; color: var(--grey); max-width: 150mm; }
+.titlepage .tp-art { margin: 10mm 0; }
+.titlepage .tp-meta { font-size: 10pt; color: var(--grey); border-top: 1px solid var(--line); padding-top: 4mm; }
+
+/* ---------- toc ---------- */
+.toc { break-after: page; }
+.toc h1 { font-family: 'Source Serif 4', serif; font-size: 22pt; margin: 0 0 6mm; }
+.toc ol { list-style: none; margin: 0; padding: 0; }
+.toc li { display: flex; align-items: baseline; gap: 2mm; }
+.toc li.l1 { font-weight: 700; margin-top: 3.2mm; font-size: 11pt; }
+.toc li.l2 { padding-left: 8mm; font-size: 9.5pt; color: var(--ink); margin-top: 0.6mm; }
+.toc li .dots { flex: 1; border-bottom: 1px dotted var(--line); transform: translateY(-3px); }
+.toc li .pg { min-width: 8mm; text-align: right; color: var(--grey); font-variant-numeric: tabular-nums; }
+
+/* ---------- chapters ---------- */
+section.chapter { break-before: page; }
+.kicker { font-size: 9pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dgreen); font-weight: 700; margin: 0 0 2mm; }
+h1 { font-family: 'Source Serif 4', serif; font-size: 24pt; line-height: 1.15; margin: 0 0 4mm; color: var(--ink); }
+.lead { font-size: 12.5pt; color: #3f4a44; margin-bottom: 6mm; line-height: 1.4; }
+h2 { font-family: 'Source Serif 4', serif; font-size: 14.5pt; margin: 7mm 0 2.5mm; color: var(--dgreen); break-after: avoid; }
+h3 { font-size: 11.5pt; margin: 5mm 0 1.5mm; break-after: avoid; }
+ul, ol { margin: 0 0 0.7em; padding-left: 6mm; }
+li { margin-bottom: 0.25em; }
+
+/* stage meta */
+table.stage-meta { width: 100%; border-collapse: collapse; margin: 0 0 6mm; font-size: 10pt; break-inside: avoid; border: 1px solid var(--line); }
+table.stage-meta th { width: 28mm; text-align: left; vertical-align: top; background: var(--bg); color: var(--dgreen); padding: 2mm 3mm; border-bottom: 1px solid var(--line); font-weight: 700; }
+table.stage-meta td { padding: 2mm 3mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+
+/* boxes */
+.box { border-left: 4px solid var(--green); background: var(--bg); padding: 3mm 4mm 1.5mm; margin: 4mm 0; break-inside: avoid; border-radius: 0 3px 3px 0; }
+.box .box-title { font-weight: 700; margin-bottom: 1mm; text-transform: uppercase; font-size: 8.5pt; letter-spacing: 0.06em; }
+.box.tip { border-color: var(--green); } .box.tip .box-title { color: var(--dgreen); }
+.box.warn { border-color: var(--red); background: #FBF1EF; } .box.warn .box-title { color: var(--red); }
+.box.info { border-color: var(--blue); background: #EEF3F8; } .box.info .box-title { color: var(--blue); }
+.box.decision { border-color: var(--yellow); background: #FBF6E6; } .box.decision .box-title { color: #8a6d0f; }
+.box ul, .box ol { margin-bottom: 0.5em; }
+
+/* steps */
+ol.steps { list-style: none; counter-reset: step; padding-left: 0; }
+ol.steps > li { counter-increment: step; position: relative; padding-left: 9mm; margin-bottom: 2.2mm; break-inside: avoid; }
+ol.steps > li::before { content: counter(step); position: absolute; left: 0; top: 0.1em; width: 5.6mm; height: 5.6mm; border-radius: 50%; background: var(--dgreen); color: #fff; font-weight: 700; font-size: 8.5pt; display: flex; align-items: center; justify-content: center; }
+
+/* checklist */
+ul.checklist { list-style: none; padding-left: 0; }
+ul.checklist > li { position: relative; padding-left: 7mm; margin-bottom: 1.6mm; break-inside: avoid; }
+ul.checklist > li::before { content: ""; position: absolute; left: 0; top: 0.18em; width: 3.4mm; height: 3.4mm; border: 1.3px solid var(--dgreen); border-radius: 1px; background: #fff; }
+
+/* tables */
+table.t { width: 100%; border-collapse: collapse; margin: 2mm 0 5mm; font-size: 9.5pt; }
+table.t thead { display: table-header-group; }
+table.t th { background: var(--dgreen); color: #fff; text-align: left; padding: 1.6mm 2.4mm; font-weight: 600; vertical-align: bottom; }
+table.t td { padding: 1.5mm 2.4mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.t tbody tr:nth-child(even) td { background: #F8FAF7; }
+table.t tr { break-inside: avoid; }
+.table-caption { font-size: 9pt; color: var(--grey); margin: 4mm 0 1mm; font-weight: 600; break-after: avoid; }
+
+/* roles */
+.who { display: inline-block; font-size: 8pt; font-weight: 700; padding: 0 1.6mm; border-radius: 8px; line-height: 1.5; vertical-align: 0.08em; }
+.who.du { background: #E3EFDD; color: var(--dgreen); }
+.who.claude { background: #E1EAF3; color: var(--blue); }
+.who.team { background: #F6EBC8; color: #7a5f0c; }
+
+/* prompts */
+.prompt { border: 1px solid #B9CADB; background: #F2F6FA; border-radius: 3px; margin: 3mm 0 5mm; break-inside: avoid; }
+.prompt .prompt-title { margin: 0; padding: 1.6mm 3mm; background: var(--blue); color: #fff; font-weight: 700; font-size: 9pt; }
+.prompt pre { margin: 0; padding: 2.5mm 3mm 3mm; font-family: 'Source Code Pro', monospace; font-size: 8.1pt; line-height: 1.42; white-space: pre-wrap; word-break: break-word; color: #1c2b3a; }
+
+/* templates */
+.template { border: 1.5px dashed var(--grey); padding: 5mm; margin: 4mm 0; break-inside: avoid; }
+.template h3 { margin-top: 0; }
+.page-break { break-after: page; height: 0; }
+
+/* figures */
+figure { margin: 4mm 0 5mm; break-inside: avoid; }
+figure svg { width: 100%; height: auto; display: block; }
+figcaption { font-size: 9pt; color: var(--grey); margin-top: 2mm; }
+
+h1, h2, h3, .toc li { hyphens: manual; }
+.toc li .tt { flex: 0 1 auto; }

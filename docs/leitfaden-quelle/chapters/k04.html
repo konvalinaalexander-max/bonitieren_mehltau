@@ -1,0 +1,432 @@
+<section class="chapter" id="kap-4">
+<p class="kicker">Etappe 1 · ca. 1–3 Wochen</p>
+<h1>4 Die Fotobox bauen</h1>
+<p class="lead">In der Fotobox entsteht jedes Foto unter denselben Bedingungen. Du baust erst einen Karton-Prototyp, prüfst damit die Maße und baust dann die endgültige Box mit 3D-Druckteilen.</p>
+
+<table class="stage-meta">
+<tr><th>Ziel</th><td>Gleiches Licht, gleicher Abstand, Topf immer an derselben Stelle, Farbkarte und Etikett immer im Bild.</td></tr>
+<tr><th>Dauer</th><td>ca. 1–3 Wochen (grobe Schätzung), davon Karton-Test 1–2 Tage.</td></tr>
+<tr><th>Du</th><td>Karton-Test machen, Topf und Handy ausmessen, einkaufen, drucken, bauen, Abnahme-Fotos machen.</td></tr>
+<tr><th>Claude</th><td>Druckdateien (OpenSCAD), Zuschnittliste und Bauanleitung; beantwortet Fragen.</td></tr>
+<tr><th>Du brauchst</th><td>Material aus Tabelle 4.1, 3D-Drucker, Box-Handy und Farbkarte (Kapitel 3), Säge, Cuttermesser, Akkuschrauber, Messschieber, Wasserwaage.</td></tr>
+<tr><th>Ergebnis</th><td>Eine Box, die die Abnahme in Abschnitt 4.10 besteht, und ein Zettel mit allen gemessenen Maßen.</td></tr>
+</table>
+
+<h2>4.1 Warum eine Box?</h2>
+<p>Eine Handykamera stellt Helligkeit und Farben bei jedem Foto neu ein – je nach Hallenlicht, Tageszeit und Hintergrund. Für eine Messung ist das schlecht: Dasselbe Blatt sieht morgens anders aus als mittags, und das Programm zählt genau diese Farben (Kapitel 7). Die Box hält alles fest, was sich sonst ändern würde:</p>
+<ul>
+<li><strong>Licht:</strong> Nur die LEDs in der Box leuchten; Tages- und Hallenlicht bleiben draußen.</li>
+<li><strong>Abstand:</strong> Das Handy liegt immer gleich auf dem Deckel. Gleich große Pflanzen sind im Bild gleich groß.</li>
+<li><strong>Position:</strong> Ein Zentrierring stellt den Topf immer in die Bildmitte.</li>
+<li><strong>Hintergrund:</strong> Weiße Wände, schwarzer Boden, schwarze Abdeckscheibe – die Pflanze hebt sich klar ab.</li>
+<li><strong>Farbkarte und Etikett:</strong> immer an derselben Stelle im Bild – für Farbkorrektur und Topf-Erkennung.</li>
+</ul>
+<p><strong>Merksatz:</strong> Fotografierst du denselben Topf zweimal, müssen beide Fotos praktisch gleich aussehen. Jedes Teil der Box dient diesem Ziel.</p>
+
+<h2>4.2 Erst ein Karton-Prototyp</h2>
+<p>Ein Karton ist an einem Nachmittag gebaut und beantwortet die wichtigen Fragen, bevor du Geld ausgibst und stundenlang druckst: Passt die Höhe? Bleiben Farbkarte und Etikett frei von Blättern? Ist das Licht gleichmäßig?</p>
+<p><strong>Du brauchst:</strong> großen Karton (oder zwei Umzugskartons übereinander), mattes weißes Papier, schwarzen Tonkarton, Klebeband, Cuttermesser, Zollstock, Lampe oder LED-Streifen, Brett, Bücher, Box-Handy, Farbkarte, eine Topf-Karte mit großer Nummer, deine größte und kleinste Pflanze.</p>
+<ol class="steps">
+<li><strong>Karton auskleiden.</strong> Innen ca. 50 × 50 cm, ca. 70 cm hoch, oben offen. Wände mit mattem weißem Papier, Boden mit schwarzem Tonkarton auskleiden. Vorne eine Klappe ausschneiden (Klebeband als Scharnier).</li>
+<li><strong>Handy auflegen.</strong> Brett mit ca. 3 cm Loch in der Mitte auf den Karton legen (Bücher darunter verstellen die Höhe). Handy mit dem Bildschirm nach oben darauf, Hauptkamera genau über dem Loch, festkleben.</li>
+<li><strong>Mitte und Ecken.</strong> Diagonalen am Boden ziehen: Der Kreuzungspunkt ist die Topfmitte, genau unter der Kamera. Farbkarte flach in eine hintere Ecke, Topf-Karte flach in die gegenüberliegende vordere Ecke.</li>
+<li><strong>Licht und Foto.</strong> Lampe oben innen gegen die Wand richten, nicht auf die Pflanze. Mit der Kamera-App fotografieren: Hauptkamera „1×“, kein Zoom, kein Blitz, Selbstauslöser. Größte und kleinste Pflanze.</li>
+<li><strong>Höhe vergleichen.</strong> Bücher unter das Brett legen (10 cm höher), neu fotografieren. Zeigt schon die 70-cm-Höhe viel zu viel Rand, schneidest du die Wände oben 10 cm kürzer und fotografierst noch einmal. Fotos am PC vergleichen, beste Höhe notieren.</li>
+</ol>
+<div class="box tip"><p class="box-title">Tipp: Welche Linse ist die Hauptkamera?</p><p>Kamera-App auf „1×“ stellen und nacheinander jede Linse mit dem Finger abdecken. Wird das Vorschaubild dunkel, ist es die Hauptkamera – sie muss über dem Loch liegen.</p></div>
+<h3>Was du im Karton testest</h3>
+<ul class="checklist">
+<li><strong>Bildausschnitt:</strong> Größte Pflanze ganz im Bild, mit Rand; kleinste Pflanze nicht winzig.</li>
+<li><strong>Ecken frei:</strong> Farbkarte und Etikett auch bei der größten Pflanze vollständig sichtbar.</li>
+<li><strong>Licht:</strong> Leere Box mit weißem Blatt am Boden: Ecken und Mitte ähnlich hell, keine harten Schatten; keine Glanzpunkte auf Blättern.</li>
+<li><strong>Handhabung:</strong> Topf lässt sich bequem hinein- und herausstellen.</li>
+</ul>
+<p>Schreib die Ergebnisse auf – du brauchst sie für den Prompt in Abschnitt 4.5.</p>
+
+<h2>4.3 Maße und Aufbau</h2>
+<p>Die Box ist innen 50 × 50 cm groß und 70 cm hoch. Das Handy liegt oben auf dem Deckel, die Kamera ist also ca. 70 cm über dem Boden (Abbildung 4.1).</p>
+
+<h3>Die Faustregel: Abstand ≈ Bildbreite</h3>
+<p>Mit der Hauptkamera (1×) gilt bei den meisten Handys ungefähr: <strong>Das Foto ist an der kurzen Seite so breit, wie die Kamera entfernt ist.</strong> Daraus ergeben sich die Maße der Box:</p>
+<ul>
+<li><strong>An der Pflanze:</strong> 70 cm − Topf ca. 11 cm − Pflanze bis ca. 25 cm = ca. 34 cm Abstand. Das Bild ist dort ca. 34 cm breit – genug für 25 cm Pflanzendurchmesser, rundum gut 4 cm Rand.</li>
+<li><strong>Am Boden:</strong> 70 cm Abstand, also ca. 70 cm Bildbreite. Der ganze Boden (50 × 50 cm) ist im Bild, auch die Ecken mit Farbkarte und Etikett.</li>
+<li><strong>Größere Pflanzen:</strong> Innenhöhe ≈ Topfhöhe + Pflanzenhöhe (zusammen Maß F aus Tabelle 3.2) + gewünschte Bildbreite. Beispiel: Pflanze 30 cm hoch und breit, rundum 4 cm Rand: 11 + 30 + 38 = ca. 80 cm. Dann werden auch die Ecken für Farbkarte und Etikett knapp – das prüfst du ebenfalls im Karton-Test.</li>
+</ul>
+<p>Die Regel ist eine Näherung und gilt nur für die Hauptkamera ohne Zoom (die Weitwinkel-Kamera, z.&nbsp;B. „0,5×“, verzerrt stark). Deshalb der Karton-Test.</p>
+
+<figure>
+<svg viewBox="0 0 800 472" role="img" aria-label="Seitenansicht der Fotobox mit Maßen: 50 cm breit, 70 cm hoch, Handy auf dem Deckel, Kamerablick, Topf 11 cm, Pflanze 25 cm, Abstand Kamera bis Pflanze 34 cm" font-family="Source Sans 3, sans-serif">
+  <!-- Innenraum -->
+  <rect x="275" y="66" width="250" height="350" fill="#F3F6F1"/>
+  <!-- sichtbarer Bereich der Kamera -->
+  <polygon points="400,62 275,312 275,416 525,416 525,312" fill="#2B5D8C" fill-opacity="0.07"/>
+  <line x1="400" y1="62" x2="275" y2="312" stroke="#2B5D8C" stroke-width="1.6" stroke-dasharray="7 5"/>
+  <line x1="400" y1="62" x2="525" y2="312" stroke="#2B5D8C" stroke-width="1.6" stroke-dasharray="7 5"/>
+  <!-- Mittellinie -->
+  <line x1="400" y1="68" x2="400" y2="205" stroke="#6B7570" stroke-width="1" stroke-dasharray="12 4 2 4"/>
+  <line x1="400" y1="231" x2="400" y2="414" stroke="#6B7570" stroke-width="1" stroke-dasharray="12 4 2 4"/>
+  <!-- Wände, Deckel, Boden -->
+  <rect x="268" y="66" width="7" height="350" fill="#FFFFFF" stroke="#2F6B3A" stroke-width="1.8"/>
+  <rect x="525" y="66" width="7" height="350" fill="#FFFFFF" stroke="#6B7570" stroke-width="1.5"/>
+  <rect x="268" y="59" width="124" height="7" fill="#FFFFFF" stroke="#6B7570" stroke-width="1.5"/>
+  <rect x="408" y="59" width="124" height="7" fill="#FFFFFF" stroke="#6B7570" stroke-width="1.5"/>
+  <rect x="268" y="416" width="264" height="7" fill="#1F2A24"/>
+  <!-- LED + Diffusor -->
+  <polygon points="275,66 302,66 275,93" fill="#2B5D8C"/>
+  <rect x="277" y="68" width="7" height="7" fill="#D9B32E"/>
+  <line x1="275" y1="93" x2="302" y2="66" stroke="#FFFFFF" stroke-width="3"/>
+  <polygon points="525,66 498,66 525,93" fill="#2B5D8C"/>
+  <rect x="516" y="68" width="7" height="7" fill="#D9B32E"/>
+  <line x1="525" y1="93" x2="498" y2="66" stroke="#FFFFFF" stroke-width="3"/>
+  <g stroke="#D9B32E" stroke-width="2">
+    <line x1="296" y1="84" x2="309" y2="97"/><line x1="289" y1="91" x2="299" y2="104"/><line x1="303" y1="77" x2="316" y2="87"/>
+    <line x1="504" y1="84" x2="491" y2="97"/><line x1="511" y1="91" x2="501" y2="104"/><line x1="497" y1="77" x2="484" y2="87"/>
+  </g>
+  <!-- Handy + Halter -->
+  <rect x="390" y="48" width="42" height="10" rx="3" fill="#1F2A24"/>
+  <rect x="395" y="56" width="10" height="5" rx="1" fill="#6B7570"/>
+  <path d="M381,59 V42 H396 V46 H390 V59 Z" fill="#2B5D8C"/>
+  <path d="M441,59 V42 H426 V46 H432 V59 Z" fill="#2B5D8C"/>
+  <!-- Pflanze -->
+  <path d="M370,356 C347,345 339,300 342,275 C345,252 370,236 400,236 C430,236 455,252 458,275 C461,300 453,345 430,356 Z" fill="#5B9A3C" stroke="#2F6B3A" stroke-width="1.5"/>
+  <g fill="#2F6B3A" fill-opacity="0.35">
+    <ellipse cx="373" cy="272" rx="20" ry="9" transform="rotate(-25 373 272)"/>
+    <ellipse cx="427" cy="268" rx="20" ry="9" transform="rotate(25 427 268)"/>
+    <ellipse cx="364" cy="315" rx="18" ry="8" transform="rotate(-10 364 315)"/>
+    <ellipse cx="436" cy="312" rx="18" ry="8" transform="rotate(10 436 312)"/>
+    <ellipse cx="400" cy="254" rx="15" ry="7"/>
+  </g>
+  <!-- Topf, Abdeckscheibe, Zentrierring -->
+  <polygon points="370,361 430,361 422.5,416 377.5,416" fill="#6B7570"/>
+  <rect x="367" y="356" width="66" height="5" fill="#2B5D8C"/>
+  <rect x="369" y="410" width="9" height="6" fill="#2B5D8C"/>
+  <rect x="422" y="410" width="9" height="6" fill="#2B5D8C"/>
+  <!-- Etikettenhalter vorne, Farbkarte hinten -->
+  <rect x="277" y="411" width="40" height="5" fill="#2B5D8C"/>
+  <rect x="280" y="408.5" width="34" height="2.5" fill="#FFFFFF" stroke="#6B7570" stroke-width="0.6"/>
+  <rect x="480" y="411" width="43" height="5" fill="#2B5D8C"/>
+  <rect x="483" y="408.5" width="9" height="2.5" fill="#C0392B"/><rect x="492" y="408.5" width="9" height="2.5" fill="#D9B32E"/>
+  <rect x="501" y="408.5" width="9" height="2.5" fill="#5B9A3C"/><rect x="510" y="408.5" width="9" height="2.5" fill="#2B5D8C"/>
+  <!-- Bildbreite an der Pflanzenoberkante -->
+  <line x1="318" y1="226" x2="482" y2="226" stroke="#2B5D8C" stroke-width="1.3"/>
+  <line x1="318" y1="220" x2="318" y2="232" stroke="#2B5D8C" stroke-width="1.3"/>
+  <line x1="482" y1="220" x2="482" y2="232" stroke="#2B5D8C" stroke-width="1.3"/>
+  <text x="400" y="218" text-anchor="middle" font-size="14" fill="#2B5D8C" font-weight="600">Bildbreite ca. 34 cm</text>
+  <!-- Maßketten -->
+  <g stroke="#C9D2C6" stroke-width="1" stroke-dasharray="4 3">
+    <line x1="404" y1="236" x2="552" y2="236"/>
+    <line x1="434" y1="361" x2="552" y2="361"/>
+    <line x1="534" y1="66" x2="767" y2="66"/>
+    <line x1="534" y1="416" x2="767" y2="416"/>
+  </g>
+  <g stroke="#1F2A24" stroke-width="1.3">
+    <line x1="555" y1="66" x2="555" y2="416"/>
+    <line x1="549" y1="66" x2="561" y2="66"/><line x1="549" y1="236" x2="561" y2="236"/>
+    <line x1="549" y1="361" x2="561" y2="361"/><line x1="549" y1="416" x2="561" y2="416"/>
+    <line x1="770" y1="66" x2="770" y2="416"/>
+    <line x1="764" y1="66" x2="776" y2="66"/><line x1="764" y1="416" x2="776" y2="416"/>
+    <line x1="275" y1="436" x2="525" y2="436"/>
+    <line x1="275" y1="430" x2="275" y2="442"/><line x1="525" y1="430" x2="525" y2="442"/>
+  </g>
+  <g font-size="14" fill="#1F2A24">
+    <text x="566" y="140" font-size="15" font-weight="700">ca. 34 cm</text>
+    <text x="566" y="158">Kamera bis</text>
+    <text x="566" y="174">Pflanzenoberkante</text>
+    <text x="566" y="296" font-size="15" font-weight="700">ca. 25 cm</text>
+    <text x="566" y="314">Pflanze</text>
+    <text x="566" y="386" font-size="15" font-weight="700">ca. 11 cm</text>
+    <text x="566" y="404">Topf</text>
+    <text x="786" y="241" font-size="15" font-weight="700" text-anchor="middle" transform="rotate(-90 786 241)">70 cm Kamera bis Boden</text>
+    <text x="400" y="458" font-size="15" font-weight="700" text-anchor="middle">50 cm (innen)</text>
+  </g>
+  <!-- Hinweislinien -->
+  <g stroke="#6B7570" stroke-width="1" fill="none">
+    <polyline points="255,44 340,62"/>
+    <polyline points="255,100 280,74"/>
+    <polyline points="255,174 341,180"/>
+    <polyline points="255,266 269,266"/>
+    <polyline points="255,358 366,358"/>
+    <polyline points="255,394 369,412"/>
+    <polyline points="255,426 286,412"/>
+    <polyline points="486,28 438,42"/>
+    <polyline points="562,428 505,410"/>
+    <polyline points="562,461 531,422"/>
+  </g>
+  <g fill="#6B7570">
+    <circle cx="340" cy="62" r="2.5"/><circle cx="280" cy="74" r="2.5"/><circle cx="341" cy="180" r="2.5"/>
+    <circle cx="269" cy="266" r="2.5"/><circle cx="366" cy="358" r="2.5"/><circle cx="369" cy="412" r="2.5"/>
+    <circle cx="286" cy="412" r="2.5"/><circle cx="438" cy="42" r="2.5"/><circle cx="505" cy="410" r="2.5"/>
+    <circle cx="531" cy="422" r="2.5"/>
+  </g>
+  <g font-size="14" fill="#1F2A24" text-anchor="end">
+    <text x="250" y="40">Deckel, fest verschraubt,</text>
+    <text x="250" y="56">Kameraloch ca. 3 cm</text>
+    <text x="250" y="98">LED-Streifen + Diffusor,</text>
+    <text x="250" y="114">rundum an der Oberkante</text>
+    <text x="250" y="172">Bildfeld der Kamera</text>
+    <text x="250" y="188" fill="#6B7570">(unten: ganzer Boden)</text>
+    <text x="250" y="262">Vorderwand = Klappe</text>
+    <text x="250" y="278">Wände innen matt weiß</text>
+    <text x="250" y="362">Abdeckscheibe</text>
+    <text x="250" y="398">Zentrierring</text>
+    <text x="250" y="430">Etikettenhalter (vorne)</text>
+  </g>
+  <g font-size="14" fill="#1F2A24">
+    <text x="490" y="20">Box-Handy im Halter,</text>
+    <text x="490" y="36">liegt waagerecht</text>
+    <text x="566" y="432">Farbkarte im Halter</text>
+    <text x="566" y="448">(hinten, in der Ecke)</text>
+    <text x="566" y="466">Boden matt schwarz</text>
+  </g>
+  <!-- Legende -->
+  <rect x="60" y="447" width="14" height="14" fill="#2B5D8C"/>
+  <text x="80" y="459" font-size="14" fill="#1F2A24">= 3D-Druckteil</text>
+</svg>
+<figcaption>Abb. 4.1: Die Fotobox von der Seite (Vorderwand links). Blau gestrichelt: der Kamerablick; er erfasst den ganzen Boden und den unteren Teil der Wände.</figcaption>
+</figure>
+
+
+<h3>Warum Farbkarte und Etikett in die Ecken?</h3>
+<p>Stell dir an der Stelle der Kamera eine Lampe vor: Was im Schatten der Pflanze liegt, sieht die Kamera nicht. Der Boden ist ungefähr doppelt so weit von der Kamera weg wie die Pflanzenoberkante (70 statt 34 cm), also ist dieser Schatten am Boden etwa doppelt so breit wie die Pflanze. Eine 25 cm breite Pflanze verdeckt dort im ungünstigsten Fall einen Kreis von ca. 50 cm Durchmesser. Frei bleiben nur die vier Ecken (Abbildung 4.2).</p>
+
+
+<figure>
+<svg viewBox="0 0 800 384" role="img" aria-label="Blick der Kamera von oben auf den Boden: Topf in der Mitte, Farbkarte hinten links, Etikett vorne rechts, Klappe vorne, gestrichelter Bildrand, Kreis der größten Pflanze" font-family="Source Sans 3, sans-serif">
+  <polygon points="282.1,87.1 517.9,87.1 565.0,40.0 235.0,40.0" fill="#F3F6F1" stroke="#C9D2C6" stroke-width="1.2"/>
+  <polygon points="282.1,322.9 517.9,322.9 565.0,370.0 235.0,370.0" fill="#F3F6F1" stroke="#2F6B3A" stroke-width="1.8"/>
+  <polygon points="282.1,87.1 235.0,40.0 180.0,40.0 180.0,370.0 235.0,370.0 282.1,322.9" fill="#F3F6F1" stroke="#C9D2C6" stroke-width="1.2"/>
+  <polygon points="517.9,87.1 565.0,40.0 620.0,40.0 620.0,370.0 565.0,370.0 517.9,322.9" fill="#F3F6F1" stroke="#C9D2C6" stroke-width="1.2"/>
+  <rect x="282.1" y="87.1" width="235.7" height="235.7" fill="#6B7570"/>
+  <circle cx="400" cy="205.0" r="121.3" fill="#5B9A3C" fill-opacity="0.28"/>
+  <rect x="284.1" y="89.1" width="56.6" height="35.4" fill="#1F2A24"/>
+  <rect x="286.7" y="91.7" width="7.5" height="6.6" fill="#8A5A2B"/>
+  <rect x="295.5" y="91.7" width="7.5" height="6.6" fill="#D9B32E"/>
+  <rect x="304.3" y="91.7" width="7.5" height="6.6" fill="#2B5D8C"/>
+  <rect x="313.1" y="91.7" width="7.5" height="6.6" fill="#2F6B3A"/>
+  <rect x="321.9" y="91.7" width="7.5" height="6.6" fill="#6B7570"/>
+  <rect x="330.6" y="91.7" width="7.5" height="6.6" fill="#5B9A3C"/>
+  <rect x="286.7" y="99.6" width="7.5" height="6.6" fill="#D9B32E"/>
+  <rect x="295.5" y="99.6" width="7.5" height="6.6" fill="#2B5D8C"/>
+  <rect x="304.3" y="99.6" width="7.5" height="6.6" fill="#C0392B"/>
+  <rect x="313.1" y="99.6" width="7.5" height="6.6" fill="#8A5A2B"/>
+  <rect x="321.9" y="99.6" width="7.5" height="6.6" fill="#5B9A3C"/>
+  <rect x="330.6" y="99.6" width="7.5" height="6.6" fill="#D9B32E"/>
+  <rect x="286.7" y="107.5" width="7.5" height="6.6" fill="#2B5D8C"/>
+  <rect x="295.5" y="107.5" width="7.5" height="6.6" fill="#2F6B3A"/>
+  <rect x="304.3" y="107.5" width="7.5" height="6.6" fill="#C0392B"/>
+  <rect x="313.1" y="107.5" width="7.5" height="6.6" fill="#D9B32E"/>
+  <rect x="321.9" y="107.5" width="7.5" height="6.6" fill="#C0392B"/>
+  <rect x="330.6" y="107.5" width="7.5" height="6.6" fill="#2B5D8C"/>
+  <rect x="286.7" y="115.3" width="7.5" height="6.6" fill="#FFFFFF"/>
+  <rect x="295.5" y="115.3" width="7.5" height="6.6" fill="#F3F6F1"/>
+  <rect x="304.3" y="115.3" width="7.5" height="6.6" fill="#C9D2C6"/>
+  <rect x="313.1" y="115.3" width="7.5" height="6.6" fill="#6B7570" stroke="#C9D2C6" stroke-width="0.6"/>
+  <rect x="321.9" y="115.3" width="7.5" height="6.6" fill="#1F2A24" stroke="#C9D2C6" stroke-width="0.6"/>
+  <rect x="330.6" y="115.3" width="7.5" height="6.6" fill="#1F2A24" stroke="#C9D2C6" stroke-width="0.6"/>
+  <rect x="471.1" y="290.2" width="44.8" height="30.6" fill="#1F2A24"/>
+  <rect x="473.4" y="292.6" width="40.1" height="25.9" fill="#FFFFFF"/>
+  <text x="493.5" y="311.0" font-size="16" font-weight="700" text-anchor="middle" fill="#1F2A24">17</text>
+  <circle cx="400" cy="205.0" r="36.4" fill="#1F2A24"/>
+  <rect x="400" y="203.0" width="36.4" height="4" fill="#8A5A2B"/>
+  <circle cx="400" cy="205.0" r="8.4" fill="#8A5A2B"/>
+  <circle cx="397" cy="202.0" r="2.3" fill="#5B9A3C"/>
+  <circle cx="403" cy="206.0" r="2.3" fill="#5B9A3C"/>
+  <circle cx="398" cy="209.0" r="2.3" fill="#5B9A3C"/>
+  <g stroke="#FFFFFF" stroke-width="1.2">
+    <line x1="344.6" y1="205.0" x2="355.6" y2="205.0"/><line x1="444.4" y1="205.0" x2="455.4" y2="205.0"/>
+    <line x1="400" y1="149.6" x2="400" y2="160.6"/><line x1="400" y1="249.4" x2="400" y2="260.4"/>
+  </g>
+  <circle cx="400" cy="205.0" r="121.3" fill="none" stroke="#2F6B3A" stroke-width="2" stroke-dasharray="8 5"/>
+  <rect x="180.0" y="40.0" width="440.0" height="330.0" fill="none" stroke="#2B5D8C" stroke-width="2.2" stroke-dasharray="9 5"/>
+  <g font-size="14" text-anchor="middle">
+    <text x="400" y="68.6" fill="#6B7570">Rückwand (unterer Teil)</text>
+    <text x="231.1" y="202.0" fill="#6B7570">Seiten-</text><text x="231.1" y="218.0" fill="#6B7570">wand</text>
+    <text x="568.9" y="202.0" fill="#6B7570">Seiten-</text><text x="568.9" y="218.0" fill="#6B7570">wand</text>
+    <text x="400" y="351.4" fill="#2F6B3A" font-weight="700">Vorderwand = Klappe (vorne)</text>
+    <text x="400" y="30.0" fill="#6B7570">hinten</text>
+  </g>
+  <text x="180.0" y="30.0" font-size="14" fill="#2B5D8C" font-weight="600">Bildrand (Foto)</text>
+  <text x="287.1" y="316.9" font-size="13" fill="#FFFFFF">50 × 50 cm</text>
+  <g stroke="#6B7570" stroke-width="1" fill="none">
+    <line x1="174.0" y1="105.1" x2="294.1" y2="103.1"/>
+    <line x1="174.0" y1="300.9" x2="304.1" y2="296.9"/>
+    <line x1="626.0" y1="127.4" x2="499.4" y2="135.4"/>
+    <line x1="626.0" y1="205.0" x2="436.4" y2="205.0"/>
+    <line x1="626.0" y1="305.5" x2="513.9" y2="305.5"/>
+  </g>
+  <g fill="#6B7570">
+    <circle cx="294.1" cy="103.1" r="2.5"/>
+    <circle cx="304.1" cy="296.9" r="2.5"/>
+    <circle cx="499.4" cy="135.4" r="2.5"/>
+    <circle cx="436.4" cy="205.0" r="2.5"/>
+    <circle cx="513.9" cy="305.5" r="2.5"/>
+  </g>
+  <text font-size="14" fill="#1F2A24" text-anchor="end"><tspan x="170.0" y="101.1">Farbkarte im Halter,</tspan><tspan x="170.0" y="117.1">hinten links</tspan></text>
+  <text font-size="14" fill="#1F2A24" text-anchor="end"><tspan x="170.0" y="296.9">Boden matt schwarz</tspan><tspan x="170.0" y="312.9">oder dunkelgrau</tspan></text>
+  <text font-size="14" fill="#1F2A24" text-anchor="start"><tspan x="630.0" y="123.4">größte Pflanze verdeckt</tspan><tspan x="630.0" y="139.4">am Boden bis ca. 50 cm</tspan></text>
+  <text font-size="14" fill="#1F2A24" text-anchor="start"><tspan x="630.0" y="201.0">Topf mit Abdeckscheibe</tspan><tspan x="630.0" y="217.0">im Zentrierring</tspan></text>
+  <text font-size="14" fill="#1F2A24" text-anchor="start"><tspan x="630.0" y="301.5">Etikett-Karte im Halter,</tspan><tspan x="630.0" y="317.5">vorne rechts</tspan></text>
+</svg>
+<figcaption>Abb. 4.2: So sieht die Kamera die Box (vorne = unten): ganzer Boden, ringsum der untere Teil der Wände. Grün gestrichelt: Im ungünstigsten Fall (Pflanze oben 25 cm breit) verdeckt die Pflanze alles bis auf die Ecken und reicht an die inneren Kanten von Karte und Etikett. Weiße Striche: Bildmitte.</figcaption>
+</figure>
+
+<p>Eine oben sehr breite Pflanze kann im Foto die innere Kante der Karte verdecken. Zeigt der Karton-Test das, kommt der Halter auf einen Sockel von ca. 10 cm: Je näher die Karte an der Pflanze liegt, desto kleiner ist dort ihr „Schatten“ (in 10 cm Höhe ca. 44 statt 50 cm Durchmesser). Ob das reicht, zeigt ein Testfoto mit der größten Pflanze. In der Druckdatei ist das die Einstellung <code>sockel_hoehe</code> (Sockelhöhe).</p>
+
+<h2>4.4 Material und Kosten</h2>
+<p class="table-caption">Tabelle 4.1: Materialliste für die Fotobox (Preise grob geschätzt, vor dem Kauf vergleichen)</p>
+<table class="t">
+<thead><tr><th>Teil</th><th>Menge / Maß</th><th>Worauf achten</th><th>Preis ca.</th></tr></thead>
+<tbody>
+<tr><td>Farbkarte</td><td>24 Felder, z.&nbsp;B. Calibrite ColorChecker Classic Mini</td><td>Graukarte reicht nicht (korrigiert nur den Weißabgleich)</td><td>60–80&nbsp;€</td></tr>
+<tr><td>LED&#8209;Streifen</td><td>5 V (USB), ca. 2 m</td><td>CRI/Ra ≥ 90, 5000–6500 K, ohne Dimmer (Abschnitt 4.7)</td><td>15–30&nbsp;€</td></tr>
+<tr><td>Platten</td><td>Wände und Deckel: 4 × ca. 50 × 70 cm, 1 × ca. 50 × 50 cm; Boden: ca. 50 × 50 cm</td><td>Wände und Deckel matt weiß: Forex (PVC-Hartschaum) 3–5 mm oder Kapa-Platte (Leichtschaumplatte) 5 mm; Boden matt schwarz oder dunkelgrau, z.&nbsp;B. Moosgummi</td><td>20–40&nbsp;€</td></tr>
+<tr><td>Rahmen</td><td>Leisten 4 × 70 cm, 8 × ca. 46&#8288;–&#8288;50&nbsp;cm; Schrauben</td><td>Holz 20 × 20 mm oder Alu-Profil 2020 (20 × 20 mm mit Nuten); Längen laut Zuschnittliste</td><td>20–40&nbsp;€</td></tr>
+<tr><td>Filament</td><td>ca. 1 Rolle</td><td>PLA matt schwarz; PETG für belastete Teile</td><td>20&nbsp;€</td></tr>
+<tr><td>Diffusorfolie</td><td>für ca. 2 m</td><td>Milchglasfolie oder opales (milchig-weißes) Material</td><td>5–10&nbsp;€</td></tr>
+<tr><td>Strom</td><td>USB-Netzteil/Powerbank</td><td>genug Leistung für den LED-Streifen, mit Reserve</td><td>10–20&nbsp;€</td></tr>
+<tr><td>Klappe</td><td>2 Scharniere, 2 Magnete</td><td>oder nur Magnete (Platte abnehmbar)</td><td>5&nbsp;€</td></tr>
+<tr><td colspan="3"><strong>Summe ohne Handy (grobe Schätzung)</strong></td><td><strong>150&#8288;–&#8288;250&nbsp;€</strong></td></tr>
+</tbody>
+</table>
+<p>Dazu kommt das Box-Handy, falls du keins hast (gebraucht ca. 80–150 €, Kapitel 3). Holzleisten sind günstig und leicht zu bearbeiten, Alu-Profil 2020 ist stabiler, aber teurer – beides geht.</p>
+
+<h2>4.5 Die 3D-Druckteile</h2>
+<p>Die Box braucht sieben verschiedene Druckteile (Übersicht in Tabelle 4.2, Schritt 2). Alles, was später im Foto zu sehen ist, druckst du in <strong>mattem Schwarz</strong>: Das Programm sortiert sehr dunkle Bildpunkte aus (Kapitel 7), und matte Flächen spiegeln nicht.</p>
+
+
+<p>Claude liefert die Druckteile als OpenSCAD-Dateien. <strong>OpenSCAD</strong> ist ein kostenloses Zeichenprogramm für 3D-Teile. Die Dateien sind <strong>parametrisch</strong>: Jedes Maß steht als Zahl darin; änderst du sie, passt sich das Teil an. Aus OpenSCAD exportierst du eine <strong>STL-Datei</strong>, das fertige Modell für deinen <strong>Slicer</strong> (das Programm, das den Druck vorbereitet). Die Arbeitsteilung: <span class="who du">Du</span> misst, <span class="who claude">Claude</span> zeichnet, du druckst eine Passprobe und dann den Rest.</p>
+
+<h3>Schritt 1: Messen und Claude beauftragen</h3>
+<p>Füll im Prompt alle eckigen Klammern [&nbsp;] aus; Maße misst du mit dem Messschieber in Millimetern. Die Topfmaße A bis C hast du in Tabelle 3.2 schon grob in cm; für die Druckteile misst du sie jetzt genau nach: drei Töpfe, jeweils den größten Wert. Hast du mehrere Topfgrößen, schreib für jede eine Zeile. Miss das Handy ohne Hülle – es liegt immer ohne Hülle im Halter. Vorschlag für die Topf-Karte: Visitenkartengröße (85 × 55 mm), dasselbe Format wie die Topfnummer-Karten in Kapitel 6.</p>
+<p>Abschicken wie in Abschnitt 1.4 und 3.9 (Sitzung in claude.ai/code, Klammern ersetzen). Claude liefert einen Pull Request; passt alles, übernimmst du ihn mit „Merge pull request“ und „Confirm merge“.</p>
+<div class="prompt"><p class="prompt-title">Prompt für Claude – Druckdateien für die Fotobox</p><pre>Lies docs/SPEZIFIKATION.md (Abschnitt Fotobox und meine Entscheidungen
+aus Etappe 0). Erstelle parametrische OpenSCAD-Druckdateien für alle
+3D-Druckteile der Fotobox im Ordner fotobox/: 8 Eckverbinder (3-Wege),
+Handyhalter, LED-/Diffusor-Halteleisten, Zentrierring, Abdeckscheibe,
+Farbkarten-Halter, Etikettenhalter.
+Arbeite auf einem eigenen Zweig und öffne am Ende einen Pull Request.
+
+Meine Messwerte (mm):
+- Topf: Rand außen [ ], Boden außen [ ], Höhe [ ]
+  (bei mehreren Topfgrößen je eine Zeile)
+- Handy: Modell [ ]; Länge [ ], Breite [ ], Dicke [ ] (ohne Hülle)
+- Linse der Hauptkamera (Mitte, von hinten gesehen): [ ] von der oberen
+  Kante, [ ] von der linken Kante; Tasten und Ladebuchse: [wo, z. B.
+  Tasten rechts 60–100 mm von oben, Buchse unten Mitte]
+- Rahmen: Holzleiste gemessen [ ] × [ ] (oder: Alu-Profil 2020)
+- Wandplatten Dicke [ ]; LED-Streifen Breite [ ]
+- Farbkarte außen [ ] × [ ]; Topf-Karte 85 × 55
+- Druckbett [ ] × [ ]; Düse [ ] (meist 0,4)
+- Karton-Test: Höhe [ ] cm; Karte/Etikett bei großen Pflanzen
+  verdeckt? [ja/nein]
+
+Anforderungen:
+- Alle Maße als Variablen mit deutschem Kommentar oben in der Hauptdatei,
+  damit ich sie im Customizer von OpenSCAD ändern kann (nicht nur in
+  include-Dateien). Eine Auswahlliste "teil" legt fest, was gerendert wird.
+- Passungs-Spiel als eigener Parameter (Start 0,3).
+- Alle Teile ohne Stützmaterial druckbar und passend fürs Druckbett.
+- Abdeckscheibe: Durchmesser = Topfrand + 10, Schlitz bis zur Mitte,
+  Mittelloch 30, Dicke 2. Zentrierring: flach, Innenmaß = Topfboden + 1.
+- Farbkarten- und Etikettenhalter: flach, Karte parallel zur Kamera,
+  Rand verdeckt keine Farbfelder, Parameter sockel_hoehe (Start 0);
+  sie passen in die Bodenecke neben Leiste und Eckverbinder.
+- Handyhalter: Linse genau über dem Kameraloch (30) in der Deckelmitte,
+  Handy waagerecht, Tasten und Ladebuchse frei.
+- fotobox/README.md auf Deutsch: Teileliste, Druckhinweise, Zuschnittliste
+  (Innenmaß 50 × 50 cm, Höhe laut Karton-Test), Bauanleitung.
+- Wenn OpenSCAD in deiner Umgebung läuft: Prüfe, dass jedes Teil
+  fehlerfrei rendert, und lege STL-Dateien in fotobox/stl/ ab.
+- Erkläre mir am Ende in einfachen Worten, welche Werte ich wo ändere.</pre></div>
+
+<h3>Schritt 2: Von der OpenSCAD-Datei zum Druck</h3>
+<p>Liefert Claude fertige STL-Dateien mit (Ordner <code>fotobox/stl/</code>), brauchst du nur Schritt 1 (Dateien holen) und Schritt 5 (drucken); OpenSCAD brauchst du dann erst, wenn du ein Maß ändern willst. Die Menünamen unten stammen aus der englischen Oberfläche von OpenSCAD; in einer deutschen Oberfläche heißen sie sinngemäß übersetzt.</p>
+<ol class="steps">
+<li><strong>Installieren und Dateien holen.</strong> OpenSCAD kostenlos von <a href="https://openscad.org/">openscad.org</a> laden (für Windows, macOS und Linux). Nach dem „Merge“ auf GitHub in deinem Repository auf „Code“ → „Download ZIP“ klicken und entpacken; die Dateien liegen in <code>fotobox/</code>.</li>
+<li><strong>Öffnen und anpassen.</strong> „File“ → „Open“, die <code>.scad</code>-Datei wählen. Die Maße änderst du in der Leiste „Customizer“ (falls unsichtbar: Menü „Window“, Haken bei „Hide Customizer“ entfernen). Bei „teil“ wählst du das Teil. F5 („Design“ → „Preview“) zeigt eine schnelle Vorschau.</li>
+<li><strong>Rendern.</strong> F6 („Design“ → „Render“). Das dauert Sekunden bis Minuten; erst danach lässt sich exportieren.</li>
+<li><strong>Exportieren.</strong> „File“ → „Export“ → „Export as STL…“ (oder F7), Dateiname mit der Endung <code>.stl</code>. Für jedes Teil wiederholen: bei „teil“ das nächste wählen, F6, exportieren.</li>
+<li><strong>Drucken.</strong> STL im Slicer öffnen (z.&nbsp;B. PrusaSlicer, Cura, Bambu Studio), Material laut Tabelle 4.2 wählen, drucken.</li>
+</ol>
+<p class="table-caption">Tabelle 4.2: Die 3D-Druckteile – wozu sie dienen und woraus du sie druckst</p>
+<table class="t">
+<thead><tr><th>Teil</th><th>Wozu</th><th>Material</th><th>Hinweise</th></tr></thead>
+<tbody>
+<tr><td>Eckverbinder (8&nbsp;Stück)</td><td>verbinden die Leisten zum Rahmen (3-Wege-Ecken)</td><td>PETG oder PLA, matt schwarz</td><td>erst einen als Passprobe drucken; die vier unteren sind im Bild</td></tr>
+<tr><td>Handyhalter</td><td>hält das Handy waagerecht, Hauptkamera über dem Kameraloch</td><td>PETG oder PLA</td><td>für genau dein Modell; Tasten und Ladebuchse frei</td></tr>
+<tr><td>LED-/Diffusor-Halteleisten</td><td>halten LEDs und Diffusor an der oberen Innenkante</td><td>PETG (LEDs werden warm)</td><td>in Stücken drucken; außerhalb des Bildes</td></tr>
+<tr><td>Zentrierring</td><td>stellt den Topf immer an dieselbe Stelle</td><td>PLA matt schwarz</td><td>flach; Innenmaß = Topfboden + ca.&nbsp;1&nbsp;mm; je Topfgröße ein Ring</td></tr>
+<tr><td>Abdeckscheibe (2&#8288;–&#8288;3&nbsp;Stück)</td><td>deckt Erde und Topfrand ab</td><td>PLA matt schwarz</td><td>Ø Topfrand + ca. 1 cm, Schlitz bis zur Mitte, Mittelloch ca. 3 cm</td></tr>
+<tr><td>Farbkarten-Halter</td><td>hält die Karte flach und parallel zur Kamera</td><td>PLA matt schwarz</td><td>Rand verdeckt keine Farbfelder; Sockel bei Bedarf</td></tr>
+<tr><td>Etikettenhalter</td><td>hält die Topf-Karte (Nummer bzw. QR-Code)</td><td>PLA matt schwarz</td><td>Einschubschlitz, oben offen, Karte liegt flach</td></tr>
+</tbody>
+</table>
+<div class="box tip"><p class="box-title">Tipps für den Druck</p><p>Teile im Bild nur aus mattem schwarzem Filament (kein glänzendes „Silk“-Filament) und flach drucken, <strong>die Seite, die die Kamera sieht, nach oben</strong> – auf glatten Druckplatten wird die Unterseite oft glänzend. Erst ein Teil als Passprobe; klemmt oder wackelt es, änderst du den Parameter für das Passungs-Spiel.</p></div>
+
+<h2>4.6 Zusammenbau</h2>
+<p>Genaue Längen und Plattenmaße stehen in <code>fotobox/README.md</code>. Bau in dieser Reihenfolge:</p>
+<ol class="steps">
+<li><strong>Rahmen.</strong> Leisten zusägen, mit den Eckverbindern zusammenstecken, bei Bedarf verschrauben. Gleich lange Diagonalen je Seite = rechtwinklig.</li>
+<li><strong>Wände.</strong> Rück- und Seitenwände von außen anschrauben oder mit Montageband kleben, matte Seite nach innen. Innen sichtbare Leisten matt weiß streichen.</li>
+<li><strong>Vorderklappe.</strong> Seitlich zwei Scharniere, gegenüber Magnete als Verschluss (oder nur Magnete, Platte abnehmbar). Sie muss ohne Lichtspalt anliegen.</li>
+<li><strong>Boden.</strong> Matt schwarze Platte einlegen und festkleben.</li>
+<li><strong>Deckel und Handyhalter.</strong> In der Deckelmitte ein Loch von ca. 3 cm schneiden, Deckel (innen weiß) fest verschrauben – er wird nie mehr bewegt. Halter mit Handy so ausrichten, dass die Hauptkamera genau über dem Loch sitzt, mit der Wasserwaage prüfen, dann festschrauben.</li>
+<li><strong>LEDs und Diffusor.</strong> Halteleisten rundum oben innen befestigen, LED-Streifen einkleben (nur an den markierten Stellen kürzen), Diffusor davor. Kabel nach außen führen, Loch abdichten.</li>
+<li><strong>Farbkarten-Halter.</strong> Flach ganz in die hintere linke Ecke kleben (Abbildung 4.2), Karte einlegen.</li>
+<li><strong>Zentrierring – nach dem Foto ausrichten.</strong> Topf in den Ring, Ring lose in die Mitte, Testfoto. Verschieben, bis der Topf genau in der Bildmitte steht (Gitterlinien der Kamera-App helfen), dann festkleben.</li>
+<li><strong>Etikettenhalter.</strong> In die vordere rechte Ecke kleben, Schlitz zur Klappe. Abdeckscheiben an einen Haken an der Box hängen.</li>
+</ol>
+
+<h2>4.7 Licht</h2>
+<p>Das Licht entscheidet, wie echt die Farben im Foto sind. Vier Regeln:</p>
+<ul>
+<li><strong>Farbtreu: CRI/Ra ≥ 90.</strong> Der Farbwiedergabeindex (CRI, Ra) sagt, wie natürlich Farben unter einer Lampe aussehen; 100 ist der Höchstwert (wie Tageslicht). Billige LEDs verfälschen Farbtöne – genau die feinen Unterschiede zwischen Grün, Gelb und Braun, auf die es hier ankommt.</li>
+<li><strong>Tageslichtweiß: 5000–6500 K.</strong> Kelvin (K) ist die Lichtfarbe: kleine Werte gelblich, große bläulich. Notiere den Wert; du brauchst ihn in Kapitel 5.</li>
+<li><strong>Indirekt:</strong> durch den Diffusor (milchige Folie, die das Licht streut) oder gegen die Wand, nie direkt auf die Pflanze – sonst harte Schatten und Glanzpunkte.</li>
+<li><strong>Nicht dimmen:</strong> kein Dimmer, kein Controller mit Fernbedienung. Viele Dimmer schalten die LEDs sehr schnell an und aus (PWM, Pulsweitenmodulation). Das Auge merkt es nicht, die Kamera schon: dunkle Streifen im Foto. Hat dein Streifen einen Dimmschalter: volle Helligkeit, dann Flimmer-Test.</li>
+</ul>
+<p><strong>Flimmer-Test:</strong> LEDs direkt am Netzteil, Klappe zu, leere Box mit weißem Blatt fotografieren, am PC vergrößern. Dunkle Streifen quer durchs Bild? Dann anderes Netzteil, sonst anderen LED-Streifen probieren. Streifen zeigen sich vor allem bei kurzer Belichtungszeit; darum Test in Kapitel 5 wiederholen. LEDs einige Minuten vorher einschalten.</p>
+
+<h2>4.8 Farbkarte richtig anbringen</h2>
+<p>Das Programm rechnet jedes Foto so um, dass die Farbkarte immer gleich aussieht (Kapitel 7). Ist sie schief, schmutzig oder verdeckt, stimmt die ganze Messung nicht.</p>
+<ul class="checklist">
+<li><strong>Flach und parallel zur Kamera</strong> – eine schräge Karte ist ungleich beleuchtet und kann spiegeln.</li>
+<li><strong>Immer an derselben Stelle, gleich herum:</strong> Die Position wird einmal eingestellt; verrutscht die Karte, misst das Programm daneben.</li>
+<li><strong>Nie verdeckt:</strong> kein Blatt, kein Finger, kein Halterrand über den Farbfeldern.</li>
+<li><strong>Sauber:</strong> Nur am Rand anfassen; Staub mit weichem, trockenem Pinsel entfernen.</li>
+<li><strong>Vor Licht schützen:</strong> Licht bleicht Farben aus. Karte im Halter in der geschlossenen Box lassen (LEDs nur zum Fotografieren an), sonst lichtdicht verpackt, nie in der Sonne.</li>
+<li><strong>Ersetzen,</strong> wenn sie verblasst, zerkratzt oder fleckig ist – danach neu prüfen (Kapitel 10).</li>
+</ul>
+
+<h2>4.9 Abdeckscheibe und Etikettenhalter</h2>
+<p><strong>Abdeckscheibe – warum:</strong> Feuchte Erde und Topfrand sehen im Foto braun oder dunkel aus, fast wie abgestorbene Blätter – das Programm würde sie als „braun“ zählen. Die matt schwarze Scheibe ist so dunkel, dass das Programm sie aussortiert (Kapitel 7).</p>
+<p><strong>So geht’s:</strong> Scheibe mit dem Schlitz seitlich an die Stängel schieben, bis sie im Mittelloch stehen, flach auf den Topfrand legen. Eingeklemmte Blätter vorsichtig nach oben ziehen, keine abreißen. Nach dem Foto Erdkrümel abklopfen – sonst zählen sie als „braun“. Jede Topfgröße bekommt eigene Scheiben und einen eigenen Ring.</p>
+<p><strong>Etikettenhalter – warum:</strong> Liegt die Topf-Nummer mit im Foto, können Foto und Topf nicht verwechselt werden. Später liest die App Nummer bzw. QR-Code direkt aus dem Foto (Baustein B7, Kapitel 9).</p>
+<p><strong>So geht’s:</strong> Topf-Karte mit der Nummer nach oben einschieben, immer gleich herum. Nummer groß drucken (z.&nbsp;B. 2–3 cm hoch), Karte matt lassen – laminierte Karten spiegeln. Danach geht sie zurück zum Topf.</p>
+
+<h2>4.10 Abnahme: Ist die Box fertig?</h2>
+<p>Die Box ist fertig, wenn sie diese Testfotos besteht (Box-Handy, Hauptkamera 1×, ohne Blitz). Fotos am PC vergleichen und im Ordner „Abnahme“ aufheben; Flimmer- und Hallenlicht-Test nach Kapitel 5 wiederholen.</p>
+<ul class="checklist">
+<li><strong>Leere Box, weißes Blatt am Boden:</strong> Licht gleichmäßig, keine hellen Flecken, harten Schatten oder Streifen.</li>
+<li><strong>Größte Pflanze:</strong> ganz im Bild, mit Rand; Farbkarte und Etikett vollständig sichtbar, kein Blatt darüber.</li>
+<li><strong>Kleinste Pflanze:</strong> gut erkennbar, Topf in der Bildmitte.</li>
+<li><strong>Blätter vergrößert:</strong> keine Glanzpunkte. <strong>Abdeckscheibe:</strong> keine Erde, kein Topfrand zu sehen.</li>
+<li><strong>Hallenlicht an und aus</strong> (zwei Fotos desselben Topfs): kein Unterschied erkennbar.</li>
+<li><strong>Derselbe Topf dreimal,</strong> jedes Mal heraus und wieder hinein: Er steht immer an derselben Stelle.</li>
+<li><strong>Etikett:</strong> Die Nummer ist im Foto gut lesbar.</li>
+<li><strong>Mechanik:</strong> Handy sitzt fest und waagerecht, Klappe schließt dicht, nichts wackelt.</li>
+</ul>
+
+<div class="box warn"><p class="box-title">Typische Fehler</p>
+<ul>
+<li><strong>Falsche Linse:</strong> Weitwinkel oder Zoom statt Hauptkamera 1×.</li>
+<li><strong>Glänzende Flächen:</strong> Platten, laminierte Karten, Silk-Filament – Spiegelungen, Glanzpunkte.</li>
+<li><strong>Farbige Teile im Bild:</strong> grüner Zentrierring, Holz, buntes Klebeband – zählen als Pflanze.</li>
+<li><strong>Gedimmte LEDs:</strong> Streifen im Foto.</li>
+<li><strong>Deckel oder Halter locker, Handy mal mit Hülle:</strong> Kamera verrutscht, Kartenposition stimmt nicht.</li>
+<li><strong>Zentrierring nach Zollstock statt nach Foto ausgerichtet:</strong> Der Topf steht nicht in der Bildmitte.</li>
+<li><strong>Lichtspalten</strong> an Klappe oder Kabelloch: Das Hallenlicht verändert das Foto.</li>
+<li><strong>Stille Änderungen:</strong> Karte umgesteckt, LED getauscht, nichts notiert. Box-Protokoll führen (Datum, Änderung; z.&nbsp;B. im Projekttagebuch, Abschnitt 1.6) – solche Änderungen verlangen eine neue Prüfung (Kapitel 10).</li>
+</ul></div>
+</section>
