@@ -30,6 +30,17 @@ test('Bonitur-Blatt: Fehler für ungültige Noten und doppelte Töpfe', () => {
   assert.ok(r.fehler.some((f) => f.includes('P001 kommt doppelt')));
 });
 
+test('Bonitur-Blatt: vorbereitete Zeilen ohne Noten und Foto werden übersprungen', () => {
+  const r = boniturLesen([
+    { topf_nr: 'P001', note_A: 1, note_B: 1, foto_datei: 'a.jpg' },
+    { topf_nr: 'P002', sorte: 'Genovese', note_A: null, note_B: null },
+    { topf_nr: 'P003', note_A: null, note_B: null, foto_datei: 'c.jpg' },
+  ], skala.noten);
+  assert.deepEqual(r.zeilen.map((z) => z.topf_nr), ['P001', 'P003']);
+  assert.ok(r.hinweise.some((h) => h.startsWith('1 vorbereitete Zeile ')));
+  assert.ok(r.hinweise.some((h) => h.includes('P003') || h.includes('Zeile 4: note_A fehlt')));
+});
+
 test('Zuordnung über foto_datei, QR-Rückfall und Problemlisten', () => {
   const fotos = [
     { name: 'BOX_1.jpg', qr: 'P001' }, { name: 'BOX_2.jpg', qr: 'P002' }, { name: 'BOX_3.jpg', qr: 'P003' },

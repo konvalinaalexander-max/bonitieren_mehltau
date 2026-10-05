@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2F6B3A">
+<title>Mehltau-Bonitur</title>
+<link rel="icon" href="app/symbole/symbol-192.png">
+<style>
+  :root { --tinte: #1F2A24; --grau: #6B7570; --linie: #C9D2C6; --hell: #F3F6F1; --dgruen: #2F6B3A; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #FAFBF9; color: var(--tinte); font: 16px/1.5 "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; }
+  header { background: var(--dgruen); color: #fff; padding: 22px 16px; }
+  header div, main { max-width: 860px; margin: 0 auto; }
+  header h1 { margin: 0 0 4px; font-size: 26px; display: flex; align-items: center; gap: 12px; }
+  header img { width: 40px; height: 40px; border-radius: 9px; }
+  header p { margin: 0; opacity: 0.9; }
+  main { padding: 18px 16px 40px; }
+  .raster { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+  a.kachel { display: block; background: #fff; border: 1px solid var(--linie); border-radius: 12px; padding: 16px; color: inherit; text-decoration: none; }
+  a.kachel:hover { border-color: var(--dgruen); box-shadow: 0 2px 8px rgba(47,107,58,0.12); }
+  a.kachel b { display: block; font-size: 18px; color: var(--dgruen); margin-bottom: 4px; }
+  a.kachel span { color: var(--grau); font-size: 14px; }
+  h2 { font-size: 17px; color: var(--dgruen); margin: 26px 0 10px; }
+  ul { padding-left: 20px; } li { margin: 4px 0; }
+  .klein { color: var(--grau); font-size: 13px; margin-top: 28px; }
+</style>
+</head>
+<body>
+<header><div>
+  <h1><img src="app/symbole/symbol-192.png" alt="">Mehltau-Bonitur</h1>
+  <p>Falscher Mehltau an Topfbasilikum: Topf in die Fotobox, Foto von oben, die App misst grün, gelb und braun und gibt eine Note.</p>
+</div></header>
+<main>
+  <div class="raster">
+    <a class="kachel" href="app/"><b>Handy-App</b><span>Auf dem Box-Handy in Chrome öffnen und „Zum Startbildschirm hinzufügen“. Läuft danach auch ohne Internet.</span></a>
+    <a class="kachel" href="werkstatt/"><b>Analyse-Werkstatt</b><span>Am PC: Pilot auswerten, Farbkarte und Topfkreis einstellen, Schwellen prüfen, Einstellungsdatei für die App speichern.</span></a>
+    <a class="kachel" href="dist/analyse-werkstatt.html" download><b>Werkstatt als Datei</b><span>Eine einzige HTML-Datei zum Herunterladen; läuft per Doppelklick auch ganz ohne Internet.</span></a>
+    <a class="kachel" href="etiketten/"><b>Topf-Karten drucken</b><span>Karten 85 × 55 mm mit großer Nummer und QR-Code, dazu die Maßstab-Karte 10 × 10 cm.</span></a>
+  </div>
+  <h2>Unterlagen</h2>
+  <ul>
+    <li><a href="docs/Leitfaden_Mehltau-Bonitur.pdf">Leitfaden (PDF)</a> – Schritt für Schritt von der Fotobox bis zur fertigen App</li>
+    <li><a href="docs/SPEZIFIKATION.md">Spezifikation</a> – verbindliche Zahlen und Entscheidungen</li>
+    <li><a href="docs/FORTSCHRITT.md">Fortschritt</a> – Stand der Bausteine B1–B9</li>
+    <li><a href="vorlagen/">Vorlagen</a> – Pilot-Excel, Topf-Karten, Maßstab-Karte, Bonitur-Bogen</li>
+    <li><a href="druckteile/">3D-Druckteile</a> – OpenSCAD-Dateien für die Fotobox</li>
+  </ul>
+  <p class="klein">Alle Auswertungen laufen im Browser auf deinem Gerät. Fotos und Messwerte werden nicht hochgeladen.</p>
+</main>
+</body>
+</html>

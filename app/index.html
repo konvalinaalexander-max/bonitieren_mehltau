@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2F6B3A">
+<meta name="description" content="Bonitur von Falschem Mehltau an Topfbasilikum mit der Fotobox">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="symbole/symbol-192.png">
+<link rel="apple-touch-icon" href="symbole/symbol-192.png">
+<title>Mehltau-Bonitur</title>
+<link rel="stylesheet" href="stil.css">
+</head>
+<body>
+<header class="kopf">
+  <button id="zurueck" class="symbolknopf" aria-label="Zurück" hidden>‹</button>
+  <h1 id="titel">Mehltau-Bonitur</h1>
+  <a id="zu-einstellungen" class="symbolknopf" href="#/einstellungen" aria-label="Einstellungen">⚙</a>
+</header>
+<main id="inhalt"><p class="laden">Lade …</p></main>
+<div id="aktualisierung" class="leiste" hidden>Neue Version der App verfügbar. <button id="neu-laden" class="knopf klein">Jetzt laden</button></div>
+<div id="meldung" class="meldung" hidden></div>
+<input type="file" id="eingabe-kamera" accept="image/*" capture="environment" hidden>
+<input type="file" id="eingabe-import" accept="image/jpeg,.jpg,.jpeg" multiple hidden>
+<input type="file" id="eingabe-json" accept=".json,application/json" hidden>
+<input type="file" id="eingabe-bild" accept="image/*" hidden>
+<script type="module" src="app.js"></script>
+</body>
+</html>

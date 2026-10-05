@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Topf-Karten drucken</title>
+<link rel="stylesheet" href="etiketten.css">
+</head>
+<body>
+<header class="kopf nur-bildschirm">
+  <span class="punkt"></span><b>Topf-Karten und Maßstab-Karte drucken</b>
+  <a href="../" class="leise">zur Übersicht</a>
+</header>
+
+<main class="nur-bildschirm">
+  <section class="karte">
+    <h2>Was drucken?</h2>
+    <label><input type="radio" name="art" value="karten" checked> Topf-Karten 85 × 55 mm (10 je A4-Seite)</label>
+    <label><input type="radio" name="art" value="massstab"> Maßstab-Karte 10 × 10 cm (2 je Seite)</label>
+  </section>
+
+  <section class="karte" id="bereich-karten">
+    <h2>Nummern</h2>
+    <div class="reiter">
+      <button type="button" data-quelle="bereich" class="aktiv">Bereich</button>
+      <button type="button" data-quelle="liste">Liste</button>
+      <button type="button" data-quelle="excel">Aus Excel</button>
+    </div>
+    <div data-teil="bereich" class="raster">
+      <label>Vorsatz<input type="text" id="praefix" value="P" maxlength="12"></label>
+      <label>Von<input type="number" id="von" value="1" min="0"></label>
+      <label>Bis<input type="number" id="bis" value="200" min="0"></label>
+      <label>Stellen<input type="number" id="stellen" value="3" min="1" max="8"></label>
+      <p class="leise breit">Beispiele: Vorsatz „P“, 1 bis 200, 3 Stellen → P001 … P200. Vorsatz „12-“ → 12-001, 12-002 …</p>
+    </div>
+    <div data-teil="liste" hidden>
+      <label class="breit">Eine Topf-ID je Zeile, wahlweise mit Satz und Sorte, getrennt durch Tabulator oder Strichpunkt (z. B. aus Excel kopiert):
+        <textarea id="liste" rows="8" placeholder="12-001;12;Genovese&#10;12-002;12;Genovese"></textarea></label>
+    </div>
+    <div data-teil="excel" hidden>
+      <p>Excel-Datei mit einer Spalte <code>topf_id</code> (oder <code>topf_nr</code>), wahlweise <code>satz</code> und <code>sorte</code>. Ohne passende Überschrift wird die erste Spalte genommen.</p>
+      <input type="file" id="excel" accept=".xlsx,.xls,.csv">
+      <p class="leise" id="excel-info"></p>
+    </div>
+    <h2>Klein auf jeder Karte</h2>
+    <div class="raster">
+      <label>Satz<input type="text" id="satz" placeholder="z. B. 12"></label>
+      <label>Sorte<input type="text" id="sorte" placeholder="z. B. Genovese"></label>
+    </div>
+    <label><input type="checkbox" id="mit-qr" checked> QR-Code drucken (die App und die Werkstatt lesen damit die Topf-ID aus dem Foto)</label>
+  </section>
+
+  <section class="karte hinweis">
+    <p><b id="zusammenfassung">–</b></p>
+    <p>Im Druckdialog <b>„Tatsächliche Größe“ bzw. „100 %“</b> wählen, nicht „An Seite anpassen“. Danach das Kontrollmaß oben auf der Seite nachmessen: Die Linie muss genau 50 mm lang sein. Mattes Papier oder dünnen Karton nehmen, nicht glänzend laminieren.</p>
+    <button class="knopf haupt" id="drucken" type="button">Drucken …</button>
+  </section>
+  <h2>Vorschau</h2>
+</main>
+
+<div id="seiten"></div>
+
+<script type="module" src="etiketten.js"></script>
+</body>
+</html>

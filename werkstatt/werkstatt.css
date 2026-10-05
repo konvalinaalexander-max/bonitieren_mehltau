@@ -3,6 +3,7 @@
   --dgruen: #2F6B3A; --gruen: #5B9A3C; --gelb: #D9B32E; --braun: #8A5A2B; --rot: #C0392B; --blau: #2B5D8C;
   --schrift: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
 }
+[hidden] { display: none !important; }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: #FAFBF9; color: var(--tinte); font: 15px/1.45 var(--schrift); }
 h1 { font-size: 26px; margin: 4px 0 6px; }

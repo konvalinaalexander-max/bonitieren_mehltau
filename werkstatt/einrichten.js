@@ -5,10 +5,10 @@ import { viereckAbbildung, SPALTEN, ZEILEN } from '../kern/farbkarte.js';
 
 const ANLEITUNG = {
   keine: 'Wähle oben ein Werkzeug.',
-  karte: 'Farbkarte: Klicke nacheinander die 4 äußeren Ecken der Farbfelder (1 braunes Feld, 2 türkises, 3 schwarzes, 4 weißes). Die Lupe hilft beim genauen Treffen.',
-  kreis: 'Topfkreis: Auf die Mitte der Abdeckscheibe drücken, Maustaste halten und den Radius ziehen. Alle Blattspitzen müssen innen liegen, Farbkarte und Etikett außen.',
-  etikett: 'Etikettbereich: Ein Rechteck um die Topf-Karte ziehen (Maustaste halten). Danach wird der QR-Code probeweise gelesen.',
-  massstab: 'Maßstab-Karte: Zuerst rechts das Foto der 10 × 10 cm Karte wählen, dann ihre 4 Ecken anklicken.',
+  karte: 'Farbkarte: Nacheinander die 4 äußeren Ecken der Farbfelder anklicken bzw. antippen (1 braunes Feld, 2 türkises, 3 schwarzes, 4 weißes). Die Lupe hilft beim genauen Treffen; der Punkt wird beim Loslassen gesetzt.',
+  kreis: 'Topfkreis: Auf die Mitte der Abdeckscheibe drücken, gedrückt halten (Maustaste oder Finger) und den Radius ziehen. Alle Blattspitzen müssen innen liegen, Farbkarte und Etikett außen.',
+  etikett: 'Etikettbereich: Ein Rechteck um die Topf-Karte ziehen (gedrückt halten). Danach wird der QR-Code probeweise gelesen.',
+  massstab: 'Maßstab-Karte: Zuerst rechts das Foto der Karte wählen, dann die 4 äußeren Ecken des schwarzen 10 × 10 cm Quadrats anklicken.',
 };
 
 /** Analyse-Auflösung wie verkleinern() in kern/bild.js. */
@@ -38,7 +38,7 @@ export class Einrichtung {
     this.modus = 'keine';
     this.bild = null; this.datei = null;
     this.massstabBild = null; this.massstabDatei = null;
-    this.punkte = []; this.ziehen = null; this.mauspos = null;
+    this.punkte = []; this.ziehen = null; this.mauspos = null; this.setzenBei = null; this.gedrueckt = false;
     this.kartenErgebnis = null;
     this.ereignisse();
     this.anleitungEl.textContent = ANLEITUNG.keine;
@@ -61,7 +61,7 @@ export class Einrichtung {
   }
 
   modusSetzen(modus) {
-    this.modus = modus; this.punkte = []; this.ziehen = null;
+    this.modus = modus; this.punkte = []; this.ziehen = null; this.setzenBei = null;
     this.anleitungEl.textContent = ANLEITUNG[modus] || ANLEITUNG.keine;
     if (modus === 'massstab' && !this.massstabBild) this.anleitungEl.textContent = 'Maßstab-Karte: Zuerst rechts unter „Maßstab“ das Foto der 10 × 10 cm Karte wählen.';
     this.zeichnen();
@@ -74,10 +74,34 @@ export class Einrichtung {
 
   ereignisse() {
     const lw = this.leinwand;
-    lw.addEventListener('mousedown', (e) => this.druecken(this.normPunkt(e)));
-    lw.addEventListener('mousemove', (e) => { this.mauspos = this.normPunkt(e); if (this.ziehen) this.ziehen.bis = this.mauspos; this.zeichnen(); this.lupeZeichnen(); });
-    lw.addEventListener('mouseleave', () => { this.mauspos = null; this.lupe.style.display = 'none'; this.zeichnen(); });
-    window.addEventListener('mouseup', () => { if (this.ziehen) this.loslassen(); });
+    lw.style.touchAction = 'none';
+    // Zeiger-Ereignisse: Maus und Finger. Ecken werden beim Loslassen gesetzt,
+    // so kann man den Finger mit der Lupe noch genau hinschieben.
+    lw.addEventListener('pointerdown', (e) => {
+      lw.setPointerCapture?.(e.pointerId);
+      this.gedrueckt = true;
+      this.mauspos = this.normPunkt(e);
+      this.druecken(this.mauspos);
+      this.zeichnen(); this.lupeZeichnen();
+    });
+    lw.addEventListener('pointermove', (e) => {
+      this.mauspos = this.normPunkt(e);
+      if (this.ziehen) this.ziehen.bis = this.mauspos;
+      if (this.setzenBei) this.setzenBei = this.mauspos;
+      this.zeichnen(); this.lupeZeichnen();
+    });
+    const ende = (e) => {
+      if (!this.gedrueckt) return;
+      this.gedrueckt = false;
+      if (e && e.type !== 'pointercancel') this.mauspos = this.normPunkt(e);
+      if (this.setzenBei) { const p = this.mauspos || this.setzenBei; this.setzenBei = null; this.punktSetzen(p); }
+      if (this.ziehen) { this.ziehen.bis = this.mauspos || this.ziehen.bis; this.loslassen(); }
+      if (e?.pointerType !== 'mouse') { this.mauspos = null; this.lupe.style.display = 'none'; }
+      this.zeichnen();
+    };
+    lw.addEventListener('pointerup', ende);
+    lw.addEventListener('pointercancel', ende);
+    lw.addEventListener('pointerleave', (e) => { if (!this.gedrueckt && e.pointerType === 'mouse') { this.mauspos = null; this.lupe.style.display = 'none'; this.zeichnen(); } });
     window.addEventListener('resize', () => this.zeichnen());
   }
 
@@ -85,14 +109,17 @@ export class Einrichtung {
     if (!this.aktuellesBild) return;
     if (this.modus === 'karte' || this.modus === 'massstab') {
       if (this.modus === 'massstab' && !this.massstabBild) return;
-      this.punkte.push(p);
-      if (this.punkte.length === 4) {
-        const ecken = this.punkte; this.punkte = [];
-        if (this.modus === 'karte') this.karteFertig(ecken); else this.massstabFertig(ecken);
-      }
-      this.zeichnen();
+      this.setzenBei = p;
     } else if (this.modus === 'kreis' || this.modus === 'etikett') {
       this.ziehen = { von: p, bis: p };
+    }
+  }
+
+  punktSetzen(p) {
+    this.punkte.push(p);
+    if (this.punkte.length === 4) {
+      const ecken = this.punkte; this.punkte = [];
+      if (this.modus === 'karte') this.karteFertig(ecken); else this.massstabFertig(ecken);
     }
   }
 
@@ -101,7 +128,7 @@ export class Einrichtung {
     const B = this.bild.width; const H = this.bild.height;
     if (this.modus === 'kreis') {
       const r = Math.hypot((bis[0] - von[0]) * B, (bis[1] - von[1]) * H) / B;
-      if (r < 0.02) { this.melden('Kreis zu klein – Maustaste gedrückt halten und den Radius ziehen.'); this.zeichnen(); return; }
+      if (r < 0.02) { this.melden('Kreis zu klein – gedrückt halten und den Radius ziehen.'); this.zeichnen(); return; }
       this.setzen((e) => { e.auswertekreis = { cx: von[0], cy: von[1], r }; }, 'geometrie');
     } else if (this.modus === 'etikett') {
       const x = Math.min(von[0], bis[0]); const y = Math.min(von[1], bis[1]);
@@ -185,8 +212,9 @@ export class Einrichtung {
     const e = this.einstellungen();
     ctx.lineWidth = 2 * dpr;
     if (this.modus === 'massstab') {
-      const ecken = this.punkte.length ? this.punkte : (e.massstab?.ecken && e.massstab?.quelle === this.massstabDatei?.name ? e.massstab.ecken : []);
-      this.vieleck(ctx, ecken.map(px), '#00e0ff', this.punkte.length > 0 && this.punkte.length < 4, dpr);
+      const offen = [...this.punkte, ...(this.setzenBei ? [this.setzenBei] : [])];
+      const ecken = offen.length ? offen : (e.massstab?.ecken && e.massstab?.quelle === this.massstabDatei?.name ? e.massstab.ecken : []);
+      this.vieleck(ctx, ecken.map(px), '#00e0ff', offen.length > 0 && offen.length < 4, dpr);
       return;
     }
     // Topfkreis
@@ -221,7 +249,7 @@ export class Einrichtung {
       }
       ctx.lineWidth = 2 * dpr;
     }
-    if (this.modus === 'karte' && this.punkte.length) this.vieleck(ctx, this.punkte.map(px), '#ff3b30', true, dpr);
+    if (this.modus === 'karte' && (this.punkte.length || this.setzenBei)) this.vieleck(ctx, [...this.punkte, ...(this.setzenBei ? [this.setzenBei] : [])].map(px), '#ff3b30', true, dpr);
   }
 
   vieleck(ctx, punkte, farbe, offen, dpr) {

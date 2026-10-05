@@ -54,7 +54,13 @@ export function zeilenAufbereiten(roh) {
  */
 export function boniturLesen(roh, noten) {
   const fehler = []; const hinweise = [];
-  const zeilen = zeilenAufbereiten(roh).map((z) => {
+  // Vorbereitete Zeilen (nur Topfnummer, evtl. Datum/Sorte/Satz) ohne Noten, Prozent und Foto
+  // gehören zu Töpfen, die nicht im Pilot waren: still überspringen.
+  const genutzt = (z) => ['note_a', 'note_b', 'prozent_a', 'prozent_b', 'sporen_unten', 'foto_datei', 'bemerkung'].some((k) => !leer(z[k]));
+  const alle = zeilenAufbereiten(roh);
+  const unbenutzt = alle.filter((z) => !genutzt(z)).length;
+  if (unbenutzt) hinweise.push(`${unbenutzt} vorbereitete Zeile${unbenutzt === 1 ? '' : 'n'} ohne Noten und Foto übersprungen.`);
+  const zeilen = alle.filter(genutzt).map((z) => {
     const r = {
       excelZeile: z._zeile,
       topf_nr: leer(z.topf_nr) ? null : String(z.topf_nr).trim(),

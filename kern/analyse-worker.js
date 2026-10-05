@@ -114,7 +114,19 @@ async function qrTesten({ datei, bereich }) {
   return { qr: qrLesen(await dateiZuBild(datei), bereich) };
 }
 
-const AUFGABEN = { analysieren, farbkarteSuchen, qrTesten };
+/** Nur vorbereiten (Sicht-Bonitur): Vorschau, EXIF und QR – ohne automatische Analyse. */
+async function vorbereiten({ datei, einstellungen, optionen = {} }) {
+  const einst = einstellungenErgaenzen(einstellungen);
+  const [voll, exif] = await Promise.all([dateiZuBild(datei), exifAusDatei(datei)]);
+  return {
+    ergebnis: { exif, groesse: { voll: { breite: voll.width, hoehe: voll.height } } },
+    qr: optionen.qr ? qrLesen(voll, einst.etikettbereich) : null,
+    vorschau: await alsJpeg(voll, optionen.vorschau || 320, 0.8),
+    gross: optionen.gross ? await alsJpeg(voll, optionen.gross, 0.85) : null,
+  };
+}
+
+const AUFGABEN = { analysieren, farbkarteSuchen, qrTesten, vorbereiten };
 
 self.onmessage = async (ereignis) => {
   const { id, typ } = ereignis.data;
