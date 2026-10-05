@@ -30,8 +30,13 @@ img.breit { width: 100%; border: 1px solid var(--line); border-radius: 2px; }
 .linie.kurz { min-width: 16mm; }
 .linie.lang { min-width: 80mm; }
 table.formular td { height: 6mm; padding-top: 1.2mm; padding-bottom: 1.2mm; }
-figure.handy svg { width: 88%; margin: 0 auto; }
+figure.handy { margin: 2mm 0 3mm; }
+figure.handy svg { width: 72%; margin: 0 auto; }
 table.formular td.leer { min-width: 22mm; }
+.teile { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2mm 3mm; margin: 3mm 0 1mm; break-inside: avoid; }
+.teile figure { margin: 0; text-align: center; }
+.teile img { width: 100%; border: 1px solid var(--line); border-radius: 2px; background: #F8F8F8; }
+.teile figcaption { font-size: 8pt; margin-top: 0.5mm; color: var(--ink); }
 .status-ok { color: var(--dgreen); font-weight: 700; }
 .status-offen { color: #8a6d0f; font-weight: 700; }
 """

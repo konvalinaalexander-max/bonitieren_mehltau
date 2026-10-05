@@ -1,7 +1,6 @@
 # Druckteile für die Fotobox
 
 Hier liegen alle 3D-Druckteile für die Fotobox aus Kapitel 4 des Leitfadens.
-(Im Leitfaden heißt der Ordner noch `fotobox/` – gemeint ist dieser Ordner.)
 
 | Datei / Ordner | Was ist das? |
 |---|---|

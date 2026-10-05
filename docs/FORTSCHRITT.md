@@ -61,7 +61,7 @@ Druckseite, Vorlagen).
 | Etappe | Inhalt | Stand |
 |---|---|---|
 | 0 | Entscheidungen, Material | ⬜ Entscheidungen des Inhabers offen (siehe Fragen-PDF) |
-| 1 | Fotobox bauen | ⬜ Druckteile vorbereitet (`druckteile/`), Maße fehlen |
+| 1 | Fotobox bauen | ⬜ Druckteile vorbereitet (`fotobox/`), Maße fehlen |
 | 2 | Box-Handy einrichten | ⬜ |
 | 3 | Pilot: Fotos und Sicht-Bonitur | ⬜ Vorlagen fertig |
 | 4 | Pilot auswerten (Werkstatt) | ⬜ Werkstatt fertig |

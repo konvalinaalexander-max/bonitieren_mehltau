@@ -58,7 +58,7 @@ Grundlagen: `docs/Leitfaden_Mehltau-Bonitur.pdf` (Schritt für Schritt), `docs/S
 | `app/` | Handy-App (PWA): `app.js` Oberfläche, `db.js` Speicher (IndexedDB), `logik.js` Fachlogik ohne Oberfläche, `export.js` Excel/ZIP, `kamera.js`, `sw.js` Offline-Speicher, `version.js` |
 | `etiketten/` | Druckseite Topf-Karten 85 × 55 mm (Nummer + QR) und Maßstab-Karte |
 | `vorlagen/` | fertige PDFs und Excel-Vorlage für den Pilot |
-| `druckteile/` | OpenSCAD-Dateien der 3D-Druckteile für die Fotobox |
+| `fotobox/` | 3D-Druckteile der Fotobox: OpenSCAD-Datei (`fotobox_teile.scad`), STL-Dateien, Vorschaubilder, Bau- und Druckanleitung (`README.md`) |
 | `bibliotheken/` | fremde Bibliotheken mit Lizenzen |
 | `tests/` | automatische Tests (`node --test`), `hilfen.mjs` mit künstlichen Szenen, `browser/` Browser-Test |
 | `werkzeuge/` | künstliche Testbilder (`synthetik.js`), Sollwerte der Referenzbilder, Bauen, Seite zusammenstellen, Vorlagen erzeugen |

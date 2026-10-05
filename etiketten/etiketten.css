@@ -31,9 +31,10 @@ code { background: var(--hell); padding: 0 4px; border-radius: 3px; }
 .kontrollmass i::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 0.25mm solid #000; }
 
 .topfkarte { position: absolute; width: 85mm; height: 55mm; border: 0.2mm dashed #9a9a9a; }
-.topfkarte .qr { position: absolute; left: 2.5mm; top: 8.5mm; width: 38mm; height: 38mm; }
-.topfkarte .text { position: absolute; left: 42mm; right: 2.5mm; top: 3mm; bottom: 3mm; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2.5mm; }
-.topfkarte.ohne-qr .text { left: 3mm; right: 3mm; }
+/* Abstand zum Rand mind. 4 mm: der Etikettenhalter (fotobox/) hat 2 mm breite Lippen */
+.topfkarte .qr { position: absolute; left: 4mm; top: 8.5mm; width: 38mm; height: 38mm; }
+.topfkarte .text { position: absolute; left: 44mm; right: 4mm; top: 4mm; bottom: 4mm; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2.5mm; }
+.topfkarte.ohne-qr .text { left: 4mm; right: 4mm; }
 .topfkarte .nummer { font-weight: 700; line-height: 1; white-space: nowrap; letter-spacing: -0.02em; }
 .topfkarte .zusatz { font-size: 3.4mm; line-height: 1.25; text-align: center; color: #222; max-width: 100%; overflow: hidden; }
 

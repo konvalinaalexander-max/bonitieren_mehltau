@@ -72,7 +72,7 @@
 <tr><td><strong>Handy-App</strong> (B3–B9)<br><code>app/</code></td><td>installierbar, läuft offline; Sitzungen, Stammdaten (auch als Excel), Foto-Import aus Open Camera oder Direktaufnahme, Kamera-Test, Ergebnis mit Kontrollbild, Sicht-Bonitur mit Referenzfotos (No-Go-Variante), Export Excel + ZIP, Löschen erst nach Sicherung, Übersicht mit Verlauf und AUDPC, Regelkarte der Kontroll-Pflanze, Einstellungen mit PIN</td><td>Test am Box-Handy, Einstellungsdatei aus Etappe 4</td></tr>
 <tr><td><strong>Druckseite</strong> (B7)<br><code>etiketten/</code></td><td>Topf-Karten 85 × 55 mm mit großer Nummer und QR-Code, Nummern als Bereich, Liste oder aus Excel; Maßstab-Karte 10 × 10 cm</td><td>Antwort auf F3/F4</td></tr>
 <tr><td><strong>Vorlagen</strong><br><code>vorlagen/</code></td><td>Topf-Karten P001–P200, Maßstab-Karte, Pilot-Excel mit Auswahllisten, Bonitur-Bogen, Projekttagebuch</td><td>–</td></tr>
-<tr><td><strong>3D-Druckteile</strong><br><code>druckteile/</code></td><td>Eine OpenSCAD-Datei mit allen Teilen der Fotobox, Maße als Einstellungen (Kapitel 2.5)</td><td>deine Maße (Kapitel 5)</td></tr>
+<tr><td><strong>3D-Druckteile</strong><br><code>fotobox/</code></td><td>Eine OpenSCAD-Datei mit allen Teilen der Fotobox, Maße als Einstellungen (Kapitel 2.5)</td><td>deine Maße (Kapitel 5)</td></tr>
 <tr><td><strong>GitHub-Abläufe</strong><br><code>.github/workflows/</code></td><td>Tests bei jeder Änderung (grüner Haken); Veröffentlichung der Seite, auf Wunsch mit Testversion unter <code>/vorschau/</code> mit eigenen Testdaten</td><td>Seite einschalten (3.2)</td></tr>
 </tbody></table>
 
@@ -106,7 +106,27 @@
 </tbody></table>
 
 <h2>2.5 Die 3D-Druckteile</h2>
-<!--DRUCKTEILE-->
+<p>Alle 3D-Druckteile aus Kapitel 4 des Leitfadens stecken in einer einzigen OpenSCAD-Datei, <code>fotobox/fotobox_teile.scad</code>. Im „Customizer“ von OpenSCAD wählst du das Teil und trägst deine Maße ein. Fertige STL-Dateien mit Standardwerten liegen in <code>fotobox/stl/</code>. Druckeinstellungen, Zuschnittliste und Zusammenbau stehen in <code>fotobox/README.md</code>. Alle 8 Teile rendern ohne Fehler und lassen sich ohne Stützmaterial auf einem Druckbett von 220 × 220 mm drucken.</p>
+<div class="teile"><figure><img src="../../fotobox/vorschau/eckverbinder.png" alt="Eckverbinder · 8 ×"><figcaption>Eckverbinder · 8 ×</figcaption></figure><figure><img src="../../fotobox/vorschau/handyhalter.png" alt="Handyhalter mit Zentrierdorn"><figcaption>Handyhalter mit Zentrierdorn</figcaption></figure><figure><img src="../../fotobox/vorschau/led_leiste.png" alt="LED-Leiste mit Diffusor-Nut · 8 ×"><figcaption>LED-Leiste mit Diffusor-Nut · 8 ×</figcaption></figure><figure><img src="../../fotobox/vorschau/zentrierring.png" alt="Zentrierring"><figcaption>Zentrierring</figcaption></figure><figure><img src="../../fotobox/vorschau/abdeckscheibe.png" alt="Abdeckscheibe"><figcaption>Abdeckscheibe</figcaption></figure><figure><img src="../../fotobox/vorschau/farbkarten_halter.png" alt="Farbkarten-Halter"><figcaption>Farbkarten-Halter</figcaption></figure><figure><img src="../../fotobox/vorschau/etikettenhalter.png" alt="Etikettenhalter"><figcaption>Etikettenhalter</figcaption></figure><figure><img src="../../fotobox/vorschau/massstab_halter.png" alt="Maßstab-Halter"><figcaption>Maßstab-Halter</figcaption></figure></div>
+<p class="table-caption" style="margin-top:1mm">Abb. 2.4: Die acht Druckteile mit Standardwerten (Vorschau aus OpenSCAD)</p>
+<table class="t">
+<thead><tr><th style="width:34%">Teil</th><th style="width:18%">Stück</th><th>Wann drucken?</th></tr></thead>
+<tbody>
+<tr><td>Eckverbinder</td><td>8</td><td>sofort, wenn deine Leiste genau 20 mm misst – zuerst einen als Passprobe</td></tr>
+<tr><td>LED-Leiste</td><td>8 (2 je Seite)</td><td>sofort, wenn der LED-Streifen 10 mm breit ist</td></tr>
+<tr><td>Etikettenhalter</td><td>1</td><td>sofort (Topf-Karte 85 × 55 mm)</td></tr>
+<tr><td>Maßstab-Halter</td><td>1</td><td>sofort</td></tr>
+<tr><td>Farbkarten-Halter</td><td>1</td><td>nach dem Nachmessen der Farbkarte</td></tr>
+<tr><td>Handyhalter mit Zentrierdorn</td><td>1</td><td>erst mit deinen Handymaßen (Kapitel 5.1)</td></tr>
+<tr><td>Zentrierring</td><td>1 je Topfgröße</td><td>erst mit Maß B</td></tr>
+<tr><td>Abdeckscheibe</td><td>2–3 je Topfgröße</td><td>erst mit den Maßen A und G</td></tr>
+</tbody></table>
+<p>Alles, was im Foto zu sehen ist, druckst du in mattem Schwarz. Zuschnitt bei 20-mm-Leisten und 500 × 500 × 700 mm innen: 4 senkrechte Leisten à 700 mm und 8 waagerechte à 457 mm, 4 Wände 500 × 700 mm (die Vorderwand ist die Klappe), Boden und Deckel 500 × 500 mm, im Deckel ein Loch von 30 mm genau in der Mitte. Für andere Maße rechnet OpenSCAD die Längen neu aus.</p>
+<div class="box info"><p class="box-title">Zwei Abweichungen vom Leitfaden</p>
+<ul>
+<li>Der Rahmen steht auf der Bodenplatte; im Leitfaden wird der Boden eingelegt.</li>
+<li>Die Platten liegen an den Ecken auf den Eckverbindern auf. Zwischen Platte und Leiste bleiben etwa 1,5 mm. Mit Montageband in dieser Dicke kleben und an die Klappe ein schwarzes Dichtband – dann kommt kein Licht durch.</li>
+</ul></div>
 
 <h2>2.6 So habe ich getestet</h2>
 <ul>
@@ -308,7 +328,7 @@
 <div class="template"><h3>Messbogen Box-Handy</h3>
 <p>Hersteller und Modell: <span class="linie lang"></span></p>
 <table class="t formular">
-<thead><tr><th style="width:52%">Maß</th><th>Wert in mm</th></tr></thead>
+<thead><tr><th style="width:68%">Maß</th><th>Wert in mm</th></tr></thead>
 <tbody>
 <tr><td>L Länge (lange Seite)</td><td></td></tr>
 <tr><td>B Breite (kurze Seite)</td><td></td></tr>
@@ -359,7 +379,7 @@
 <h1>6 Antworten an Claude schicken</h1>
 <p class="lead">Wenn du die Fragen beantwortet und die Bögen ausgefüllt hast, startest du eine neue Sitzung in Claude Code und schickst diesen Text mit deinen Werten. Du kannst auch Fotos der ausgefüllten Seiten anhängen.</p>
 <div class="prompt"><p class="prompt-title">Prompt für Claude – Antworten aus „Stand und Fragen“</p><pre>Lies CLAUDE.md, docs/SPEZIFIKATION.md, docs/FORTSCHRITT.md und
-druckteile/README.md. Hier sind meine Antworten aus dem PDF
+fotobox/README.md. Hier sind meine Antworten aus dem PDF
 "Stand und Fragen" vom 05.10.2026:
 F1 Skala: [Vorschlag 0-4 / eigene: ...]
 F2 Grenze Note 0/1: [2 % / ... %]
@@ -387,7 +407,7 @@ Bitte:
    (Abschnitt "Entscheidungen Etappe 0"). Nur Kürzel, keine Namen.
 2. Prüfe auf Widersprüche (z. B. Box-Höhe zu Pflanzenmaßen) und erkläre
    sie mir einfach, bevor du andere Werte änderst.
-3. Übernimm meine Maße in druckteile/fotobox_teile.scad, exportiere alle
+3. Übernimm meine Maße in fotobox/fotobox_teile.scad, exportiere alle
    STL-Dateien neu und prüfe die Vorschaubilder.
 4. Passe App, Werkstatt und Vorlagen an meine Antworten an (Notenskala,
    Topf-Karten, Stammdaten), lass alle Tests laufen.
@@ -413,6 +433,7 @@ damit gegen die "Fertig, wenn"-Liste im Leitfaden, sag mir, was ich am
 Box-Handy bzw. Firmen-PC ausprobieren soll, und passe an, was nicht passt.
 Erst Plan, dann auf mein OK warten. Zum Schluss Pull Request.</pre></div>
 <p>Für B1 heißt das zum Beispiel: Referenzbilder hochladen, Claude erzeugt die Sollwerte und legt die vier Beispiel-Kontrollbilder echter Töpfe in <code>docs/beispiele/</code> ab.</p>
+<p>Dasselbe gilt für den Prompt „Druckdateien für die Fotobox“ in Leitfaden 4.5: Die Dateien liegen schon in <code>fotobox/</code>. Es genügen deine Maße – sie stehen im Antwort-Prompt oben.</p>
 
 <div class="box tip"><p class="box-title">Wenn etwas unklar ist</p>
 <p>Frag einfach in einer neuen Sitzung: „Lies CLAUDE.md und docs/FORTSCHRITT.md und erklär mir …“. Die Projektregeln sorgen dafür, dass jede neue Sitzung weiß, wo wir stehen.</p></div>
@@ -430,7 +451,7 @@ Erst Plan, dann auf mein OK warten. Zum Schluss Pull Request.</pre></div>
 <tr><td><code>kern/</code></td><td>Analyse-Kern, den App und Werkstatt gemeinsam nutzen</td></tr>
 <tr><td><code>etiketten/</code></td><td>Druckseite für Topf-Karten und Maßstab-Karte</td></tr>
 <tr><td><code>vorlagen/</code></td><td>druckfertige PDFs und Pilot-Excel</td></tr>
-<tr><td><code>druckteile/</code></td><td>OpenSCAD-Datei, STL-Dateien und Vorschaubilder der 3D-Druckteile</td></tr>
+<tr><td><code>fotobox/</code></td><td>OpenSCAD-Datei, STL-Dateien und Vorschaubilder der 3D-Druckteile</td></tr>
 <tr><td><code>docs/</code></td><td>Leitfaden, Spezifikation, Fortschritt, dieses PDF</td></tr>
 <tr><td><code>CLAUDE.md</code></td><td>Projektregeln für die Arbeit mit Claude</td></tr>
 <tr><td><code>tests/</code>, <code>werkzeuge/</code></td><td>automatische Tests, künstliche Testfotos, Bauen und Veröffentlichen</td></tr>
