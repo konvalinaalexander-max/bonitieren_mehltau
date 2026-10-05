@@ -1,0 +1,57 @@
+# Veröffentlicht App, Werkstatt und Druckseite auf GitHub Pages.
+# - Automatisch bei jedem Push auf main.
+# - Von Hand (Actions → „Seite veröffentlichen“ → Run workflow): optional einen Zweig angeben,
+#   der zusätzlich als Testversion unter /vorschau/ erscheint. Die Testversion hat eigene
+#   Daten (eigene Datenbank, eigener Speicher) – echte Daten der App bleiben unberührt.
+name: Seite veröffentlichen
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      vorschau:
+        description: 'Zweig für die Testversion unter /vorschau/ (leer = keine Testversion)'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  bauen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Hauptversion zusammenstellen
+        run: bash werkzeuge/seite-zusammenstellen.sh _site
+      - name: Testversion zusammenstellen
+        if: ${{ inputs.vorschau != '' }}
+        env:
+          ZWEIG: ${{ inputs.vorschau }}
+        run: |
+          git fetch --depth=1 origin "refs/heads/$ZWEIG"
+          git worktree add /tmp/vorschau FETCH_HEAD
+          bash werkzeuge/seite-zusammenstellen.sh _site/vorschau /tmp/vorschau
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  veroeffentlichen:
+    needs: bauen
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.seite.outputs.page_url }}
+    steps:
+      - id: seite
+        uses: actions/deploy-pages@v4

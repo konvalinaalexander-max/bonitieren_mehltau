@@ -10,6 +10,26 @@ export const EXPORT_SPALTEN = [
   'note_app', 'note_manuell', 'qualitaet', 'algorithmus_version', 'app_version', 'handy_modell', 'bemerkung',
 ];
 
+/** Version des Datenmodells je Messung (bei neuen Feldern erhöhen und messungErgaenzen anpassen). */
+export const DATEN_VERSION = 1;
+
+/**
+ * Ergänzt eine gespeicherte Messung auf das aktuelle Datenmodell: fehlende Felder werden
+ * mit null angelegt, nichts wird gelöscht. So lassen sich ältere Daten immer exportieren.
+ */
+export function messungErgaenzen(m) {
+  const aus = { ...m };
+  for (const s of EXPORT_SPALTEN) if (aus[s] === undefined) aus[s] = null;
+  for (const s of ['foto_key', 'kontroll_key', 'vorschau_key']) if (aus[s] === undefined) aus[s] = null;
+  aus.daten_version = DATEN_VERSION;
+  return aus;
+}
+
+/** Testversion der App (eigene Daten): Pfad enthält /vorschau/ oder /test/. */
+export function istTestversion(pfad) {
+  return /\/(vorschau|test)\//i.test(String(pfad ?? ''));
+}
+
 export const SITZUNGSARTEN = {
   normal: 'Bonitur',
   kontrolle: 'Kontroll-Pflanze',
@@ -73,6 +93,54 @@ export function eindeutigerName(name, vorhandene) {
 /** Zeile für die Export-Excel (nur die Spalten aus EXPORT_SPALTEN, in dieser Reihenfolge). */
 export function exportZeile(m) {
   return Object.fromEntries(EXPORT_SPALTEN.map((s) => [s, m[s] === undefined ? null : m[s]]));
+}
+
+// ---- Stammdaten als Excel (eine Spalte je Liste) ----
+
+export const STAMMDATEN_SPALTEN = ['saetze', 'sorten', 'behandlungen', 'tische', 'mitarbeiter'];
+
+const STAMMDATEN_NAMEN = {
+  saetze: ['saetze', 'satz', 'saetze_versuche', 'versuche', 'versuch'],
+  sorten: ['sorten', 'sorte'],
+  behandlungen: ['behandlungen', 'behandlung'],
+  tische: ['tische', 'tisch'],
+  mitarbeiter: ['mitarbeiter', 'kuerzel', 'mitarbeiter_kuerzel', 'mitarbeiterkuerzel'],
+};
+
+const spalte = (s) => String(s ?? '').trim().toLowerCase().replace(/[\s-]+/g, '_')
+  .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss');
+
+/** Listen -> Tabellenzeilen ({ saetze, sorten, … } je Zeile). */
+export function stammdatenZeilen(stammdaten) {
+  const n = Math.max(0, ...STAMMDATEN_SPALTEN.map((k) => (stammdaten?.[k] || []).length));
+  return Array.from({ length: n }, (_, i) => Object.fromEntries(STAMMDATEN_SPALTEN.map((k) => [k, stammdaten?.[k]?.[i] ?? null])));
+}
+
+/** Tabellenzeilen -> Listen (Überschriften mit oder ohne Umlaute, Einzahl oder Mehrzahl). */
+export function stammdatenAusZeilen(zeilen) {
+  const aus = Object.fromEntries(STAMMDATEN_SPALTEN.map((k) => [k, []]));
+  for (const z of zeilen || []) {
+    for (const [roh, wert] of Object.entries(z)) {
+      const name = spalte(roh);
+      const k = STAMMDATEN_SPALTEN.find((s) => STAMMDATEN_NAMEN[s].includes(name));
+      const text = wert === null || wert === undefined ? '' : String(wert).trim();
+      if (k && text && !aus[k].includes(text)) aus[k].push(text);
+    }
+  }
+  return aus;
+}
+
+/** Listen zusammenführen (vorhandene bleiben, neue werden angehängt). */
+export function stammdatenMischen(alt, neu) {
+  const aus = { ...alt };
+  for (const k of STAMMDATEN_SPALTEN) aus[k] = [...new Set([...(alt?.[k] || []), ...(neu?.[k] || [])])];
+  return aus;
+}
+
+/** „2026-10-05“ -> „05.10.“ */
+export function kurzDatum(datum) {
+  const m = String(datum ?? '').match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return m ? `${m[3]}.${m[2]}.` : String(datum ?? '');
 }
 
 /** Tage zwischen zwei Datumstexten JJJJ-MM-TT. */

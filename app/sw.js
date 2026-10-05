@@ -1,7 +1,10 @@
 // Service Worker der Handy-App: legt alle Dateien im Handy ab, damit die App offline läuft.
 // Bei jeder App-Änderung APP_VERSION erhöhen (gleicher Wert wie in app/version.js).
 const APP_VERSION = '0.1.0';
-const CACHE = `mehltau-app-${APP_VERSION}`;
+// Cache-Name mit dem Pfad der App: Auf github.io teilen sich alle Seiten eines Kontos den
+// Speicher – so stören sich Hauptversion (/app/) und Testversion (/vorschau/app/) nie.
+const PRAEFIX = `mehltau-app:${new URL(self.registration.scope).pathname}:`;
+const CACHE = `${PRAEFIX}${APP_VERSION}`;
 
 const DATEIEN = [
   './', './index.html', './stil.css', './app.js', './db.js', './logik.js', './version.js', './kamera.js', './export.js',
@@ -19,7 +22,7 @@ self.addEventListener('install', (e) => {
 
 self.addEventListener('activate', (e) => {
   e.waitUntil(caches.keys().then((namen) => Promise.all(
-    namen.filter((n) => n.startsWith('mehltau-app-') && n !== CACHE).map((n) => caches.delete(n)),
+    namen.filter((n) => n.startsWith(PRAEFIX) && n !== CACHE).map((n) => caches.delete(n)),
   )).then(() => self.clients.claim()));
 });
 

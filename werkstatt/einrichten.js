@@ -8,7 +8,7 @@ const ANLEITUNG = {
   karte: 'Farbkarte: Nacheinander die 4 äußeren Ecken der Farbfelder anklicken bzw. antippen (1 braunes Feld, 2 türkises, 3 schwarzes, 4 weißes). Die Lupe hilft beim genauen Treffen; der Punkt wird beim Loslassen gesetzt.',
   kreis: 'Topfkreis: Auf die Mitte der Abdeckscheibe drücken, gedrückt halten (Maustaste oder Finger) und den Radius ziehen. Alle Blattspitzen müssen innen liegen, Farbkarte und Etikett außen.',
   etikett: 'Etikettbereich: Ein Rechteck um die Topf-Karte ziehen (gedrückt halten). Danach wird der QR-Code probeweise gelesen.',
-  massstab: 'Maßstab-Karte: Zuerst rechts das Foto der Karte wählen, dann die 4 äußeren Ecken des schwarzen 10 × 10 cm Quadrats anklicken.',
+  massstab: 'Maßstab-Karte: Foto der Karte wählen, dann die 4 äußeren Ecken des schwarzen 10 × 10 cm Quadrats anklicken bzw. antippen.',
 };
 
 /** Analyse-Auflösung wie verkleinern() in kern/bild.js. */

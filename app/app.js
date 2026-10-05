@@ -12,13 +12,15 @@ import { zeitAusDateiname } from '../kern/exif.js';
 import * as db from './db.js';
 import {
   SITZUNGSARTEN, datumText, datumZeitText, fotoDateiname, sitzungIdBilden, messIdBilden, eindeutigerName,
-  verlaufBerechnen, regelkarte, pinHash,
+  verlaufBerechnen, regelkarte, pinHash, stammdatenMischen, kurzDatum,
 } from './logik.js';
 import { APP_VERSION } from './version.js';
 import {
   kameraStarten, kameraStoppen, kameraInfo, werteAnwenden, fotoAufnehmen,
 } from './kamera.js';
-import { sitzungsExcel, sitzungsZip, herunterladen, teilen } from './export.js';
+import {
+  sitzungsExcel, sitzungsZip, herunterladen, teilen, stammdatenExcel, stammdatenLesen,
+} from './export.js';
 import { Einrichtung } from '../werkstatt/einrichten.js';
 
 const $ = (s, w = document) => w.querySelector(s);
@@ -68,7 +70,7 @@ function gehe(hash) {
 }
 
 function titel(text, zurueck = null) {
-  $('#titel').textContent = text;
+  $('#titel').textContent = db.TESTVERSION ? `${text} · TEST` : text;
   const z0 = $('#zurueck');
   z0.hidden = !zurueck;
   z0.onclick = zurueck ? () => { location.hash = zurueck; } : null;
@@ -141,6 +143,7 @@ async function seiteStart() {
   const ohneKarte = z.einst.modus === 'automatisch' && !z.einst.farbkarte?.ecken;
   if (!gilt()) return;
   inhalt.innerHTML = `
+    ${db.TESTVERSION ? '<section class="karte warn"><b>Testversion.</b> Hier gespeicherte Sitzungen sind Testdaten und getrennt von den echten Daten der App.</section>' : ''}
     ${z.aktiveSitzung ? `<section class="karte gut"><h2 style="margin-top:0">Laufende Sitzung</h2>
       <p><b>${esc(z.aktiveSitzung.sitzung_id)}</b> · ${anzahl.get(z.aktiveSitzung.sitzung_id) ?? 0} Töpfe · ${esc(z.aktiveSitzung.mitarbeiter)}</p>
       <a class="knopf haupt gross" href="#/aufnahme">Weiter fotografieren</a>
@@ -313,7 +316,7 @@ async function seiteErgebnis() {
   if (!gilt()) return;
   inhalt.innerHTML = `
     ${kontrollUrl ? `<div class="umschalter"><button class="aktiv" data-bild="k">Kontrollbild</button><button data-bild="o">Original</button></div>` : ''}
-    <img class="bild" id="bild" src="${kontrollUrl || originalUrl}" alt="Foto">
+    <img class="bild" id="bild" src="${kontrollUrl || originalUrl}" alt="Foto"><p class="klein-text">Bild antippen zum Vergrößern.</p>
     ${a.sicht ? '' : `<div class="note-gross"><b>Note ${e.note_app ?? '–'}</b><span>Befall ${fmt(e.befall_pct)} %</span></div>
       ${[['grün', e.gruen_pct, '#5B9A3C'], ['gelb', e.gelb_pct, '#D9B32E'], ['braun', e.braun_pct, '#C0392B']].map(([t, w, c]) => `<div class="balken"><span>${t}</span><div><i style="width:${Math.min(100, w || 0)}%;background:${c}"></i></div><span>${fmt(w)} %</span></div>`).join('')}
       <p class="leise">Fläche ${e.flaeche_cm2_ca ? `ca. ${e.flaeche_cm2_ca} cm²` : `${(e.flaeche_px || 0).toLocaleString('de-DE')} Pixel`} · Grünwert ${fmt(e.gruenwert)}°</p>`}
@@ -468,7 +471,7 @@ async function seiteMessung(messId) {
     ${kb || og ? `<img class="bild" id="bild" src="${url((kb || og).blob)}" alt="">` : '<p class="leise">Foto ist vom Handy gelöscht (liegt im Export).</p>'}
     <table class="tabelle" style="margin-top:10px"><tbody>
       ${[['Befall %', fmt(m.befall_pct)], ['grün / gelb / braun %', `${fmt(m.gruen_pct)} / ${fmt(m.gelb_pct)} / ${fmt(m.braun_pct)}`], ['Note App', m.note_app ?? '–'], ['Hand-Note', m.note_manuell ?? '–'],
-        ['Fläche', m.flaeche_cm2_ca ? `ca. ${m.flaeche_cm2_ca} cm²` : `${m.flaeche_px ?? '–'} px`], ['Qualität', esc(m.qualitaet)], ['Foto', esc(m.foto_datei)], ['Zeit', esc(m.datum_zeit)],
+        ['Fläche', m.flaeche_cm2_ca ? `ca. ${m.flaeche_cm2_ca} cm²` : `${m.flaeche_px ?? '–'} px`], ['Qualität', esc(m.qualitaet)], ['Foto', `${esc(m.foto_datei)}${og?.blob?.size ? ` (${fmt(og.blob.size / 1e6, 1)} MB)` : ''}`], ['Zeit', esc(m.datum_zeit)],
         ['Sorte / Behandlung / Tisch', esc([m.sorte, m.behandlung, m.tisch].filter(Boolean).join(' / '))], ['Version', esc(m.algorithmus_version)]].map(([a, b]) => `<tr><th>${a}</th><td>${b}</td></tr>`).join('')}
     </tbody></table>
     <form id="f" class="karte" style="margin-top:12px"><h3 style="margin-top:0">Korrigieren</h3>
@@ -514,14 +517,14 @@ async function seiteExport(id) {
   $('#excel').addEventListener('click', () => herunterladen(sitzungsExcel(sitzung, messungen, einst), `${id}.xlsx`));
   $('#zip').addEventListener('click', async () => {
     melden('ZIP wird erstellt …');
-    herunterladen(await sitzungsZip(sitzung, messungen, einst, { mitKontrollbildern: $('#mit-kontrolle').checked }), `${id}_fotos.zip`);
+    herunterladen(await sitzungsZip(sitzung, messungen, einst, { mitKontrollbildern: $('#mit-kontrolle').checked }), `${id}.zip`);
   });
   $('#teilen').addEventListener('click', async () => {
     try {
       const zipBlob = await sitzungsZip(sitzung, messungen, einst, { mitKontrollbildern: $('#mit-kontrolle').checked });
       const ok = await teilen([
         new File([sitzungsExcel(sitzung, messungen, einst)], `${id}.xlsx`, { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
-        new File([zipBlob], `${id}_fotos.zip`, { type: 'application/zip' }),
+        new File([zipBlob], `${id}.zip`, { type: 'application/zip' }),
       ], id);
       if (!ok) melden('Teilen geht auf diesem Handy nicht – bitte „speichern“ nutzen.', true);
     } catch (f) { if (f.name !== 'AbortError') melden(`Teilen: ${f.message}`, true); }
@@ -582,7 +585,7 @@ async function seiteUebersicht() {
   const gilt = seiteGilt();
   titel('Übersicht und Verlauf', '#/');
   const sitzungen = await db.sitzungen();
-  const messungen = await db.alle('messungen');
+  const messungen = await db.alleMessungen();
   const gruppen = verlaufBerechnen(messungen, sitzungen);
   const saetze = [...new Set(gruppen.map((g) => g.satz))];
   const kontrollSitzungen = new Map(sitzungen.filter((s) => s.art === 'kontrolle').map((s) => [s.sitzung_id, s.datum]));
@@ -596,8 +599,9 @@ async function seiteUebersicht() {
       const termine = new Set(gs.flatMap((g) => g.termine.map((x) => x.datum))).size;
       return `<section class="karte"><h2 style="margin-top:0">Satz ${esc(satz || '–')}</h2><div class="diagramm">${verlaufDiagramm(gs)}</div>
         ${termine < 2 ? '<p class="klein-text">Ein Verlauf und die AUDPC entstehen ab dem zweiten Termin.</p>' : ''}
-        <table class="tabelle"><thead><tr><th>Behandlung</th><th>Termine</th><th class="z">letzter Befall %</th><th class="z">AUDPC</th></tr></thead><tbody>
-        ${gs.map((g) => `<tr><td>${esc(g.behandlung || '–')}</td><td>${g.termine.map((t) => `${t.datum.slice(5)}: ${fmt(t.befall)} % (n ${t.n})`).join('<br>')}</td><td class="z">${fmt(g.termine.at(-1)?.befall)}</td><td class="z">${fmt(g.audpc, 1)}</td></tr>`).join('')}
+        <table class="tabelle"><thead><tr><th>Behandlung</th><th>Termin</th><th class="z">Ø Befall %</th><th class="z">Ø Note</th><th class="z">n</th></tr></thead><tbody>
+        ${gs.map((g) => g.termine.map((t, i) => `<tr${i === 0 ? ' class="gruppe"' : ''}><td>${i === 0 ? esc(g.behandlung || '–') : ''}</td><td>${kurzDatum(t.datum)}</td><td class="z">${fmt(t.befall)}</td><td class="z">${fmt(t.note)}</td><td class="z">${t.n}</td></tr>`).join('')
+          + (g.audpc !== null ? `<tr class="summe"><td></td><td>AUDPC</td><td class="z">${fmt(g.audpc, 1)}</td><td></td><td></td></tr>` : '')).join('')}
         </tbody></table><p class="klein-text">AUDPC = Summe über aufeinanderfolgende Termine von (Befall₁ + Befall₂) / 2 × Tage dazwischen (Prozent-Tage).</p></section>`;
     }).join('') : '<p class="leise">Noch keine Messungen für einen Verlauf.</p>'}
     <section class="karte"><h2 style="margin-top:0">Kontroll-Pflanze (Regelkarte)</h2>
@@ -653,7 +657,9 @@ async function seiteEinstellungen() {
         <button class="knopf" type="submit">Ändern (neue Kennung ${esc(naechsteKennung(e.kennung, 'H'))})</button></form>
       ${e.aenderungen?.length ? `<details><summary>Änderungsprotokoll (${e.aenderungen.length})</summary><ul>${e.aenderungen.map((a) => `<li>${esc(a.datum.slice(0, 10))} · ${esc(a.kennung)} · ${esc(a.wo)}: ${esc(a.was)}${a.grund ? ` – ${esc(a.grund)}` : ''}</li>`).join('')}</ul></details>` : ''}</section>
     <section class="karte"><h2 style="margin-top:0">Stammdaten</h2>
-      ${chipsHtml('saetze', 'Sätze / Versuche')}${chipsHtml('sorten', 'Sorten')}${chipsHtml('behandlungen', 'Behandlungen')}${chipsHtml('tische', 'Tische')}${chipsHtml('mitarbeiter', 'Mitarbeiter-Kürzel (keine Namen)')}</section>
+      ${chipsHtml('saetze', 'Sätze / Versuche')}${chipsHtml('sorten', 'Sorten')}${chipsHtml('behandlungen', 'Behandlungen')}${chipsHtml('tische', 'Tische')}${chipsHtml('mitarbeiter', 'Mitarbeiter-Kürzel (keine Namen)')}
+      <div class="reihe" style="margin-top:12px"><button class="knopf klein" id="stamm-laden">Aus Excel ergänzen</button><button class="knopf klein" id="stamm-speichern">Als Excel speichern</button></div>
+      <p class="klein-text">Excel mit den Spalten saetze, sorten, behandlungen, tische, mitarbeiter (eine Liste je Spalte). Beim Laden werden neue Einträge angehängt.</p></section>
     <section class="karte"><h2 style="margin-top:0">Handy und Kamera</h2>
       <label class="feld">Handy-Modell</label><input type="text" id="modell" value="${esc(z.handy.modell)}" placeholder="wird aus dem Foto gelesen">
       <p>Aufnahme: <b>${z.kamera.modus === 'direkt' ? 'direkt in der App' : 'Import aus Open Camera'}</b></p>
@@ -707,6 +713,19 @@ async function seiteEinstellungen() {
     stammdatenErgaenzen(art, inp.value); await speichernKonfig(); seiteEinstellungen();
   }));
   $('#modell').addEventListener('change', async (ev) => { z.handy.modell = ev.target.value.trim(); await speichernKonfig(); });
+  $('#stamm-speichern').addEventListener('click', () => herunterladen(stammdatenExcel(z.stammdaten), 'stammdaten.xlsx'));
+  $('#stamm-laden').addEventListener('click', async () => {
+    const [d] = await dateiWaehlen('#eingabe-excel');
+    if (!d) return;
+    try {
+      const neu = stammdatenLesen(new Uint8Array(await d.arrayBuffer()));
+      const vorher = Object.values(z.stammdaten).flat().length;
+      z.stammdaten = stammdatenMischen(z.stammdaten, neu);
+      await speichernKonfig();
+      melden(`${Object.values(z.stammdaten).flat().length - vorher} neue Einträge übernommen.`);
+      seiteEinstellungen();
+    } catch (f) { melden(`Excel nicht lesbar: ${f.message}`, true); }
+  });
   $('#pin-setzen').addEventListener('click', async () => {
     const p1 = window.prompt('Neue PIN (mind. 4 Ziffern, leer = keine PIN):', '');
     if (p1 === null) return;
@@ -745,7 +764,7 @@ async function seiteEinrichten() {
   if (!gilt()) return;
   inhalt.innerHTML = `<p class="leise">Ein Foto aus der Box wählen, dann Werkzeug wählen. Finger auf das Bild, mit der Lupe genau schieben, loslassen.</p>
     <div class="reihe"><button class="knopf" id="foto">Foto wählen</button></div>
-    <div class="reihe" style="margin:8px 0"><button class="knopf klein" data-m="karte">Farbkarte</button><button class="knopf klein" data-m="kreis">Topfkreis</button><button class="knopf klein" data-m="etikett">Etikett</button></div>
+    <div class="reihe" style="margin:8px 0"><button class="knopf klein" data-m="karte">Farbkarte</button><button class="knopf klein" data-m="kreis">Topfkreis</button><button class="knopf klein" data-m="etikett">Etikett</button><button class="knopf klein" id="massstab">Maßstab-Karte</button></div>
     <p class="karte" id="anleitung">Erst ein Foto wählen.</p>
     <canvas class="einrichten" id="lw"></canvas><canvas class="lupe" id="lupe" width="180" height="180"></canvas>
     <button class="knopf haupt gross" id="fertig" style="margin-top:12px">Fertig (neue Kennung ${esc(naechsteKennung(z.einst.kennung, 'H'))})</button>`;
@@ -757,8 +776,12 @@ async function seiteEinrichten() {
   });
   $('#foto').addEventListener('click', async () => { const [d] = await dateiWaehlen('#eingabe-bild'); if (d) einr.fotoZeigen(d); });
   inhalt.querySelectorAll('[data-m]').forEach((b) => b.addEventListener('click', () => einr.modusSetzen(b.dataset.m)));
+  $('#massstab').addEventListener('click', async () => {
+    const [d] = await dateiWaehlen('#eingabe-bild');
+    if (d) await einr.massstabFotoZeigen(d);
+  });
   $('#fertig').addEventListener('click', async () => {
-    const geaendert = ['farbkarte', 'auswertekreis', 'etikettbereich'].filter((k) => JSON.stringify(arbeit[k]) !== JSON.stringify(z.einst[k]));
+    const geaendert = ['farbkarte', 'auswertekreis', 'etikettbereich', 'massstab'].filter((k) => JSON.stringify(arbeit[k]) !== JSON.stringify(z.einst[k]));
     if (!geaendert.length) { location.hash = '#/einstellungen'; return; }
     const grund = window.prompt('Kurzer Grund (fürs Änderungsprotokoll):', '') ?? '';
     arbeit.kennung = naechsteKennung(z.einst.kennung, 'H');
@@ -868,6 +891,18 @@ async function seiteLaden() {
 }
 
 window.addEventListener('hashchange', seiteLaden);
+
+// Kontrollbild oder Foto antippen: groß anzeigen (verschieben mit dem Finger, schließen mit ×).
+inhalt.addEventListener('click', (e) => {
+  const bild = e.target.closest('img.bild');
+  if (!bild) return;
+  const zoom = $('#zoom');
+  const gross = zoom.querySelector('img');
+  gross.onload = () => { zoom.scrollLeft = (gross.scrollWidth - zoom.clientWidth) / 2; zoom.scrollTop = (gross.scrollHeight - zoom.clientHeight) / 2; };
+  gross.src = bild.src;
+  zoom.hidden = false;
+});
+$('#zoom button').addEventListener('click', () => { $('#zoom').hidden = true; $('#zoom img').removeAttribute('src'); });
 
 async function serviceWorker() {
   if (!('serviceWorker' in navigator)) return;

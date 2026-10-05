@@ -1,23 +1,33 @@
 // Speicher der App im Browser (IndexedDB): Konfiguration, Sitzungen, Messungen, Bilder.
 // Browser-Speicher ist kein Archiv – nach jeder Sitzung exportieren (Leitfaden 11.3).
 
-const NAME = 'mehltau-bonitur';
+import { istTestversion, messungErgaenzen } from './logik.js';
+
+/** Testversionen (Pfad mit /vorschau/ oder /test/) bekommen eigene Daten – echte Daten bleiben unberührt. */
+export const TESTVERSION = istTestversion(globalThis.location?.pathname);
+const NAME = TESTVERSION ? 'mehltau-bonitur-test' : 'mehltau-bonitur';
 const VERSION = 1;
 let dbVersprechen = null;
+
+/**
+ * Schema-Änderungen: je Version eine Funktion, die nur Neues anlegt. Alte Einträge
+ * nie ändern, nur neue anhängen und VERSION erhöhen – so bleiben vorhandene Daten erhalten.
+ */
+const MIGRATIONEN = {
+  1: (db) => {
+    db.createObjectStore('konfig', { keyPath: 'schluessel' });
+    db.createObjectStore('sitzungen', { keyPath: 'sitzung_id' });
+    db.createObjectStore('messungen', { keyPath: 'mess_id' }).createIndex('sitzung_id', 'sitzung_id');
+    db.createObjectStore('bilder', { keyPath: 'schluessel' });
+  },
+};
 
 function oeffnen() {
   if (dbVersprechen) return dbVersprechen;
   dbVersprechen = new Promise((loesen, ablehnen) => {
     const anfrage = indexedDB.open(NAME, VERSION);
-    anfrage.onupgradeneeded = () => {
-      const db = anfrage.result;
-      if (!db.objectStoreNames.contains('konfig')) db.createObjectStore('konfig', { keyPath: 'schluessel' });
-      if (!db.objectStoreNames.contains('sitzungen')) db.createObjectStore('sitzungen', { keyPath: 'sitzung_id' });
-      if (!db.objectStoreNames.contains('messungen')) {
-        const m = db.createObjectStore('messungen', { keyPath: 'mess_id' });
-        m.createIndex('sitzung_id', 'sitzung_id');
-      }
-      if (!db.objectStoreNames.contains('bilder')) db.createObjectStore('bilder', { keyPath: 'schluessel' });
+    anfrage.onupgradeneeded = (e) => {
+      for (let v = e.oldVersion + 1; v <= VERSION; v++) MIGRATIONEN[v](anfrage.result, anfrage.transaction);
     };
     anfrage.onsuccess = () => loesen(anfrage.result);
     anfrage.onerror = () => ablehnen(anfrage.error);
@@ -59,7 +69,12 @@ export async function konfigSetzen(schluessel, wert) {
 // ---- Sitzungen und Messungen ----
 export async function messungenDerSitzung(sitzungId) {
   const s = await speicher('messungen');
-  return anfrageZuPromise(s.index('sitzung_id').getAll(sitzungId));
+  const liste = await anfrageZuPromise(s.index('sitzung_id').getAll(sitzungId));
+  return liste.map(messungErgaenzen).sort((a, b) => String(a.mess_id).localeCompare(String(b.mess_id)));
+}
+
+export async function alleMessungen() {
+  return (await alle('messungen')).map(messungErgaenzen);
 }
 
 export async function sitzungen() {

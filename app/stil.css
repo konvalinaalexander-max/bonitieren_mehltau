@@ -75,3 +75,9 @@ canvas.einrichten { width: 100%; border-radius: 10px; background: #222; touch-ac
 .legende i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
 details { margin: 8px 0; }
 summary { cursor: pointer; font-weight: 600; min-height: 32px; }
+.bild { cursor: zoom-in; }
+.zoom { position: fixed; inset: 0; z-index: 60; background: #000; overflow: auto; -webkit-overflow-scrolling: touch; }
+.zoom img { display: block; width: auto; max-width: none; }
+.zoom button { position: fixed; top: max(10px, env(safe-area-inset-top)); right: 10px; width: 48px; height: 48px; border-radius: 50%; background: rgba(0,0,0,0.6); border: 1px solid #fff; color: #fff; }
+.tabelle tr.gruppe td { border-top: 2px solid var(--linie); }
+.tabelle tr.summe td { font-weight: 700; color: var(--dgruen); }
