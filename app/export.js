@@ -25,6 +25,7 @@ export function sitzungsInfo(sitzung, messungen, einstellungen, jetzt = new Date
     ['farbkarte_eingestellt', ja(e.farbkarte?.ecken)], ['topfkreis_eingestellt', ja(e.auswertekreis)],
     ['etikett_eingestellt', ja(e.etikettbereich)], ['massstab_pixel_pro_cm2', e.massstab?.pixel_pro_cm2 ?? ''],
     ['exportiert', jetzt.toISOString()],
+    ['hinweis', 'Werte = sichtbare Symptome von oben (gelbe/braune Blattfläche), keine Mehltau-Diagnose.'],
   ];
 }
 

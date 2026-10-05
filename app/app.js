@@ -319,7 +319,7 @@ async function seiteErgebnis() {
     <img class="bild" id="bild" src="${kontrollUrl || originalUrl}" alt="Foto"><p class="klein-text">Bild antippen zum Vergrößern.</p>
     ${a.sicht ? '' : `<div class="note-gross"><b>Note ${e.note_app ?? '–'}</b><span>Befall ${fmt(e.befall_pct)} %</span></div>
       ${[['grün', e.gruen_pct, '#5B9A3C'], ['gelb', e.gelb_pct, '#D9B32E'], ['braun', e.braun_pct, '#C0392B']].map(([t, w, c]) => `<div class="balken"><span>${t}</span><div><i style="width:${Math.min(100, w || 0)}%;background:${c}"></i></div><span>${fmt(w)} %</span></div>`).join('')}
-      <p class="leise">Fläche ${e.flaeche_cm2_ca ? `ca. ${e.flaeche_cm2_ca} cm²` : `${(e.flaeche_px || 0).toLocaleString('de-DE')} Pixel`} · Grünwert ${fmt(e.gruenwert)}°</p>`}
+      <p class="leise">Fläche ${e.flaeche_cm2_ca ? `ca. ${e.flaeche_cm2_ca} cm²` : `${(e.flaeche_px || 0).toLocaleString('de-DE')} Pixel`} · Grünwert ${fmt(e.gruenwert)}°<br>Sichtbare Symptome von oben – keine Mehltau-Diagnose.</p>`}
     ${warnungen.length ? `<div class="warnungen">⚠ ${warnungen.map(esc).join('<br>⚠ ')}</div>` : ''}
     <form id="f" class="karte">
       <label class="feld">Topf-ID ${qrGelesen ? '<span class="marke ok">aus QR gelesen</span>' : ''}</label><input type="text" name="topf_id" value="${esc(topfId)}" autocomplete="off">

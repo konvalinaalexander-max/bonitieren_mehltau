@@ -5,7 +5,7 @@ Claude liest diese Datei vor jeder Arbeit. Grundlage ist der Leitfaden
 `docs/Leitfaden_Mehltau-Bonitur.pdf`; bei Abweichungen gilt diese Datei.
 Änderungen an Zahlen und Grenzwerten immer hier eintragen, mit Datum.
 
-Stand: 30.09.2026
+Stand: 05.10.2026
 
 ---
 
@@ -163,13 +163,14 @@ Startwerte, werden im Pilot eingestellt.
 1. Bild auf ca. 1600 Pixel lange Kante verkleinern.
 2. Farbkorrektur: Farbkarten-Position einmal eingestellt (4 Ecken). Mittelwert
    der 24 Felder (Feldmitte) → 3×3-Farbmatrix per Ausgleichsrechnung auf die
-   Sollfarben → auf das ganze Bild. Qualität: Restabweichung ΔE; Warngrenze legt
-   Claude fest und dokumentiert sie hier.
+   Sollfarben → auf das ganze Bild. Qualität: mittlere Restabweichung ΔE2000;
+   Warnung „Farbkarte prüfen“ über 6, „Farbkarte nicht gefunden“ über 12
+   (festgelegt 05.10.2026).
 3. Auswertekreis um die Topfmitte (einmal eingestellt).
 4. HSV: Farbton H 0–360°, Sättigung S 0–1, Helligkeit V 0–1.
 5. Pflanzen-Maske: H 15–170°, S ≥ 0,20, V ≥ 0,15. Glanzlicht (V > 0,90 und
-   S < 0,15) ignorieren. Kleine Einzelflecken entfernen (Mindestgröße legt Claude
-   fest und dokumentiert sie hier).
+   S < 0,15) ignorieren. Kleine Einzelflecken entfernen: zusammenhängende Gebiete
+   unter 30 Pixeln (im 1600-Pixel-Bild, 8er-Nachbarschaft) (festgelegt 05.10.2026).
 6. Klassen: grün H ≥ 80° · gelb 45–80° · braun 15–45°.
 7. Kennzahlen: `flaeche_px`, `flaeche_cm2_ca` (über Maßstab-Karte), `gruen_pct`,
    `gelb_pct`, `braun_pct`, `befall_pct` = gelb + braun, `gruenwert` (mittlerer
@@ -184,6 +185,36 @@ Technik: reines JavaScript im Browser, keine Installation. Bibliotheken lokal
 im Repository: jsQR (QR lesen), SheetJS (Excel), JSZip (ZIP). Ideen aus
 LeafScan (MIT-Lizenz) dürfen genutzt werden. Algorithmus-Version beginnt bei
 `A-1.0`.
+
+### Umsetzung A-1.0 (festgelegt von Claude, 05.10.2026)
+
+- Verkleinern im Kern selbst (flächengewichtet, lange Kante 1600 Pixel), nicht im
+  Browser – App, Werkstatt und Tests rechnen dadurch exakt gleich.
+- Farbkorrektur: Sollwerte ColorChecker Classic ab Nov. 2014 (Lab D50, Bradford
+  nach D65). Je Feld der Mittelwert der inneren 28 % (Raster 9 × 9 Punkte),
+  übersteuerte Felder werden ausgelassen, Graufelder doppelt gewichtet,
+  mindestens 6 Felder. Reihenfolge der 4 Ecken wird bei Bedarf automatisch
+  korrigiert.
+- Farbton in ganzen Grad, S und V in ganzen Prozent. Die Regler der Werkstatt
+  bleiben in festen Bereichen (Farbton 10–180°, S 10–50 % in 2er-Schritten,
+  V 10–35 %); innerhalb dieser Bereiche ist die schnelle Neuberechnung über
+  Histogramme exakt. Der Fleckenfilter arbeitet auf der lockersten
+  Reglerstellung (H 10–180°, S ≥ 10 %, V ≥ 10 %).
+- Weitere Qualitätschecks: Weißfeld der Farbkarte (unkorrigiert) unter 120 →
+  „Bild zu dunkel“, über 250 → „Bild zu hell“; Pflanzenfläche unter 2 % des
+  Auswertekreises → „Keine Pflanze gefunden“; fehlende Einstellung → Warnung.
+- `gruenwert` = mittlerer Farbton aller Pflanzenpixel in Grad.
+- `flaeche_cm2_ca` = `flaeche_px` / Pixel je cm² der Maßstab-Karte (gemessen an
+  den 4 äußeren Ecken des schwarzen 10-cm-Quadrats, im 1600-Pixel-Bild).
+- Kontrollbild: außerhalb des Kreises abgedunkelt; grün, gelb, rot (= braun),
+  hellblau (= Glanzlicht) halbdeckend über dem farbkorrigierten Foto.
+- Einstellungsdatei (JSON, Format 1): Farbkarten-Ecken, Auswertekreis,
+  Etikettbereich (alles relativ zur Bildgröße), Maßstab, Schwellen,
+  Notentabelle, Qualitätsgrenzen, Betriebsart, Kennung und Änderungsprotokoll.
+  Kennung: Werkstatt `W1`, `W2` …, Handy `W3.H1`, `W3.H2` …; jede Ergebniszeile
+  trägt `algorithmus_version` = Rechenweg/Kennung, z. B. `A-1.0/W3.H1`.
+- Topf-ID: QR-Code (Fehlerkorrektur M) in voller Auflösung im Etikettbereich
+  (+25 % Rand) lesen, sonst im ganzen Bild (verkleinert auf 2000 Pixel).
 
 ---
 
@@ -238,6 +269,17 @@ aus Kappa App–A und App–B.
   `algorithmus_version`, `app_version`, `handy_modell`, `bemerkung`.
 - Versionen: `app_version` zählt jede Änderung; `algorithmus_version` nur
   Änderungen, die Ergebnisse verschieben können.
+- Umsetzung (05.10.2026): `mess_id` = `sitzung_id`-Laufnummer (z. B.
+  `2027-02-10_Satz12-007`); `sitzung_id` = Datum_SatzNN, bei Kontroll-Pflanze
+  Datum_Kontrolle, bei Kalibrierung Datum_Kalibrierung; zweite Sitzung am selben
+  Tag mit `_2`. Export: `2027-02-10_Satz12.xlsx` (Blätter „Messungen“ und
+  „Sitzung“ mit Versionen und Einstellungen) und `2027-02-10_Satz12.zip`
+  (Excel, `fotos/` unverändert, `kontrollbilder/`, `einstellungen.json`).
+  Sicht-Bonitur (No-Go-Variante): Analysefelder leer, Note in `note_manuell`,
+  `qualitaet` = „Sicht-Bonitur“.
+- Testversion: Unter `/vorschau/` (Workflow „Seite veröffentlichen“ mit
+  Zweigname) läuft eine Testversion mit eigener Datenbank und eigenem
+  Offline-Speicher; echte Daten bleiben unberührt.
 - Repository-Aufbau (Vorschlag, genau festgelegt in B1 und `CLAUDE.md`):
   `kern/`, `werkstatt/`, `app/`, `bibliotheken/`, `tests/`, `referenzbilder/`,
   `docs/` (Spezifikation, `FORTSCHRITT.md`, Pilotbericht), `.github/workflows/`.
