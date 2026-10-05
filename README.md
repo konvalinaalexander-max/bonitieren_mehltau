@@ -25,6 +25,7 @@ Werkstatt und Druckseite unter `https://<konto>.github.io/bonitieren_mehltau/`.
 
 ## Unterlagen
 
+- [docs/So_geht_es_weiter.pdf](docs/So_geht_es_weiter.pdf) – **einfach erklärt:** was das Programm ist, wie die fertige App für Versuche aussieht und die nächsten Schritte
 - [docs/Leitfaden_Mehltau-Bonitur.pdf](docs/Leitfaden_Mehltau-Bonitur.pdf) – **Leitfaden:** Schritt für Schritt von der Fotobox bis zur fertigen App
 - [docs/SPEZIFIKATION.md](docs/SPEZIFIKATION.md) – verbindliche Zahlen, Entscheidungen und technische Vorgaben
 - [docs/FORTSCHRITT.md](docs/FORTSCHRITT.md) – Stand der Bausteine B1–B9

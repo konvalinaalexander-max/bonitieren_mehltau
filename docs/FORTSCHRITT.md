@@ -18,6 +18,22 @@ Legende: ✅ gebaut und getestet · 🟡 gebaut, Prüfung mit echter Box/echten 
 | B8 | Export und Datensicherung | 🟡 | Export einer Test-Sitzung (10 Töpfe) am Firmen-PC in Excel öffnen; Teilen an den Cloud-Ordner am Box-Handy ausprobieren |
 | B9 | Einstellungen, Übersicht, Verlauf, AUDPC | 🟡 | PIN am Handy festlegen; Kontroll-Pflanze wöchentlich |
 
+## Geplant: Vereinfachung auf den Versuchs-Ablauf (wartet auf OK)
+
+Der Inhaber nutzt das Werkzeug vor allem bei **Versuchen**: Versuch planen, an jedem Termin
+fotografieren, Befall % und Note sofort sehen, am Ende ein Excel als Versuchsdaten. Plan
+(Einzelheiten in `docs/So_geht_es_weiter.pdf`, Kapitel 2 und 4):
+
+- Start mit Versuchen statt Sitzungen; Versuch = Name, Varianten (A, B, C …), Töpfe je Variante
+  → Topf-Nummern A1–A10 … (QR-Karten wahlweise).
+- Vor dem Foto „Was wird fotografiert?“ – nächster Topf vorgeschlagen, QR-Code prüft mit.
+- Ergebnis groß: Befall % und Note, dann „Weiter“. „Schnell messen“ ohne Versuch.
+- Ein Excel je Versuch über alle Termine: Blätter „Messwerte“, „Übersicht“ (Mittel je Variante
+  und Termin), „Versuch“; Fotos als ZIP mit Namen wie `2026-10-12_A4.jpg`.
+- Kein Dashboard in der App; Übersicht/AUDPC/Regelkarte nur noch im Excel bzw. versteckt.
+- Probelauf-Modus (ca. 50 Töpfe): Noten blind in der App, App-Ergebnis erst danach.
+- Fotobox: Vorschlag fertiges LED-Lichtzelt (≥ 70–80 cm, Öffnung oben, CRI ≥ 90) statt Eigenbau.
+
 ## Was es schon gibt
 
 **B1 Analyse-Kern** (`kern/`): Verkleinern auf 1600 Pixel (lange Kante), Farbkorrektur mit allen
