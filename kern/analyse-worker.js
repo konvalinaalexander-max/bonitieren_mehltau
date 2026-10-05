@@ -11,14 +11,23 @@ import { qrLesen } from './qr.js';
 import { exifLesen, zeitAusDateiname } from './exif.js';
 import { einstellungenErgaenzen } from './einstellungen.js';
 
-async function dateiZuBild(datei) {
-  const bitmap = await createImageBitmap(datei, { imageOrientation: 'from-image' });
+/** ImageBitmap -> RGBA-Bild { width, height, data }. */
+function bitmapZuBild(bitmap) {
   const leinwand = new OffscreenCanvas(bitmap.width, bitmap.height);
   const ctx = leinwand.getContext('2d', { willReadFrequently: true });
   ctx.drawImage(bitmap, 0, 0);
-  bitmap.close();
+  bitmap.close?.();
   const d = ctx.getImageData(0, 0, leinwand.width, leinwand.height);
   return { width: d.width, height: d.height, data: d.data };
+}
+
+/**
+ * Foto als RGBA-Bild. Normalfall: im Hauptprogramm dekodiert ({ bitmap, kopf, name },
+ * siehe nachrichtVorbereiten in arbeiter.js). Rückfall: ein Blob, der hier dekodiert wird.
+ */
+async function fotoBild(datei) {
+  if (datei instanceof Blob) return bitmapZuBild(await createImageBitmap(datei, { imageOrientation: 'from-image' }));
+  return bitmapZuBild(datei.bitmap);
 }
 
 async function alsJpeg(bild, breite, qualitaet = 0.85) {
@@ -33,9 +42,9 @@ async function alsJpeg(bild, breite, qualitaet = 0.85) {
   return ziel.convertToBlob({ type: 'image/jpeg', quality: qualitaet });
 }
 
-async function exifAusDatei(datei) {
+async function fotoExif(datei) {
   try {
-    const kopf = await datei.slice(0, 196608).arrayBuffer();
+    const kopf = datei instanceof Blob ? await datei.slice(0, 196608).arrayBuffer() : datei.kopf;
     const e = exifLesen(kopf);
     const zeitName = zeitAusDateiname(datei.name || '');
     return {
@@ -52,7 +61,7 @@ async function exifAusDatei(datei) {
 async function analysieren({ datei, einstellungen, optionen = {} }) {
   const start = performance.now();
   const einst = einstellungenErgaenzen(einstellungen);
-  const [voll, exif] = await Promise.all([dateiZuBild(datei), exifAusDatei(datei)]);
+  const [voll, exif] = await Promise.all([fotoBild(datei), fotoExif(datei)]);
   const qr = optionen.qr ? qrLesen(voll, einst.etikettbereich) : null;
   const vorschau = optionen.vorschau ? await alsJpeg(voll, optionen.vorschau, 0.8) : null;
   const klein = verkleinern(voll, einst.analyse.lange_kante);
@@ -93,7 +102,7 @@ async function analysieren({ datei, einstellungen, optionen = {} }) {
 }
 
 async function farbkarteSuchen({ datei, ecken, langeKante = 1600 }) {
-  const klein = verkleinern(await dateiZuBild(datei), langeKante);
+  const klein = verkleinern(await fotoBild(datei), langeKante);
   const W = klein.width; const H = klein.height;
   const k = farbkarteAuswerten(klein, ecken.map(([x, y]) => [x * W, y * H]), { reihenfolgeSuchen: true });
   if (!k) return { gefunden: false };
@@ -111,13 +120,13 @@ async function farbkarteSuchen({ datei, ecken, langeKante = 1600 }) {
 }
 
 async function qrTesten({ datei, bereich }) {
-  return { qr: qrLesen(await dateiZuBild(datei), bereich) };
+  return { qr: qrLesen(await fotoBild(datei), bereich) };
 }
 
 /** Nur vorbereiten (Sicht-Bonitur): Vorschau, EXIF und QR – ohne automatische Analyse. */
 async function vorbereiten({ datei, einstellungen, optionen = {} }) {
   const einst = einstellungenErgaenzen(einstellungen);
-  const [voll, exif] = await Promise.all([dateiZuBild(datei), exifAusDatei(datei)]);
+  const [voll, exif] = await Promise.all([fotoBild(datei), fotoExif(datei)]);
   return {
     ergebnis: { exif, groesse: { voll: { breite: voll.width, hoehe: voll.height } } },
     qr: optionen.qr ? qrLesen(voll, einst.etikettbereich) : null,

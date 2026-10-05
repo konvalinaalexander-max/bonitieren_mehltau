@@ -14,6 +14,23 @@ export function analyseArbeiterErzeugen() {
   return new Worker(new URL('./analyse-worker.js', import.meta.url), { type: 'module' });
 }
 
+/**
+ * Fotos (Blob/File) werden im Hauptprogramm dekodiert und als ImageBitmap übergeben, dazu der
+ * Dateianfang für EXIF. Grund: Safari kann unter file:// (Werkstatt als Datei per Doppelklick)
+ * in einem Worker keine Bilddaten dekodieren („An error occured reading the Blob argument to
+ * createImageBitmap“), im Hauptprogramm aber schon. Dekodiert wird erst, wenn ein Worker frei
+ * ist – so liegen nie alle Fotos gleichzeitig im Speicher.
+ */
+export async function nachrichtVorbereiten(nachricht, transfer = []) {
+  const d = nachricht?.datei;
+  if (typeof Blob === 'undefined' || !(d instanceof Blob)) return [nachricht, transfer];
+  const [bitmap, kopf] = await Promise.all([
+    createImageBitmap(d, { imageOrientation: 'from-image' }),
+    d.slice(0, 196608).arrayBuffer(),
+  ]);
+  return [{ ...nachricht, datei: { bitmap, kopf, name: d.name || '', typ: d.type || '' } }, [...transfer, bitmap, kopf]];
+}
+
 /** Verteilt Aufträge auf mehrere Worker; jeder Auftrag liefert ein Promise. */
 export class ArbeiterPool {
   constructor(erzeugen, anzahl) {
@@ -52,7 +69,9 @@ export class ArbeiterPool {
       const a = this.warteschlange.shift();
       const id = ++this.zaehler;
       this.offen.set(id, { ...a, arbeiter: w });
-      w.postMessage({ ...a.nachricht, id }, a.transfer);
+      nachrichtVorbereiten(a.nachricht, a.transfer)
+        .then(([n, t]) => w.postMessage({ ...n, id }, t))
+        .catch((f) => this.antwort(w, { id, ok: false, fehler: `Foto nicht lesbar: ${f?.message || f}` }));
     }
   }
 

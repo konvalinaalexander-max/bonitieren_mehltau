@@ -44,11 +44,30 @@ async function speicher(name, modus = 'readonly') {
   return db.transaction(name, modus).objectStore(name);
 }
 
+/**
+ * Bilder werden als ArrayBuffer (+ Typ) gespeichert, nicht als Blob: Safari (WebKit) kann Blobs
+ * nicht immer in IndexedDB ablegen („Error preparing Blob/File data to be stored in object store“).
+ * Beim Lesen wird wieder ein Blob daraus; ältere Einträge mit Blob werden unverändert gelesen.
+ */
+async function bildEinpacken(wert) {
+  if (!(wert?.blob instanceof Blob)) return wert;
+  const { blob, ...rest } = wert;
+  return { ...rest, bytes: await blob.arrayBuffer(), mime: blob.type || 'image/jpeg' };
+}
+function bildAuspacken(wert) {
+  if (!wert || wert.blob || !wert.bytes) return wert;
+  const { bytes, mime, ...rest } = wert;
+  return { ...rest, blob: new Blob([bytes], { type: mime || 'image/jpeg' }) };
+}
+
 export async function holen(store, schluessel) {
-  return anfrageZuPromise((await speicher(store)).get(schluessel));
+  const wert = await anfrageZuPromise((await speicher(store)).get(schluessel));
+  return store === 'bilder' ? bildAuspacken(wert) : wert;
 }
 export async function ablegen(store, wert) {
-  return anfrageZuPromise((await speicher(store, 'readwrite')).put(wert));
+  // erst einpacken (asynchron), dann die Transaktion öffnen – sie würde sonst während des Wartens enden
+  const fertig = store === 'bilder' ? await bildEinpacken(wert) : wert;
+  return anfrageZuPromise((await speicher(store, 'readwrite')).put(fertig));
 }
 export async function loeschen(store, schluessel) {
   return anfrageZuPromise((await speicher(store, 'readwrite')).delete(schluessel));

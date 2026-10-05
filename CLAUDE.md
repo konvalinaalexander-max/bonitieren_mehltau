@@ -91,10 +91,12 @@ Grundlagen: `docs/Leitfaden_Mehltau-Bonitur.pdf` (Schritt für Schritt), `docs/S
 - `tests/referenzbilder.test.mjs` vergleicht alle Referenzbilder mit gespeicherten Sollwerten;
   er wird übersprungen, solange `referenzbilder/` fehlt.
 - `npm run test:browser` (`tests/browser/ablauf.mjs`): kompletter Ablauf im echten Browser
-  (Playwright/Chromium) mit künstlichen Fotos – App (Einstellungen, Sitzung, Import, QR, Export,
-  Wiederlesen, Sicht-Bonitur, Offline), Druckseite und Werkstatt-Demo bis zur GO-Entscheidung.
-  Einmalig `npx playwright install chromium`; in Claude-Sitzungen ist der Browser schon da.
-  Läuft in GitHub Actions als eigener Job.
+  (Playwright) mit künstlichen Fotos, in **Chromium** (Chrome, Edge) und **WebKit** (Safari, iPhone):
+  App (Einstellungen, Sitzung, Import, QR, Export, Wiederlesen, Sicht-Bonitur, Offline-Start),
+  Druckseite, Werkstatt-Demo bis zur GO-Entscheidung und die Werkstatt **als Datei** (file://)
+  mit eigenen Fotos, Farbkarte und Topfkreis. Einmalig `npx playwright install chromium webkit`
+  (Linux: zusätzlich `npx playwright install-deps webkit`); fehlt WebKit, wird es übersprungen,
+  außer mit `ALLE_BROWSER=1` (so in GitHub Actions).
 
 ## Bekannte Fallstricke
 
@@ -107,3 +109,9 @@ Grundlagen: `docs/Leitfaden_Mehltau-Bonitur.pdf` (Schritt für Schritt), `docs/S
   Offline-Speicher der Testversion (`/vorschau/`) sind deshalb getrennt benannt.
 - CSS: `[hidden] { display: none !important; }` steht in allen Stylesheets – sonst
   überschreibt z. B. `display: flex` das `hidden`-Attribut.
+- Safari (WebKit) kann unter file:// in einem Worker keine Bilder dekodieren („An error occured
+  reading the Blob argument to createImageBitmap“). Darum dekodiert `nachrichtVorbereiten`
+  (`kern/arbeiter.js`) Fotos im Hauptprogramm und übergibt ImageBitmap + Dateianfang (EXIF).
+- Safari kann Blobs nicht immer in IndexedDB speichern („Error preparing Blob/File data to be
+  stored“). `app/db.js` legt Bilder deshalb als ArrayBuffer + Typ ab und macht beim Lesen
+  wieder einen Blob daraus.

@@ -1,6 +1,6 @@
 // Service Worker der Handy-App: legt alle Dateien im Handy ab, damit die App offline läuft.
 // Bei jeder App-Änderung APP_VERSION erhöhen (gleicher Wert wie in app/version.js).
-const APP_VERSION = '0.1.0';
+const APP_VERSION = '0.1.1';
 // Cache-Name mit dem Pfad der App: Auf github.io teilen sich alle Seiten eines Kontos den
 // Speicher – so stören sich Hauptversion (/app/) und Testversion (/vorschau/app/) nie.
 const PRAEFIX = `mehltau-app:${new URL(self.registration.scope).pathname}:`;
