@@ -8,6 +8,7 @@ Druck- und Excel-Vorlagen für Pilot und Betrieb. Sie enthalten keine Betriebsda
 | `massstab_karte.pdf` | Maßstab-Karte 10 × 10 cm (2 je Seite, eine als Ersatz) | gemessen wird die äußere Kante des schwarzen Rahmens |
 | `pilot_bonitur_vorlage.xlsx` | Excel für den Pilot: Blätter „Bonitur“, „Wiederholung“, „Lichttest“, „Anleitung“ | Spalten wie in `docs/SPEZIFIKATION.md`; Auswahllisten für Noten (0–4), ja/nein, Zeitpunkt, Hallenlicht |
 | `bonitur_bogen_pilot.pdf` | Kopiervorlage Bonitur-Bogen (Leitfaden 6.8) | je Person und Sitzung ein Bogen |
+| `projekttagebuch.xlsx` | Projekttagebuch (Leitfaden 1.6) | nach jedem Arbeitsschritt eine Zeile: Datum, Erledigtes, Entscheidungen, offene Fragen |
 
 ## Drucken
 

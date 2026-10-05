@@ -2,6 +2,7 @@
 
 - pilot_bonitur_vorlage.xlsx: Blätter Bonitur, Wiederholung, Lichttest, Anleitung
   (Spalten genau wie in docs/SPEZIFIKATION.md, Abschnitt Pilot), mit Auswahllisten.
+- projekttagebuch.xlsx: Projekttagebuch (Leitfaden 1.6) mit einer Beispielzeile.
 - bonitur_bogen_pilot.pdf: Kopiervorlage Bonitur-Bogen (Seite 37 des Leitfadens).
 
 Die Topf-Karten und die Maßstab-Karte entstehen aus der Druckseite etiketten/
@@ -117,6 +118,25 @@ def excel():
     return pfad
 
 
+def tagebuch():
+    """Projekttagebuch (Leitfaden 1.6): eine Zeile je Arbeitsschritt."""
+    wb = Workbook()
+    wb.properties.creator = 'Mehltau-Bonitur (Vorlage)'
+    wb.properties.lastModifiedBy = ''
+    wb.properties.title = 'Projekttagebuch'
+    ws = blatt(wb, 'Tagebuch', ['datum', 'etappe', 'erledigt', 'entscheidung', 'offene_fragen', 'naechster_schritt'],
+               [12, 8, 50, 40, 45, 40], erstes=True)
+    ws.append(['05.10.2026', '0', 'Claude hat Analyse-Kern, Werkstatt, Handy-App, Druckseite, Vorlagen und '
+               'Druckteile vorab gebaut (PDF „Stand und Fragen“)', '', 'Fragen F1–F15 aus dem PDF',
+               'Werkstatt-Demo ansehen, GitHub einrichten, Fragen beantworten, messen'])
+    for r in range(2, ZEILEN + 2):
+        for c in range(1, 7):
+            ws.cell(row=r, column=c).alignment = Alignment(wrap_text=True, vertical='top')
+    pfad = ZIEL / 'projekttagebuch.xlsx'
+    wb.save(pfad)
+    return pfad
+
+
 def bogen():
     leitfaden = PdfReader(WURZEL / 'docs' / 'Leitfaden_Mehltau-Bonitur.pdf')
     for nr, seite in enumerate(leitfaden.pages):
@@ -134,5 +154,6 @@ def bogen():
 if __name__ == '__main__':
     ZIEL.mkdir(exist_ok=True)
     print('geschrieben:', excel())
+    print('geschrieben:', tagebuch())
     pfad, nr = bogen()
     print(f'geschrieben: {pfad} (Leitfaden Seite {nr})')
