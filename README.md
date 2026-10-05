@@ -37,6 +37,7 @@ Werkstatt und Druckseite unter `https://<konto>.github.io/bonitieren_mehltau/`.
 ```
 npm ci        # einmalig (nur esbuild für die Einzeldatei der Werkstatt)
 npm test      # alle automatischen Tests
+npm run test:browser       # Ablauf von App, Werkstatt und Druckseite im Browser (Playwright)
 node werkzeuge/bauen.mjs   # dist/analyse-werkstatt.html neu bauen
 ```
 

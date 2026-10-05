@@ -52,8 +52,9 @@ Satz/Behandlung mit Verlauf und AUDPC, Regelkarte der Kontroll-Pflanze. Testvers
 **B7 Druckseite** (`etiketten/`) und **Vorlagen** (`vorlagen/`): Topf-Karten P001–P200,
 Maßstab-Karte, Pilot-Excel mit Auswahllisten, Bonitur-Bogen.
 
-**GitHub Actions**: Tests bei jedem Push/Pull Request; Veröffentlichung auf GitHub Pages
-(nur App, Werkstatt, Kern, Bibliotheken, Druckseite, Vorlagen).
+**GitHub Actions**: Tests bei jedem Push/Pull Request (Rechnung und kompletter Ablauf im
+Browser); Veröffentlichung auf GitHub Pages (nur App, Werkstatt, Kern, Bibliotheken,
+Druckseite, Vorlagen).
 
 ## Etappen (Leitfaden Kapitel 2)
 

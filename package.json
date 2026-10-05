@@ -5,12 +5,14 @@
   "description": "Bonitur von Falschem Mehltau an Topfbasilikum per Fotobox und Handy",
   "type": "module",
   "scripts": {
-    "test": "node --test \"tests/*.test.mjs\""
+    "test": "node --test \"tests/*.test.mjs\"",
+    "test:browser": "node tests/browser/ablauf.mjs"
   },
   "engines": {
     "node": ">=22"
   },
   "devDependencies": {
-    "esbuild": "0.25.10"
+    "esbuild": "0.25.10",
+    "playwright": "1.56.1"
   }
 }

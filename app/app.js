@@ -684,7 +684,9 @@ async function seiteEinstellungen() {
   });
   $('#json-speichern').addEventListener('click', () => herunterladen(JSON.stringify(z.einst, null, 2), `bonitur-einstellungen_${z.einst.kennung}.json`, 'application/json'));
   inhalt.querySelectorAll('[name=modus]').forEach((r) => r.addEventListener('change', async () => {
-    z.einst.modus = r.value; await speichernKonfig(); $('#referenz-bereich').hidden = r.value !== 'sicht'; referenzenZeigen();
+    z.einst.modus = r.value; await speichernKonfig();
+    const bereich = $('#referenz-bereich'); // Seite kann inzwischen gewechselt sein
+    if (bereich) { bereich.hidden = r.value !== 'sicht'; referenzenZeigen(); }
   }));
   referenzenZeigen();
   $('#schwellen').addEventListener('submit', async (ev) => {
@@ -844,6 +846,7 @@ async function seiteKameratest() {
       const r = await pool.auftrag({ typ: 'analysieren', datei: new File([blob], `test${i}.jpg`, { type: 'image/jpeg' }), einstellungen: z.einst, optionen: {} });
       ergebnisse.push({ ...r.ergebnis, quelle });
       await new Promise((res) => setTimeout(res, 800));
+      if (!knopf.isConnected) return; // Seite verlassen: Test abbrechen
     }
     const weiss = ergebnisse.map((x) => x.farbkarte?.weiss_roh).filter(Number.isFinite);
     const befall = ergebnisse.map((x) => x.befall_pct).filter(Number.isFinite);

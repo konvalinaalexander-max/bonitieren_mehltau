@@ -25,3 +25,18 @@ jobs:
           node werkzeuge/bauen.mjs
           git diff --exit-code -I 'Einzeldatei-Fassung, gebaut am' -- dist/ || {
             echo "dist/analyse-werkstatt.html ist veraltet: bitte 'node werkzeuge/bauen.mjs' ausführen und mit einchecken."; exit 1; }
+
+  browser:
+    # Ablauf von Handy-App, Werkstatt und Druckseite im echten Browser (Chromium)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Browser installieren
+        run: npx playwright install --with-deps chromium
+      - name: Browser-Test (App, Werkstatt, Druckseite)
+        run: npm run test:browser

@@ -60,7 +60,7 @@ Grundlagen: `docs/Leitfaden_Mehltau-Bonitur.pdf` (Schritt für Schritt), `docs/S
 | `vorlagen/` | fertige PDFs und Excel-Vorlage für den Pilot |
 | `druckteile/` | OpenSCAD-Dateien der 3D-Druckteile für die Fotobox |
 | `bibliotheken/` | fremde Bibliotheken mit Lizenzen |
-| `tests/` | automatische Tests (`node --test`), `hilfen.mjs` mit künstlichen Szenen |
+| `tests/` | automatische Tests (`node --test`), `hilfen.mjs` mit künstlichen Szenen, `browser/` Browser-Test |
 | `werkzeuge/` | künstliche Testbilder (`synthetik.js`), Sollwerte der Referenzbilder, Bauen, Seite zusammenstellen, Vorlagen erzeugen |
 | `referenzbilder/` | (kommt in Etappe 3) echte Referenzfotos + `referenzbilder.xlsx` |
 | `docs/` | Leitfaden (PDF + Quelle), Spezifikation, Fortschritt |
@@ -90,8 +90,11 @@ Grundlagen: `docs/Leitfaden_Mehltau-Bonitur.pdf` (Schritt für Schritt), `docs/S
   Notengrenzen.
 - `tests/referenzbilder.test.mjs` vergleicht alle Referenzbilder mit gespeicherten Sollwerten;
   er wird übersprungen, solange `referenzbilder/` fehlt.
-- Browser-Tests (Playwright, Ablauf der App und der Werkstatt) liefen in der Entwicklung mit
-  künstlichen Fotos; sie sind noch nicht im Repository.
+- `npm run test:browser` (`tests/browser/ablauf.mjs`): kompletter Ablauf im echten Browser
+  (Playwright/Chromium) mit künstlichen Fotos – App (Einstellungen, Sitzung, Import, QR, Export,
+  Wiederlesen, Sicht-Bonitur, Offline), Druckseite und Werkstatt-Demo bis zur GO-Entscheidung.
+  Einmalig `npx playwright install chromium`; in Claude-Sitzungen ist der Browser schon da.
+  Läuft in GitHub Actions als eigener Job.
 
 ## Bekannte Fallstricke
 
