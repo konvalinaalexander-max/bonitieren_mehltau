@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { verkleinern, ausschnitt } from '../kern/bild.js';
 import { qrLesen } from '../kern/qr.js';
 import { exifLesen, zeitAusDateiname, nachExifDrehen } from '../kern/exif.js';
-import { standardEinstellungen, einstellungenPruefen, einstellungenErgaenzen } from '../kern/einstellungen.js';
+import { standardEinstellungen, einstellungenPruefen, einstellungenErgaenzen, naechsteKennung, versionsText } from '../kern/einstellungen.js';
 import { szeneErzeugen, KAMERAS } from '../werkzeuge/synthetik.js';
 
 function einfarbig(w, h, [r, g, b]) {
@@ -92,4 +92,14 @@ test('Einstellungen: Standard ist gültig, Fehler werden erkannt, Ergänzen fül
   assert.equal(ergaenzt.schwellen.s_min, 24);
   assert.equal(ergaenzt.schwellen.h_max, 170);
   assert.equal(ergaenzt.analyse.lange_kante, 1600);
+});
+
+test('Einstellungs-Kennung: Werkstatt und Handy bekommen nie dieselbe Nummer', () => {
+  assert.equal(naechsteKennung('W0', 'W'), 'W1');
+  assert.equal(naechsteKennung('W3', 'W'), 'W4');
+  assert.equal(naechsteKennung('W3', 'H'), 'W3.H1');
+  assert.equal(naechsteKennung('W3.H1', 'H'), 'W3.H2');
+  assert.equal(naechsteKennung('W3.H2', 'W'), 'W4');
+  assert.equal(naechsteKennung(undefined, 'W'), 'W1');
+  assert.match(versionsText({ kennung: 'W3.H1' }), /^A-\d+\.\d+\/W3\.H1$/);
 });

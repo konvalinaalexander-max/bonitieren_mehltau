@@ -54,7 +54,28 @@ export function standardEinstellungen() {
     analyse: { lange_kante: 1600, min_fleck: 30 },
     /** Betriebsart der App: 'automatisch' oder 'sicht' (No-Go-Variante: Sicht-Bonitur). */
     modus: 'automatisch',
+    /**
+     * Kennung des Einstellungsstands: W1, W2 … für Stände aus der Werkstatt,
+     * W3.H1, W3.H2 … für Änderungen am Handy auf Basis von W3. So bekommen
+     * Werkstatt und Handy nie dieselbe Kennung.
+     */
+    kennung: 'W0',
+    /** Änderungsprotokoll: { datum, kennung, wo, was, alt, neu, grund } */
+    aenderungen: [],
   };
+}
+
+/** Nächste Kennung: wo = 'W' (Werkstatt) oder 'H' (Handy). */
+export function naechsteKennung(kennung, wo) {
+  const m = String(kennung || 'W0').match(/^W(\d+)(?:\.H(\d+))?$/);
+  const w = m ? Number(m[1]) : 0;
+  const h = m && m[2] ? Number(m[2]) : 0;
+  return wo === 'H' ? `W${w}.H${h + 1}` : `W${w + 1}`;
+}
+
+/** Versionstext für jede Ergebniszeile: Rechenweg und Einstellungsstand, z. B. „A-1.0/W3.H1“. */
+export function versionsText(einstellungen) {
+  return `${ALGORITHMUS_VERSION}/${einstellungen?.kennung || 'W0'}`;
 }
 
 function istObjekt(x) {

@@ -14,7 +14,7 @@
 
 import { verkleinern } from './bild.js';
 import { farbkarteAuswerten, bildKorrigieren } from './farbkarte.js';
-import { ALGORITHMUS_VERSION, BEREICHE, standardEinstellungen, einstellungenErgaenzen } from './einstellungen.js';
+import { BEREICHE, standardEinstellungen, einstellungenErgaenzen, versionsText } from './einstellungen.js';
 import { noteAusBefall } from './noten.js';
 import { runden } from './statistik.js';
 
@@ -190,7 +190,19 @@ export function klassifizieren(vv, schwellen, { mitKarte = true } = {}) {
   return { klassen, anzahl: { gruen, gelb, braun, glanz, kreis: vv.kreisPixel, farbtonSumme } };
 }
 
-/** Kennzahlen, Note und Qualitätsprüfung aus Zählwerten. */
+/**
+ * Was kennzahlen() außer den Zählwerten braucht (aus der Vorverarbeitung).
+ * Klein genug, um es mit den Ergebnissen zu speichern (Werkstatt: Regler ohne neue Bildauswertung).
+ */
+export function basisInfo(vv) {
+  return {
+    karte: vv.karte ? { deltaE_mittel: vv.karte.deltaE_mittel, weiss_roh: vv.karte.weiss_roh } : null,
+    kreis: { eingestellt: vv.kreis.eingestellt },
+    kreisPixel: vv.kreisPixel,
+  };
+}
+
+/** Kennzahlen, Note und Qualitätsprüfung aus Zählwerten (vv: Vorverarbeitung oder basisInfo(vv)). */
 export function kennzahlen(anzahl, vv, einstellungen) {
   const einst = einstellungenErgaenzen(einstellungen);
   const { gruen, gelb, braun, farbtonSumme } = anzahl;
@@ -223,7 +235,7 @@ export function kennzahlen(anzahl, vv, einstellungen) {
     warnungen,
     qualitaet: warnungen.length ? `Warnung: ${warnungen.join('; ')}` : 'ok',
     farbkarte_delta_e: karte ? runden(karte.deltaE_mittel, 2) : null,
-    algorithmus_version: ALGORITHMUS_VERSION,
+    algorithmus_version: versionsText(einst),
   };
 }
 

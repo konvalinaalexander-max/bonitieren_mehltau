@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analyse-Werkstatt – Mehltau-Bonitur</title>
+<link rel="stylesheet" href="werkstatt.css">
+</head>
+<body>
+<header class="kopf">
+  <div class="marke"><span class="punkt"></span>Analyse-Werkstatt <small>Mehltau-Bonitur</small></div>
+  <nav class="schritte" id="schritte">
+    <button data-schritt="laden" class="aktiv"><b>1</b> Daten</button>
+    <button data-schritt="einrichten"><b>2</b> Einrichten</button>
+    <button data-schritt="auswerten"><b>3</b> Auswerten</button>
+    <button data-schritt="kontrolle"><b>4</b> Kontrollbilder</button>
+    <button data-schritt="ergebnis"><b>5</b> Ergebnis</button>
+    <button data-schritt="export"><b>6</b> Speichern</button>
+  </nav>
+  <div class="version" id="version"></div>
+</header>
+
+<main>
+<!-- 1 Daten laden -->
+<section class="schritt aktiv" id="schritt-laden">
+  <h1>Daten laden</h1>
+  <p class="lead">Alles bleibt auf diesem Computer: Die Fotos werden im Browser ausgewertet und nirgends hochgeladen.</p>
+  <div class="karten">
+    <div class="karte">
+      <h2>Fotos</h2>
+      <p>Den Ordner mit allen Pilotfotos wählen (Tagesordner darin werden mitgelesen) oder einzelne Fotos.</p>
+      <div class="knoepfe">
+        <label class="knopf haupt">Ordner wählen<input type="file" id="eingabe-ordner" webkitdirectory multiple hidden></label>
+        <label class="knopf">Einzelne Fotos<input type="file" id="eingabe-fotos" accept="image/jpeg,.jpg,.jpeg" multiple hidden></label>
+      </div>
+      <p class="status" id="status-fotos">Noch keine Fotos.</p>
+    </div>
+    <div class="karte">
+      <h2>Bonitur-Excel</h2>
+      <p>Die Kopie von <code>pilot_bonitur.xlsx</code> mit den Blättern „Bonitur“, „Wiederholung“ und „Lichttest“.</p>
+      <div class="knoepfe">
+        <label class="knopf haupt">Excel wählen<input type="file" id="eingabe-excel" accept=".xlsx,.xls" hidden></label>
+      </div>
+      <p class="status" id="status-excel">Noch keine Excel-Datei.</p>
+    </div>
+    <div class="karte">
+      <h2>Einstellungsdatei <span class="optional">optional</span></h2>
+      <p>Eine früher gespeicherte Einstellungsdatei (Farbkarte, Kreis, Schwellen). Sonst richtest du in Schritt 2 ein.</p>
+      <div class="knoepfe">
+        <label class="knopf">Datei laden<input type="file" class="eingabe-einstellungen" accept=".json,application/json" hidden></label>
+      </div>
+      <p class="status" id="status-einstellungen"></p>
+    </div>
+    <div class="karte demo">
+      <h2>Ausprobieren ohne echte Fotos</h2>
+      <p>Erzeugt 71 künstliche Box-Fotos (40 Töpfe, Wiederholungs- und Lichttest) und eine passende Bonitur-Excel zweier gedachter Personen. So siehst du, wie alles funktioniert.</p>
+      <div class="knoepfe"><button class="knopf" id="knopf-demo">Demo-Daten erzeugen</button></div>
+      <div class="fortschritt" id="demo-fortschritt" hidden><div></div></div>
+      <p class="status" id="status-demo"></p>
+    </div>
+  </div>
+  <div id="zuordnung-laden"></div>
+</section>
+
+<!-- 2 Einrichten -->
+<section class="schritt" id="schritt-einrichten">
+  <h1>Einrichten</h1>
+  <p class="lead">Einmal für die feste Box: Farbkarte, Topfkreis, Etikett und Maßstab. Die Werte gelten für alle Fotos und gehen später in die Handy-App.</p>
+  <div class="einrichten">
+    <div class="buehne">
+      <div class="werkzeugleiste">
+        <select id="einrichten-foto" title="Einrichtungsfoto"></select>
+        <button class="knopf" id="foto-zurueck" title="Voriges Foto">◀</button>
+        <button class="knopf" id="foto-vor" title="Nächstes Foto">▶</button>
+        <span class="trenner"></span>
+        <button class="knopf modus" data-modus="karte">Farbkarte: 4 Ecken</button>
+        <button class="knopf modus" data-modus="kreis">Topfkreis</button>
+        <button class="knopf modus" data-modus="etikett">Etikettbereich</button>
+        <button class="knopf modus" data-modus="massstab">Maßstab-Karte</button>
+      </div>
+      <p class="anleitung" id="anleitung">Wähle oben ein Werkzeug.</p>
+      <div class="leinwand-rahmen"><canvas id="leinwand"></canvas><canvas id="lupe" width="180" height="180"></canvas></div>
+    </div>
+    <aside class="seitenleiste">
+      <div class="karte klein">
+        <h3>Farbkarte</h3>
+        <div class="ecken-hilfe">
+          <svg viewBox="0 0 120 80" aria-hidden="true"><rect x="2" y="2" width="116" height="76" rx="4" fill="#222"/>
+            <g id="hilfe-felder"></g>
+            <g font-size="11" font-weight="700" fill="#fff" stroke="#2F6B3A" stroke-width="3" paint-order="stroke"><text x="3" y="12">1</text><text x="108" y="12">2</text><text x="108" y="77">3</text><text x="3" y="77">4</text></g></svg>
+          <p>Klicke die äußeren Ecken der Farbfelder: <b>1</b> am braunen Feld (Dunkle Haut), <b>2</b> am türkisen, <b>3</b> am schwarzen, <b>4</b> am weißen Feld. Falsche Reihenfolge wird erkannt.</p>
+        </div>
+        <p class="status" id="status-karte">Nicht eingestellt.</p>
+      </div>
+      <div class="karte klein"><h3>Topfkreis</h3><p class="status" id="status-kreis">Nicht eingestellt.</p></div>
+      <div class="karte klein"><h3>Etikettbereich (QR-Code)</h3><p class="status" id="status-etikett">Nicht eingestellt.</p></div>
+      <div class="karte klein">
+        <h3>Maßstab</h3>
+        <p>Foto der 10 × 10 cm Karte in Blatthöhe laden, dann 4 Ecken anklicken.</p>
+        <label class="knopf">Maßstab-Foto wählen<input type="file" id="eingabe-massstab" accept="image/jpeg,.jpg,.jpeg" hidden></label>
+        <p class="status" id="status-massstab">Nicht eingestellt.</p>
+      </div>
+      <div class="karte klein">
+        <h3>Einstellungen</h3>
+        <p class="status" id="status-kennung"></p>
+        <div class="knoepfe">
+          <button class="knopf haupt" id="knopf-einstellungen-speichern">Als Datei speichern</button>
+          <label class="knopf">Laden<input type="file" class="eingabe-einstellungen" accept=".json,application/json" hidden></label>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- 3 Auswerten -->
+<section class="schritt" id="schritt-auswerten">
+  <h1>Auswerten</h1>
+  <p class="lead">Alle Fotos werden mit dem Analyse-Kern ausgewertet – genau so, wie es später die Handy-App tut.</p>
+  <div class="karte">
+    <div class="knoepfe">
+      <button class="knopf haupt" id="knopf-auswerten">Alle Fotos auswerten</button>
+      <label class="haken"><input type="checkbox" id="qr-lesen" checked> QR-Codes der Topf-Karten lesen</label>
+    </div>
+    <div class="fortschritt" id="auswerten-fortschritt" hidden><div></div></div>
+    <p class="status" id="status-auswerten">Noch nicht ausgewertet.</p>
+  </div>
+  <div id="zuordnung-auswerten"></div>
+</section>
+
+<!-- 4 Kontrollbilder -->
+<section class="schritt" id="schritt-kontrolle">
+  <h1>Kontrollbilder prüfen</h1>
+  <p class="lead">Erst die Bilder, dann die Zahlen: Ist die ganze Pflanze gefärbt – und nichts anderes? Grün = gesund, Gelb = Aufhellung, Rot = braun/abgestorben, Hellblau = Glanzlicht.</p>
+  <div class="werkzeugleiste">
+    <button class="knopf filter aktiv" data-filter="alle">Alle</button>
+    <button class="knopf filter" data-filter="warnung">Mit Warnung</button>
+    <button class="knopf filter" data-filter="abweichung">Größte Abweichung App/Mensch</button>
+    <button class="knopf filter" data-filter="zufall">20 zufällige</button>
+    <button class="knopf filter" data-filter="ausgeschlossen">Ausgeschlossen</button>
+    <span class="trenner"></span>
+    <span class="status" id="status-kontrolle"></span>
+  </div>
+  <div class="hinweis" id="hinweis-veraltet" hidden>Die Regler wurden verändert – die kleinen Kontrollbilder zeigen noch die alten Schwellen. <button class="knopf" id="knopf-neu-berechnen">Kontrollbilder neu berechnen</button></div>
+  <div class="raster" id="raster"></div>
+</section>
+
+<!-- 5 Ergebnis -->
+<section class="schritt" id="schritt-ergebnis">
+  <h1>Ergebnis und Entscheidung</h1>
+  <div class="ergebnis">
+    <aside class="regler" id="regler"></aside>
+    <div class="ergebnis-haupt">
+      <div class="karte" id="entscheidung"></div>
+      <div class="karte"><h2>Streudiagramm</h2><div id="streudiagramm"></div></div>
+      <div class="karte"><h2>Kennzahlen</h2><div id="kennzahlen"></div></div>
+      <div class="zwei">
+        <div class="karte"><h2>Wiederholbarkeit</h2><div id="wiederholbarkeit"></div></div>
+        <div class="karte"><h2>Lichttest</h2><div id="lichttest"></div></div>
+      </div>
+      <div class="karte" id="kalibrier-karte"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 Speichern -->
+<section class="schritt" id="schritt-export">
+  <h1>Speichern</h1>
+  <p class="lead">Lege alles auf dem Firmen-PC ab, z. B. im Ordner <code>Bonitur/Pilot/auswertung/</code>.</p>
+  <div class="karten">
+    <div class="karte"><h2>Ergebnis-Excel</h2><p>Eine Zeile je Foto mit allen Kennzahlen und euren Noten, dazu Blätter für Kennzahlen, Wiederholung, Lichttest und Einstellungen.</p><button class="knopf haupt" id="knopf-excel">Ergebnis-Excel speichern</button></div>
+    <div class="karte"><h2>Kontrollbilder</h2><p>Alle Kontrollbilder als ZIP-Datei.</p><button class="knopf" id="knopf-zip">Kontrollbilder (ZIP)</button></div>
+    <div class="karte"><h2>Einstellungsdatei</h2><p>Für die Handy-App und für später. Sie bekommt eine neue Kennung, wenn du etwas geändert hast.</p><button class="knopf haupt" id="knopf-einstellungen-export">Einstellungsdatei speichern</button></div>
+    <div class="karte"><h2>Referenzbilder-Paket</h2><p>Vorschlag nach Leitfaden 6.7: je Note 4–6 Fotos und alle Wiederholungsfotos, dazu <code>referenzbilder.xlsx</code> und <code>einstellungen.json</code> – zum Hochladen ins Repository.</p><button class="knopf" id="knopf-referenz">Referenzbilder-Paket (ZIP)</button></div>
+    <div class="karte"><h2>Pilot-Kennzahlen als Text</h2><p>Für den Prompt „Pilotbericht“ (Leitfaden 8.8): in die Zwischenablage kopieren und in die Claude-Sitzung einfügen.</p><button class="knopf" id="knopf-text">Kennzahlen kopieren</button><pre class="textausgabe" id="kennzahlen-text" hidden></pre></div>
+  </div>
+</section>
+</main>
+
+<div class="dialog" id="detail" hidden>
+  <div class="dialog-innen">
+    <div class="dialog-kopf"><h2 id="detail-titel"></h2><div><button class="knopf" id="detail-zurueck">◀</button><button class="knopf" id="detail-vor">▶</button><button class="knopf" id="detail-zu">Schließen</button></div></div>
+    <div class="detail-bilder"><figure><img id="detail-original" alt="Originalfoto"><figcaption>Original</figcaption></figure><figure><img id="detail-kontrolle" alt="Kontrollbild"><figcaption id="detail-kontrolle-text">Kontrollbild (aktuelle Regler)</figcaption></figure></div>
+    <div class="detail-zahlen" id="detail-zahlen"></div>
+  </div>
+</div>
+<div class="meldung" id="meldung" hidden></div>
+<script type="module" src="werkstatt.js"></script>
+</body>
+</html>

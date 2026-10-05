@@ -40,6 +40,47 @@ function hsvZuRgb8(h, s, v) {
 
 const WAHR = { HINTERGRUND: 0, GRUEN: 1, GELB: 2, BRAUN: 3 };
 
+/** Fester Pseudo-Zufallswert 0..1 je Position (unabhängig von der Malreihenfolge). */
+function rauschWert(x, y, k) {
+  let h = Math.imul(x | 0, 374761393) ^ Math.imul(y | 0, 668265263) ^ Math.imul(k | 0, 2147483647);
+  h = Math.imul(h ^ (h >>> 13), 1274126177);
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+}
+
+/** Blätter mit allen Eigenschaften (Lage, Größe, Farbe, Flecken) aus dem Startwert. */
+function blaetterErzeugen(o, R) {
+  const rnd = zufall(o.seed * 7919 + 17);
+  const blaetter = [];
+  for (let i = 0; i < o.blattAnzahl; i++) {
+    const ring = i / o.blattAnzahl; // 0 = außen, 1 = innen
+    blaetter.push({
+      nr: i + 1, ring,
+      abstand: R * (0.62 - 0.5 * ring) * rnd.zwischen(0.85, 1.1),
+      winkel: i * 2.39996 + rnd.zwischen(-0.2, 0.2), // goldener Winkel
+      laenge: 0, breite: 0,
+      befallFaktor: 1.7 - 1.4 * ring, // außen mehr Befall
+    });
+    const b = blaetter[i];
+    b.laenge = R * rnd.zwischen(0.42, 0.55) * (1 - 0.3 * ring);
+    b.breite = b.laenge * rnd.zwischen(0.27, 0.34);
+  }
+  const mittelFaktor = blaetter.reduce((a, b) => a + b.befallFaktor, 0) / Math.max(1, blaetter.length);
+  const flecken = (anteil, rMin, rMax, uMin) => {
+    const liste = [];
+    const n = Math.round((anteil * 1.2) / (Math.PI * 0.035));
+    for (let k = 0; k < n; k++) liste.push({ u: rnd.zwischen(uMin, 0.95), v: rnd.zwischen(-0.7, 0.7), r: rnd.zwischen(rMin, rMax) });
+    return liste;
+  };
+  for (const b of blaetter) {
+    b.gruenH = rnd.zwischen(88, 104); b.gruenS = rnd.zwischen(0.55, 0.68); b.gruenV = rnd.zwischen(0.48, 0.62) + 0.08 * b.ring;
+    const anteilGelb = Math.min(0.95, o.gelb * (b.befallFaktor / mittelFaktor) * rnd.zwischen(0.6, 1.4));
+    const anteilBraun = Math.min(0.9, o.braun * (b.befallFaktor / mittelFaktor) * rnd.zwischen(0.5, 1.5));
+    b.gelbFlecken = flecken(anteilGelb, 0.14, 0.24, 0.1);
+    b.braunFlecken = flecken(anteilBraun, 0.1, 0.2, 0.45);
+  }
+  return blaetter;
+}
+
 /**
  * Erzeugt ein synthetisches Box-Foto.
  * Rückgabe: { bild, wahrheit, einstellungen } – einstellungen enthält passende
@@ -49,7 +90,7 @@ export function szeneErzeugen(optionen = {}) {
   const o = {
     breite: 1600, hoehe: 1200, seed: 1,
     gelb: 0.10, braun: 0.03, // ungefähre Ziel-Anteile an der Blattfläche
-    pflanzenRadius: 0.30, // Anteil der Bildhöhe
+    pflanzenRadius: 0.28, // Anteil der Bildhöhe
     blattAnzahl: 40, drehung: 0, verschiebung: [0, 0],
     karte: true, etikett: 'P001', abdeckscheibe: true, erdeSichtbar: false,
     kamera: { matrix: [[1, 0, 0], [0, 1, 0], [0, 0, 1]], gain: 1, rauschen: 0, unschaerfe: 0 },
@@ -81,7 +122,7 @@ export function szeneErzeugen(optionen = {}) {
 
   // Farbkarte oben links auf dem Boden
   if (o.karte) {
-    const kw = 187 * s; const kh = 109 * s; const kx = bx0 + 18 * s; const ky = by0 + 18 * s;
+    const kw = 187 * s; const kh = 109 * s; const kx = bx0 + 10 * s; const ky = by0 + 10 * s;
     for (let y = Math.floor(ky); y < ky + kh; y++) for (let x = Math.floor(kx); x < kx + kw; x++) setze(y * W + x, [18, 18, 18]);
     const rand = 7 * s; const spalt = 3 * s;
     const gx0 = kx + rand; const gy0 = ky + rand; const gw = kw - 2 * rand; const gh = kh - 2 * rand;
@@ -98,7 +139,7 @@ export function szeneErzeugen(optionen = {}) {
   // Topf-Karte mit QR-Code unten rechts
   if (o.etikett) {
     const ew = 150 * s; const eh = 97 * s;
-    const ex = bx0 + bodenW - ew - 18 * s; const ey = by0 + bodenH - eh - 18 * s;
+    const ex = bx0 + bodenW - ew - 10 * s; const ey = by0 + bodenH - eh - 10 * s;
     for (let y = Math.floor(ey); y < ey + eh; y++) for (let x = Math.floor(ex); x < ex + ew; x++) setze(y * W + x, [238, 238, 236]);
     const q = qrcode(0, 'M'); q.addData(String(o.etikett)); q.make();
     const n = q.getModuleCount();
@@ -123,43 +164,24 @@ export function szeneErzeugen(optionen = {}) {
   for (let y = Math.floor(cy - scheibeR); y <= cy + scheibeR; y++) {
     for (let x = Math.floor(cx - scheibeR); x <= cx + scheibeR; x++) {
       if ((x - cx) ** 2 + (y - cy) ** 2 > scheibeR ** 2) continue;
-      if (o.abdeckscheibe) setze(y * W + x, [30, 30, 31]);
+      if (o.abdeckscheibe || !o.erdeSichtbar) setze(y * W + x, [30, 30, 31]);
       else {
-        const t = rnd();
-        setze(y * W + x, o.erdeSichtbar ? [Math.round(95 + 20 * t), Math.round(68 + 14 * t), Math.round(45 + 8 * t)] : [30, 30, 31]);
+        const t = rauschWert(x, y, 7);
+        setze(y * W + x, [Math.round(95 + 20 * t), Math.round(68 + 14 * t), Math.round(45 + 8 * t)]);
       }
     }
   }
 
-  // Blätter: von außen (untere, ältere Blätter, stärker befallen) nach innen (obere, junge)
+  // Blätter: von außen (untere, ältere Blätter, stärker befallen) nach innen (obere, junge).
+  // Alle Blatt-Eigenschaften kommen aus dem Startwert, nicht aus der Malreihenfolge:
+  // Dieselbe Pflanze gedreht oder verschoben hat dieselben Blätter und Flecken.
   const R = o.pflanzenRadius * H;
-  const blaetter = [];
-  for (let i = 0; i < o.blattAnzahl; i++) {
-    const ring = i / o.blattAnzahl; // 0 = außen, 1 = innen
-    const abstand = R * (0.62 - 0.5 * ring) * rnd.zwischen(0.85, 1.1);
-    const winkel = i * 2.39996 + o.drehung + rnd.zwischen(-0.2, 0.2); // goldener Winkel
-    const laenge = R * rnd.zwischen(0.42, 0.55) * (1 - 0.3 * ring);
-    const breite = laenge * rnd.zwischen(0.27, 0.34);
-    const befallFaktor = 1.7 - 1.4 * ring; // außen mehr Befall
-    blaetter.push({ abstand, winkel, laenge, breite, befallFaktor, ring });
-  }
-  const mittelFaktor = blaetter.reduce((a, b) => a + b.befallFaktor, 0) / blaetter.length;
+  const blaetter = blaetterErzeugen(o, R);
   for (const b of blaetter) {
-    const basisX = cx + Math.cos(b.winkel) * (b.abstand - b.laenge * 0.35);
-    const basisY = cy + Math.sin(b.winkel) * (b.abstand - b.laenge * 0.35);
-    const ux = Math.cos(b.winkel); const uy = Math.sin(b.winkel);
-    const gruenH = rnd.zwischen(88, 104); const gruenS = rnd.zwischen(0.55, 0.68); const gruenV = rnd.zwischen(0.48, 0.62) + 0.08 * b.ring;
-    // Flecken in Blattkoordinaten (u entlang, v quer)
-    const anteilGelb = Math.min(0.95, o.gelb * (b.befallFaktor / mittelFaktor) * rnd.zwischen(0.6, 1.4));
-    const anteilBraun = Math.min(0.9, o.braun * (b.befallFaktor / mittelFaktor) * rnd.zwischen(0.5, 1.5));
-    const flecken = (anteil, rMin, rMax, uMin) => {
-      const liste = [];
-      const n = Math.round((anteil * 1.2) / (Math.PI * 0.035));
-      for (let k = 0; k < n; k++) liste.push({ u: rnd.zwischen(uMin, 0.95), v: rnd.zwischen(-0.7, 0.7), r: rnd.zwischen(rMin, rMax) });
-      return liste;
-    };
-    const gelbFlecken = flecken(anteilGelb, 0.14, 0.24, 0.1);
-    const braunFlecken = flecken(anteilBraun, 0.1, 0.2, 0.45);
+    const winkel = b.winkel + o.drehung;
+    const ux = Math.cos(winkel); const uy = Math.sin(winkel);
+    const basisX = cx + ux * (b.abstand - b.laenge * 0.35);
+    const basisY = cy + uy * (b.abstand - b.laenge * 0.35);
     const umfang = b.laenge + b.breite;
     const xa = Math.floor(basisX - umfang); const xb = Math.ceil(basisX + umfang);
     const ya = Math.floor(basisY - umfang); const yb = Math.ceil(basisY + umfang);
@@ -171,19 +193,19 @@ export function szeneErzeugen(optionen = {}) {
         const vAbs = (-dx * uy + dy * ux) / b.breite;
         const form = Math.pow(Math.sin(Math.PI * Math.pow(u, 0.85)), 0.9);
         if (Math.abs(vAbs) > form) continue;
-        const vRel = vAbs / Math.max(form, 1e-6);
-        const nahMitte = Math.abs(vRel);
+        const nahMitte = Math.abs(vAbs / Math.max(form, 1e-6));
         const inFleck = (liste) => liste.some((f) => (u - f.u) ** 2 + ((vAbs - f.v) * 0.8) ** 2 < f.r * f.r);
+        const t = rauschWert(Math.round(u * 400), Math.round(vAbs * 200), b.nr);
         let klasse = WAHR.GRUEN; let farbe;
-        if (inFleck(braunFlecken)) {
+        if (inFleck(b.braunFlecken)) {
           klasse = WAHR.BRAUN;
-          farbe = hsvZuRgb8(rnd.zwischen(26, 36), 0.62, 0.36 + 0.06 * (1 - nahMitte));
-        } else if (inFleck(gelbFlecken)) {
+          farbe = hsvZuRgb8(26 + 10 * t, 0.62, 0.36 + 0.06 * (1 - nahMitte));
+        } else if (inFleck(b.gelbFlecken)) {
           klasse = WAHR.GELB;
-          farbe = hsvZuRgb8(rnd.zwischen(57, 66), 0.66, 0.74 + 0.06 * (1 - nahMitte));
+          farbe = hsvZuRgb8(57 + 9 * t, 0.66, 0.74 + 0.06 * (1 - nahMitte));
         } else {
           const ader = nahMitte < 0.07 ? 0.06 : 0;
-          farbe = hsvZuRgb8(gruenH, gruenS - ader, Math.min(0.95, gruenV + 0.07 * (1 - nahMitte) + ader));
+          farbe = hsvZuRgb8(b.gruenH, b.gruenS - ader, Math.min(0.95, b.gruenV + 0.07 * (1 - nahMitte) + ader));
         }
         const p = y * W + x;
         setze(p, farbe);
@@ -229,7 +251,7 @@ export function szeneErzeugen(optionen = {}) {
   }
 
   // Wahrheit zählen (im Auswertekreis)
-  const kreisR = R * 1.08;
+  const kreisR = R * 1.06;
   einst.auswertekreis = { cx: cx / W, cy: cy / H, r: kreisR / W };
   let g = 0; let ge = 0; let br = 0;
   for (let y = 0; y < H; y++) {

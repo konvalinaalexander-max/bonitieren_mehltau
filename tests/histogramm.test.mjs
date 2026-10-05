@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { vorverarbeiten, klassifizieren } from '../kern/analyse.js';
+import { vorverarbeiten, klassifizieren, kennzahlen, basisInfo } from '../kern/analyse.js';
 import { histogrammErstellen, auszaehlen, schwellenImRaster } from '../kern/histogramm.js';
 import { szene, einstellungenFuer, KAMERAS } from './hilfen.mjs';
 import { zufall } from '../werkzeuge/synthetik.js';
@@ -29,4 +29,13 @@ test('Schwellen außerhalb des Rasters werden abgelehnt', () => {
   assert.equal(auszaehlen(hist, { ...basis, s_min: 21 }), null);
   assert.equal(auszaehlen(hist, { ...basis, v_min: 9 }), null);
   assert.equal(auszaehlen(hist, { ...basis, h_max: 200 }), null);
+});
+
+test('Kennzahlen aus basisInfo = Kennzahlen aus der vollen Vorverarbeitung', () => {
+  const sz = szene('hist', { seed: 31, kamera: KAMERAS.warm, gelb: 0.18, braun: 0.06 });
+  const einst = einstellungenFuer(sz);
+  const vv = vorverarbeiten(sz.bild, einst);
+  const { anzahl } = klassifizieren(vv, einst.schwellen);
+  const basis = JSON.parse(JSON.stringify(basisInfo(vv))); // so wie es gespeichert wird
+  assert.deepEqual(kennzahlen(anzahl, basis, einst), kennzahlen(anzahl, vv, einst));
 });
